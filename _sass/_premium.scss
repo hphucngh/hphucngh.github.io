@@ -1,0 +1,408 @@
+/*******************************************************************************
+ * Terminal Design System
+ * Monospace · Sharp Borders · No Glass · Lime Green Accents
+ * Inspired by TUI / terminal email-client aesthetic
+ ******************************************************************************/
+
+// ---------------------------------------------------------------------------
+// Selection
+// ---------------------------------------------------------------------------
+
+::selection {
+  background: rgba(51, 153, 153, 0.28);
+  color: inherit;
+}
+::-moz-selection {
+  background: rgba(51, 153, 153, 0.28);
+  color: inherit;
+}
+
+// ---------------------------------------------------------------------------
+// Scrollbar — thin, accent-colored
+// ---------------------------------------------------------------------------
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 0px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--global-theme-color);
+  border-radius: 0;
+}
+
+// ---------------------------------------------------------------------------
+// Body — remove any gradient leftover
+// ---------------------------------------------------------------------------
+
+body {
+  background-image: none !important;
+  background-color: var(--global-bg-color);
+}
+
+// ---------------------------------------------------------------------------
+// Profile image — rectangular, terminal border
+// ---------------------------------------------------------------------------
+
+.profile img {
+  border-radius: 4px !important;
+  border: 1px solid var(--global-divider-color) !important;
+  box-shadow: none !important;
+  transition: border-color 0.2s ease !important;
+
+  &:hover {
+    border-color: var(--global-theme-color) !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Progress bar — accent color
+// ---------------------------------------------------------------------------
+
+progress {
+  color: var(--global-theme-color) !important;
+}
+progress::-webkit-progress-value {
+  background-color: var(--global-theme-color) !important;
+}
+progress::-moz-progress-bar {
+  background-color: var(--global-theme-color) !important;
+}
+
+// ---------------------------------------------------------------------------
+// Back-to-top — terminal button style
+// ---------------------------------------------------------------------------
+
+#back-to-top {
+  background: var(--global-card-bg-color) !important;
+  border: 1px solid var(--global-theme-color) !important;
+  border-radius: 2px !important;
+  box-shadow: none !important;
+  color: var(--global-theme-color) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: background 0.15s ease, color 0.15s ease !important;
+
+  i, svg {
+    color: var(--global-theme-color) !important;
+    fill: var(--global-theme-color) !important;
+    display: block;
+    margin: 0 !important;
+  }
+
+  &:hover {
+    background: var(--global-theme-color) !important;
+    color: #ffffff !important;
+    transform: none !important;
+    box-shadow: none !important;
+
+    i, svg {
+      color: #ffffff !important;
+      fill: #ffffff !important;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Blockquote — terminal accent bar, no glass
+// ---------------------------------------------------------------------------
+
+blockquote:not(.block-tip):not(.block-warning):not(.block-danger) {
+  border-left: 2px solid var(--global-theme-color) !important;
+  border-radius: 0 !important;
+  background: var(--global-card-bg-color) !important;
+}
+
+// ---------------------------------------------------------------------------
+// Blog header — simple accent title, no gradient text
+// ---------------------------------------------------------------------------
+
+.header-bar {
+  &::after {
+    display: none;
+  }
+
+  h1 {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    -webkit-text-fill-color: var(--global-theme-color) !important;
+    background-clip: unset !important;
+    color: var(--global-theme-color) !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Post list — simple dividers, no card lift
+// ---------------------------------------------------------------------------
+
+.post-list li {
+  border-bottom: 1px solid var(--global-divider-color) !important;
+  background: none !important;
+  border-radius: 0 !important;
+  padding: 1.25rem 0 !important;
+  margin-bottom: 0 !important;
+  box-shadow: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-top: none !important;
+
+  &:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  // Accent left indicator on hover
+  &:hover {
+    border-left: 2px solid var(--global-theme-color) !important;
+    padding-left: 0.75rem !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Tag badges — outlined terminal style
+// ---------------------------------------------------------------------------
+
+.post-tags a,
+.post-list .post-tags a {
+  display: inline-block;
+  background: transparent !important;
+  border: 1px solid var(--global-theme-color) !important;
+  border-radius: 2px !important;
+  padding: 0 0.5rem !important;
+  font-size: 0.78rem !important;
+  color: var(--global-theme-color) !important;
+  text-decoration: none !important;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: var(--global-theme-color) !important;
+    color: var(--global-bg-color) !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Nav active state — no underline dot, just bold + color (already default)
+// ---------------------------------------------------------------------------
+
+.navbar-nav .nav-item.active > .nav-link::after {
+  display: none;
+}
+
+// ---------------------------------------------------------------------------
+// Social icons — accent on hover
+// ---------------------------------------------------------------------------
+
+.social .contact-icons a:hover i::before,
+.navbar-brand.social a:hover i::before {
+  color: var(--global-theme-color) !important;
+}
+
+// ---------------------------------------------------------------------------
+// CV — terminal style, đồng bộ với notes/synthesis
+// ---------------------------------------------------------------------------
+
+.cv {
+  // Section card wrapper
+  .card {
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    margin-bottom: 0.75rem !important;
+
+    &:hover {
+      box-shadow: none !important;
+      transform: none !important;
+    }
+  }
+
+  // Section title — badge style matching notes year labels & about h3
+  .card-title {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 0 0.85rem !important;
+    padding: 0.15rem 0.65rem !important;
+    border: 1px solid var(--global-theme-color) !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: var(--global-theme-color) !important;
+    background: var(--global-card-bg-color) !important;
+  }
+
+  // Skills
+  .skill-item {
+    padding: 0.35rem 0 !important;
+    font-size: 0.82rem !important;
+    border-bottom: 1px solid var(--global-divider-color) !important;
+
+    &:last-child { border-bottom: none !important; }
+
+    i {
+      color: var(--global-theme-color) !important;
+      margin-right: 0.4rem !important;
+      font-size: 0.75rem !important;
+    }
+
+    strong { color: var(--global-text-color) !important; }
+  }
+
+  // Languages
+  .language-item {
+    padding: 0.35rem 0 !important;
+    font-size: 0.82rem !important;
+    border-bottom: 1px solid var(--global-divider-color) !important;
+
+    &:last-child { border-bottom: none !important; }
+
+    strong { color: var(--global-text-color) !important; }
+  }
+
+  // Contact table
+  .table-cv {
+    color: var(--global-text-color) !important;
+    background: transparent !important;
+
+    td { border: none !important; padding: 0.2rem 0.5rem !important; }
+    b { color: var(--global-theme-color) !important; font-size: 0.78rem !important; }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Publication badges
+// ---------------------------------------------------------------------------
+
+.publications .abbr abbr,
+.badge {
+  border-radius: 2px !important;
+}
+
+// ---------------------------------------------------------------------------
+// Inline code & pre — terminal colors
+// ---------------------------------------------------------------------------
+
+code {
+  border-radius: 2px !important;
+  padding: 1px 5px !important;
+}
+
+pre {
+  border-radius: 2px !important;
+}
+
+// ---------------------------------------------------------------------------
+// Smooth theme transition
+// ---------------------------------------------------------------------------
+
+body,
+.navbar,
+.card,
+footer,
+blockquote,
+.post-list li {
+  transition: background-color 0.2s ease, color 0.15s ease,
+    border-color 0.15s ease;
+}
+
+// ---------------------------------------------------------------------------
+// About page — post header
+// ---------------------------------------------------------------------------
+
+.post-header {
+  padding-bottom: 1rem !important;
+  border-bottom: 1px solid var(--global-divider-color) !important;
+  margin-bottom: 1.5rem !important;
+
+  h1.post-title {
+    font-size: 1.6rem !important;
+    font-weight: 700 !important;
+    color: var(--global-theme-color) !important;
+    margin: 0 0 0.2rem !important;
+    letter-spacing: 0 !important;
+
+    &::before {
+      content: '> ';
+      opacity: 0.5;
+    }
+  }
+
+  p.desc,
+  p.post-description {
+    font-size: 0.82rem !important;
+    color: var(--global-text-color-light) !important;
+    margin: 0 !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// About page — profile more-info panel
+// ---------------------------------------------------------------------------
+
+.profile .more-info {
+  margin-top: 0.75rem !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 0 !important;
+  background: var(--global-card-bg-color) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid var(--global-divider-color) !important;
+  border-left: 2px solid var(--global-theme-color) !important;
+  box-shadow: none !important;
+}
+
+// ---------------------------------------------------------------------------
+// About page — social panel
+// ---------------------------------------------------------------------------
+
+.social {
+  margin-top: 1.5rem !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+// ---------------------------------------------------------------------------
+// About page — section label (h3) and list items (ul li)
+// ---------------------------------------------------------------------------
+
+.post article {
+  h3 {
+    display: inline-flex;
+    align-items: center;
+    margin: 1.75rem 0 0.65rem;
+    padding: 0.15rem 0.65rem;
+    border: 1px solid var(--global-theme-color);
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--global-theme-color) !important;
+    background: var(--global-card-bg-color);
+  }
+
+  ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin: 0;
+
+    li {
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--global-text-color);
+      margin-bottom: 0.4rem;
+
+      strong {
+        color: var(--global-theme-color);
+        font-weight: 700;
+        margin-right: 0.2rem;
+      }
+    }
+  }
+}

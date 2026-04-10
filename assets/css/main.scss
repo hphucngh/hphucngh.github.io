@@ -33,6 +33,10 @@
 @use "tabs";
 @use "teachings";
 @use "typograms";
+
+// Premium sunglow-gold design system (must come last to override)
+@use "premium";
+
 @use "font-awesome/fontawesome";
 @use "font-awesome/brands";
 @use "font-awesome/solid";

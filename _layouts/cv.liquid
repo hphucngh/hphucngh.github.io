@@ -37,7 +37,215 @@ layout: default
     {% endif %}
   </header>
 
+  <style>
+    .cv-layout {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    @media (max-width: 700px) {
+      .cv-layout { grid-template-columns: 1fr; gap: 1.5rem; }
+      .cv-sidebar { position: static !important; }
+    }
+    .cv-sidebar {
+      position: sticky;
+      top: 5rem;
+      text-align: left;
+    }
+    .cv-sidebar .sidebar-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--global-theme-color);
+      margin: 0 0 0.6rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--global-divider-color);
+    }
+    .cv-sidebar ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .cv-sidebar-avatar {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      border: 1px solid var(--global-divider-color);
+      filter: grayscale(20%);
+      transition: filter 0.2s ease, border-color 0.2s ease;
+      margin-bottom: 1.25rem;
+    }
+    .cv-sidebar-avatar:hover {
+      filter: grayscale(0%);
+      border-color: var(--global-theme-color);
+    }
+    .cv-sidebar-name {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--global-theme-color);
+      margin: 0 0 0.15rem;
+    }
+    .cv-sidebar-label {
+      font-size: 0.72rem;
+      color: var(--global-text-color-light);
+      margin: 0 0 0;
+      line-height: 1.4;
+    }
+    .cv-sidebar-divider {
+      border: none;
+      border-top: 1px solid var(--global-divider-color);
+      margin: 1.25rem 0;
+    }
+    .cv-sidebar ul li { margin-bottom: 0.3rem; list-style: none; }
+    .cv-sidebar ul li a {
+      font-size: 0.82rem;
+      color: var(--global-text-color);
+      text-decoration: none;
+      display: block;
+      padding: 0.1rem 0;
+      transition: color 0.15s;
+    }
+    .cv-sidebar ul li a { text-align: left; }
+    .cv-sidebar ul li a:hover { color: var(--global-theme-color); }
+    .cv-sidebar ul li a.active {
+      color: var(--global-theme-color);
+      font-weight: 600;
+    }
+    .cv-sidebar-socials {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--global-divider-color);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .cv-sidebar-socials a {
+      font-size: 0.75rem;
+      color: var(--global-text-color-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: color 0.15s;
+    }
+    .cv-sidebar-socials a:hover { color: var(--global-theme-color); }
+    .cv-sidebar-socials i { font-size: 0.75rem; width: 0.9rem; text-align: center; }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var anchors = document.querySelectorAll('.cv a.anchor[id]');
+      var navLinks = document.querySelectorAll('.cv-sidebar ul li a');
+
+      function onScroll() {
+        var scrollY = window.scrollY + 120;
+        var current = '';
+        anchors.forEach(function (anchor) {
+          if (anchor.offsetTop <= scrollY) {
+            current = anchor.id;
+          }
+        });
+        navLinks.forEach(function (link) {
+          link.classList.remove('active');
+          var href = link.getAttribute('href');
+          if (href === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    });
+  </script>
+
   <article>
+    <div class="cv-layout">
+
+    <!-- Sidebar navigation -->
+    <aside class="cv-sidebar">
+      {% assign cv_avatar = cv_data.image | default: 'assets/img/prof_pic.jpg' %}
+      {% if cv_avatar != '' %}
+        <img class="cv-sidebar-avatar" src="{{ cv_avatar | relative_url }}" alt="{{ cv_data.name }}">
+      {% endif %}
+      {% if cv_data.name %}
+        <p class="cv-sidebar-name">{{ cv_data.name }}</p>
+      {% endif %}
+      {% if cv_data.label %}
+        <p class="cv-sidebar-label">{{ cv_data.label }}</p>
+      {% endif %}
+      <hr class="cv-sidebar-divider">
+      <ul>
+        {% assign cv_data = site.data.cv.cv %}
+        {% if cv_data.name or cv_data.email or cv_data.location %}
+          <li><a href="#contact">Contact</a></li>
+        {% endif %}
+        {% if cv_data.summary %}
+          <li><a href="#summary">About</a></li>
+        {% endif %}
+        {% assign has_exp = cv_data.sections.Experience | default: "" %}
+        {% if has_exp != "" %}
+          <li><a href="#experience">Experience</a></li>
+        {% endif %}
+        {% assign section_labels = "Education:Education,Awards:Awards,Publications:Publications,Skills:Skills,Languages:Languages,Interests:Interests,Certificates:Certificates,Projects:Projects,References:References" | split: ',' %}
+        {% for section_pair in cv_data.sections %}
+          {% assign section_title = section_pair[0] %}
+          {% if section_title == 'Experience' or section_title == 'Volunteer' %}{% continue %}{% endif %}
+          {% assign display = section_title %}
+          {% for pair in section_labels %}
+            {% assign parts = pair | split: ':' %}
+            {% if parts[0] == section_title %}{% assign display = parts[1] %}{% endif %}
+          {% endfor %}
+          <li><a href="#{{ section_title | slugify }}">{{ display }}</a></li>
+        {% endfor %}
+      </ul>
+
+      <!-- Social networks -->
+      {% if cv_data.social_networks and cv_data.social_networks.size > 0 %}
+      <div class="cv-sidebar-socials">
+        {% for social in cv_data.social_networks %}
+          {% if social.network == 'GitHub' %}
+            {% assign icon = 'fa-brands fa-github' %}
+            {% assign url = 'https://github.com/' | append: social.username %}
+          {% elsif social.network == 'LinkedIn' %}
+            {% assign icon = 'fa-brands fa-linkedin' %}
+            {% assign url = 'https://linkedin.com/in/' | append: social.username %}
+          {% elsif social.network == 'X' or social.network == 'Twitter' %}
+            {% assign icon = 'fa-brands fa-x-twitter' %}
+            {% assign url = 'https://x.com/' | append: social.username %}
+          {% elsif social.network == 'Email' %}
+            {% assign icon = 'fa-solid fa-envelope' %}
+            {% assign url = 'mailto:' | append: social.username %}
+          {% else %}
+            {% assign icon = 'fa-solid fa-link' %}
+            {% assign url = social.url | default: '#' %}
+          {% endif %}
+          {% if social.username and social.username != '' %}
+          <a href="{{ url }}" target="_blank" rel="noopener">
+            <i class="{{ icon }}"></i>
+            <span>{{ social.username }}</span>
+          </a>
+          {% endif %}
+        {% endfor %}
+        {% if cv_data.email and cv_data.email != '' %}
+          <a href="mailto:{{ cv_data.email }}">
+            <i class="fa-solid fa-envelope"></i>
+            <span>{{ cv_data.email }}</span>
+          </a>
+        {% endif %}
+        {% if cv_data.location and cv_data.location != '' %}
+          <a href="#contact">
+            <i class="fa-solid fa-location-dot"></i>
+            <span>{{ cv_data.location }}</span>
+          </a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </aside>
+
     <div class="cv">
       {% comment %} Determine which CV format to render {% endcomment %}
       {% assign render_rendercv = false %}
@@ -62,6 +270,7 @@ layout: default
 
         <!-- Header/Contact Information -->
         {% if cv.name or cv.label or cv.location or cv.email or cv.phone or cv.website %}
+          <a class="anchor" id="contact"></a>
           <div class="card mt-3 p-3">
             <h3 class="card-title font-weight-medium">Contact Information</h3>
             <table class="table table-cv table-sm table-borderless">
@@ -73,7 +282,7 @@ layout: default
               {% endif %}
               {% if cv.label %}
                 <tr>
-                  <td class="p-1 pr-2 font-weight-bold"><b>Professional Title</b></td>
+                  <td class="p-1 pr-2 font-weight-bold"><b>Title</b></td>
                   <td class="p-1 pl-2 font-weight-light">{{ cv.label }}</td>
                 </tr>
               {% endif %}
@@ -114,8 +323,9 @@ layout: default
 
         <!-- Summary -->
         {% if cv.summary %}
+          <a class="anchor" id="summary"></a>
           <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">Professional Summary</h3>
+            <h3 class="card-title font-weight-medium">About</h3>
             <p>{{ cv.summary | markdownify | remove: '<p>' | remove: '</p>' }}</p>
           </div>
         {% endif %}
@@ -147,9 +357,18 @@ layout: default
             {% continue %}
           {% endif %}
 
+          {% assign section_labels = "Experience:Experience,Education:Education,Awards:Awards,Publications:Publications,Skills:Skills,Languages:Languages,Interests:Interests,Certificates:Certificates,Projects:Projects,References:References" | split: ',' %}
+          {% assign section_display = section_title %}
+          {% for pair in section_labels %}
+            {% assign parts = pair | split: ':' %}
+            {% if parts[0] == section_title %}
+              {% assign section_display = parts[1] %}
+            {% endif %}
+          {% endfor %}
+
           <a class="anchor" id="{{ section_title | slugify }}"></a>
           <div class="card mt-3 p-3">
-            <h3 class="card-title font-weight-medium">{{ section_title }}</h3>
+            <h3 class="card-title font-weight-medium">{{ section_display }}</h3>
             <div>
               {% if section_title == 'Education' %}
                 {% assign entries = section_entries %}
@@ -387,6 +606,7 @@ layout: default
       {% else %}
         <p>No CV data found. Please configure either RenderCV (cv.yml) or JSONResume (resume.json) data.</p>
       {% endif %}
-    </div>
+    </div><!-- .cv -->
+    </div><!-- .cv-layout -->
   </article>
 </div>

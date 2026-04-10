@@ -38,6 +38,17 @@ ul.task-list input[type="checkbox"] {
 
 .card {
   background-color: var(--global-card-bg-color);
+  border-radius: 0 !important;
+  border: 1px solid var(--global-divider-color) !important;
+  box-shadow: none !important;
+  transition: border-color 0.15s ease !important;
+  overflow: hidden;
+
+  &:hover {
+    transform: none;
+    border-color: var(--global-theme-color) !important;
+    box-shadow: none !important;
+  }
 
   .card-img {
     width: 100%;
@@ -97,7 +108,7 @@ ul.task-list input[type="checkbox"] {
 
   .card {
     background-color: var(--global-card-bg-color);
-    border: 1px solid var(--global-divider-color);
+    border: 1px solid var(--global-divider-color) !important;
 
     .list-group-item {
       background-color: inherit;
@@ -118,8 +129,7 @@ ul.task-list input[type="checkbox"] {
 }
 
 .date-column {
-  width: 75px;
-  transform: translateX(-15px) translateY(-5px);
+  width: 90px;
 }
 
 // Projects
@@ -175,23 +185,32 @@ ul.task-list input[type="checkbox"] {
   text-align: center;
 
   .contact-icons {
-    font-size: 4rem;
+    font-size: 2rem;
 
     a {
       img {
-        width: 3.2rem;
-        height: 3.2rem;
-        margin-bottom: 1rem;
+        border-radius: 50%;
+        width: 2rem;
+        height: 2rem;
+        margin-bottom: 0.25rem;
+        transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out;
+        filter: grayscale(20%);
+        opacity: 0.75;
+      }
+
+      &:hover img {
+        opacity: 1;
+        filter: grayscale(0%) drop-shadow(0 0 4px var(--global-theme-color));
       }
 
       svg {
-        width: 3.5rem;
-        height: 4rem;
-        margin-bottom: 0.5rem;
+        width: 1.8rem;
+        height: 2rem;
+        margin-bottom: 0.25rem;
 
         image {
-          width: 3.5rem;
-          height: 3.5rem;
+          width: 1.8rem;
+          height: 1.8rem;
         }
       }
 

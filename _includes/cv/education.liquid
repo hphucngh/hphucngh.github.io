@@ -1,93 +1,87 @@
 {% comment %}
-  Unified education entry renderer for both RenderCV and JSONResume formats
-  Handles both:
-  - RenderCV: institution, area, studyType (or degree), start_date, end_date, location, courses, highlights
-  - JSONResume: institution, area, studyType, startDate, endDate, location, courses, highlights
+  Education renderer — đồng bộ layout với experience timeline
 {% endcomment %}
 
-<ul class="card-text font-weight-light list-group list-group-flush">
+<div class="cv-edu-list">
   {% for entry in entries %}
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col-xs-2 col-sm-2 col-md-2 text-center date-column">
-          {% capture start_date %}
-            {% if entry.start_date %}{{ entry.start_date }}{% elsif entry.startDate %}{{ entry.startDate }}{% endif %}
-          {% endcapture %}
-          {% capture end_date %}
-            {% if entry.end_date %}{{ entry.end_date }}{% elsif entry.endDate %}{{ entry.endDate }}{% endif %}
-          {% endcapture %}
+    {% assign start_raw = entry.start_date | default: entry.startDate | strip %}
+    {% assign end_raw   = entry.end_date   | default: entry.endDate   | strip %}
 
-          {% if start_date != '' %}
-            {% comment %} Extract year only from dates like "1933-01-01" or just use "1933" as is {% endcomment %}
-            {% assign startDate = start_date | split: '-' | first %}
-            {% assign endDate = end_date | split: '-' | first | default: 'Present' %}
-            {% assign date = startDate | append: ' - ' | append: endDate %}
-          {% else %}
-            {% assign date = null %}
-          {% endif %}
+    {% assign start_parts = start_raw | split: '-' %}
+    {% assign start_year  = start_parts[0] %}
+    {% assign end_parts   = end_raw | split: '-' %}
+    {% assign end_year    = end_parts[0] %}
 
-          <table class="table-cv">
-            <tbody>
-              <tr>
-                <td>
-                  {% if date %}
-                    <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px">{{ date }}</span>
-                  {% endif %}
-                </td>
-              </tr>
-              {% capture location %}
-                {% if entry.location %}{{ entry.location }}{% endif %}
-              {% endcapture %}
-              {% if location != '' %}
-                <tr>
-                  <td>
-                    <p class="location">
-                      <i class="fa-solid fa-location-dot iconlocation"></i>
-                      {{ location }}
-                    </p>
-                  </td>
-                </tr>
-              {% endif %}
-            </tbody>
-          </table>
-        </div>
-        <div class="col-xs-10 col-sm-10 col-md-10 mt-2 mt-md-0">
-          {% capture study_type %}
-            {% if entry.studyType %}{{ entry.studyType }}{% elsif entry.degree %}{{ entry.degree }}{% endif %}
-          {% endcapture %}
-
-          {% if entry.url %}
-            <h6 class="title font-weight-bold ml-1 ml-md-4">
-              <a href="{{ entry.url }}">{{ study_type }}</a>
-            </h6>
-          {% elsif study_type != '' %}
-            <h6 class="title font-weight-bold ml-1 ml-md-4">{{ study_type }}</h6>
-          {% endif %}
-
-          {% if entry.institution %}
-            <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem">{{ entry.institution }}</h6>
-          {% endif %}
-
-          {% if entry.area %}
-            <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem; font-style: italic">{{ entry.area }}</h6>
-          {% endif %}
-
-          {% if entry.courses or entry.highlights %}
-            <ul class="items">
-              {% for item in entry.courses %}
-                <li>
-                  <span class="item">{{ item }}</span>
-                </li>
-              {% endfor %}
-              {% for item in entry.highlights %}
-                <li>
-                  <span class="item">{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</span>
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
+    <div class="cv-edu-entry">
+      <!-- Date column -->
+      <div class="cv-edu-dates">
+        {% if start_year and end_year %}
+          <span class="cv-edu-period">{{ start_year }} – {{ end_year }}</span>
+        {% elsif start_year %}
+          <span class="cv-edu-period">{{ start_year }}</span>
+        {% endif %}
       </div>
-    </li>
+
+      <!-- Spine -->
+      <div class="cv-tl-spine">
+        <div class="tl-dot"></div>
+        <div class="tl-line"></div>
+      </div>
+
+      <!-- Card -->
+      <div class="cv-exp-card">
+        {% capture study_type %}{% if entry.studyType %}{{ entry.studyType }}{% elsif entry.degree %}{{ entry.degree }}{% endif %}{% endcapture %}
+        {% if study_type != '' %}
+          <span class="cv-exp-position">
+            {% if entry.url %}<a href="{{ entry.url }}" target="_blank">{{ study_type }}</a>{% else %}{{ study_type }}{% endif %}
+          </span>
+        {% endif %}
+        <div class="cv-exp-company">
+          {{ entry.institution }}
+          {% if entry.location %}
+            <span class="sep">&middot;</span>
+            <span class="cv-exp-location">{{ entry.location }}</span>
+          {% endif %}
+        </div>
+        {% if entry.area %}
+          <p style="font-size:0.8rem;color:var(--global-text-color-light);margin:0 0 0.35rem;font-style:italic;">{{ entry.area }}</p>
+        {% endif %}
+        {% if entry.courses or entry.highlights %}
+          <ul class="cv-exp-highlights">
+            {% for item in entry.courses %}
+              <li>{{ item }}</li>
+            {% endfor %}
+            {% for item in entry.highlights %}
+              <li>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
   {% endfor %}
-</ul>
+</div>
+
+<style>
+.cv-edu-list {
+  display: flex;
+  flex-direction: column;
+}
+.cv-edu-entry {
+  display: grid;
+  grid-template-columns: 62px 18px 1fr;
+  gap: 0 0.6rem;
+}
+.cv-edu-dates {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding-top: 0.45rem;
+}
+.cv-edu-period {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--global-theme-color);
+  white-space: nowrap;
+  line-height: 1;
+}
+</style>

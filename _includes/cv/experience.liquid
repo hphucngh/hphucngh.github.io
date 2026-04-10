@@ -1,91 +1,203 @@
 {% comment %}
-  Unified work/experience entry renderer for both RenderCV and JSONResume formats
-  Handles both:
-  - RenderCV: company, position, start_date, end_date, location, url, summary, highlights
-  - JSONResume: name, position, startDate, endDate, location, url, summary, highlights
+  Timeline-style experience renderer — hiển thị cả start và end date trên spine
 {% endcomment %}
 
-<ul class="card-text font-weight-light list-group list-group-flush">
+<style>
+/* ── Outer wrapper ────────────────────────────────────────────── */
+.cv-exp-timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Each entry: [dates | spine | card] ──────────────────────── */
+.cv-tl-entry {
+  display: grid;
+  grid-template-columns: 62px 18px 1fr;
+  gap: 0 0.6rem;
+}
+
+/* ── Date column ─────────────────────────────────────────────── */
+.cv-tl-dates {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0.45rem 0 0.9rem;
+  min-height: 2.5rem;
+}
+.tl-date-end {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--global-theme-color);
+  line-height: 1;
+  white-space: nowrap;
+}
+.tl-date-end.is-present {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.tl-date-end.is-present::before {
+  content: '';
+  display: inline-block;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--global-theme-color);
+  animation: pulse-now 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes pulse-now {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+.tl-date-start {
+  font-size: 0.62rem;
+  color: var(--global-text-color-light);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ── Spine column ────────────────────────────────────────────── */
+.cv-tl-spine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tl-dot {
+  width: 8px; height: 8px;
+  border: 1.5px solid var(--global-theme-color);
+  background: transparent;
+  flex-shrink: 0;
+  margin-top: 0.4rem;
+  transition: background 0.15s ease;
+}
+.tl-dot.active {
+  background: var(--global-theme-color);
+}
+.cv-tl-entry:hover .tl-dot {
+  background: var(--global-theme-color);
+}
+.tl-line {
+  flex: 1;
+  width: 1px;
+  background: var(--global-divider-color);
+  margin: 3px 0;
+}
+
+/* ── Card ────────────────────────────────────────────────────── */
+.cv-exp-card {
+  margin: 0.2rem 0 0.75rem;
+  padding: 0.75rem 1rem;
+  background: var(--global-card-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-left: 2px solid var(--global-theme-color);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.cv-exp-card:hover {
+  background: var(--global-surface-color, var(--global-card-bg-color));
+  border-color: var(--global-theme-color);
+}
+
+/* ── Card content ────────────────────────────────────────────── */
+.cv-exp-position {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--global-text-color);
+  display: block;
+  margin-bottom: 0.15rem;
+  line-height: 1.35;
+}
+.cv-exp-company {
+  font-size: 0.78rem;
+  color: var(--global-theme-color);
+  margin-bottom: 0.45rem;
+}
+.cv-exp-company .sep { opacity: 0.4; margin: 0 0.25rem; }
+.cv-exp-location {
+  font-size: 0.72rem;
+  color: var(--global-text-color-light);
+}
+
+/* ── Highlights ──────────────────────────────────────────────── */
+.cv-exp-highlights {
+  margin: 0.45rem 0 0;
+  padding-left: 1.1rem;
+}
+.cv-exp-highlights li {
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--global-text-color);
+  padding: 0.1rem 0;
+}
+.cv-exp-highlights li strong { color: var(--global-theme-color); }
+</style>
+
+<div class="cv-exp-timeline">
   {% for entry in entries %}
-    <li class="list-group-item">
-      <div class="row">
-        <div class="col-xs-2 col-sm-2 col-md-2 text-center date-column">
-          {% capture start_date %}
-            {% if entry.start_date %}{{ entry.start_date }}{% elsif entry.startDate %}{{ entry.startDate }}{% endif %}
-          {% endcapture %}
-          {% capture end_date %}
-            {% if entry.end_date %}{{ entry.end_date }}{% elsif entry.endDate %}{{ entry.endDate }}{% endif %}
-          {% endcapture %}
+    {% assign start_raw = entry.start_date | default: entry.startDate | strip %}
+    {% assign end_raw   = entry.end_date   | default: entry.endDate   | strip %}
 
-          {% if start_date != '' %}
-            {% comment %} Extract year only from dates like "1933-01-01" or just use "1933" as is {% endcomment %}
-            {% assign startDate = start_date | split: '-' | first %}
-            {% assign endDate = end_date | split: '-' | first | default: 'Present' %}
-            {% assign date = startDate | append: ' - ' | append: endDate %}
-          {% else %}
-            {% assign date = '' %}
-          {% endif %}
+    {% assign start_parts = start_raw | split: '-' %}
+    {% assign start_year  = start_parts[0] %}
+    {% assign start_month = start_parts[1] %}
 
-          <table class="table-cv">
-            <tbody>
-              <tr>
-                <td>
-                  <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px">{{ date }}</span>
-                </td>
-              </tr>
-              {% capture location %}
-                {% if entry.location %}{{ entry.location }}{% endif %}
-              {% endcapture %}
-              {% if location != '' %}
-                <tr>
-                  <td>
-                    <p class="location">
-                      <i class="fa-solid fa-location-dot iconlocation"></i>
-                      {{ location }}
-                    </p>
-                  </td>
-                </tr>
-              {% endif %}
-            </tbody>
-          </table>
-        </div>
-        <div class="col-xs-10 col-sm-10 col-md-10 mt-2 mt-md-0">
-          {% capture position_title %}
-            {% if entry.position %}{{ entry.position }}{% endif %}
-          {% endcapture %}
+    {% assign is_active = false %}
+    {% if end_raw == 'present' or end_raw == '' or end_raw == blank %}
+      {% assign is_active = true %}
+      {% assign end_label = 'Present' %}
+    {% else %}
+      {% assign end_parts = end_raw | split: '-' %}
+      {% assign end_year  = end_parts[0] %}
+      {% assign end_month = end_parts[1] %}
+      {% if end_month %}
+        {% assign end_label = end_month | append: '/' | append: end_year %}
+      {% else %}
+        {% assign end_label = end_year %}
+      {% endif %}
+    {% endif %}
 
-          {% if entry.url %}
-            <h6 class="title font-weight-bold ml-1 ml-md-4">
-              <a href="{{ entry.url }}">{{ position_title }}</a>
-            </h6>
-          {% elsif position_title != '' %}
-            <h6 class="title font-weight-bold ml-1 ml-md-4">{{ position_title }}</h6>
-          {% endif %}
+    {% if start_month %}
+      {% assign start_label = start_month | append: '/' | append: start_year %}
+    {% else %}
+      {% assign start_label = start_year %}
+    {% endif %}
 
-          {% capture company_name %}
-            {% if entry.name %}{{ entry.name }}{% elsif entry.company %}{{ entry.company }}{% elsif entry.organization %}{{ entry.organization }}{% endif %}
-          {% endcapture %}
-          {% if company_name != '' %}
-            <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem">{{ company_name }}</h6>
-          {% endif %}
-
-          {% if entry.summary %}
-            <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem; font-style: italic">
-              {{ entry.summary | markdownify | remove: '<p>' | remove: '</p>' }}
-            </h6>
-          {% endif %}
-
-          {% if entry.highlights %}
-            <ul class="items">
-              {% for item in entry.highlights %}
-                <li>
-                  <span class="item">{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</span>
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
+    <div class="cv-tl-entry">
+      <!-- Date column -->
+      <div class="cv-tl-dates">
+        <span class="tl-date-end{% if is_active %} is-present{% endif %}">{{ end_label }}</span>
+        <span class="tl-date-start">{{ start_label }}</span>
       </div>
-    </li>
+
+      <!-- Spine column -->
+      <div class="cv-tl-spine">
+        <div class="tl-dot{% if is_active %} active{% endif %}"></div>
+        <div class="tl-line"></div>
+      </div>
+
+      <!-- Card -->
+      <div class="cv-exp-card">
+        <span class="cv-exp-position">{{ entry.position }}</span>
+        <div class="cv-exp-company">
+          {{ entry.company | default: entry.name | default: entry.organization }}
+          {% if entry.location %}
+            <span class="sep">&middot;</span>
+            <span class="cv-exp-location">{{ entry.location }}</span>
+          {% endif %}
+        </div>
+        {% if entry.summary %}
+          <p style="font-size:0.8rem;color:var(--global-text-color-light);margin:0 0 0.35rem;font-style:italic;">
+            {{ entry.summary | markdownify | remove: '<p>' | remove: '</p>' }}
+          </p>
+        {% endif %}
+        {% if entry.highlights %}
+          <ul class="cv-exp-highlights">
+            {% for item in entry.highlights %}
+              <li>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
   {% endfor %}
-</ul>
+</div>

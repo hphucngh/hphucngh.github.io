@@ -4,19 +4,17 @@
 
 title: Timoty Nguyen # the website title (if blank, full name will be used instead)
 first_name: Nguyen
-middle_name: Huu
+middle_name: 
 last_name: Phuc
 contact_note: >
-  You can even add a little note about which of these is the best way to reach you.
+  Best way to reach me is via email or Telegram
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
-  A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
+  Perspectives on applying AI in software and daily life.
 footer_text: >
-  Powered by <a href="https://jekyllrb.com/" target="_blank">Jekyll</a> with <a href="https://github.com/alshedivat/al-folio">al-folio</a> theme.
-  Hosted by <a href="https://pages.github.com/" target="_blank">GitHub Pages</a>.
-  Photos from <a href="https://unsplash.com" target="_blank">Unsplash</a>.
-keywords: jekyll, jekyll-theme, academic-website, portfolio-website # add your own keywords or leave empty
+  Building AI systems & sharing what works
+keywords: timoty, timoty-nguyen, timoty-website
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: ⚛️ # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: 🔳
 
 url: https://hphucngh.github.io # the base hostname & protocol for your site
 baseurl:  # /al-folio # the subpath of your site, e.g. /blog/. Leave blank for root
@@ -92,8 +90,8 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: timoty nguyen # al-folio # blog_name will be displayed in your blog page
-blog_description: a simple whitespace theme for academics
-permalink: /blog/:year/:title/
+blog_description: Perspectives on applying AI in software and daily life.
+permalink: /synthesis/:year/:title/
 lsi: false # produce an index for related posts
 
 # Pagination
@@ -128,17 +126,17 @@ disqus_shortname:  timoty nguyen # al-folio # put your disqus shortname
 # If you have blog posts published on medium.com or other external sources,
 # you can display them in your blog by adding a link to the RSS feed.
 # Optional: Set default categories and tags for posts from each source.
-external_sources:
-  - name: medium.com
-    rss_url: https://medium.com/@al-folio/feed
-    categories: [external-posts]
-    tags: [medium]
-  - name: Google Blog
-    posts:
-      - url: https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
-        published_date: 2024-05-14
-    categories: [external-posts]
-    tags: [google]
+## external_sources:
+##   - name: medium.com
+##     rss_url: https://medium.com/@al-folio/feed
+##     categories: [external-posts]
+##     tags: [medium]
+##   - name: Google Blog
+##     posts:
+##       - url: https://blog.google/technology/ai/google-gemini-update-flash-ai-assistant-io-2024/
+##         published_date: 2024-05-14
+##     categories: [external-posts]
+##     tags: [google]
 
 # -----------------------------------------------------------------------------
 # Newsletter
@@ -160,6 +158,9 @@ collections:
     defaults:
       layout: post
     output: true
+  notes:
+    output: true
+    sort_by: date
   projects:
     output: true
   teachings:
@@ -205,12 +206,14 @@ exclude:
   - readme_preview/
   - vendor
 
-  - _pages/cv
+  # - _pages/cv
+  - _pages/notes
+  - _pages/blog
   - _pages/books
   - _pages/news
   - _pages/projects
   - _pages/teaching
-  - _pages/blog
+
   - _pages/external_sources
   - _pages/publications
   - _pages/profile
@@ -250,6 +253,11 @@ defaults:
       path: "assets"
     values:
       sitemap: false
+  - scope:
+      path: "_notes"
+      type: notes
+    values:
+      layout: post
 
 sass:
   style: compressed
@@ -278,9 +286,9 @@ jekyll-archives:
   posts:
     enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
     permalinks:
-      year: "/blog/:year/"
-      tags: "/blog/:type/:name/"
-      categories: "/blog/:type/:name/"
+      year: "/synthesis/:year/"
+      tags: "/synthesis/:type/:name/"
+      categories: "/synthesis/:type/:name/"
   books:
     enabled: [year, tags, categories] # enables year, tag and category archives (remove if you need to disable one of them).
 
@@ -290,10 +298,9 @@ display_categories: ["external-services"] # these categories will be displayed o
 # -----------------------------------------------------------------------------
 # Jekyll Scholar
 # -----------------------------------------------------------------------------
-
 scholar:
-  last_name: [Einstein]
-  first_name: [Albert, A.]
+  last_name: [Timoty]
+  first_name: [Nguyen]
 
   style: apa
   locale: en
@@ -474,7 +481,7 @@ third_party_libraries:
     version: "5.5.0"
   google_fonts:
     url:
-      fonts: "https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&display=swap"
+      fonts: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@100;300;400;500;700&display=swap"
   highlightjs:
     integrity:
       css:

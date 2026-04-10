@@ -8,13 +8,19 @@
   box-shadow: none;
   border-bottom: 1px solid var(--global-divider-color);
   background-color: var(--global-bg-color);
-  opacity: 0.95;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  opacity: 1;
 }
 
 .navbar .dropdown-menu,
 .btn-group.dropdown .dropdown-menu {
   background-color: var(--global-bg-color);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   border: 1px solid var(--global-divider-color);
+  border-radius: 0;
+  box-shadow: none;
 
   a:not(.active) {
     color: var(--global-text-color);
@@ -56,7 +62,7 @@
   }
 
   .navbar-brand {
-    color: var(--global-text-color);
+    color: var(--global-theme-color);
   }
 
   .navbar-nav .nav-item .nav-link {

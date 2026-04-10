@@ -4,6 +4,30 @@
 
 @use "variables" as v;
 
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+em,
+div,
+li,
+span,
+strong,
+a,
+button,
+input,
+textarea,
+select,
+code,
+pre {
+  font-family: "JetBrains Mono", "Fira Code", "Cascadia Code", "SF Mono",
+    "Menlo", "Consolas", "Courier New", monospace !important;
+}
+
 p,
 h1,
 h2,

@@ -1,0 +1,126 @@
+cv:
+  name: Timoty Nguyen
+  label: AI Engineer · Backend Engineer · Machine Learning Engineer
+  email: "hphuc.ngh@gmail.com"
+  location: Hồ Chí Minh, Việt Nam
+  image: ""
+  summary: >
+    AI Engineer với kinh nghiệm xây dựng hệ thống AI và backend ở quy mô production.
+    Chuyên về LLM, Computer Vision và Generative AI, kết hợp với kiến trúc microservices.
+    Thành thạo phát triển API, tối ưu hiệu năng và triển khai trên AWS/GCP.
+    Hướng tới xây dựng các giải pháp AI có tác động thực tế và khả năng mở rộng cao.
+
+  social_networks:
+    - network: GitHub
+      username: hphucngh
+    - network: LinkedIn
+      username: "hphucngh"
+
+  sections:
+    Experience:
+      - company: Ninety Eight
+        position: AI Engineer
+        location: Hồ Chí Minh (Hybrid)
+        start_date: 2023-06
+        end_date: present
+        highlights:
+          - "**Image Generation:** Huấn luyện và fine-tune mô hình sinh ảnh (LoRA, Stable Diffusion); xây dựng và vận hành API cho hệ thống."
+          - "Triển khai trên AWS, đảm bảo scalability và tối ưu chi phí; tối ưu mô hình để chạy hiệu quả trên GPU cấu hình thấp."
+          - "Nghiên cứu và phát triển các use case: NFT generation, logo generation."
+          - "**Chatbot & Web3 Agent:** Phát triển chatbot sử dụng RAG để trả lời câu hỏi sản phẩm với độ chính xác cao."
+          - "Xây dựng AI Agent hỗ trợ các tác vụ Web3 (transfer, staking, swap) thông qua NLP và LLM."
+
+      - company: CyberLogitec
+        position: Backend Developer
+        location: Hồ Chí Minh (Hybrid)
+        start_date: 2022-11
+        end_date: 2023-05
+        highlights:
+          - "Phát triển hệ thống microservices cho logistics sử dụng FastAPI, GCP và PostgreSQL."
+          - "Xây dựng hệ thống gửi email tự động theo lịch."
+          - "Tối ưu truy vấn database, cải thiện hiệu năng xử lý dữ liệu lớn."
+
+      - company: Minerva Technology Solutions JSC
+        position: Backend Developer – R&D Team
+        location: Hồ Chí Minh
+        start_date: 2021-07
+        end_date: 2022-11
+        highlights:
+          - "**eKYC System:** Thiết kế hệ thống eKYC theo kiến trúc microservices (Django, FastAPI)."
+          - "Phát triển AI model: OCR, segmentation, document recognition, signature verification."
+          - "Triển khai model bằng TorchServe, TensorFlow Serving; sử dụng Redis, PostgreSQL và CUDA."
+          - "**Face Recognition Attendance:** Xây dựng hệ thống nhận diện khuôn mặt real-time với ANN vector search (~1B vectors / 100ms)."
+          - "**Chatbot Research:** Nghiên cứu chatbot sử dụng RNN, LSTM cho các tác vụ NLP."
+
+      - company: Minerva Technology Solutions JSC
+        position: Backend Developer – R&D Team
+        location: Hồ Chí Minh
+        start_date: 2020-11
+        end_date: 2021-07
+        highlights:
+          - "**CCTV & Video Analytics:** Phát triển AI model (facial landmark, face recognition với VGG16)."
+          - "Xây dựng API nhận diện khuôn mặt real-time; dùng PostgreSQL + CUBE cho vector similarity search."
+          - "Implement object tracking, people counting, zone detection; xử lý video stream với RabbitMQ."
+
+      - company: Minerva Technology Solutions JSC
+        position: Backend Developer – Service Team
+        location: Hồ Chí Minh
+        start_date: 2020-01
+        end_date: 2020-11
+        highlights:
+          - "Phát triển hệ thống chat real-time với RabbitMQ và API dạng Protobuf."
+          - "Thiết lập CI/CD pipeline với Jenkins."
+          - "Phát triển Location Service API (Django)."
+
+      - company: Minerva Technology Solutions JSC
+        position: Backend Developer – API Team
+        location: Hồ Chí Minh
+        start_date: 2019-06
+        end_date: 2019-12
+        highlights:
+          - "Phát triển API cho hệ thống order và khảo sát."
+          - "Xây dựng các cron job tự động và API hỗ trợ."
+
+      - company: Green Space Solution
+        position: Intern Developer
+        location: Hồ Chí Minh
+        start_date: 2018-06
+        end_date: 2018-08
+        highlights:
+          - "Tích hợp đăng nhập Facebook & Google cho mobile app (React Native)."
+
+    Education:
+      - institution: Trường Đại học Cần Thơ
+        location: Cần Thơ, Việt Nam
+        area: Mạng Máy Tính & Truyền Thông Dữ Liệu
+        studyType: Kỹ sư
+        start_date: 2014
+        end_date: 2019
+
+    Skills:
+      - name: AI / ML
+        icon: fa-solid fa-brain
+        keywords: "LLM, RAG, Stable Diffusion, LoRA, Computer Vision, OCR, TorchServe, TensorFlow Serving"
+
+      - name: Backend
+        icon: fa-solid fa-server
+        keywords: "FastAPI, Django, Microservices, REST API, RabbitMQ, Protobuf"
+
+      - name: Cloud & DevOps
+        icon: fa-solid fa-cloud
+        keywords: "AWS, GCP, Docker, Jenkins, CI/CD"
+
+      - name: Cơ sở dữ liệu
+        icon: fa-solid fa-database
+        keywords: "PostgreSQL, Redis, MongoDB"
+
+      - name: Ngôn ngữ lập trình
+        icon: fa-solid fa-code
+        keywords: "Python, SQL"
+
+    # Languages:
+    #   - name: Tiếng Việt
+    #     summary: "Tiếng mẹ đẻ"
+
+    #   - name: Tiếng Anh
+    #     summary: "Giao tiếp chuyên nghiệp"
