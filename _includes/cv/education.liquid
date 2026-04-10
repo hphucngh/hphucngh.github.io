@@ -84,4 +84,19 @@
   white-space: nowrap;
   line-height: 1;
 }
+
+/* ── Mobile: collapse to 1 column, date inline ───────────────── */
+@media (max-width: 600px) {
+  .cv-edu-entry {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .cv-edu-dates {
+    justify-content: flex-start;
+    padding: 0.5rem 0 0.15rem;
+  }
+  .cv-edu-period { font-size: 0.68rem; }
+  .cv-edu-entry .cv-tl-spine { display: none; }
+  .cv-edu-entry .cv-exp-card { margin: 0.15rem 0 1rem; }
+}
 </style>

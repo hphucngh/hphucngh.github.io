@@ -406,3 +406,123 @@ blockquote,
     }
   }
 }
+
+// ---------------------------------------------------------------------------
+// Mobile optimizations — About page + Footer + Back-to-top
+// ---------------------------------------------------------------------------
+
+@media (max-width: 575px) {
+  // Global: thu nhỏ base font-size → toàn bộ rem values scale theo
+  html {
+    font-size: 14px;
+  }
+
+  // Profile: bỏ float, chuyển sang flex row — ảnh trái, more-info phải
+  .profile {
+    float: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 0 1.25rem 0 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 0.85rem;
+  }
+
+  .profile img {
+    width: 80px !important;
+    flex-shrink: 0;
+  }
+
+  .profile .more-info {
+    flex: 1 !important;
+    margin-top: 0 !important;
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.76rem !important;
+    min-width: 0; // prevent flex overflow
+  }
+
+  .post-header h1.post-title {
+    font-size: 1.25rem !important;
+  }
+
+  // Social icons: nhỏ hơn trên mobile
+  .social .contact-icons {
+    font-size: 1.5rem !important;
+  }
+  .social .contact-note {
+    font-size: 0.72rem !important;
+  }
+
+  // Fixed footer: gọn hơn trên mobile
+  footer.fixed-bottom .container {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+    font-size: 0.66rem !important;
+    line-height: 1.4 !important;
+  }
+
+  // Back-to-top: nhấc lên trên footer, nhỏ hơn, sát mép phải hơn
+  #back-to-top {
+    bottom: 48px !important;
+    right: 10px !important;
+    height: 32px !important;
+    width: 32px !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Mobile optimizations — CV sidebar
+// ---------------------------------------------------------------------------
+
+@media (max-width: 700px) {
+  .cv-sidebar-avatar {
+    width: 60px !important;
+    height: 60px !important;
+    aspect-ratio: 1 !important;
+    float: left;
+    margin-right: 0.85rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .cv-sidebar-divider {
+    clear: both;
+    margin: 0.75rem 0 !important;
+  }
+
+  .cv-sidebar ul {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 0.3rem 0.5rem !important;
+  }
+
+  .cv-sidebar ul li {
+    margin-bottom: 0 !important;
+  }
+
+  .cv-sidebar ul li a {
+    padding: 0.15rem 0.5rem !important;
+    border: 1px solid var(--global-divider-color) !important;
+    font-size: 0.76rem !important;
+  }
+
+  .cv-sidebar ul li a.active,
+  .cv-sidebar ul li a:hover {
+    border-color: var(--global-theme-color) !important;
+    background: var(--global-card-bg-color) !important;
+  }
+
+  .cv-sidebar-socials {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 0.4rem 1rem !important;
+    margin-top: 0.75rem !important;
+    padding-top: 0.75rem !important;
+  }
+
+  .cv-sidebar-socials a span {
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

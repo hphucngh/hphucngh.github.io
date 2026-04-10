@@ -130,6 +130,27 @@
   padding: 0.1rem 0;
 }
 .cv-exp-highlights li strong { color: var(--global-theme-color); }
+
+/* ── Mobile: collapse to 1 column, date inline ───────────────── */
+@media (max-width: 600px) {
+  .cv-tl-entry {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .cv-tl-dates {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.3rem;
+    min-height: unset;
+    padding: 0.5rem 0 0.15rem;
+  }
+  .tl-date-end   { order: 2; font-size: 0.68rem; }
+  .tl-date-start { order: 1; font-size: 0.68rem; }
+  .tl-date-start::after { content: ' –'; opacity: 0.5; }
+  .cv-tl-spine { display: none; }
+  .cv-exp-card { margin: 0.15rem 0 1rem; }
+}
 </style>
 
 <div class="cv-exp-timeline">
