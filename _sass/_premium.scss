@@ -437,27 +437,18 @@ blockquote,
     flex: 1 !important;
     margin-top: 0 !important;
     padding: 0.5rem 0.75rem !important;
-    font-size: 0.76rem !important;
     min-width: 0; // prevent flex overflow
   }
 
-  .post-header h1.post-title {
-    font-size: 1.25rem !important;
-  }
-
-  // Social icons: nhỏ hơn trên mobile
+  // Social icons: nhỏ hơn trên mobile (rem tự scale từ html 14px)
   .social .contact-icons {
-    font-size: 1.5rem !important;
-  }
-  .social .contact-note {
-    font-size: 0.72rem !important;
+    font-size: 1.6rem !important;
   }
 
-  // Fixed footer: gọn hơn trên mobile
+  // Fixed footer: gọn hơn trên mobile (font-size tự scale từ html 14px)
   footer.fixed-bottom .container {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
-    font-size: 0.66rem !important;
     line-height: 1.4 !important;
   }
 
