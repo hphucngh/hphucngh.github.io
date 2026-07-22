@@ -28,6 +28,38 @@ pre {
     "Menlo", "Consolas", "Courier New", monospace !important;
 }
 
+/* Direction A: long-form article/note/about prose uses the readable slab-serif
+   body font. The UI "chrome" (nav, TOC, labels, tags), headings, and code stay
+   mono — they are intentionally left out of this override. */
+.post-content,
+.post article .clearfix {
+  p,
+  li,
+  blockquote,
+  dd,
+  dt,
+  strong,
+  em,
+  a {
+    font-family: var(--font-body) !important;
+  }
+}
+
+/* Keyboard focus visibility (accessibility). */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--global-theme-color);
+  outline-offset: 2px;
+}
+
+::selection {
+  background-color: var(--global-selection-bg);
+}
+
 p,
 h1,
 h2,

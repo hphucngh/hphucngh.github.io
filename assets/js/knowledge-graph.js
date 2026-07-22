@@ -19,13 +19,15 @@
     };
   }
 
+  // Muted categorical palette — distinguishable but restrained, works on both
+  // the light and dark terminal backgrounds (no neon).
   const FOLDER_COLORS = {
-    ml: "#e74c3c",
-    engineering: "#2698BA",
-    thinking: "#27ae60",
-    personal: "#f39c12",
+    ml: "#b56a5a", // clay
+    engineering: "#5f8a93", // slate-teal
+    thinking: "#7f9668", // sage
+    personal: "#c2954e", // ochre
   };
-  const DEFAULT_FOLDER_COLOR = "#95a5a6";
+  const DEFAULT_FOLDER_COLOR = "#8a8a82"; // neutral
 
   function folderColor(folder) {
     return FOLDER_COLORS[folder] || DEFAULT_FOLDER_COLOR;

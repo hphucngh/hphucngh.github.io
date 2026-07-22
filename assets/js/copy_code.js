@@ -1,4 +1,4 @@
-// create element for copy button in code blocks
+// Add a terminal-style header (language label + copy button) to code blocks.
 var codeBlocks = document.querySelectorAll("pre");
 codeBlocks.forEach(function (codeBlock) {
   if (
@@ -11,13 +11,22 @@ codeBlocks.forEach(function (codeBlock) {
     codeBlock.querySelector("code:not(.language-plotly)") &&
     codeBlock.querySelector("code:not(.language-vega_lite)")
   ) {
+    // derive the language label from the nearest `language-xxx` ancestor
+    var langLabel = "code";
+    var langHost = codeBlock.closest('[class*="language-"]');
+    if (langHost) {
+      var match = langHost.className.match(/language-([\w+#-]+)/);
+      if (match && match[1] && match[1] !== "plaintext") {
+        langLabel = match[1];
+      }
+    }
+
     // create copy button
     var copyButton = document.createElement("button");
     copyButton.className = "copy";
     copyButton.type = "button";
     copyButton.ariaLabel = "Copy code to clipboard";
-    copyButton.innerText = "Copy";
-    copyButton.innerHTML = '<i class="fa-solid fa-clipboard"></i>';
+    copyButton.innerHTML = '<i class="fa-solid fa-clipboard"></i> copy';
 
     // get code from code block and copy to clipboard
     copyButton.addEventListener("click", function () {
@@ -28,29 +37,33 @@ codeBlocks.forEach(function (codeBlock) {
         // get code from code block ignoring line numbers
         var code = codeBlock.querySelector("pre:not(.lineno)").innerText.trim();
       } else {
-        // if (codeBlock.querySelector('code')) {
         // get code from code block when line numbers are not displayed
         var code = codeBlock.querySelector("code").innerText.trim();
       }
       window.navigator.clipboard.writeText(code);
-      copyButton.innerText = "Copied";
-      copyButton.innerHTML = '<i class="fa-solid fa-clipboard-check"></i>';
-      var waitFor = 3000;
+      copyButton.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> copied';
+      var waitFor = 2500;
 
       setTimeout(function () {
-        copyButton.innerText = "Copy";
-        copyButton.innerHTML = '<i class="fa-solid fa-clipboard"></i>';
+        copyButton.innerHTML = '<i class="fa-solid fa-clipboard"></i> copy';
       }, waitFor);
     });
 
-    // create wrapper div
+    // build header bar: language label (left) + copy button (right)
+    var header = document.createElement("div");
+    header.className = "code-header";
+    var langSpan = document.createElement("span");
+    langSpan.className = "code-lang";
+    langSpan.textContent = langLabel;
+    header.appendChild(langSpan);
+    header.appendChild(copyButton);
+
+    // create wrapper div and assemble
     var wrapper = document.createElement("div");
     wrapper.className = "code-display-wrapper";
-
-    // add copy button and code block to wrapper div
     const parent = codeBlock.parentElement;
     parent.insertBefore(wrapper, codeBlock);
+    wrapper.append(header);
     wrapper.append(codeBlock);
-    wrapper.append(copyButton);
   }
 });

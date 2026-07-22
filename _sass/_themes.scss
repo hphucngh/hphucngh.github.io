@@ -6,33 +6,42 @@
 
 :root {
   color-scheme: light;
-  // --- Terminal light palette ---
-  --global-bg-color: #d8d8d0;
+  // --- Terminal light palette (warm off-white) ---
+  --global-bg-color: #f4f3ee;
   --global-code-bg-color: #{v.$code-bg-color-light};
   --global-text-color: #1a1a1a;
-  --global-text-color-light: #585850;
+  --global-text-color-light: #5f5f57;
   --global-theme-color: #{v.$gold-color-dark};
   --global-hover-color: #{v.$gold-color-dark};
-  --global-hover-text-color: #d8d8d0;
+  --global-hover-text-color: #f4f3ee;
   --global-footer-bg-color: #111111;
   --global-footer-text-color: #888880;
   --global-footer-link-color: #c8c8c0;
   --global-distill-app-color: #{v.$grey-color};
-  --global-divider-color: #b8b8b0;
-  --global-card-bg-color: #ccccc4;
+  --global-divider-color: #dcdbd3;
+  --global-card-bg-color: #e9e8e1;
   --global-highlight-color: #{v.$red-color-dark};
   --global-back-to-top-bg-color: #{v.$gold-color-dark};
-  --global-back-to-top-text-color: #d8d8d0;
-  --global-newsletter-bg-color: #ccccc4;
+  --global-back-to-top-text-color: #f4f3ee;
+  --global-newsletter-bg-color: #e9e8e1;
   --global-newsletter-text-color: #1a1a1a;
+  // Syntax: muted string/literal hue (paired with teal keywords + grey comments)
+  --syntax-string: #8a6a3a;
 
   // --- Terminal design tokens ---
   --global-accent: #{v.$gold-color};
-  --global-surface-color: #ccccc4;
-  --global-border-color: #b8b8b0;
+  --global-surface-color: #e9e8e1;
+  --global-border-color: #d5d4cb;
   --global-card-shadow: none;
   --global-card-hover-shadow: none;
   --global-card-radius: 0px;
+
+  // Fonts: mono for the UI/chrome, a readable slab-serif for long-form prose.
+  --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", "Menlo", "Consolas",
+    monospace;
+  --font-body: "Roboto Slab", Georgia, Cambria, "Times New Roman", serif;
+  // Text selection: a soft tint of the teal accent (works on both themes).
+  --global-selection-bg: rgba(51, 153, 153, 0.28);
 
   --global-tip-block: #42b983;
   --global-tip-block-bg: #e2f5ec;
@@ -84,7 +93,7 @@ html[data-theme="dark"] {
   --global-bg-color: #1a1a1a;
   --global-code-bg-color: #222222;
   --global-text-color: #c8c8c0;
-  --global-text-color-light: #787870;
+  --global-text-color-light: #8a8a82;
   --global-theme-color: #{v.$gold-color};
   --global-hover-color: #{v.$gold-color};
   --global-hover-text-color: #1a1a1a;
@@ -98,6 +107,8 @@ html[data-theme="dark"] {
   --global-back-to-top-text-color: #{v.$gold-color};
   --global-newsletter-bg-color: #222222;
   --global-newsletter-text-color: #c8c8c0;
+  // Syntax: muted string/literal hue for the dark terminal palette
+  --syntax-string: #b58a5a;
 
   // --- Terminal design tokens (dark) ---
   --global-accent: #{v.$gold-color};

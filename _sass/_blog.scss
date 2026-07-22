@@ -316,9 +316,32 @@
   p,
   li,
   blockquote {
-    font-size: 0.75rem;
-    text-align: justify;
-    hyphens: auto;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    text-align: left;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Comfortable reading measure (~66–72 chars). Code blocks, tables, and
+     figures are intentionally excluded, so they keep full width. */
+  p,
+  ul,
+  ol,
+  dl,
+  blockquote,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    max-width: 44rem;
+  }
+
+  /* Links inside prose are underlined, not color-only (accessibility). */
+  a {
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 
   table {

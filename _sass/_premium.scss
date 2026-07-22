@@ -405,6 +405,20 @@ blockquote,
       }
     }
   }
+
+  // Readable body prose on the about page (comfortable leading + measure).
+  .clearfix {
+    p {
+      line-height: 1.8;
+    }
+
+    p,
+    ul,
+    ol,
+    blockquote {
+      max-width: 44rem;
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------
