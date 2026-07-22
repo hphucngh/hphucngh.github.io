@@ -9,453 +9,107 @@ ninja.data = [{
     handler: () => {
       window.location.href = "/";
     },
-  },{id: "post-a-post-with-plotly-js",
-        
-          title: "a post with plotly.js",
-        
-        description: "this is what included plotly.js code could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2025/plotly/";
-          
-        },
-      },{id: "post-a-post-with-image-galleries",
-        
-          title: "a post with image galleries",
-        
-        description: "this is what included image galleries could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2024/photo-gallery/";
-          
-        },
-      },{id: "post-a-post-with-tabs",
-        
-          title: "a post with tabs",
-        
-        description: "this is what included tabs in a post could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2024/tabs/";
-          
-        },
-      },{id: "post-a-post-with-typograms",
-        
-          title: "a post with typograms",
-        
-        description: "this is what included typograms code could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2024/typograms/";
-          
-        },
-      },{id: "post-a-post-that-can-be-cited",
-        
-          title: "a post that can be cited",
-        
-        description: "this is what a post that can be cited looks like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2024/post-citation/";
-          
-        },
-      },{id: "post-a-post-with-pseudo-code",
-        
-          title: "a post with pseudo code",
-        
-        description: "this is what included pseudo code could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2024/pseudocode/";
-          
-        },
-      },{id: "post-a-post-with-code-diff",
-        
-          title: "a post with code diff",
-        
-        description: "this is how you can display code diffs",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2024/code-diff/";
-          
-        },
-      },{id: "post-a-post-with-advanced-image-components",
-        
-          title: "a post with advanced image components",
-        
-        description: "this is what advanced image components could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2024/advanced-images/";
-          
-        },
-      },{id: "post-a-post-with-vega-lite",
-        
-          title: "a post with vega lite",
-        
-        description: "this is what included vega lite code could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2024/vega-lite/";
-          
-        },
-      },{id: "post-a-post-with-geojson",
-        
-          title: "a post with geojson",
-        
-        description: "this is what included geojson code could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2024/geojson-map/";
-          
-        },
-      },{id: "post-a-post-with-echarts",
-        
-          title: "a post with echarts",
-        
-        description: "this is what included echarts code could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2024/echarts/";
-          
-        },
-      },{id: "post-a-post-with-chart-js",
-        
-          title: "a post with chart.js",
-        
-        description: "this is what included chart.js code could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2024/chartjs/";
-          
-        },
-      },{id: "post-a-post-with-tikzjax",
-        
-          title: "a post with TikZJax",
-        
-        description: "this is what included TikZ code could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2023/tikzjax/";
-          
-        },
-      },{id: "post-a-post-with-bibliography",
-        
-          title: "a post with bibliography",
-        
-        description: "an example of a blog post with bibliography",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2023/post-bibliography/";
-          
-        },
-      },{id: "post-a-post-with-jupyter-notebook",
-        
-          title: "a post with jupyter notebook",
-        
-        description: "an example of a blog post with jupyter notebook",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2023/jupyter-notebook/";
-          
-        },
-      },{id: "post-a-post-with-custom-blockquotes",
-        
-          title: "a post with custom blockquotes",
-        
-        description: "an example of a blog post with custom blockquotes",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2023/custom-blockquotes/";
-          
-        },
-      },{id: "post-a-post-with-table-of-contents-on-a-sidebar",
-        
-          title: "a post with table of contents on a sidebar",
-        
-        description: "an example of a blog post with table of contents on a sidebar",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2023/sidebar-table-of-contents/";
-          
-        },
-      },{id: "post-a-post-with-audios",
-        
-          title: "a post with audios",
-        
-        description: "this is what included audios could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2023/audios/";
-          
-        },
-      },{id: "post-a-post-with-videos",
-        
-          title: "a post with videos",
-        
-        description: "this is what included videos could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2023/videos/";
-          
-        },
-      },{id: "post-displaying-beautiful-tables-with-bootstrap-tables",
-        
-          title: "displaying beautiful tables with Bootstrap Tables",
-        
-        description: "an example of how to use Bootstrap Tables",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2023/tables/";
-          
-        },
-      },{id: "post-a-post-with-table-of-contents",
-        
-          title: "a post with table of contents",
-        
-        description: "an example of a blog post with table of contents",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2023/table-of-contents/";
-          
-        },
-      },{id: "post-a-post-with-giscus-comments",
-        
-          title: "a post with giscus comments",
-        
-        description: "an example of a blog post with giscus comments",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2022/giscus-comments/";
-          
-        },
-      },{id: "post-a-post-with-redirect",
-        
-          title: "a post with redirect",
-        
-        description: "you can also redirect to assets like pdf",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/assets/pdf/example_pdf.pdf";
-          
-        },
-      },{id: "post-a-post-with-diagrams",
-        
-          title: "a post with diagrams",
-        
-        description: "an example of a blog post with diagrams",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2021/diagrams/";
-          
-        },
-      },{id: "post-a-distill-style-blog-post",
-        
-          title: "a distill-style blog post",
-        
-        description: "an example of a distill-style blog post and main elements",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2021/distill/";
-          
-        },
-      },{id: "post-a-post-with-twitter",
-        
-          title: "a post with twitter",
-        
-        description: "an example of a blog post with twitter",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2020/twitter/";
-          
-        },
-      },{id: "post-a-post-with-disqus-comments",
-        
-          title: "a post with disqus comments",
-        
-        description: "an example of a blog post with disqus comments",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2015/disqus-comments/";
-          
-        },
-      },{id: "post-a-post-with-math",
-        
-          title: "a post with math",
-        
-        description: "an example of a blog post with some math",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2015/math/";
-          
-        },
-      },{id: "post-a-post-with-code",
-        
-          title: "a post with code",
-        
-        description: "an example of a blog post with some code",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2015/code/";
-          
-        },
-      },{id: "post-a-post-with-images",
-        
-          title: "a post with images",
-        
-        description: "this is what included images could look like",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2015/images/";
-          
-        },
-      },{id: "post-a-post-with-formatting-and-links",
-        
-          title: "a post with formatting and links",
-        
-        description: "march &amp; april, looking forward to summer",
-        section: "Posts",
-        handler: () => {
-          
-            window.location.href = "/synthesis/2015/formatting-and-links/";
-          
-        },
-      },{id: "books-the-godfather",
-          title: 'The Godfather',
+  },{id: "nav-synthesis",
+          title: "synthesis",
           description: "",
-          section: "Books",handler: () => {
-              window.location.href = "/books/the_godfather/";
-            },},{id: "news-a-simple-inline-announcement",
-          title: 'A simple inline announcement.',
-          description: "",
-          section: "News",},{id: "news-a-long-announcement-with-details",
-          title: 'A long announcement with details',
-          description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/announcement_2/";
-            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
-          description: "",
-          section: "News",},{id: "notes-viết-để-hiểu-không-phải-để-giải-thích",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/synthesis/index.html";
+          },
+        },{id: "nav-notes",
+          title: "notes",
+          description: "Personal thoughts, reflections, and short notes.",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/notes/";
+          },
+        },{id: "post-kv-caching-explained",
+        
+          title: "KV Caching Explained",
+        
+        description: "Giải thích về KV Cache — tại sao cần nó, công thức tính chính xác, đến các kỹ thuật tối ưu production. Với ví dụ tính thực tế trên Llama, DeepSeek, Kimi 2026.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/synthesis/2026/kv-cache-deep-dive/";
+          
+        },
+      },{id: "post-self-hosted-llm",
+        
+          title: "self-hosted LLM",
+        
+        description: "Tự triển khai LLM — khi nào nên làm, chọn model gì, cần bao nhiêu GPU và những con số mà không ai nói trước.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/synthesis/2026/self-hosted-llm-guide/";
+          
+        },
+      },{id: "notes-viết-để-hiểu-không-phải-để-giải-thích",
           title: 'Viết để hiểu, không phải để giải thích',
           description: "Khi bạn không thể viết rõ ràng về một thứ, bạn chưa thực sự hiểu nó.",
           section: "Notes",handler: () => {
-              window.location.href = "/notes/2025-11-03-writing-clarifies-thinking/";
+              window.location.href = "/notes/thinking/writing-clarifies-thinking/";
             },},{id: "notes-đơn-giản-khó-hơn-phức-tạp",
           title: 'Đơn giản khó hơn phức tạp',
           description: "Giải pháp đơn giản đòi hỏi hiểu biết sâu hơn, không phải nông hơn.",
           section: "Notes",handler: () => {
-              window.location.href = "/notes/2025-12-10-simplicity-is-hard/";
-            },},{id: "notes-chi-phí-thực-của-context-switching",
-          title: 'Chi phí thực của context switching',
-          description: "Không phải thời gian chuyển task, mà là thời gian để lấy lại focus.",
-          section: "Notes",handler: () => {
-              window.location.href = "/notes/2026-02-20-context-switching-cost/";
+              window.location.href = "/notes/engineering/simplicity-is-hard/";
             },},{id: "notes-debug-là-quá-trình-tư-duy-không-phải-tìm-bug",
           title: 'Debug là quá trình tư duy, không phải tìm bug',
           description: "Khi bạn không hiểu tại sao code chạy đúng, bạn cũng không hiểu tại sao nó sai.",
           section: "Notes",handler: () => {
-              window.location.href = "/notes/2026-03-15-debugging-is-thinking/";
+              window.location.href = "/notes/engineering/debugging-is-thinking/";
+            },},{id: "notes-chi-phí-thực-của-context-switching",
+          title: 'Chi phí thực của context switching',
+          description: "Không phải thời gian chuyển task, mà là thời gian để lấy lại focus.",
+          section: "Notes",handler: () => {
+              window.location.href = "/notes/engineering/context-switching-cost/";
             },},{id: "notes-ai-là-bộ-khuếch-đại-không-phải-thay-thế",
           title: 'AI là bộ khuếch đại, không phải thay thế',
           description: "AI giỏi khuếch đại cả điểm mạnh lẫn điểm yếu của bạn.",
           section: "Notes",handler: () => {
-              window.location.href = "/notes/2026-03-28-ai-is-a-multiplier/";
+              window.location.href = "/notes/thinking/ai-is-a-multiplier/";
             },},{id: "notes-xây-dựng-chậm-không-có-nghĩa-là-kém",
           title: 'Xây dựng chậm không có nghĩa là kém',
           description: "Tốc độ không phải lúc nào cũng là ưu tiên đúng.",
           section: "Notes",handler: () => {
-              window.location.href = "/notes/2026-04-05-on-building-slowly/";
+              window.location.href = "/notes/thinking/on-building-slowly/";
             },},{id: "notes-ghi-chú-đầu-tiên",
           title: 'Ghi chú đầu tiên',
           description: "Suy nghĩ đầu tiên trên trang notes.",
           section: "Notes",handler: () => {
-              window.location.href = "/notes/2026-04-08-first-note/";
-            },},{id: "projects-project-1",
-          title: 'project 1',
-          description: "with background image",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/1_project/";
-            },},{id: "projects-project-2",
-          title: 'project 2',
-          description: "a project with a background image and giscus comments",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/2_project/";
-            },},{id: "projects-project-3-with-very-long-name",
-          title: 'project 3 with very long name',
-          description: "a project that redirects to another website",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/3_project/";
-            },},{id: "projects-project-4",
-          title: 'project 4',
-          description: "another without an image",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/4_project/";
-            },},{id: "projects-project-5",
-          title: 'project 5',
-          description: "a project with a background image",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/5_project/";
-            },},{id: "projects-project-6",
-          title: 'project 6',
-          description: "a project with no image",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/6_project/";
-            },},{id: "projects-project-7",
-          title: 'project 7',
-          description: "with background image",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/7_project/";
-            },},{id: "projects-project-8",
-          title: 'project 8',
-          description: "an other project with a background image and giscus comments",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/8_project/";
-            },},{id: "projects-project-9",
-          title: 'project 9',
-          description: "another project with an image 🎉",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/9_project/";
-            },},{id: "teachings-data-science-fundamentals",
-          title: 'Data Science Fundamentals',
-          description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
-          section: "Teachings",handler: () => {
-              window.location.href = "/teachings/data-science-fundamentals/";
-            },},{id: "teachings-introduction-to-machine-learning",
-          title: 'Introduction to Machine Learning',
-          description: "This course provides an introduction to machine learning concepts, algorithms, and applications. Students will learn about supervised and unsupervised learning, model evaluation, and practical implementations.",
-          section: "Teachings",handler: () => {
-              window.location.href = "/teachings/introduction-to-machine-learning/";
+              window.location.href = "/notes/personal/first-note/";
+            },},{id: "notes-thuật-toán-cổ-điển-trong-machine-learning",
+          title: 'Thuật toán Cổ điển trong Machine Learning',
+          description: "Linear/Logistic Regression, Decision Tree, Random Forest, Gradient Boosting, K-Means, SVM, PCA.",
+          section: "Notes",handler: () => {
+              window.location.href = "/notes/ml/classical-algorithms/";
+            },},{id: "notes-dữ-liệu-amp-kỹ-thuật-đặc-trưng",
+          title: 'Dữ liệu &amp;amp; Kỹ thuật Đặc trưng',
+          description: "Feature engineering, encoding, normalization và các kỹ thuật xử lý dữ liệu cho ML.",
+          section: "Notes",handler: () => {
+              window.location.href = "/notes/ml/data-feature-engineering/";
+            },},{id: "notes-học-sâu-amp-mạng-nơ-ron",
+          title: 'Học sâu &amp;amp; Mạng Nơ-ron',
+          description: "Neural Networks, CNN, RNN, Transformer, LLM, GAN và các khái niệm deep learning cốt lõi.",
+          section: "Notes",handler: () => {
+              window.location.href = "/notes/ml/deep-learning/";
+            },},{id: "notes-đánh-giá-tinh-chỉnh-amp-điều-chuẩn-mô-hình",
+          title: 'Đánh giá, Tinh chỉnh &amp;amp; Điều chuẩn Mô hình',
+          description: "Metrics, overfitting, regularization, hyperparameter tuning và các phương pháp đánh giá mô hình ML.",
+          section: "Notes",handler: () => {
+              window.location.href = "/notes/ml/evaluation-tuning/";
+            },},{id: "notes-khái-niệm-cơ-bản-machine-learning",
+          title: 'Khái niệm cơ bản Machine Learning',
+          description: "Các thuật ngữ nền tảng của ML — supervised, unsupervised, reinforcement learning và các khái niệm cốt lõi.",
+          section: "Notes",handler: () => {
+              window.location.href = "/notes/ml/fundamentals/";
+            },},{id: "notes-sản-xuất-amp-trí-tuệ-nhân-tạo-trách-nhiệm",
+          title: 'Sản xuất &amp;amp; Trí tuệ Nhân tạo Trách nhiệm',
+          description: "Inference, training-serving skew, fairness, bias và các vấn đề khi đưa ML vào production.",
+          section: "Notes",handler: () => {
+              window.location.href = "/notes/ml/production-responsible-ai/";
             },},{
         id: 'social-email',
         title: 'email',

@@ -1,811 +1,99 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://hphucngh.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://hphucngh.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-04-10T08:47:50+00:00</updated><id>https://hphucngh.github.io/feed.xml</id><title type="html">Timoty Nguyen</title><subtitle>Perspectives on applying AI in software and daily life. </subtitle><entry><title type="html">a post with plotly.js</title><link href="https://hphucngh.github.io/synthesis/2025/plotly/" rel="alternate" type="text/html" title="a post with plotly.js"/><published>2025-03-26T14:24:00+00:00</published><updated>2025-03-26T14:24:00+00:00</updated><id>https://hphucngh.github.io/synthesis/2025/plotly</id><content type="html" xml:base="https://hphucngh.github.io/synthesis/2025/plotly/"><![CDATA[<p>This is an example post with some <a href="https://plotly.com/javascript/">plotly</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">plotly
-</span><span class="sb">{
-  "data": [
-    {
-      "x": [1, 2, 3, 4],
-      "y": [10, 15, 13, 17],
-      "type": "scatter"
-    },
-    {
-      "x": [1, 2, 3, 4],
-      "y": [16, 5, 11, 9],
-      "type": "scatter"
-    }
-  ]
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-plotly">{
-  "data": [
-    {
-      "x": [1, 2, 3, 4],
-      "y": [10, 15, 13, 17],
-      "type": "scatter"
-    },
-    {
-      "x": [1, 2, 3, 4],
-      "y": [16, 5, 11, 9],
-      "type": "scatter"
-    }
-  ]
-}
-</code></pre> <p>Also another example chart.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">plotly
-</span><span class="sb">{
-  "data": [
-    {
-      "x": [1, 2, 3, 4],
-      "y": [10, 15, 13, 17],
-      "mode": "markers"
-    },
-    {
-      "x": [2, 3, 4, 5],
-      "y": [16, 5, 11, 9],
-      "mode": "lines"
-    },
-    {
-      "x": [1, 2, 3, 4],
-      "y": [12, 9, 15, 12],
-      "mode": "lines+markers"
-    }
-  ],
-  "layout": {
-    "title": {
-      "text": "Line and Scatter Plot"
-    }
-  }
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>This is how it looks like:</p> <pre><code class="language-plotly">{
-  "data": [
-    {
-      "x": [1, 2, 3, 4],
-      "y": [10, 15, 13, 17],
-      "mode": "markers"
-    },
-    {
-      "x": [2, 3, 4, 5],
-      "y": [16, 5, 11, 9],
-      "mode": "lines"
-    },
-    {
-      "x": [1, 2, 3, 4],
-      "y": [12, 9, 15, 12],
-      "mode": "lines+markers"
-    }
-  ],
-  "layout": {
-    "title": {
-      "text": "Line and Scatter Plot"
-    }
-  }
-}
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included plotly.js code could look like]]></summary></entry><entry><title type="html">a post with image galleries</title><link href="https://hphucngh.github.io/synthesis/2024/photo-gallery/" rel="alternate" type="text/html" title="a post with image galleries"/><published>2024-12-04T01:59:00+00:00</published><updated>2024-12-04T01:59:00+00:00</updated><id>https://hphucngh.github.io/synthesis/2024/photo-gallery</id><content type="html" xml:base="https://hphucngh.github.io/synthesis/2024/photo-gallery/"><![CDATA[<p>The images in this post are all zoomable, arranged into different mini-galleries using different libraries.</p> <h2 id="lightbox2"><a href="https://lokeshdhakar.com/projects/lightbox2/">Lightbox2</a></h2> <p><a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/></a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/></a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/></a></p> <hr/> <h2 id="photoswipe"><a href="https://photoswipe.com/">PhotoSwipe</a></h2> <div class="pswp-gallery pswp-gallery--single-column" id="gallery--getting-started"> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" data-pswp-width="1669" data-pswp-height="2500" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg" alt=""/> </a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg" data-pswp-width="1875" data-pswp-height="2500" data-cropped="true" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-200.jpg" alt=""/> </a> <a href="https://unsplash.com" data-pswp-src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg" data-pswp-width="2500" data-pswp-height="1666" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg" alt=""/> </a> <div> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-2500.jpg" data-pswp-width="2500" data-pswp-height="1667" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200.jpg" alt=""/> </a> </div> </div> <hr/> <h2 id="spotlight-js"><a href="https://nextapps-de.github.io/spotlight/">Spotlight JS</a></h2> <div class="spotlight-group"> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/> </a> </div> <div class="spotlight-group"> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200.jpg"/> </a> </div> <hr/> <h2 id="venobox"><a href="https://veno.es/venobox/">Venobox</a></h2> <p><a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/></a> <a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/></a> <a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/></a></p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="images"/><summary type="html"><![CDATA[this is what included image galleries could look like]]></summary></entry><entry><title type="html">a post with tabs</title><link href="https://hphucngh.github.io/synthesis/2024/tabs/" rel="alternate" type="text/html" title="a post with tabs"/><published>2024-05-01T00:32:13+00:00</published><updated>2024-05-01T00:32:13+00:00</updated><id>https://hphucngh.github.io/synthesis/2024/tabs</id><content type="html" xml:base="https://hphucngh.github.io/synthesis/2024/tabs/"><![CDATA[<p>This is how a post with <a href="https://github.com/Ovski4/jekyll-tabs">tabs</a> looks like. Note that the tabs could be used for different purposes, not only for code.</p> <h2 id="first-tabs">First tabs</h2> <p>To add tabs, use the following syntax:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">tabs</span><span class="w"> </span><span class="nv">group-name</span><span class="w"> </span><span class="cp">%}</span>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://hphucngh.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://hphucngh.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-07-22T15:41:50+00:00</updated><id>https://hphucngh.github.io/feed.xml</id><title type="html">Timoty Nguyen</title><subtitle>Perspectives on applying AI in software and daily life. </subtitle><entry><title type="html">KV Caching Explained</title><link href="https://hphucngh.github.io/synthesis/2026/kv-cache-deep-dive/" rel="alternate" type="text/html" title="KV Caching Explained"/><published>2026-05-07T00:00:00+00:00</published><updated>2026-05-07T00:00:00+00:00</updated><id>https://hphucngh.github.io/synthesis/2026/kv-cache-deep-dive</id><content type="html" xml:base="https://hphucngh.github.io/synthesis/2026/kv-cache-deep-dive/"><![CDATA[<blockquote> <p>Bài viết tổng hợp từ <a href="https://huggingface.co/blog/not-lain/kv-caching">KV Caching Explained (Hugging Face)</a>, <a href="https://developer.nvidia.com/blog/mastering-llm-techniques-inference-optimization/">Mastering LLM Techniques (NVIDIA)</a>, cùng dữ liệu model 2026. Mục tiêu: đọc xong, bạn tính được chính xác VRAM cần thiết cho bất kỳ cấu hình nào.</p> </blockquote> <hr/> <h2 id="1-tại-sao-cần-kv-cache">1. Tại sao cần KV Cache</h2> <h3 id="llm-sinh-text-từng-token-một">LLM sinh text từng token một</h3> <p>Khi bạn hỏi ChatGPT hay bất kỳ LLM nào, câu trả lời không xuất hiện cùng lúc. Model sinh <strong>từng token một</strong> (autoregressive). Mỗi token mới phụ thuộc vào <strong>tất cả</strong> token trước đó.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Input:  <span class="s2">"Hà Nội là"</span>
+Step 1: sinh <span class="s2">"thủ"</span>     ← nhìn lại <span class="s2">"Hà Nội là"</span>
+Step 2: sinh <span class="s2">"đô"</span>      ← nhìn lại <span class="s2">"Hà Nội là thủ"</span>
+Step 3: sinh <span class="s2">"của"</span>     ← nhìn lại <span class="s2">"Hà Nội là thủ đô"</span>
+Step 4: sinh <span class="s2">"Việt"</span>    ← nhìn lại <span class="s2">"Hà Nội là thủ đô của"</span>
+Step 5: sinh <span class="s2">"Nam"</span>     ← nhìn lại <span class="s2">"Hà Nội là thủ đô của Việt"</span>
 
-<span class="cp">{%</span><span class="w"> </span><span class="nt">tab</span><span class="w"> </span><span class="nv">group-name</span><span class="w"> </span><span class="nv">tab-name-1</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div> <h3 id="không-có-cache-tính-lại-từ-đầu-mỗi-bước">Không có cache: tính lại từ đầu mỗi bước</h3> <p>Trong cơ chế attention, model cần tính 3 ma trận cho mỗi token: <strong>Query (Q)</strong>, <strong>Key (K)</strong>, và <strong>Value (V)</strong>. Sau đó dùng \((Q. K^T)\) để tính attention scores, rồi nhân với V để ra output.</p> <p><strong>Không có cache,</strong> mỗi khi sinh token mới, model phải <strong>tính lại Q, K, V cho toàn bộ chuỗi</strong> từ đầu:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Step 1: Tính Q,K,V cho <span class="o">[</span><span class="s2">"Hà"</span>,<span class="s2">"Nội"</span>,<span class="s2">"là"</span><span class="o">]</span>            → 3 token
+Step 2: Tính Q,K,V cho <span class="o">[</span><span class="s2">"Hà"</span>,<span class="s2">"Nội"</span>,<span class="s2">"là"</span>,<span class="s2">"thủ"</span><span class="o">]</span>      → 4 token <span class="o">(</span>3 bị tính lại<span class="o">)</span>
+Step 3: Tính Q,K,V cho <span class="o">[</span><span class="s2">"Hà"</span>,<span class="s2">"Nội"</span>,<span class="s2">"là"</span>,<span class="s2">"thủ"</span>,<span class="s2">"đô"</span><span class="o">]</span> → 5 token <span class="o">(</span>4 bị tính lại<span class="o">)</span>
+...
+Step N: Tính Q,K,V cho toàn bộ N token              → N-1 bị tính lại
 
-Content 1
+</code></pre></div></div> <h3 id="có-cache-chỉ-tính-token-mới">Có cache: chỉ tính token mới</h3> <p>Nhận thấy: K và V của token cũ <strong>không thay đổi</strong> giữa các bước (vì masked attention chỉ nhìn lại, không nhìn tới). Vậy tại sao phải tính lại?</p> <p><strong>KV Cache</strong> lưu K,V đã tính vào bộ nhớ GPU. Mỗi bước chỉ cần:</p> <ol> <li>Tính Q, K, V cho <strong>1 token mới</strong></li> <li>Nối K, V mới vào cache</li> <li>Dùng Q mới + toàn bộ K,V trong cache → tính attention → ra output</li> </ol> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Step 1: Tính K,V cho <span class="o">[</span><span class="s2">"Hà"</span>,<span class="s2">"Nội"</span>,<span class="s2">"là"</span><span class="o">]</span> → Cache: <span class="o">[</span>K₁K₂K₃], <span class="o">[</span>V₁V₂V₃]
+Step 2: Tính K₄,V₄ cho <span class="o">[</span><span class="s2">"thủ"</span><span class="o">]</span>         → Cache: <span class="o">[</span>K₁K₂K₃K₄], <span class="o">[</span>V₁V₂V₃V₄]
+Step 3: Tính K₅,V₅ cho <span class="o">[</span><span class="s2">"đô"</span><span class="o">]</span>          → Cache: <span class="o">[</span>K₁K₂K₃K₄K₅], <span class="o">[</span>V₁V₂V₃V₄V₅]
 
-<span class="cp">{%</span><span class="w"> </span><span class="nt">endtab</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div> <h3 id="benchmark-thực-tế">Benchmark thực tế</h3> <p>Trên GPU T4, model SmolLM2-1.7B, sinh 300 token:</p> <table> <thead> <tr> <th> </th> <th>Thời gian</th> <th>Speedup</th> </tr> </thead> <tbody> <tr> <td>Không cache</td> <td>61 giây</td> <td>Baseline</td> </tr> <tr> <td>Có KV cache</td> <td>11.7 giây</td> <td><strong>5.2× nhanh hơn</strong></td> </tr> </tbody> </table> <p><br/> Với model lớn hơn và context dài hơn, speedup còn cao hơn nhiều (10–50×).</p> <hr/> <h2 id="2-kv-cache">2. KV Cache</h2> <h3 id="cấu-trúc">Cấu trúc</h3> <p>Mỗi <strong>layer</strong> trong transformer tạo K và V riêng. Với model 80 layer (Llama 3.3 70B), có 80 cặp [K, V] cache riêng biệt.</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+Layer 1:  <span class="s2">"Cache_K₁"</span> <span class="o">=</span> <span class="o">[</span>k¹₁, k¹₂, ..., k¹ₙ],  <span class="s2">"Cache_V₁"</span> <span class="o">=</span> <span class="o">[</span>v¹₁, v¹₂, ..., v¹ₙ]
+Layer 2:  <span class="s2">"Cache_K₂"</span> <span class="o">=</span> <span class="o">[</span>k²₁, k²₂, ..., k²ₙ],  <span class="s2">"Cache_V₂"</span> <span class="o">=</span> <span class="o">[</span>v²₁, v²₂, ..., v²ₙ]
+...
+Layer 80: <span class="s2">"Cache_K₈₀"</span> <span class="o">=</span> <span class="o">[</span>k⁸⁰₁, k⁸⁰₂, ..., k⁸⁰ₙ], <span class="s2">"Cache_V₈₀"</span> <span class="o">=</span> <span class="o">[</span>v⁸⁰₁, v⁸⁰₂, ..., v⁸⁰ₙ]
 
-<span class="cp">{%</span><span class="w"> </span><span class="nt">tab</span><span class="w"> </span><span class="nv">group-name</span><span class="w"> </span><span class="nv">tab-name-2</span><span class="w"> </span><span class="cp">%}</span>
+</code></pre></div></div> <p>Tổng shape: <code class="language-plaintext highlighter-rouge">[num_layers, 2, batch_size, num_kv_heads, seq_len, head_dim]</code></p> <h3 id="kv-cache-lưu-ở-vram">KV cache lưu ở VRAM</h3> <p>KV cache nằm hoàn toàn trên <strong>VRAM của GPU</strong> — cùng chỗ với model weights. Đây là lý do nó cạnh tranh trực tiếp với weights cho không gian bộ nhớ.</p> <hr/> <h2 id="3-công-thức-tính">3. Công thức tính</h2> <h3 id="công-thức-gốc-từ-nvidia">Công thức gốc (từ NVIDIA)</h3> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>KV cache cho 1 token (bytes) = 2 × num_layers × num_kv_heads × head_dim × bytes_per_element
+</code></pre></div></div> <table> <thead> <tr> <th>Thành phần</th> <th>Giải thích</th> </tr> </thead> <tbody> <tr> <td><code class="language-plaintext highlighter-rouge">2</code></td> <td>Cả Key lẫn Value</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">num_layers</code></td> <td>Số tầng transformer (tìm trong config.json: <code class="language-plaintext highlighter-rouge">num_hidden_layers</code>)</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">num_kv_heads</code></td> <td>Số KV heads (config.json: <code class="language-plaintext highlighter-rouge">num_key_value_heads</code>). Với GQA, nhỏ hơn query heads</td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">head_dim</code></td> <td>Chiều mỗi head = <code class="language-plaintext highlighter-rouge">hidden_size / num_attention_heads</code></td> </tr> <tr> <td><code class="language-plaintext highlighter-rouge">bytes_per_element</code></td> <td>BF16 = 2, FP8 = 1, Q4 = 0.5</td> </tr> </tbody> </table> <h3 id="tổng-kv-cache">Tổng KV cache</h3> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tổng (bytes) = batch_size × seq_len × 2 × num_layers × num_kv_heads × head_dim × bytes_per_element
+</code></pre></div></div> <p>Hoặc dạng rút gọn (khi <code class="language-plaintext highlighter-rouge">num_kv_heads × head_dim = hidden_size</code> — đúng với MHA):</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tổng (bytes) = batch_size × seq_len × 2 × num_layers × hidden_size × bytes_per_element
+</code></pre></div></div> <p><strong>Chú ý:</strong> Với GQA, <code class="language-plaintext highlighter-rouge">num_kv_heads</code> nhỏ hơn <code class="language-plaintext highlighter-rouge">num_attention_heads</code>, nên phải dùng công thức đầy đủ.</p> <h3 id="bảng-tham-số-các-model-phổ-biến">Bảng tham số các model phổ biến</h3> <table> <thead> <tr> <th>Model</th> <th>Layers</th> <th>KV Heads</th> <th>Head Dim</th> <th>Hidden Size</th> <th>Attention Type</th> </tr> </thead> <tbody> <tr> <td>Llama 3.1 8B</td> <td>32</td> <td>8</td> <td>128</td> <td>4096</td> <td>GQA</td> </tr> <tr> <td>Llama 3.3 70B</td> <td>80</td> <td>8</td> <td>128</td> <td>8192</td> <td>GQA</td> </tr> <tr> <td>DeepSeek V4 Flash</td> <td>~60</td> <td>~8</td> <td>128</td> <td>~7168</td> <td>GQA + MLA</td> </tr> <tr> <td>Kimi K2.6</td> <td>61</td> <td>varies</td> <td>128</td> <td>~5120</td> <td>MoE + MLA</td> </tr> <tr> <td>GLM-5.1</td> <td>~80</td> <td>~8</td> <td>128</td> <td>~8192</td> <td>GQA</td> </tr> <tr> <td>Qwen 3.5 (A17B)</td> <td>~80</td> <td>~8</td> <td>128</td> <td>~5120</td> <td>GQA</td> </tr> <tr> <td>Phi-4 14B</td> <td>40</td> <td>10</td> <td>128</td> <td>5120</td> <td>GQA</td> </tr> </tbody> </table> <p><em>(Giá trị xấp xỉ vì một số model chưa công bố config đầy đủ. Luôn kiểm tra config.json trên Hugging Face.)</em></p> <hr/> <h2 id="4-tính-thử--từ-nhẹ-nhàng-đến-choáng-váng">4. Tính thử — từ nhẹ nhàng đến choáng váng</h2> <h3 id="ví-dụ-1-llama-31-8b-model-nhỏ">Ví dụ 1: Llama 3.1 8B (model nhỏ)</h3> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 token = 2 × 32 × 8 × 128 × 2 bytes = 131.072 bytes ≈ 0.000125 GB
+</code></pre></div></div> <table> <thead> <tr> <th>Context</th> <th>1 user</th> <th>10 user</th> <th>50 user</th> </tr> </thead> <tbody> <tr> <td>4K</td> <td>0.5 GB</td> <td>5 GB</td> <td>25 GB</td> </tr> <tr> <td>32K</td> <td>4 GB</td> <td>40 GB</td> <td>200 GB</td> </tr> <tr> <td>128K</td> <td><strong>16 GB</strong></td> <td><strong>160 GB</strong></td> <td>800 GB</td> </tr> </tbody> </table> <p>Model weights FP16 chỉ ~16 GB. Ở 128K context 1 user, KV cache đã <strong>bằng weights</strong>. Ở 10 user × 128K: KV cache = <strong>10× weights</strong>.</p> <h3 id="ví-dụ-2-llama-33-70b-model-production-phổ-biến">Ví dụ 2: Llama 3.3 70B (model production phổ biến)</h3> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 token = 2 × 80 × 8 × 128 × 2 bytes = 327.680 bytes ≈ 0.00031 GB
+</code></pre></div></div> <table> <thead> <tr> <th>Context</th> <th>1 user</th> <th>5 user</th> <th>10 user</th> <th>20 user</th> </tr> </thead> <tbody> <tr> <td>4K</td> <td>1.3 GB</td> <td>6.5 GB</td> <td>13 GB</td> <td>26 GB</td> </tr> <tr> <td>8K</td> <td>2.6 GB</td> <td>13 GB</td> <td>26 GB</td> <td>52 GB</td> </tr> <tr> <td>32K</td> <td>10.2 GB</td> <td>51 GB</td> <td>102 GB</td> <td>204 GB</td> </tr> <tr> <td>128K</td> <td><strong>40.6 GB</strong></td> <td>203 GB</td> <td><strong>406 GB</strong></td> <td>812 GB</td> </tr> </tbody> </table> <h3 id="ví-dụ-3-tổng-vram-cần-cho-70b-production">Ví dụ 3: Tổng VRAM cần cho 70B production</h3> <p>Kịch bản: Llama 3.3 70B INT4, 10 user, context 32K:</p> <table> <thead> <tr> <th>Thành phần</th> <th>Giá trị</th> </tr> </thead> <tbody> <tr> <td>Weights (INT4)</td> <td>37 GB</td> </tr> <tr> <td>KV cache (10 user × 32K, BF16)</td> <td>102 GB</td> </tr> <tr> <td>KV cache (10 user × 32K, <strong>FP8</strong>)</td> <td><strong>51 GB</strong></td> </tr> <tr> <td>Activations + overhead</td> <td>~5 GB</td> </tr> <tr> <td><strong>Tổng (BF16 cache)</strong></td> <td><strong>144 GB → 2× H100</strong></td> </tr> <tr> <td><strong>Tổng (FP8 cache)</strong></td> <td><strong>93 GB → 2× H100 (dư)</strong></td> </tr> </tbody> </table> <p>Quantize KV cache từ BF16 → FP8 tiết kiệm <strong>51 GB</strong> — có thể là sự khác biệt giữa cần 2 GPU và cần 3 GPU.</p> <hr/> <h2 id="5-gqa-mqa--giảm-kv-cache-từ-gốc">5. GQA, MQA — giảm KV cache từ gốc</h2> <h3 id="vấn-đề-với-multi-head-attention-mha-cổ-điển">Vấn đề với Multi-Head Attention (MHA) cổ điển</h3> <p>MHA gốc: mỗi query head có riêng 1 key head và 1 value head. Model 70B với 64 query heads → 64 KV heads → KV cache cực lớn.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MHA cache/token = 2 × 80 × 64 × 128 × 2 = 2.621.440 bytes ≈ 0.0025 GB
+</code></pre></div></div> <p>Ở 128K context: <code class="language-plaintext highlighter-rouge">0.0025 × 131.072 = 327 GB</code> — chỉ cho 1 user!</p> <h3 id="gqa-nhóm-query-heads-chia-sẻ-kv-heads">GQA: nhóm query heads chia sẻ KV heads</h3> <p>Grouped-Query Attention nhóm nhiều query heads chia sẻ ít KV heads hơn. Llama 3.3 70B: 64 query heads chia thành 8 nhóm, mỗi nhóm dùng chung 1 KV head → 8 KV heads.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GQA cache/token = 2 × 80 × 8 × 128 × 2 = 327.680 bytes ≈ 0.00031 GB
+</code></pre></div></div> <p>Giảm <strong>8×</strong> so với MHA!</p> <h3 id="mqa-tất-cả-query-heads-dùng-chung-1-kv-head">MQA: tất cả query heads dùng chung 1 KV head</h3> <p>Multi-Query Attention cực đoan hơn: chỉ 1 KV head cho tất cả query heads.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MQA cache/token = 2 × 80 × 1 × 128 × 2 = 40.960 bytes ≈ 0.000039 GB
+</code></pre></div></div> <p>Giảm <strong>64×</strong> so với MHA, nhưng chất lượng giảm đáng kể.</p> <h3 id="so-sánh-trực-quan--70b-model-context-128k-1-user">So sánh trực quan — 70B model, context 128K, 1 user</h3> <table> <thead> <tr> <th>Attention</th> <th>KV Heads</th> <th>Cache 128K</th> <th>So với MHA</th> </tr> </thead> <tbody> <tr> <td><strong>MHA</strong></td> <td>64</td> <td><strong>327 GB</strong></td> <td>Baseline</td> </tr> <tr> <td><strong>GQA</strong> (Llama 3.3)</td> <td>8</td> <td><strong>40.6 GB</strong></td> <td>Giảm 8×</td> </tr> <tr> <td><strong>MQA</strong></td> <td>1</td> <td><strong>5.1 GB</strong></td> <td>Giảm 64×</td> </tr> </tbody> </table> <p>GQA giữ ~99% chất lượng MHA mà cache giảm 8×. Đây là lý do <strong>mọi model 2025-2026 đều dùng GQA</strong>.</p> <h3 id="multi-latent-attention-mla--thế-hệ-mới">Multi-Latent Attention (MLA) — thế hệ mới</h3> <p>DeepSeek V4 và Kimi K2.6 dùng <strong>MLA</strong> (Multi-Latent Attention) — nén K,V xuống không gian latent nhỏ hơn trước khi cache. Hiệu quả hơn cả GQA nhưng phức tạp hơn về kiến trúc.</p> <hr/> <h2 id="6-các-kỹ-thuật-tối-ưu-kv-cache">6. Các kỹ thuật tối ưu KV Cache</h2> <h3 id="61-quantize-kv-cache">6.1 Quantize KV cache</h3> <p>Giống như quantize weights, bạn có thể lưu cache ở precision thấp hơn:</p> <table> <thead> <tr> <th>Cache precision</th> <th>70B, 10 user, 32K</th> <th>Giảm</th> <th>Chất lượng</th> </tr> </thead> <tbody> <tr> <td>BF16 (mặc định)</td> <td>102 GB</td> <td>Baseline</td> <td>100%</td> </tr> <tr> <td>FP8</td> <td><strong>51 GB</strong></td> <td>−50%</td> <td>~99%</td> </tr> <tr> <td>Q4_0</td> <td><strong>26 GB</strong></td> <td>−75%</td> <td>~95%</td> </tr> </tbody> </table> <p>Cách bật trong <strong>llama.cpp</strong>:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>llama-server <span class="nt">--model</span> model.gguf <span class="se">\</span>
+  <span class="nt">--cache-type-k</span> q4_0 <span class="se">\</span>
+  <span class="nt">--cache-type-v</span> q4_0 <span class="se">\</span>
+  <span class="nt">--flash-attn</span> <span class="se">\</span>
+  <span class="nt">--ctx-size</span> 32768
+</code></pre></div></div> <p>Cách bật trong <strong>vLLM</strong>:</p> <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vllm serve model <span class="nt">--kv-cache-dtype</span> fp8
+</code></pre></div></div> <p>Qwen 3.5 series xử lý KV cache quantization đặc biệt tốt nhờ GQA tối ưu — giảm 50% VRAM cache mà output gần như không đổi.</p> <h3 id="62-pagedattention--loại-bỏ-lãng-phí">6.2 PagedAttention — loại bỏ lãng phí</h3> <p><strong>Vấn đề:</strong> Cách truyền thống cấp KV cache tĩnh, contiguous (liền mạch) cho max sequence length. Model hỗ trợ 128K nhưng request dùng 2K → 126K slot bị lãng phí. Gây 3 loại lãng phí:</p> <ul> <li><strong>Reserved waste:</strong> Bộ nhớ giữ chỗ cho cả context nhưng chưa dùng</li> <li><strong>Internal fragmentation:</strong> Không biết output bao dài nên phải cấp thừa</li> <li><strong>External fragmentation:</strong> Các request khác nhau cần kích thước khác nhau, tạo khoảng trống giữa các block</li> </ul> <p><strong>PagedAttention</strong> (vLLM) giải quyết bằng cách mượn ý tưởng <strong>paging</strong> từ hệ điều hành:</p> <ol> <li>KV cache chia thành <strong>blocks</strong> nhỏ (ví dụ 16 token/block)</li> <li>Blocks cấp phát <strong>non-contiguous</strong> — không cần liền nhau trong VRAM</li> <li>Block table theo dõi block nào thuộc request nào</li> <li>Request xong → blocks giải phóng ngay cho request khác</li> </ol> <p><strong>Kết quả:</strong> GPU utilization từ ~24% lên <strong>~98.5%</strong>. Batch size có thể tăng <strong>2–4×</strong> trên cùng phần cứng.</p> <h3 id="63-sliding-window-attention">6.3 Sliding Window Attention</h3> <p>Một số model (Mistral) dùng <strong>sliding window</strong>: chỉ giữ KV cache cho N token gần nhất (ví dụ 4096), token cũ hơn bị loại bỏ. Giới hạn KV cache ở mức cố định bất kể context dài bao nhiêu.</p> <p>Trade-off: mất thông tin ở đầu context. Phù hợp cho chat (thông tin gần quan trọng hơn), không phù hợp cho document processing (cần toàn bộ context).</p> <h3 id="64-token-eviction--compression">6.4 Token eviction / compression</h3> <p>Các kỹ thuật nâng cao xác định token nào “ít quan trọng” (attention score thấp) và loại bỏ khỏi cache:</p> <ul> <li><strong>StreamingLLM:</strong> Giữ “attention sink” tokens (vài token đầu tiên) + N token gần nhất</li> <li><strong>H2O (Heavy-Hitter Oracle):</strong> Giữ token có attention score tích lũy cao nhất</li> <li><strong>Dynamic Memory Compression:</strong> Nén groups of tokens thành representation nhỏ hơn</li> </ul> <p>Các kỹ thuật này cho phép context “hiệu dụng” dài hơn physical KV cache.</p> <hr/> <h2 id="7-prefill-vs-decode--hai-pha-khác-nhau-hoàn-toàn">7. Prefill vs Decode — hai pha khác nhau hoàn toàn</h2> <p>Hiểu 2 pha này giúp hiểu tại sao KV cache quan trọng:</p> <h3 id="prefill-xử-lý-input">Prefill (xử lý input)</h3> <ul> <li>Toàn bộ input tokens xử lý <strong>parallel</strong> (cùng lúc)</li> <li>Phép tính: matrix × matrix → <strong>compute-bound</strong> (GPU tính toán là bottleneck)</li> <li>KV cache được tạo cho toàn bộ input tokens</li> <li>Tốc độ đo bằng: <strong>tokens processed per second</strong> (TTFT — Time To First Token)</li> </ul> <h3 id="decode-sinh-output">Decode (sinh output)</h3> <ul> <li>Sinh <strong>1 token/bước</strong>, tuần tự</li> <li>Phép tính: matrix × vector → <strong>memory-bound</strong> (đọc bộ nhớ là bottleneck)</li> <li>Mỗi bước: đọc toàn bộ weights + KV cache từ VRAM, chỉ tính cho 1 token</li> <li>Tốc độ đo bằng: <strong>tokens generated per second</strong> (TPS)</li> </ul> <h3 id="tại-sao-decode-bị-memory-bound">Tại sao decode bị memory-bound?</h3> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tổng data cần đọc mỗi decode step:
+= Model weights + KV cache
+= 37 GB (70B INT4) + 10.2 GB (1 user, 32K, BF16)
+= 47.2 GB
 
-Content 2
+Trên H100 (3.350 GB/s bandwidth):
+Max tokens/sec = 3.350 / 47.2 ≈ 71 token/s (lý thuyết)
+</code></pre></div></div> <p>GPU H100 có 990 TFLOPS nhưng chỉ cần ~1 GFLOP cho 1 token decode. Compute utilization &lt;0.1%. <strong>100% bottleneck là đọc bộ nhớ.</strong></p> <p>Đây là lý do:</p> <ul> <li><strong>Bandwidth quan trọng hơn TFLOPS</strong> cho inference</li> <li><strong>Quantize weights + KV cache</strong> trực tiếp tăng tốc (ít data cần đọc)</li> <li><strong>Batch &gt; 1</strong> hiệu quả vì weights chỉ đọc 1 lần cho cả batch</li> </ul> <hr/> <h2 id="8-kv-cache-với-moe--đặc-thù-riêng">8. KV Cache với MoE — đặc thù riêng</h2> <p>Model MoE (Kimi K2.6, DeepSeek V4, GLM-5.1) có đặc điểm:</p> <ul> <li>Attention layers vẫn dùng KV cache <strong>bình thường</strong> (giống dense model)</li> <li>Expert layers (MLP) <strong>không tạo KV cache</strong> — chỉ attention layer mới có</li> <li>Nhưng toàn bộ expert weights phải nằm trong VRAM (vì bất kỳ token nào cũng có thể route đến bất kỳ expert nào)</li> </ul> <p><strong>Hệ quả:</strong> Với MoE, KV cache chiếm tỷ lệ nhỏ hơn tổng VRAM (vì weights lớn hơn nhiều), nhưng vẫn là yếu tố scaling quan trọng khi tăng users/context.</p> <p>Ví dụ Kimi K2.6 (1T params, 61 layers):</p> <ul> <li>Weights INT4: ~500 GB (chiếm đa số VRAM)</li> <li>KV cache 1 user 128K (BF16): ~20–30 GB (ước tính, phụ thuộc MLA config)</li> <li>KV cache 10 user 128K: ~200–300 GB</li> </ul> <p>Tổng cho 10 user: ~700–800 GB → cần 8× H100 hoặc 4–6× H200.</p> <hr/> <h2 id="9-batching--kv-cache-và-multi-user-serving">9. Batching — KV cache và multi-user serving</h2> <h3 id="static-batching-lãng-phí">Static batching: lãng phí</h3> <p>Gom N request thành 1 batch, chờ <strong>tất cả</strong> xong. Request A sinh 10 token, request B sinh 500 → A phải chờ B → GPU lãng phí 490 bước cho A.</p> <h3 id="continuous-batching-in-flight-batching-hiệu-quả">Continuous batching (in-flight batching): hiệu quả</h3> <p>Khi request A xong → lập tức đưa request C vào slot trống, B vẫn chạy. GPU luôn bận. <strong>KV cache của A được giải phóng ngay</strong> cho C dùng.</p> <p>vLLM kết hợp PagedAttention + continuous batching:</p> <ul> <li>PagedAttention: cấp phát KV cache hiệu quả</li> <li>Continuous batching: tái sử dụng slot ngay khi request xong</li> <li>Prefix caching: nếu nhiều request có chung prefix (system prompt), cache prefix chỉ lưu <strong>1 lần</strong></li> </ul> <h3 id="prefix-caching--tiết-kiệm-lớn-cho-production">Prefix caching — tiết kiệm lớn cho production</h3> <p>Nhiều request chia sẻ cùng system prompt (ví dụ 2.000 token). Không cần tính + lưu KV cache cho 2.000 token này mỗi request. Tính 1 lần, dùng chung:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Không có prefix caching:
+  10 user × (2K system + 8K user) = 10 × 10K = 100K token cache
 
-<span class="cp">{%</span><span class="w"> </span><span class="nt">endtab</span><span class="w"> </span><span class="cp">%}</span>
+Có prefix caching:
+  1 × 2K system (shared) + 10 × 8K user = 82K token cache
+  Tiết kiệm: 18%
+</code></pre></div></div> <p>Với system prompt dài (RAG context 10K+ token), tiết kiệm lên tới 40–60%.</p> <hr/> <h2 id="10-speculative-decoding--kv-cache-cho-2-model">10. Speculative Decoding — KV cache cho 2 model</h2> <p>Speculative decoding dùng <strong>model nhỏ</strong> (draft) đoán trước N token, rồi <strong>model lớn</strong> (verifier) kiểm tra parallel. Mỗi model cần KV cache riêng:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Draft model (7B): KV cache nhỏ, sinh nhanh
+Main model (70B): KV cache lớn, nhưng verify N token cùng lúc
 
-<span class="cp">{%</span><span class="w"> </span><span class="nt">endtabs</span><span class="w"> </span><span class="cp">%}</span>
-</code></pre></div></div> <p>With this you can generate visualizations like:</p> <ul id="log" class="tab" data-tab="fa72fb07-767f-43c6-92b0-d02371c952dd" data-name="log"> <li class="active" id="log-php"> <a href="#">php </a> </li> <li id="log-js"> <a href="#">js </a> </li> <li id="log-ruby"> <a href="#">ruby </a> </li> </ul> <ul class="tab-content" id="fa72fb07-767f-43c6-92b0-d02371c952dd" data-name="log"> <li class="active"> <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">var_dump</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>
-</code></pre></div></div> </li> <li> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>
-</code></pre></div></div> </li> <li> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">pputs</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span>
-</code></pre></div></div> </li> </ul> <h2 id="another-example">Another example</h2> <ul id="data-struct" class="tab" data-tab="78b0c39e-0b5b-4241-bc12-c2c0e79b520d" data-name="data-struct"> <li class="active" id="data-struct-yaml"> <a href="#">yaml </a> </li> <li id="data-struct-json"> <a href="#">json </a> </li> </ul> <ul class="tab-content" id="78b0c39e-0b5b-4241-bc12-c2c0e79b520d" data-name="data-struct"> <li class="active"> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">hello</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">whatsup"</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">hi"</span>
-</code></pre></div></div> </li> <li> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"hello"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"whatsup"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hi"</span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div> </li> </ul> <h2 id="tabs-for-something-else">Tabs for something else</h2> <ul id="something-else" class="tab" data-tab="3d55a1f0-de11-4201-bda0-eff54dda458a" data-name="something-else"> <li class="active" id="something-else-text"> <a href="#">text </a> </li> <li id="something-else-quote"> <a href="#">quote </a> </li> <li id="something-else-list"> <a href="#">list </a> </li> </ul> <ul class="tab-content" id="3d55a1f0-de11-4201-bda0-eff54dda458a" data-name="something-else"> <li class="active"> <p>Regular text</p> </li> <li> <blockquote> <p>A quote</p> </blockquote> </li> <li> <p>Hipster list</p> <ul> <li>brunch</li> <li>fixie</li> <li>raybans</li> <li>messenger bag</li> </ul> </li> </ul>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is what included tabs in a post could look like]]></summary></entry><entry><title type="html">a post with typograms</title><link href="https://hphucngh.github.io/synthesis/2024/typograms/" rel="alternate" type="text/html" title="a post with typograms"/><published>2024-04-29T23:36:10+00:00</published><updated>2024-04-29T23:36:10+00:00</updated><id>https://hphucngh.github.io/synthesis/2024/typograms</id><content type="html" xml:base="https://hphucngh.github.io/synthesis/2024/typograms/"><![CDATA[<p>This is an example post with some <a href="https://github.com/google/typograms/">typograms</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">typograms
-</span><span class="sb">+----+
-|    |---&gt; My first diagram!
-+----+</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-typograms">+----+
-|    |---&gt; My first diagram!
-+----+
-</code></pre> <p>Another example:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">typograms
-</span><span class="sb">.------------------------.
-|.----------------------.|
-||"https://example.com" ||
-|'----------------------'|
-| ______________________ |
-||                      ||
-||   Welcome!           ||
-||                      ||
-||                      ||
-||  .----------------.  ||
-||  | username       |  ||
-||  '----------------'  ||
-||  .----------------.  ||
-||  |"*******"       |  ||
-||  '----------------'  ||
-||                      ||
-||  .----------------.  ||
-||  |   "Sign-up"    |  ||
-||  '----------------'  ||
-||                      ||
-|+----------------------+|
-.------------------------.</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>which generates:</p> <pre><code class="language-typograms">.------------------------.
-|.----------------------.|
-||"https://example.com" ||
-|'----------------------'|
-| ______________________ |
-||                      ||
-||   Welcome!           ||
-||                      ||
-||                      ||
-||  .----------------.  ||
-||  | username       |  ||
-||  '----------------'  ||
-||  .----------------.  ||
-||  |"*******"       |  ||
-||  '----------------'  ||
-||                      ||
-||  .----------------.  ||
-||  |   "Sign-up"    |  ||
-||  '----------------'  ||
-||                      ||
-|+----------------------+|
-.------------------------.
-</code></pre> <p>For more examples, check out the <a href="https://google.github.io/typograms/#examples">typograms documentation</a>.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="diagrams"/><summary type="html"><![CDATA[this is what included typograms code could look like]]></summary></entry><entry><title type="html">a post that can be cited</title><link href="https://hphucngh.github.io/synthesis/2024/post-citation/" rel="alternate" type="text/html" title="a post that can be cited"/><published>2024-04-28T15:06:00+00:00</published><updated>2024-04-28T15:06:00+00:00</updated><id>https://hphucngh.github.io/synthesis/2024/post-citation</id><content type="html" xml:base="https://hphucngh.github.io/synthesis/2024/post-citation/"><![CDATA[<p>This is an example post that can be cited. The content of the post ends here, while the citation information is automatically provided below. The only thing needed is for you to set the <code class="language-plaintext highlighter-rouge">citation</code> key in the front matter to <code class="language-plaintext highlighter-rouge">true</code>.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="citation"/><summary type="html"><![CDATA[this is what a post that can be cited looks like]]></summary></entry><entry><title type="html">a post with pseudo code</title><link href="https://hphucngh.github.io/synthesis/2024/pseudocode/" rel="alternate" type="text/html" title="a post with pseudo code"/><published>2024-04-15T00:01:00+00:00</published><updated>2024-04-15T00:01:00+00:00</updated><id>https://hphucngh.github.io/synthesis/2024/pseudocode</id><content type="html" xml:base="https://hphucngh.github.io/synthesis/2024/pseudocode/"><![CDATA[<p>This is an example post with some pseudo code rendered by <a href="https://github.com/SaswatPadhi/pseudocode.js">pseudocode</a>. The example presented here is the same as the one in the <a href="https://saswat.padhi.me/pseudocode.js/">pseudocode.js</a> documentation, with only one simple but important change: everytime you would use <code class="language-plaintext highlighter-rouge">$</code>, you should use <code class="language-plaintext highlighter-rouge">$$</code> instead. Also, note that the <code class="language-plaintext highlighter-rouge">pseudocode</code> key in the front matter is set to <code class="language-plaintext highlighter-rouge">true</code> to enable the rendering of pseudo code. As an example, using this code:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">pseudocode
-</span><span class="sb">% This quicksort algorithm is extracted from Chapter 7, Introduction to Algorithms (3rd edition)
-\begin{algorithm}
-\caption{Quicksort}
-\begin{algorithmic}
-\PROCEDURE{Quicksort}{$$A, p, r$$}
-    \IF{$$p &lt; r$$}
-        \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
-        \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
-        \STATE \CALL{Quicksort}{$$A, q + 1, r$$}
-    \ENDIF
-\ENDPROCEDURE
-\PROCEDURE{Partition}{$$A, p, r$$}
-    \STATE $$x = A[r]$$
-    \STATE $$i = p - 1$$
-    \FOR{$$j = p$$ \TO $$r - 1$$}
-        \IF{$$A[j] &lt; x$$}
-            \STATE $$i = i + 1$$
-            \STATE exchange
-            $$A[i]$$ with $$A[j]$$
-        \ENDIF
-        \STATE exchange $$A[i]$$ with $$A[r]$$
-    \ENDFOR
-\ENDPROCEDURE
-\end{algorithmic}
-\end{algorithm}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Generates:</p> <pre><code class="language-pseudocode">% This quicksort algorithm is extracted from Chapter 7, Introduction to Algorithms (3rd edition)
-\begin{algorithm}
-\caption{Quicksort}
-\begin{algorithmic}
-\PROCEDURE{Quicksort}{$$A, p, r$$}
-    \IF{$$p &lt; r$$}
-        \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
-        \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
-        \STATE \CALL{Quicksort}{$$A, q + 1, r$$}
-    \ENDIF
-\ENDPROCEDURE
-\PROCEDURE{Partition}{$$A, p, r$$}
-    \STATE $$x = A[r]$$
-    \STATE $$i = p - 1$$
-    \FOR{$$j = p$$ \TO $$r - 1$$}
-        \IF{$$A[j] &lt; x$$}
-            \STATE $$i = i + 1$$
-            \STATE exchange
-            $$A[i]$$ with $$A[j]$$
-        \ENDIF
-        \STATE exchange $$A[i]$$ with $$A[r]$$
-    \ENDFOR
-\ENDPROCEDURE
-\end{algorithmic}
-\end{algorithm}
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is what included pseudo code could look like]]></summary></entry><entry><title type="html">a post with code diff</title><link href="https://hphucngh.github.io/synthesis/2024/code-diff/" rel="alternate" type="text/html" title="a post with code diff"/><published>2024-01-27T19:22:00+00:00</published><updated>2024-01-27T19:22:00+00:00</updated><id>https://hphucngh.github.io/synthesis/2024/code-diff</id><content type="html" xml:base="https://hphucngh.github.io/synthesis/2024/code-diff/"><![CDATA[<p>You can display diff code by using the regular markdown syntax:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">diff
-</span><span class="gh">diff --git a/sample.js b/sample.js
-index 0000001..0ddf2ba
-</span><span class="gd">--- a/sample.js
-</span><span class="gi">+++ b/sample.js
-</span><span class="p">@@ -1 +1 @@</span>
-<span class="gd">-console.log("Hello World!")
-</span><span class="gi">+console.log("Hello from Diff2Html!")</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/sample.js b/sample.js
-index 0000001..0ddf2ba
-</span><span class="gd">--- a/sample.js
-</span><span class="gi">+++ b/sample.js
-</span><span class="p">@@ -1 +1 @@</span>
-<span class="gd">-console.log("Hello World!")
-</span><span class="gi">+console.log("Hello from Diff2Html!")
-</span></code></pre></div></div> <p>But this is difficult to read, specially if you have a large diff. You can use <a href="https://diff2html.xyz/">diff2html</a> to display a more readable version of the diff. For this, just use <code class="language-plaintext highlighter-rouge">diff2html</code> instead of <code class="language-plaintext highlighter-rouge">diff</code> for the code block language:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">diff2html
-</span><span class="sb">diff --git a/sample.js b/sample.js
-index 0000001..0ddf2ba
---- a/sample.js
-+++ b/sample.js
-@@ -1 +1 @@
--console.log("Hello World!")
-+console.log("Hello from Diff2Html!")</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>If we use a longer example, for example <a href="https://github.com/rtfpessoa/diff2html/commit/c2c253d3e3f8b8b267f551e659f72b44ca2ac927">this commit from diff2html</a>, it will generate the following output:</p> <pre><code class="language-diff2html">From 2aaae31cc2a37bfff83430c2c914b140bee59b6a Mon Sep 17 00:00:00 2001
-From: Rodrigo Fernandes &lt;rtfrodrigo@gmail.com&gt;
-Date: Sun, 9 Oct 2016 16:41:54 +0100
-Subject: [PATCH 1/2] Initial template override support
+Tổng KV cache = cache_draft + cache_main
+</code></pre></div></div> <p>Tuy tốn thêm VRAM cho draft model cache, speedup ~1.5–2.5× thường xứng đáng. Nhưng cần tính tổng VRAM cho cả 2 model khi planning.</p> <hr/> <h2 id="11-công-cụ-tính">11. Công cụ tính</h2> <h3 id="python-snippet">Python snippet</h3> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">kv_cache_gb</span><span class="p">(</span>
+    <span class="n">num_layers</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">num_kv_heads</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">head_dim</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">seq_len</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">precision_bytes</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span>  <span class="c1"># BF16=2, FP8=1, Q4=0.5
+</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sh">"""</span><span class="s">Tính KV cache size (GB).</span><span class="sh">"""</span>
+    <span class="n">total_bytes</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">batch_size</span> <span class="o">*</span> <span class="n">seq_len</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">num_layers</span>
+        <span class="o">*</span> <span class="n">num_kv_heads</span> <span class="o">*</span> <span class="n">head_dim</span> <span class="o">*</span> <span class="n">precision_bytes</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">total_bytes</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1024</span> <span class="o">**</span> <span class="mi">3</span><span class="p">)</span>
 
----
- scripts/hulk.js                    |  4 ++--
- src/diff2html.js                   |  3 +--
- src/file-list-printer.js           | 11 ++++++++---
- src/hoganjs-utils.js               | 29 +++++++++++++++++------------
- src/html-printer.js                |  6 ++++++
- src/line-by-line-printer.js        |  6 +++++-
- src/side-by-side-printer.js        |  6 +++++-
- test/file-list-printer-tests.js    |  2 +-
- test/hogan-cache-tests.js          | 18 +++++++++++++++---
- test/line-by-line-tests.js         |  3 +--
- test/side-by-side-printer-tests.js |  3 +--
- 11 files changed, 62 insertions(+), 29 deletions(-)
+<span class="c1"># Llama 3.3 70B, 10 user, 32K context, BF16
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="nf">kv_cache_gb</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">32768</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s"> GB</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1"># → 97.5 GB
+</span>
+<span class="c1"># Cùng config nhưng FP8 cache
+</span><span class="nf">print</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="si">{</span><span class="nf">kv_cache_gb</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">32768</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="si">:</span><span class="p">.</span><span class="mi">1</span><span class="n">f</span><span class="si">}</span><span class="s"> GB</span><span class="sh">"</span><span class="p">)</span>
+<span class="c1"># → 48.8 GB
+</span></code></pre></div></div> <h3 id="online-tools">Online tools</h3> <ul> <li><a href="https://lmcache.ai/kv_cache_calculator.html">LMCache KV Cache Calculator</a> — chọn model, chọn precision, nhập token count</li> <li><a href="https://localllm.in/blog/interactive-vram-calculator">LocalLLM VRAM Calculator</a> — tính tổng VRAM (weights + KV cache + overhead)</li> </ul> <hr/> <h2 id="12-cheat-sheet--tra-nhanh">12. Cheat sheet — tra nhanh</h2> <h3 id="kv-cache-theo-model-1-user-bf16">KV cache theo model (1 user, BF16)</h3> <table> <thead> <tr> <th>Model</th> <th>Per token</th> <th>4K ctx</th> <th>32K ctx</th> <th>128K ctx</th> </tr> </thead> <tbody> <tr> <td>Llama 3.1 8B</td> <td>0.125 MB</td> <td>0.5 GB</td> <td>4 GB</td> <td><strong>16 GB</strong></td> </tr> <tr> <td>Phi-4 14B</td> <td>0.098 MB</td> <td>0.4 GB</td> <td>3.1 GB</td> <td>12.5 GB</td> </tr> <tr> <td>Llama 3.3 70B</td> <td>0.31 MB</td> <td>1.3 GB</td> <td>10.2 GB</td> <td><strong>40.6 GB</strong></td> </tr> <tr> <td>Llama 4 Scout 109B</td> <td>~0.31 MB</td> <td>1.3 GB</td> <td>10 GB</td> <td>40 GB</td> </tr> </tbody> </table> <h3 id="nhân-hệ-số-cho-multi-user">Nhân hệ số cho multi-user</h3> <table> <thead> <tr> <th>Users</th> <th>Nhân KV cache</th> </tr> </thead> <tbody> <tr> <td>1</td> <td>×1</td> </tr> <tr> <td>5</td> <td>×5</td> </tr> <tr> <td>10</td> <td>×10</td> </tr> <tr> <td>20</td> <td>×20</td> </tr> </tbody> </table> <h3 id="nhân-hệ-số-cho-precision">Nhân hệ số cho precision</h3> <table> <thead> <tr> <th>Precision</th> <th>Nhân KV cache</th> </tr> </thead> <tbody> <tr> <td>BF16 (baseline)</td> <td>×1</td> </tr> <tr> <td>FP8</td> <td>×0.5</td> </tr> <tr> <td>Q4</td> <td>×0.25</td> </tr> </tbody> </table> <h3 id="tổng-vram-nhanh">Tổng VRAM nhanh</h3> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>VRAM ≈ Weights(precision) + KV_cache(ctx × users × cache_precision) + 10–20% overhead
+</code></pre></div></div> <hr/> <h2 id="13-sai-lầm-phổ-biến">13. Sai lầm phổ biến</h2> <h3 id="model-8b-chỉ-cần-4-gb-ram-int4">“Model 8B chỉ cần 4 GB RAM (INT4)”</h3> <p>Đúng cho weights. Nhưng:</p> <ul> <li>Thêm 4 GB KV cache cho context 32K</li> <li>Thêm 1 GB overhead</li> <li>Tổng: ~9 GB — không vừa GPU 8GB nếu context dài</li> </ul> <h3 id="tôi-có-h100-80gb-chạy-được-70b-int4-cho-20-user">“Tôi có H100 80GB, chạy được 70B INT4 cho 20 user”</h3> <ul> <li>Weights INT4: 37 GB</li> <li>KV cache 20 user × 8K, BF16: 52 GB</li> <li>Tổng: 89 GB &gt; 80 GB → <strong>OOM</strong></li> <li>Fix: dùng FP8 KV cache → 26 GB → Tổng 65 GB → vừa</li> </ul> <h3 id="context-10m-token-của-llama-4-scout-chạy-trên-1-h100">“Context 10M token của Llama 4 Scout chạy trên 1× H100”</h3> <ul> <li>Weights INT4: ~58 GB</li> <li>KV cache 1 user × 10M, BF16: <strong>~3.100 GB</strong> → Cần cluster ~40× H100</li> <li>Thực tế production: Scout giới hạn ở ~128K–256K context trên 1 GPU</li> </ul> <h3 id="moe-model-chỉ-cần-vram-cho-active-parameters">“MoE model chỉ cần VRAM cho active parameters”</h3> <p>Sai. Toàn bộ 1T tham số của Kimi K2.6 phải nằm trong VRAM, dù chỉ 32B active mỗi token. Expert không thể offload ra CPU rồi đưa vào theo nhu cầu — latency không chấp nhận được.</p> <hr/> <h2 id="14-tóm-tắt">14. Tóm tắt</h2> <p>Năm điều cần nhớ về KV Cache:</p> <ol> <li> <p><strong>KV Cache là bộ nhớ tăng tuyến tính</strong> theo context_length × batch_size. Ở context dài + nhiều user, nó lớn hơn model weights.</p> </li> <li> <p><strong>GQA giảm cache 8×</strong> so với MHA cổ điển mà chất lượng gần như giữ nguyên. Mọi model 2025-2026 đều dùng GQA hoặc MLA.</p> </li> <li> <p><strong>Quantize KV cache (FP8)</strong> là optimization có ROI cao nhất — giảm 50% cache, chất lượng ~99%, chỉ cần thêm 1 flag khi khởi động.</p> </li> <li> <p><strong>PagedAttention (vLLM)</strong> loại bỏ lãng phí bộ nhớ do cấp phát tĩnh, tăng throughput 2–4×.</p> </li> <li> <p><strong>Luôn tính VRAM = Weights + KV Cache + Overhead.</strong> Nếu chỉ tính weights, bạn sẽ deploy xong rồi OOM crash khi user thật bắt đầu dùng.</p> </li> </ol> <hr/> <h2 id="nguồn-tham-khảo">Nguồn tham khảo</h2> <ol> <li><a href="https://huggingface.co/blog/not-lain/kv-caching">Not Lain — KV Caching Explained (Hugging Face)</a></li> <li><a href="https://developer.nvidia.com/blog/mastering-llm-techniques-inference-optimization/">NVIDIA — Mastering LLM Techniques: Inference Optimization</a></li> <li><a href="https://www.spheron.network/blog/gpu-memory-requirements-llm/">Spheron — GPU Memory Requirements for LLMs</a></li> <li><a href="https://lyceum.technology/magazine/kv-cache-memory-calculation-llm/">Lyceum — KV Cache Memory Calculation for LLMs</a></li> <li><a href="https://dev.to/bytecalculators/the-math-behind-local-llms-how-to-calculate-exact-vram-requirements-before-you-crash-your-gpu-12n5">DEV.to — The Math Behind Local LLMs VRAM</a></li> <li><a href="https://lmcache.ai/kv_cache_calculator.html">LMCache — KV Cache Size Calculator</a></li> <li><a href="https://localllm.in/blog/llamacpp-vram-requirements-for-local-llms">LocalLLM — llama.cpp VRAM Requirements</a></li> <li><a href="https://insiderllm.com/guides/kv-cache-optimization-guide/">InsiderLLM — KV Cache Optimization Guide</a></li> <li><a href="https://llmgarage.ai/kv-cache-optimization/">LLM Garage — KV Cache Optimization: Making Large Context Viable</a></li> <li><a href="https://arxiv.org/abs/2309.06180">vLLM — Efficient Memory Management with PagedAttention (Paper)</a></li> <li><a href="https://arxiv.org/abs/2205.14135">FlashAttention: Fast and Memory-Efficient Exact Attention (Paper)</a></li> <li><a href="https://arxiv.org/abs/2305.13245">GQA: Training Generalized Multi-Query Transformer Models (Paper)</a></li> <li><a href="https://huggingface.co/docs/transformers/main/en/generation_strategies#kv-caching">Hugging Face — Generation Strategies: KV Caching</a></li> <li><a href="https://medium.com/@joaolages/kv-caching-explained-276520203249">João Lages — Transformers KV Caching Explained (Medium)</a></li> <li><a href="https://neptune.ai/blog/transformers-key-value-caching">Neptune.ai — Transformers Key-Value Caching</a></li> </ol> <hr/> <p><em>Cập nhật: 07/05/2026.</em></p>]]></content><author><name></name></author><category term="AI"/><category term="AI"/><category term="LLM"/><category term="KV-cache"/><category term="inference"/><category term="VRAM"/><category term="optimization"/><summary type="html"><![CDATA[Giải thích về KV Cache — tại sao cần nó, công thức tính chính xác, đến các kỹ thuật tối ưu production. Với ví dụ tính thực tế trên Llama, DeepSeek, Kimi 2026.]]></summary></entry><entry><title type="html">self-hosted LLM</title><link href="https://hphucngh.github.io/synthesis/2026/self-hosted-llm-guide/" rel="alternate" type="text/html" title="self-hosted LLM"/><published>2026-05-05T22:24:00+00:00</published><updated>2026-05-05T22:24:00+00:00</updated><id>https://hphucngh.github.io/synthesis/2026/self-hosted-llm-guide</id><content type="html" xml:base="https://hphucngh.github.io/synthesis/2026/self-hosted-llm-guide/"><![CDATA[<p>Tháng 5/2026, các model open-weight đạt hiệu năng ngang hàng với model đóng (Claude, GPT) trên hầu hết benchmark coding và reasoning. Khoảng cách SWE-bench giữa best open-weight (Kimi K2.6: 80.2%) và Claude Opus 4.6 (80.8%) chỉ còn <strong>0.6%</strong>. Trong khi đó, chi phí API open-weight rẻ hơn 5–70 lần.</p> <p>Điều này khiến câu hỏi “có nên tự host LLM?” trở nên thực tế hơn bao giờ hết. Nhưng câu trả lời không đơn giản là “có” hay “không” — nó phụ thuộc vào con số, và phần lớn các developer tôi thấy đang tính nhầm.</p> <blockquote> <p>Bài viết này tổng hợp dữ liệu từ Onyx AI Leaderboard, các model card chính thức (Hugging Face), và phân tích chi phí từ nhiều nguồn thực tế. Mọi con số đều có context cụ thể — không có “model tốt nhất”.</p> </blockquote> <h2 id="landscape-052025">Landscape 05/2025</h2> <p>Bức tranh open-weight đầu 2026 thay đổi rất nhanh. Chỉ trong Q1–Q2/2026, đã có ít nhất 4 bản nâng cấp lớn:</p> <ul> <li><strong>Kimi K2.5 → K2.6</strong> (Moonshot AI, 20/4/2026)</li> <li><strong>DeepSeek V3.2 → V4 Pro/Flash</strong> (DeepSeek, 24/4/2026)</li> <li><strong>GLM-5 → GLM-5.1</strong> (Z.AI, 4/2026)</li> <li><strong>Qwen 3.5 → Qwen 3.6</strong> (Alibaba, 4/2026)</li> </ul> <p>Nếu bạn đang đọc một bài so sánh model mà không ghi ngày cập nhật, rất có thể thông tin đã cũ.</p> <h3 id="bảng-model-chính-052026">Bảng model chính (05/2026)</h3> <table> <thead> <tr> <th style="text-align: left">Model</th> <th style="text-align: right">Tổng Params</th> <th style="text-align: right">Active/token</th> <th style="text-align: left">Kiến trúc</th> <th style="text-align: right">Context</th> <th style="text-align: left">License</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">DeepSeek V4 Pro</td> <td style="text-align: right">1.600B</td> <td style="text-align: right">49B</td> <td style="text-align: left">MoE CSA+HCA</td> <td style="text-align: right"><strong>1M</strong></td> <td style="text-align: left"><span class="bdg bdg-mit">MIT</span></td> </tr> <tr> <td style="text-align: left">Kimi K2.6</td> <td style="text-align: right">1.000B</td> <td style="text-align: right">32B</td> <td style="text-align: left">MoE 384E</td> <td style="text-align: right">262K</td> <td style="text-align: left"><span class="bdg bdg-mit">MIT+</span></td> </tr> <tr> <td style="text-align: left">GLM-5.1</td> <td style="text-align: right">744B</td> <td style="text-align: right">40B</td> <td style="text-align: left">MoE 256E</td> <td style="text-align: right">200K</td> <td style="text-align: left"><span class="bdg bdg-mit">MIT</span></td> </tr> <tr> <td style="text-align: left">Qwen 3.5</td> <td style="text-align: right">397B</td> <td style="text-align: right">17B</td> <td style="text-align: left">MoE</td> <td style="text-align: right">—</td> <td style="text-align: left"><span class="bdg bdg-apache">Apache</span></td> </tr> <tr> <td style="text-align: left">GLM-4.7</td> <td style="text-align: right">355B</td> <td style="text-align: right">32B</td> <td style="text-align: left">MoE</td> <td style="text-align: right">200K</td> <td style="text-align: left"><span class="bdg bdg-mit">MIT</span></td> </tr> <tr> <td style="text-align: left">Llama 4 Maverick</td> <td style="text-align: right">400B</td> <td style="text-align: right">17B</td> <td style="text-align: left">MoE 128E</td> <td style="text-align: right">—</td> <td style="text-align: left"><span class="bdg bdg-llama">Llama 4</span></td> </tr> <tr> <td style="text-align: left">DeepSeek V4 Flash</td> <td style="text-align: right">284B</td> <td style="text-align: right">13B</td> <td style="text-align: left">MoE CSA+HCA</td> <td style="text-align: right"><strong>1M</strong></td> <td style="text-align: left"><span class="bdg bdg-mit">MIT</span></td> </tr> <tr> <td style="text-align: left">Llama 4 Scout</td> <td style="text-align: right">109B</td> <td style="text-align: right">17B</td> <td style="text-align: left">MoE 16E</td> <td style="text-align: right"><strong>10M</strong></td> <td style="text-align: left"><span class="bdg bdg-llama">Llama 4</span></td> </tr> <tr> <td style="text-align: left">GLM-4.7 Flash</td> <td style="text-align: right">~30B</td> <td style="text-align: right">Dense</td> <td style="text-align: left">Distilled</td> <td style="text-align: right">200K</td> <td style="text-align: left"><span class="bdg bdg-mit">MIT</span></td> </tr> </tbody> </table> <p>Một vài điểm đáng chú ý:</p> <ul> <li> <p><strong>Hầu hết model frontier đều là MoE.</strong> Kimi K2.6 có 1 nghìn tỷ tham số nhưng chỉ kích hoạt 32B cho mỗi token — giảm 96.8% computation. Đây là lý do tại sao bạn không thể so sánh model chỉ dựa trên “số B”.</p> </li> <li> <p><strong>Context window đang bùng nổ.</strong> Llama 4 Scout claim 10M token, DeepSeek V4 hỗ trợ 1M. Nhưng context dài có giá: KV cache ngốn VRAM tuyến tính theo số token. Thực tế production, hầu hết deployment giới hạn ở 128K–256K vì lý do phần cứng.</p> </li> <li> <p><strong>MIT license chiếm ưu thế.</strong> GLM-5.1, DeepSeek V4, Kimi K2.6 đều MIT — tự do thương mại hóa, fine-tune, redistribution. Qwen 3.5 dùng Apache 2.0, Llama 4 có giới hạn ở 700M MAU.</p> </li> </ul> <h2 id="tính-vram">Tính VRAM</h2> <blockquote> <p>Đây là phần quan trọng nhất trong toàn bộ bài viết.</p> </blockquote> <h3 id="công-thức-cơ-bản">Công thức cơ bản</h3> \[\text{VRAM MIN} = \text{Weights} + \text{KV Cache} + \text{Activations} + \text{Framework Overhead}\] <p><strong>Weights</strong> (phần dễ tính):</p> <table> <thead> <tr> <th style="text-align: left">Precision</th> <th style="text-align: left">Bytes/param</th> <th style="text-align: left">VD: GLM-5.1 (744B)</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">FP16/BF16</td> <td style="text-align: left">2.0</td> <td style="text-align: left">1.488 GB</td> </tr> <tr> <td style="text-align: left">FP8</td> <td style="text-align: left">1.0</td> <td style="text-align: left">~860 GB (có overhead)</td> </tr> <tr> <td style="text-align: left">INT4</td> <td style="text-align: left">0.5</td> <td style="text-align: left">~386 GB</td> </tr> </tbody> </table> <p>Hầu hết mọi người dừng ở đây. Đó là sai lầm.</p> <h3 id="kv-cache">KV Cache</h3> <p>Mỗi token trong context cần lưu 2 vector (Key và Value) cho <strong>mỗi layer</strong>, <strong>mỗi KV head</strong>. Công thức:</p> \[\text{KV Cache} = 2 \times \text{seq_len} \times n_{\text{layers}} \times n_{\text{kv_heads}} \times d_{\text{head}} \times \text{bytes}\] <p>Giải thích từng thành phần:</p> <ul> <li><strong>2</strong> — mỗi token cần lưu cả Key lẫn Value</li> <li><strong>seq_len</strong> — số token trong context (ví dụ 4K = 4,096 token)</li> <li><strong>$n_{\text{layers}}$</strong> — số transformer layer (Llama 3.3 70B có 80 layers)</li> <li><strong>$n_{\text{kv_heads}}$</strong> — số KV heads. Lưu ý: nhờ GQA (Grouped-Query Attention), con số này <strong>nhỏ hơn nhiều</strong> so với số Q heads. Llama 3.3 70B có 64 Q heads nhưng chỉ <strong>8 KV heads</strong></li> <li><strong>$d_{\text{head}}$</strong> — kích thước mỗi head (128)</li> <li><strong>bytes</strong> — số byte mỗi phần tử (BF16 = 2 bytes)</li> </ul> <p>Ví dụ tính tay cho Llama 3.3 70B ở 4K context:</p> \[2 \times 4{,}096 \times 80 \times 8 \times 128 \times 2 = 1{,}342{,}177{,}280 \text{ bytes} \approx 1.3 \text{ GB}\] <p>Bảng đầy đủ với Llama 3.3 70B (80 layers, <strong>8 KV heads</strong>, head dim 128, BF16):</p> <table> <thead> <tr> <th style="text-align: left">Context</th> <th style="text-align: right">KV Cache (BF16)</th> <th style="text-align: left">So sánh</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">4K token</td> <td style="text-align: right">1.3 GB</td> <td style="text-align: left">Nhỏ, thoải mái</td> </tr> <tr> <td style="text-align: left">32K token</td> <td style="text-align: right">10.7 GB</td> <td style="text-align: left">Khoảng 13% card H100 80 GB</td> </tr> <tr> <td style="text-align: left">128K token</td> <td style="text-align: right"><strong>42.9 GB</strong></td> <td style="text-align: left">Chiếm hơn nửa H100, gần bằng 1/3 weights FP16 (140 GB)</td> </tr> </tbody> </table> <p>Với model nhỏ hơn — Llama 3.1 8B (32 layers, 8 KV heads, head dim 128) — ở 128K context:</p> \[2 \times 131{,}072 \times 32 \times 8 \times 128 \times 2 \approx 16 \text{ GB}\] <p><strong>16 GB KV cache</strong> — lớn hơn cả weights ở FP16 (14 GB). Đây là lý do vì sao “model nhỏ + context dài” không hề nhẹ như nhiều người nghĩ.</p> <p><strong>Và khi có nhiều user đồng thời, mỗi user cần KV cache riêng:</strong></p> <table> <thead> <tr> <th style="text-align: center">Concurrent users</th> <th style="text-align: right">70B @ 4K ctx</th> <th style="text-align: right">70B @ 32K ctx</th> </tr> </thead> <tbody> <tr> <td style="text-align: center">1</td> <td style="text-align: right">1.3 GB</td> <td style="text-align: right">10.7 GB</td> </tr> <tr> <td style="text-align: center">5</td> <td style="text-align: right">6.7 GB</td> <td style="text-align: right">53.7 GB</td> </tr> <tr> <td style="text-align: center">10</td> <td style="text-align: right">13.4 GB</td> <td style="text-align: right">107.4 GB</td> </tr> </tbody> </table> <p>Kịch bản thực tế: bạn deploy Llama 3.3 70B INT4 (~37 GB weights) trên 1× H100 80 GB, nghĩ rằng còn dư ~43 GB cho cache. Với 4 user @ 32K context, cache đã cần ~43 GB — <strong>vừa khít, không còn chỗ cho overhead</strong>. Thêm 1 user nữa là OOM crash.</p> <blockquote class="block-warning"> <h5 id="warning">WARNING</h5> <p>Luôn tính $\text{VRAM} = \text{weights} + (\text{KV cache} \times \text{concurrent users}) + 10\text{–}20\%$ overhead. Dùng PagedAttention (vLLM) để tối ưu, và cân nhắc FP8 cho KV cache để giảm 50%.</p> </blockquote> <h3 id="với-model-moe-toàn-bộ-tham-số-phải-nằm-trong-vram">Với model MoE: toàn bộ tham số phải nằm trong VRAM</h3> <p>Đây là hiểu lầm phổ biến. Kimi K2.6 chỉ kích hoạt 32B/token, nhưng toàn bộ 1T tham số phải nằm sẵn trên các GPU trong cluster (không phải CPU), vì bất kỳ token nào cũng có thể được route đến bất kỳ expert nào, do đó không thể rely vào việc load expert động từ CPU trong quá trình inference.</p> <h3 id="băng-thông-quan-trọng-hơn-dung-lượng">Băng thông quan trọng hơn dung lượng</h3> <p>Tốc độ sinh token phụ thuộc vào <strong>memory bandwidth</strong>, không phải VRAM size:</p> \[\text{Tokens/sec} \approx \frac{\text{Memory Bandwidth (GB/s)}}{\text{Model Size in Memory (GB)}}\] <table> <thead> <tr> <th style="text-align: left">Phần cứng</th> <th style="text-align: right">Bandwidth</th> <th style="text-align: right">70B INT4 (~37GB)</th> <th style="text-align: left">Phù hợp</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">DDR4 RAM (CPU offload)</td> <td style="text-align: right">~50 GB/s</td> <td style="text-align: right">~1.3 t/s</td> <td style="text-align: left">Không dùng được</td> </tr> <tr> <td style="text-align: left">DDR5 (Mac M4 Ultra)</td> <td style="text-align: right">~800 GB/s</td> <td style="text-align: right">~21 t/s</td> <td style="text-align: left">Dev/prototype</td> </tr> <tr> <td style="text-align: left">RTX 4090 GDDR6X</td> <td style="text-align: right">~1.008 GB/s</td> <td style="text-align: right">~27 t/s</td> <td style="text-align: left">Solo dev</td> </tr> <tr> <td style="text-align: left">H100 HBM3</td> <td style="text-align: right">~3.350 GB/s</td> <td style="text-align: right">~90 t/s</td> <td style="text-align: left">Production</td> </tr> <tr> <td style="text-align: left">H200 HBM3e</td> <td style="text-align: right">~4.800 GB/s</td> <td style="text-align: right">~130 t/s</td> <td style="text-align: left">High-throughput</td> </tr> </tbody> </table> <p>Chạy model 70B trên RAM hệ thống (CPU offload) cho ~1–3 token/giây — tức phải đợi 30–60 giây cho mỗi câu trả lời ngắn. Đủ để test, không đủ cho production.</p> <h2 id="matrix-phần-cứng-đến-model">Matrix phần cứng đến model</h2> <p>Câu hỏi đúng không phải “model nào tốt nhất?” mà là <strong>“GPU nào bạn đang có?”</strong></p> <table> <thead> <tr> <th style="text-align: left">Cấu hình</th> <th style="text-align: right">VRAM</th> <th style="text-align: left">Model production</th> <th style="text-align: left">Use case</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">1× RTX 3060 12GB</td> <td style="text-align: right">12 GB</td> <td style="text-align: left">GLM-4.7 Flash (INT4)</td> <td style="text-align: left">POC, chatbot nội bộ đơn giản</td> </tr> <tr> <td style="text-align: left">1× RTX 4090 24GB</td> <td style="text-align: right">24 GB</td> <td style="text-align: left">GLM-4.7 Flash (Q8), DS-R1-Distill-32B</td> <td style="text-align: left">Solo dev, coding assistant</td> </tr> <tr> <td style="text-align: left">1× H100 80GB</td> <td style="text-align: right">80 GB</td> <td style="text-align: left">Llama 4 Scout (INT4), DS V4 Flash</td> <td style="text-align: left">Team nhỏ, document processing</td> </tr> <tr> <td style="text-align: left">4× H100 80GB</td> <td style="text-align: right">320 GB</td> <td style="text-align: left">GLM-4.7 (FP8), Qwen 3.5 (INT4)</td> <td style="text-align: left">Enterprise entry-tier</td> </tr> <tr> <td style="text-align: left">4× H200 141GB</td> <td style="text-align: right">564 GB</td> <td style="text-align: left">Kimi K2.6 (INT4), DS V4 Pro (chật)</td> <td style="text-align: left">Frontier open-weight</td> </tr> <tr> <td style="text-align: left">8× H100 80GB</td> <td style="text-align: right">640 GB</td> <td style="text-align: left">GLM-5.1 (FP8), DS V4 Pro (FP8)</td> <td style="text-align: left">Enterprise full-scale</td> </tr> <tr> <td style="text-align: left">8× H200 141GB</td> <td style="text-align: right">1.128 GB</td> <td style="text-align: left">Mọi model (BF16 thoải mái)</td> <td style="text-align: left">Maximum flexibility</td> </tr> </tbody> </table> <p><strong>Ghi chú thực tế:</strong></p> <ul> <li>VRAM trên là maximum cho weights. Production cần trừ đi KV cache cho N user concurrent.</li> <li>4× H100 là điểm khởi đầu thực tế cho cluster-tier enterprise.</li> <li>Mac Studio M4 Ultra (192GB unified) chạy được GLM-4.7 GGUF 2-bit (~135 GB) nhưng tốc độ chậm hơn H100 khoảng 3–5×. Phù hợp dev, không phù hợp serving.</li> </ul> <h2 id="bài-toán-kinh-tế">Bài toán kinh tế</h2> <h3 id="con-số-shock">Con số shock</h3> <p>Ở mức 1M token/ngày, self-host trên cloud GPU đắt hơn API <strong>733 lần</strong>.</p> <p>Đọc lại câu trên.</p> <p>Đây là lý do: GPU cloud tính tiền theo giờ, bất kể bạn dùng bao nhiêu. 4× H100 trên cloud giá ~$16–32/ngày = $11.520/tháng. Nếu bạn chỉ xử lý 1M token/ngày, chi phí per-token thực tế là $0.38/1K token — đắt hơn Claude Opus rất nhiều.</p> <h3 id="bảng-so-sánh-thực-tế">Bảng so sánh thực tế</h3> <table> <thead> <tr> <th style="text-align: left">Token/ngày</th> <th style="text-align: right">Claude Sonnet <br/>($3/$15M)</th> <th style="text-align: right">DS V4 Flash <br/>($0.14/$0.28M)</th> <th style="text-align: right">Self-host 4×H100</th> <th style="text-align: left">Kết luận</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">100K</td> <td style="text-align: right">~$14/tháng</td> <td style="text-align: right">~$0.6/tháng</td> <td style="text-align: right">~$11.520/tháng</td> <td style="text-align: left">API rẻ hơn 800×</td> </tr> <tr> <td style="text-align: left">1M</td> <td style="text-align: right">~$135/tháng</td> <td style="text-align: right">~$6/tháng</td> <td style="text-align: right">~$11.520/tháng</td> <td style="text-align: left">API rẻ hơn 85×</td> </tr> <tr> <td style="text-align: left">10M</td> <td style="text-align: right">~$1.350/tháng</td> <td style="text-align: right">~$63/tháng</td> <td style="text-align: right">~$11.520/tháng</td> <td style="text-align: left">API vẫn rẻ hơn</td> </tr> <tr> <td style="text-align: left">50M</td> <td style="text-align: right">~$6.750/tháng</td> <td style="text-align: right">~$315/tháng</td> <td style="text-align: right">~$11.520/tháng</td> <td style="text-align: left">Hòa vốn vs Claude</td> </tr> <tr> <td style="text-align: left">100M</td> <td style="text-align: right">~$13.500/tháng</td> <td style="text-align: right">~$630/tháng</td> <td style="text-align: right">~$11.520/tháng</td> <td style="text-align: left">Self-host thắng vs Claude</td> </tr> <tr> <td style="text-align: left">500M</td> <td style="text-align: right">~$67.500/tháng</td> <td style="text-align: right">~$3.150/tháng</td> <td style="text-align: right">~$11.520/tháng</td> <td style="text-align: left">Self-host thắng rõ ràng</td> </tr> </tbody> </table> <p><strong>Break-even thay đổi tùy bạn so với ai:</strong></p> <ul> <li>Vs Claude Opus ($5/$25M): ~2–5M token/ngày</li> <li>Vs Claude Sonnet ($3/$15M): ~10–20M token/ngày</li> <li>Vs DS V4 Flash ($0.14/$0.28M): ~500M+ token/ngày — gần như bất khả thi trên 1 cluster</li> </ul> <blockquote class="block-tip"> <h5 id="tip">TIP</h5> <p>Khi so với API budget (DS V4 Flash, GPT-4.1 Nano), break-even gần như không đạt được. Self-host chỉ có lợi khi so với API frontier đắt tiền và lưu lượng đủ lớn.</p> </blockquote> <h3 id="chi-phí-ẩn-mà-không-ai-nói-trước">Chi phí ẩn mà không ai nói trước</h3> <table> <thead> <tr> <th style="text-align: left">Hạng mục</th> <th style="text-align: left">Chi phí thực tế</th> <th style="text-align: left">Giải thích</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">GPU idle</td> <td style="text-align: left">GPU ở 10% load → cost per-token tăng <strong>10×</strong></td> <td style="text-align: left">Bạn trả tiền GPU 24/7 nhưng traffic chỉ 8h/ngày</td> </tr> <tr> <td style="text-align: left">Setup</td> <td style="text-align: left">2–4 tuần senior ML engineer</td> <td style="text-align: left">vLLM, monitoring, load balancing, CI/CD</td> </tr> <tr> <td style="text-align: left">Bảo trì</td> <td style="text-align: left">8–20 giờ/tháng engineering time</td> <td style="text-align: left">Model upgrade, incident response, tuning</td> </tr> <tr> <td style="text-align: left">Điện + cooling</td> <td style="text-align: left">$500–4.000/tháng</td> <td style="text-align: left">Cho cụm 4–8× H100 chạy 24/7</td> </tr> </tbody> </table> <blockquote class="block-danger"> <h5 id="danger">DANGER</h5> <p>Một case study đáng chú ý: một công ty đã tự host model trên 4× A10G GPU, tốn \$5.175/tháng. API tương đương chỉ \$1.870/tháng. Họ trả <strong>2.8× nhiều hơn</strong> cho “giải pháp tiết kiệm”.</p> </blockquote> <h2 id="khi-nào-thực-sự-nên-self-host">Khi nào thực sự nên self-host</h2> <p>95% trường hợp nên dùng API. Con số này không phải hedging — nó đến từ phân tích 500+ AI deployment thực tế.</p> <p><strong>5 trường hợp nên self-host:</strong></p> <h3 id="lưu-lượng-cực-lớn-50m-tokenngày-tải-ổn-định">Lưu lượng cực lớn (&gt;50M token/ngày, tải ổn định)</h3> <p>Ở 100M token/ngày, self-host 70B trên cluster rẻ hơn Claude Sonnet khoảng \$2.000/tháng. Ở 500M token/ngày, tiết kiệm \$50K+/tháng. Nhưng phải đảm bảo GPU utilization &gt;70%.</p> <h3 id="data-residency-bắt-buộc">Data residency bắt buộc</h3> <p>HIPAA (y tế Mỹ), SOC 2 (tài chính), air-gapped (quốc phòng) — dữ liệu không được rời infra. Không có lựa chọn khác ngoài self-host. Với doanh nghiệp Việt Nam: Nghị định 13/2023 về bảo vệ dữ liệu cá nhân có thể yêu cầu xử lý dữ liệu người Việt tại Việt Nam, tùy loại dữ liệu.</p> <h3 id="fine-tuned-model-trên-dữ-liệu-nội-bộ">Fine-tuned model trên dữ liệu nội bộ</h3> <p>Bạn sở hữu weights đã train trên data riêng. Không thể deploy lên API người khác (trừ OpenAI/Mistral fine-tuning API, nhưng giá cao hơn).</p> <h3 id="bulk-tasks-đều-đặn-phân-loại-embedding-extraction">Bulk tasks đều đặn (phân loại, embedding, extraction)</h3> <p>Workload đều, complexity thấp, GPU luôn &gt;70% utilization. Model nhỏ (Phi-4, GLM-4.7 Flash) trên 1× RTX 4090 là đủ.</p> <h3 id="modelversion-cụ-thể-không-có-sẵn-trên-api">Model/version cụ thể không có sẵn trên API</h3> <p>Frozen version cho legacy pipeline, model hiếm trên Hugging Face, hoặc cần kiểm soát inference pipeline hoàn toàn.</p> <p><strong>Nếu không rơi vào 5 trường hợp trên: dùng API.</strong></p> <h2 id="inference-engine">Inference engine</h2> <p>Model tốt chạy trên framework sai vẫn chậm. Đây là so sánh thực tế:</p> <table> <thead> <tr> <th style="text-align: left">Engine</th> <th style="text-align: left">Throughput (70B, 2×A100)</th> <th style="text-align: left">Concurrent</th> <th style="text-align: left">Production</th> <th style="text-align: left">Đặc điểm</th> </tr> </thead> <tbody> <tr> <td style="text-align: left"><strong>vLLM</strong></td> <td style="text-align: left">40–60 t/s/req, 20+ user</td> <td style="text-align: left">100+ req/min</td> <td style="text-align: left"><span class="bdg bdg-prod">PROD</span></td> <td style="text-align: left">PagedAttention tăng utilization từ 24% → 98.5%</td> </tr> <tr> <td style="text-align: left"><strong>SGLang</strong></td> <td style="text-align: left">35–55 t/s/req</td> <td style="text-align: left">50+ req/min</td> <td style="text-align: left"><span class="bdg bdg-prod">PROD</span></td> <td style="text-align: left">RadixAttention, Expert Parallelism cho MoE</td> </tr> <tr> <td style="text-align: left"><strong>TGI</strong></td> <td style="text-align: left">30–50 t/s/req</td> <td style="text-align: left">50+ req/min</td> <td style="text-align: left"><span class="bdg bdg-prod">PROD</span></td> <td style="text-align: left">Docker-native, Hugging Face ecosystem</td> </tr> <tr> <td style="text-align: left"><strong>llama.cpp</strong></td> <td style="text-align: left">15–40 t/s (single GPU)</td> <td style="text-align: left">1–5 req</td> <td style="text-align: left"><span class="bdg bdg-dev">DEV</span></td> <td style="text-align: left">CPU+GPU offload, GGUF format</td> </tr> <tr> <td style="text-align: left"><strong>Ollama</strong></td> <td style="text-align: left">10–35 t/s</td> <td style="text-align: left">1–3 req</td> <td style="text-align: left"><span class="bdg bdg-no">NO</span></td> <td style="text-align: left">1 lệnh install, tốt cho prototype</td> </tr> </tbody> </table> <p><strong>Quy tắc đơn giản:</strong></p> <ul> <li>Production, nhiều user → <strong>vLLM</strong></li> <li>MoE model lớn, structured output → <strong>SGLang</strong></li> <li>Dev/prototype, Mac, edge → <strong>llama.cpp / Ollama</strong></li> <li>Đừng dùng Ollama cho production</li> </ul> <h3 id="về-parallelism-cho-model-moe-trên-multi-gpu">Về parallelism cho model MoE trên multi-GPU</h3> <p>Khi chạy MoE trên cluster, cần kết hợp:</p> <ul> <li><strong>Tensor Parallelism (TP):</strong> chia layer ngang trên GPU — dùng cho mọi model multi-GPU</li> <li><strong>Expert Parallelism (EP):</strong> phân bổ expert lên GPU khác nhau — chỉ cho MoE</li> <li><strong>Pipeline Parallelism (PP):</strong> chia theo stages — cho cluster rất lớn</li> </ul> <p>Ví dụ: Kimi K2.6 (384 expert) trên 8× H100: mỗi GPU chứa 48 expert, TP=8. Nếu thiếu EP, tất cả GPU đều load toàn bộ expert → lãng phí VRAM.</p> <h2 id="stack-production">Stack production</h2> <p>Chạy được model mới chỉ là Layer 1 trên 4:</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+┌─────────────────────────────────────────┐
+│  L4: GIAO DIỆN                          │
+│  Chat UI, Slack bot, API gateway        │
+├─────────────────────────────────────────┤
+│  L3: RAG &amp; KNOWLEDGE                    │
+│  Vector DB + Hybrid Search + Connectors │
+│  (Google Drive, Slack, Jira, Confluence)│
+├─────────────────────────────────────────┤
+│  L2: BẢO MẬT &amp; PHÂN QUYỀN               │
+│  SSO + RBAC + Document-level ACL        │
+│  PII masking + Audit log                │
+├─────────────────────────────────────────┤
+│  L1: INFERENCE ENGINE                   │
+│  vLLM/SGLang + Load Balancer            │
+│  + GPU Cluster + Monitoring             │
+└─────────────────────────────────────────┘
 
-diff --git a/scripts/hulk.js b/scripts/hulk.js
-index 5a793c18..a4b1a4d5 100755
---- a/scripts/hulk.js
-+++ b/scripts/hulk.js
-@@ -173,11 +173,11 @@ function namespace(name) {
- // write a template foreach file that matches template extension
- templates = extractFiles(options.argv.remain)
-   .map(function(file) {
--    var openedFile = fs.readFileSync(file, 'utf-8');
-+    var openedFile = fs.readFileSync(file, 'utf-8').trim();
-     var name;
-     if (!openedFile) return;
-     name = namespace(path.basename(file).replace(/\..*$/, ''));
--    openedFile = removeByteOrderMark(openedFile.trim());
-+    openedFile = removeByteOrderMark(openedFile);
-     openedFile = wrap(file, name, openedFile);
-     if (!options.outputdir) return openedFile;
-     fs.writeFileSync(path.join(options.outputdir, name + '.js')
-diff --git a/src/diff2html.js b/src/diff2html.js
-index 21b0119e..64e138f5 100644
---- a/src/diff2html.js
-+++ b/src/diff2html.js
-@@ -7,7 +7,6 @@
-
- (function() {
-   var diffParser = require('./diff-parser.js').DiffParser;
--  var fileLister = require('./file-list-printer.js').FileListPrinter;
-   var htmlPrinter = require('./html-printer.js').HtmlPrinter;
-
-   function Diff2Html() {
-@@ -43,7 +42,7 @@
-
-     var fileList = '';
-     if (configOrEmpty.showFiles === true) {
--      fileList = fileLister.generateFileList(diffJson, configOrEmpty);
-+      fileList = htmlPrinter.generateFileListSummary(diffJson, configOrEmpty);
-     }
-
-     var diffOutput = '';
-diff --git a/src/file-list-printer.js b/src/file-list-printer.js
-index e408d9b2..1e0a2c61 100644
---- a/src/file-list-printer.js
-+++ b/src/file-list-printer.js
-@@ -8,11 +8,16 @@
- (function() {
-   var printerUtils = require('./printer-utils.js').PrinterUtils;
-
--  var hoganUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+  var hoganUtils;
-+
-   var baseTemplatesPath = 'file-summary';
-   var iconsBaseTemplatesPath = 'icon';
-
--  function FileListPrinter() {
-+  function FileListPrinter(config) {
-+    this.config = config;
-+
-+    var HoganJsUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+    hoganUtils = new HoganJsUtils(config);
-   }
-
-   FileListPrinter.prototype.generateFileList = function(diffFiles) {
-@@ -38,5 +43,5 @@
-     });
-   };
-
--  module.exports.FileListPrinter = new FileListPrinter();
-+  module.exports.FileListPrinter = FileListPrinter;
- })();
-diff --git a/src/hoganjs-utils.js b/src/hoganjs-utils.js
-index 9949e5fa..0dda08d7 100644
---- a/src/hoganjs-utils.js
-+++ b/src/hoganjs-utils.js
-@@ -8,18 +8,19 @@
- (function() {
-   var fs = require('fs');
-   var path = require('path');
--
-   var hogan = require('hogan.js');
-
-   var hoganTemplates = require('./templates/diff2html-templates.js');
-
--  var templatesPath = path.resolve(__dirname, 'templates');
-+  var extraTemplates;
-
--  function HoganJsUtils() {
-+  function HoganJsUtils(configuration) {
-+    this.config = configuration || {};
-+    extraTemplates = this.config.templates || {};
-   }
-
--  HoganJsUtils.prototype.render = function(namespace, view, params, configuration) {
--    var template = this.template(namespace, view, configuration);
-+  HoganJsUtils.prototype.render = function(namespace, view, params) {
-+    var template = this.template(namespace, view);
-     if (template) {
-       return template.render(params);
-     }
-@@ -27,17 +28,16 @@
-     return null;
-   };
-
--  HoganJsUtils.prototype.template = function(namespace, view, configuration) {
--    var config = configuration || {};
-+  HoganJsUtils.prototype.template = function(namespace, view) {
-     var templateKey = this._templateKey(namespace, view);
-
--    return this._getTemplate(templateKey, config);
-+    return this._getTemplate(templateKey);
-   };
-
--  HoganJsUtils.prototype._getTemplate = function(templateKey, config) {
-+  HoganJsUtils.prototype._getTemplate = function(templateKey) {
-     var template;
-
--    if (!config.noCache) {
-+    if (!this.config.noCache) {
-       template = this._readFromCache(templateKey);
-     }
-
-@@ -53,6 +53,7 @@
-
-     try {
-       if (fs.readFileSync) {
-+        var templatesPath = path.resolve(__dirname, 'templates');
-         var templatePath = path.join(templatesPath, templateKey);
-         var templateContent = fs.readFileSync(templatePath + '.mustache', 'utf8');
-         template = hogan.compile(templateContent);
-@@ -66,12 +67,16 @@
-   };
-
-   HoganJsUtils.prototype._readFromCache = function(templateKey) {
--    return hoganTemplates[templateKey];
-+    return extraTemplates[templateKey] || hoganTemplates[templateKey];
-   };
-
-   HoganJsUtils.prototype._templateKey = function(namespace, view) {
-     return namespace + '-' + view;
-   };
-
--  module.exports.HoganJsUtils = new HoganJsUtils();
-+  HoganJsUtils.prototype.compile = function(templateStr) {
-+    return hogan.compile(templateStr);
-+  };
-+
-+  module.exports.HoganJsUtils = HoganJsUtils;
- })();
-diff --git a/src/html-printer.js b/src/html-printer.js
-index 585d5b66..13f83047 100644
---- a/src/html-printer.js
-+++ b/src/html-printer.js
-@@ -8,6 +8,7 @@
- (function() {
-   var LineByLinePrinter = require('./line-by-line-printer.js').LineByLinePrinter;
-   var SideBySidePrinter = require('./side-by-side-printer.js').SideBySidePrinter;
-+  var FileListPrinter = require('./file-list-printer.js').FileListPrinter;
-
-   function HtmlPrinter() {
-   }
-@@ -22,5 +23,10 @@
-     return sideBySidePrinter.generateSideBySideJsonHtml(diffFiles);
-   };
-
-+  HtmlPrinter.prototype.generateFileListSummary = function(diffJson, config) {
-+    var fileListPrinter = new FileListPrinter(config);
-+    return fileListPrinter.generateFileList(diffJson);
-+  };
-+
-   module.exports.HtmlPrinter = new HtmlPrinter();
- })();
-diff --git a/src/line-by-line-printer.js b/src/line-by-line-printer.js
-index b07eb53c..d230bedd 100644
---- a/src/line-by-line-printer.js
-+++ b/src/line-by-line-printer.js
-@@ -11,7 +11,8 @@
-   var utils = require('./utils.js').Utils;
-   var Rematch = require('./rematch.js').Rematch;
-
--  var hoganUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+  var hoganUtils;
-+
-   var genericTemplatesPath = 'generic';
-   var baseTemplatesPath = 'line-by-line';
-   var iconsBaseTemplatesPath = 'icon';
-@@ -19,6 +20,9 @@
-
-   function LineByLinePrinter(config) {
-     this.config = config;
-+
-+    var HoganJsUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+    hoganUtils = new HoganJsUtils(config);
-   }
-
-   LineByLinePrinter.prototype.makeFileDiffHtml = function(file, diffs) {
-diff --git a/src/side-by-side-printer.js b/src/side-by-side-printer.js
-index bbf1dc8d..5e3033b3 100644
---- a/src/side-by-side-printer.js
-+++ b/src/side-by-side-printer.js
-@@ -11,7 +11,8 @@
-   var utils = require('./utils.js').Utils;
-   var Rematch = require('./rematch.js').Rematch;
-
--  var hoganUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+  var hoganUtils;
-+
-   var genericTemplatesPath = 'generic';
-   var baseTemplatesPath = 'side-by-side';
-   var iconsBaseTemplatesPath = 'icon';
-@@ -26,6 +27,9 @@
-
-   function SideBySidePrinter(config) {
-     this.config = config;
-+
-+    var HoganJsUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+    hoganUtils = new HoganJsUtils(config);
-   }
-
-   SideBySidePrinter.prototype.makeDiffHtml = function(file, diffs) {
-diff --git a/test/file-list-printer-tests.js b/test/file-list-printer-tests.js
-index a502a46f..60ea3208 100644
---- a/test/file-list-printer-tests.js
-+++ b/test/file-list-printer-tests.js
-@@ -1,6 +1,6 @@
- var assert = require('assert');
-
--var fileListPrinter = require('../src/file-list-printer.js').FileListPrinter;
-+var fileListPrinter = new (require('../src/file-list-printer.js').FileListPrinter)();
-
- describe('FileListPrinter', function() {
-   describe('generateFileList', function() {
-diff --git a/test/hogan-cache-tests.js b/test/hogan-cache-tests.js
-index 190bf6f8..3bb754ac 100644
---- a/test/hogan-cache-tests.js
-+++ b/test/hogan-cache-tests.js
-@@ -1,6 +1,6 @@
- var assert = require('assert');
-
--var HoganJsUtils = require('../src/hoganjs-utils.js').HoganJsUtils;
-+var HoganJsUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)();
- var diffParser = require('../src/diff-parser.js').DiffParser;
-
- describe('HoganJsUtils', function() {
-@@ -21,16 +21,28 @@ describe('HoganJsUtils', function() {
-       });
-       assert.equal(emptyDiffHtml, result);
-     });
-+
-     it('should render view without cache', function() {
-       var result = HoganJsUtils.render('generic', 'empty-diff', {
-         contentClass: 'd2h-code-line',
-         diffParser: diffParser
-       }, {noCache: true});
--      assert.equal(emptyDiffHtml + '\n', result);
-+      assert.equal(emptyDiffHtml, result);
-     });
-+
-     it('should return null if template is missing', function() {
--      var result = HoganJsUtils.render('generic', 'missing-template', {}, {noCache: true});
-+      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)({noCache: true});
-+      var result = hoganUtils.render('generic', 'missing-template', {});
-       assert.equal(null, result);
-     });
-+
-+    it('should allow templates to be overridden', function() {
-+      var emptyDiffTemplate = HoganJsUtils.compile('&lt;p&gt;&lt;/p&gt;');
-+
-+      var config = {templates: {'generic-empty-diff': emptyDiffTemplate}};
-+      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)(config);
-+      var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
-+      assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
-+    });
-   });
- });
-diff --git a/test/line-by-line-tests.js b/test/line-by-line-tests.js
-index 1cd92073..8869b3df 100644
---- a/test/line-by-line-tests.js
-+++ b/test/line-by-line-tests.js
-@@ -14,7 +14,7 @@ describe('LineByLinePrinter', function() {
-         '            File without changes\n' +
-         '        &lt;/div&gt;\n' +
-         '    &lt;/td&gt;\n' +
--        '&lt;/tr&gt;\n';
-+        '&lt;/tr&gt;';
-
-       assert.equal(expected, fileHtml);
-     });
-@@ -422,7 +422,6 @@ describe('LineByLinePrinter', function() {
-         '        &lt;/div&gt;\n' +
-         '    &lt;/td&gt;\n' +
-         '&lt;/tr&gt;\n' +
--        '\n' +
-         '                &lt;/tbody&gt;\n' +
-         '            &lt;/table&gt;\n' +
-         '        &lt;/div&gt;\n' +
-diff --git a/test/side-by-side-printer-tests.js b/test/side-by-side-printer-tests.js
-index 76625f8e..771daaa5 100644
---- a/test/side-by-side-printer-tests.js
-+++ b/test/side-by-side-printer-tests.js
-@@ -14,7 +14,7 @@ describe('SideBySidePrinter', function() {
-         '            File without changes\n' +
-         '        &lt;/div&gt;\n' +
-         '    &lt;/td&gt;\n' +
--        '&lt;/tr&gt;\n';
-+        '&lt;/tr&gt;';
-
-       assert.equal(expectedRight, fileHtml.right);
-       assert.equal(expectedLeft, fileHtml.left);
-@@ -324,7 +324,6 @@ describe('SideBySidePrinter', function() {
-         '        &lt;/div&gt;\n' +
-         '    &lt;/td&gt;\n' +
-         '&lt;/tr&gt;\n' +
--        '\n' +
-         '                    &lt;/tbody&gt;\n' +
-         '                &lt;/table&gt;\n' +
-         '            &lt;/div&gt;\n' +
-
-From f3cadb96677d0eb82fc2752dc3ffbf35ca9b5bdb Mon Sep 17 00:00:00 2001
-From: Rodrigo Fernandes &lt;rtfrodrigo@gmail.com&gt;
-Date: Sat, 15 Oct 2016 13:21:22 +0100
-Subject: [PATCH 2/2] Allow uncompiled templates
-
----
- README.md                 |  3 +++
- src/hoganjs-utils.js      |  7 +++++++
- test/hogan-cache-tests.js | 24 +++++++++++++++++++++++-
- 3 files changed, 33 insertions(+), 1 deletion(-)
-
-diff --git a/README.md b/README.md
-index 132c8a28..46909f25 100644
---- a/README.md
-+++ b/README.md
-@@ -98,6 +98,9 @@ The HTML output accepts a Javascript object with configuration. Possible options
-   - `synchronisedScroll`: scroll both panes in side-by-side mode: `true` or `false`, default is `false`
-   - `matchWordsThreshold`: similarity threshold for word matching, default is 0.25
-   - `matchingMaxComparisons`: perform at most this much comparisons for line matching a block of changes, default is `2500`
-+  - `templates`: object with previously compiled templates to replace parts of the html
-+  - `rawTemplates`: object with raw not compiled templates to replace parts of the html
-+  &gt; For more information regarding the possible templates look into [src/templates](https://github.com/rtfpessoa/diff2html/tree/master/src/templates)
-
- ## Diff2HtmlUI Helper
-
-diff --git a/src/hoganjs-utils.js b/src/hoganjs-utils.js
-index 0dda08d7..b2e9c275 100644
---- a/src/hoganjs-utils.js
-+++ b/src/hoganjs-utils.js
-@@ -17,6 +17,13 @@
-   function HoganJsUtils(configuration) {
-     this.config = configuration || {};
-     extraTemplates = this.config.templates || {};
-+
-+    var rawTemplates = this.config.rawTemplates || {};
-+    for (var templateName in rawTemplates) {
-+      if (rawTemplates.hasOwnProperty(templateName)) {
-+        if (!extraTemplates[templateName]) extraTemplates[templateName] = this.compile(rawTemplates[templateName]);
-+      }
-+    }
-   }
-
-   HoganJsUtils.prototype.render = function(namespace, view, params) {
-diff --git a/test/hogan-cache-tests.js b/test/hogan-cache-tests.js
-index 3bb754ac..a34839c0 100644
---- a/test/hogan-cache-tests.js
-+++ b/test/hogan-cache-tests.js
-@@ -36,7 +36,7 @@ describe('HoganJsUtils', function() {
-       assert.equal(null, result);
-     });
-
--    it('should allow templates to be overridden', function() {
-+    it('should allow templates to be overridden with compiled templates', function() {
-       var emptyDiffTemplate = HoganJsUtils.compile('&lt;p&gt;&lt;/p&gt;');
-
-       var config = {templates: {'generic-empty-diff': emptyDiffTemplate}};
-@@ -44,5 +44,27 @@ describe('HoganJsUtils', function() {
-       var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
-       assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
-     });
-+
-+    it('should allow templates to be overridden with uncompiled templates', function() {
-+      var emptyDiffTemplate = '&lt;p&gt;&lt;/p&gt;';
-+
-+      var config = {rawTemplates: {'generic-empty-diff': emptyDiffTemplate}};
-+      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)(config);
-+      var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
-+      assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
-+    });
-+
-+    it('should allow templates to be overridden giving priority to compiled templates', function() {
-+      var emptyDiffTemplate = HoganJsUtils.compile('&lt;p&gt;&lt;/p&gt;');
-+      var emptyDiffTemplateUncompiled = '&lt;p&gt;Not used!&lt;/p&gt;';
-+
-+      var config = {
-+        templates: {'generic-empty-diff': emptyDiffTemplate},
-+        rawTemplates: {'generic-empty-diff': emptyDiffTemplateUncompiled}
-+      };
-+      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)(config);
-+      var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
-+      assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
-+    });
-   });
- });
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is how you can display code diffs]]></summary></entry><entry><title type="html">a post with advanced image components</title><link href="https://hphucngh.github.io/synthesis/2024/advanced-images/" rel="alternate" type="text/html" title="a post with advanced image components"/><published>2024-01-27T11:46:00+00:00</published><updated>2024-01-27T11:46:00+00:00</updated><id>https://hphucngh.github.io/synthesis/2024/advanced-images</id><content type="html" xml:base="https://hphucngh.github.io/synthesis/2024/advanced-images/"><![CDATA[<p>This is an example post with advanced image components.</p> <h2 id="image-slider">Image Slider</h2> <p>This is a simple image slider. It uses the <a href="https://swiperjs.com/">Swiper</a> library. Check the <a href="https://swiperjs.com/demos">examples page</a> for more information of what you can achieve with it.</p> <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true"> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/9-480.webp 480w,/assets/img/9-800.webp 800w,/assets/img/9-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/9.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/7-480.webp 480w,/assets/img/7-800.webp 800w,/assets/img/7-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/7.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/8-480.webp 480w,/assets/img/8-800.webp 800w,/assets/img/8-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/8.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/10-480.webp 480w,/assets/img/10-800.webp 800w,/assets/img/10-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/10.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/12-480.webp 480w,/assets/img/12-800.webp 800w,/assets/img/12-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/12.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </swiper-slide> </swiper-container> <h2 id="image-comparison-slider">Image Comparison Slider</h2> <p>This is a simple image comparison slider. It uses the <a href="https://img-comparison-slider.sneas.io/">img-comparison-slider</a> library. Check the <a href="https://img-comparison-slider.sneas.io/examples.html">examples page</a> for more information of what you can achieve with it.</p> <img-comparison-slider> <figure slot="first"> <picture> <source class="responsive-img-srcset" srcset="/assets/img/prof_pic-480.webp 480w,/assets/img/prof_pic-800.webp 800w,/assets/img/prof_pic-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/prof_pic.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="lazy" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> <figure slot="second"> <picture> <source class="responsive-img-srcset" srcset="/assets/img/prof_pic_color-480.webp 480w,/assets/img/prof_pic_color-800.webp 800w,/assets/img/prof_pic_color-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/prof_pic_color.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="lazy" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </img-comparison-slider>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="images"/><summary type="html"><![CDATA[this is what advanced image components could look like]]></summary></entry><entry><title type="html">a post with vega lite</title><link href="https://hphucngh.github.io/synthesis/2024/vega-lite/" rel="alternate" type="text/html" title="a post with vega lite"/><published>2024-01-27T00:20:00+00:00</published><updated>2024-04-14T04:30:00+00:00</updated><id>https://hphucngh.github.io/synthesis/2024/vega-lite</id><content type="html" xml:base="https://hphucngh.github.io/synthesis/2024/vega-lite/"><![CDATA[<p>This is an example post with some <a href="https://vega.github.io/vega-lite/">vega lite</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">vega_lite
-</span><span class="sb">{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "A dot plot showing each movie in the database, and the difference from the average movie rating. The display is sorted by year to visualize everything in sequential order. The graph is for all Movies before 2019.",
-  "data": {
-    "url": "https://raw.githubusercontent.com/vega/vega/main/docs/data/movies.json"
-  },
-  "transform": [
-    {"filter": "datum['IMDB Rating'] != null"},
-    {"filter": {"timeUnit": "year", "field": "Release Date", "range": [null, 2019]}},
-    {
-      "joinaggregate": [{
-        "op": "mean",
-        "field": "IMDB Rating",
-        "as": "AverageRating"
-      }]
-    },
-    {
-      "calculate": "datum['IMDB Rating'] - datum.AverageRating",
-      "as": "RatingDelta"
-    }
-  ],
-  "mark": "point",
-  "encoding": {
-    "x": {
-      "field": "Release Date",
-      "type": "temporal"
-    },
-    "y": {
-      "field": "RatingDelta",
-      "type": "quantitative",
-      "title": "Rating Delta"
-    },
-    "color": {
-      "field": "RatingDelta",
-      "type": "quantitative",
-      "scale": {"domainMid": 0},
-      "title": "Rating Delta"
-    }
-  }
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-vega_lite">{
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "A dot plot showing each movie in the database, and the difference from the average movie rating. The display is sorted by year to visualize everything in sequential order. The graph is for all Movies before 2019.",
-  "data": {
-    "url": "https://raw.githubusercontent.com/vega/vega/main/docs/data/movies.json"
-  },
-  "transform": [
-    {"filter": "datum['IMDB Rating'] != null"},
-    {"filter": {"timeUnit": "year", "field": "Release Date", "range": [null, 2019]}},
-    {
-      "joinaggregate": [{
-        "op": "mean",
-        "field": "IMDB Rating",
-        "as": "AverageRating"
-      }]
-    },
-    {
-      "calculate": "datum['IMDB Rating'] - datum.AverageRating",
-      "as": "RatingDelta"
-    }
-  ],
-  "mark": "point",
-  "encoding": {
-    "x": {
-      "field": "Release Date",
-      "type": "temporal"
-    },
-    "y": {
-      "field": "RatingDelta",
-      "type": "quantitative",
-      "title": "Rating Delta"
-    },
-    "color": {
-      "field": "RatingDelta",
-      "type": "quantitative",
-      "scale": {"domainMid": 0},
-      "title": "Rating Delta"
-    }
-  }
-}
-</code></pre> <p>This plot supports both light and dark themes.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included vega lite code could look like]]></summary></entry><entry><title type="html">a post with geojson</title><link href="https://hphucngh.github.io/synthesis/2024/geojson-map/" rel="alternate" type="text/html" title="a post with geojson"/><published>2024-01-26T17:57:00+00:00</published><updated>2024-01-26T17:57:00+00:00</updated><id>https://hphucngh.github.io/synthesis/2024/geojson-map</id><content type="html" xml:base="https://hphucngh.github.io/synthesis/2024/geojson-map/"><![CDATA[<p>This is an example post with some <a href="https://geojson.org/">geojson</a> code. The support is provided thanks to <a href="https://leafletjs.com/">Leaflet</a>. To create your own visualization, go to <a href="https://geojson.io/">geojson.io</a>.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">geojson
-</span><span class="sb">{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          [
-            [
-              -60.11363029935569,
-              -2.904625022183211
-            ],
-            [
-              -60.11363029935569,
-              -3.162613728707967
-            ],
-            [
-              -59.820894493858034,
-              -3.162613728707967
-            ],
-            [
-              -59.820894493858034,
-              -2.904625022183211
-            ],
-            [
-              -60.11363029935569,
-              -2.904625022183211
-            ]
-          ]
-        ],
-        "type": "Polygon"
-      }
-    }
-  ]
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-geojson">{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "coordinates": [
-          [
-            [
-              -60.11363029935569,
-              -2.904625022183211
-            ],
-            [
-              -60.11363029935569,
-              -3.162613728707967
-            ],
-            [
-              -59.820894493858034,
-              -3.162613728707967
-            ],
-            [
-              -59.820894493858034,
-              -2.904625022183211
-            ],
-            [
-              -60.11363029935569,
-              -2.904625022183211
-            ]
-          ]
-        ],
-        "type": "Polygon"
-      }
-    }
-  ]
-}
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><category term="maps"/><summary type="html"><![CDATA[this is what included geojson code could look like]]></summary></entry></feed>
+</code></pre></div></div> <blockquote class="block-warning"> <h5 id="warning-1">WARNING</h5> <p>Rủi ro lớn nhất của DIY stack: <strong>nhân viên dùng AI truy vấn tài liệu họ không có quyền xem.</strong> Nếu không có ACL kế thừa từ hệ thống gốc (Drive, Jira), đây là lỗ hổng compliance nghiêm trọng.</p> </blockquote> <h2 id="benchmark">Benchmark</h2> <p>Một vài con số đáng chú ý:</p> <table> <thead> <tr> <th style="text-align: left">Model</th> <th style="text-align: right">SWE-bench Verified</th> <th style="text-align: right">LiveCodeBench</th> <th style="text-align: right">GPQA Diamond</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">DS V4 Pro Max</td> <td style="text-align: right"><strong>80.6%</strong></td> <td style="text-align: right"><strong>93.5</strong></td> <td style="text-align: right">—</td> </tr> <tr> <td style="text-align: left">Kimi K2.6</td> <td style="text-align: right">80.2%</td> <td style="text-align: right">89.6</td> <td style="text-align: right">90.5%</td> </tr> <tr> <td style="text-align: left">GLM-5.1</td> <td style="text-align: right">— (SWE-Pro: <strong>58.4%</strong>)</td> <td style="text-align: right">—</td> <td style="text-align: right">—</td> </tr> <tr> <td style="text-align: left">Qwen 3.5</td> <td style="text-align: right">—</td> <td style="text-align: right">—</td> <td style="text-align: right"><strong>88.4%</strong></td> </tr> <tr> <td style="text-align: left">Claude Opus 4.6*</td> <td style="text-align: right">80.8%</td> <td style="text-align: right">88.8</td> <td style="text-align: right">—</td> </tr> <tr> <td style="text-align: left">GPT-5.4*</td> <td style="text-align: right">— (SWE-Pro: 57.7%)</td> <td style="text-align: right">—</td> <td style="text-align: right">92.8%</td> </tr> </tbody> </table> <p><em>* Model đóng, đưa vào để so sánh tham chiếu.</em></p> <p><strong>Cảnh báo quan trọng:</strong> Benchmark phụ thuộc rất nhiều vào harness. GPT-5.4 đạt 65.4% trên Terminal-Bench 2.0 với Terminus-2 harness, nhưng 75.1% với Codex CLI. Cùng model, khác harness, khác 10% tuyệt đối.</p> <blockquote class="block-tip"> <h5 id="tip-1">TIP</h5> <p>Luôn test trên workload thật. Không có model “tốt nhất chung chung” — chỉ có “tốt nhất cho task của bạn trên dữ liệu của bạn”.</p> </blockquote> <h2 id="giá-api-052026">Giá API 05/2026</h2> <table> <thead> <tr> <th style="text-align: left">Model</th> <th style="text-align: right">Input ($/M)</th> <th style="text-align: right">Output ($/M)</th> <th style="text-align: left">So với Claude Opus</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">DS V4 Flash</td> <td style="text-align: right"><strong>$0.14</strong></td> <td style="text-align: right"><strong>$0.28</strong></td> <td style="text-align: left">Rẻ hơn ~70×</td> </tr> <tr> <td style="text-align: left">GLM-4.7 Flash</td> <td style="text-align: right">$0.07</td> <td style="text-align: right">$0.40</td> <td style="text-align: left">Rẻ hơn ~60× (có free tier)</td> </tr> <tr> <td style="text-align: left">Kimi K2.6</td> <td style="text-align: right">$0.60</td> <td style="text-align: right">$2.50</td> <td style="text-align: left">Rẻ hơn ~10×</td> </tr> <tr> <td style="text-align: left">GLM-5.1</td> <td style="text-align: right">$1.00</td> <td style="text-align: right">$3.20</td> <td style="text-align: left">Rẻ hơn ~7×</td> </tr> <tr> <td style="text-align: left">DS V4 Pro</td> <td style="text-align: right">$1.74</td> <td style="text-align: right">$3.48</td> <td style="text-align: left">Rẻ hơn ~6×</td> </tr> <tr> <td style="text-align: left">Claude Sonnet 4.6</td> <td style="text-align: right">$3.00</td> <td style="text-align: right">$15.00</td> <td style="text-align: left">Tham chiếu</td> </tr> <tr> <td style="text-align: left">Claude Opus 4.6</td> <td style="text-align: right">$5.00</td> <td style="text-align: right">$25.00</td> <td style="text-align: left">Tham chiếu</td> </tr> </tbody> </table> <p>Những gì tốn \$500/tháng năm ngoái, năm nay tốn $50. Đây là “cost collapse” — xu hướng không dừng lại.</p> <h2 id="khuyến-nghị-thực-tế">Khuyến nghị thực tế</h2> <h3 id="bắt-đầu">Bắt đầu</h3> <table> <thead> <tr> <th style="text-align: left">Bước</th> <th style="text-align: left">Hành động</th> <th style="text-align: right">Chi phí</th> <th style="text-align: right">Thời gian</th> </tr> </thead> <tbody> <tr> <td style="text-align: left"><strong>Bước 0</strong></td> <td style="text-align: left">Dùng GLM-4.7 Flash API (free tier) để prototype</td> <td style="text-align: right">$0</td> <td style="text-align: right">1 ngày</td> </tr> <tr> <td style="text-align: left"><strong>Bước 1</strong></td> <td style="text-align: left">Dùng DS V4 Flash API cho production v1</td> <td style="text-align: right">~$5–50/tháng</td> <td style="text-align: right">1 tuần</td> </tr> <tr> <td style="text-align: left"><strong>Bước 2</strong></td> <td style="text-align: left">Nếu cần data residency: 1× RTX 4090 + GLM-4.7 Flash + vLLM</td> <td style="text-align: right">~$1.600 + setup</td> <td style="text-align: right">2 tuần</td> </tr> <tr> <td style="text-align: left"><strong>Bước 3</strong></td> <td style="text-align: left">Khi volume &gt;10M token/ngày: đánh giá 4× H100 cluster</td> <td style="text-align: right">~$100K hoặc cloud</td> <td style="text-align: right">1 tháng</td> </tr> </tbody> </table> <h3 id="hybrid-là-phương-án-tối-ưu-nhất">Hybrid là phương án tối ưu nhất</h3> <p>Đa số hệ thống production thực sự trong 2026 dùng:</p> <ul> <li><strong>Self-host model rẻ</strong> (DS V4 Flash, GLM-4.7 Flash) cho bulk tasks: phân loại, embedding, extraction</li> <li><strong>API frontier</strong> (Claude Sonnet/Opus, GPT-5.4) cho task khó: reasoning phức tạp, customer-facing</li> </ul> <p>Một router đơn giản giữa hai tầng. Đó là architecture mà hầu hết team thực sự đang ship.</p> <h3 id="lưu-ý-về-địa-chính-trị">Lưu ý về địa chính trị</h3> <p>Hầu hết model frontier open-weight (Kimi, DeepSeek, GLM, Qwen, MiniMax) đều của Trung Quốc. Với khách hàng Mỹ/EU, đây có thể là vấn đề compliance. Với startup Việt Nam, thường là lợi thế: MIT/Apache license, giá rẻ, hỗ trợ tiếng Việt/Trung tốt. Meta (Llama) là lựa chọn Mỹ duy nhất có sức cạnh tranh, nhưng license có giới hạn.</p> <p><br/></p> <hr/> <p>Self-hosted LLM năm 2026 không còn là “liệu có khả thi?” — mà là “liệu có đáng cho use case cụ thể của bạn?”</p> <p>Ba câu hỏi trước khi quyết định:</p> <ol> <li><strong>Bạn xử lý bao nhiêu token/ngày?</strong> Dưới 10M → API. Trên 50M → cân nhắc self-host. Trên 100M → self-host rõ ràng rẻ hơn.</li> <li><strong>Dữ liệu có nhạy cảm đến mức phải air-gap?</strong> Có → self-host bắt buộc. Không → API an toàn hơn (ít gánh nặng vận hành).</li> <li><strong>Team có MLOps?</strong> Không → API. Có → tính ROI 12 tháng rồi quyết.</li> </ol> <p>Đừng self-host vì “nghe tưởng rẻ hơn”. Hãy self-host vì con số cho thấy nó rẻ hơn — sau khi đã tính đủ idle cost, engineering time và cơ hội bỏ lỡ.</p> <hr/> <h3 id="nguồn-tham-khảo">Nguồn tham khảo</h3> <ol> <li><a href="https://onyx.app/self-hosted-llm-leaderboard">Onyx AI — Self-Hosted LLM Leaderboard</a></li> <li><a href="https://benchlm.ai/blog/posts/best-chinese-llm">BenchLM — Best Chinese LLMs 2026</a></li> <li><a href="https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro">Hugging Face — DeepSeek V4 Pro Model Card</a></li> <li><a href="https://www.spheron.network/blog/gpu-memory-requirements-llm/">Spheron — GPU Memory Requirements for LLMs</a></li> <li><a href="https://dev.to/bytecalculators/the-math-behind-local-llms-how-to-calculate-exact-vram-requirements-before-you-crash-your-gpu-12n5">DEV.to — The Math Behind Local LLMs VRAM</a></li> <li><a href="https://www.braincuber.com/blog/self-hosted-llms-vs-api-based-llms-cost-performance-analysis">Braincuber — Self-Hosted vs API LLMs: Real Cost Breakdown 2026</a></li> <li><a href="https://www.sitepoint.com/self-hosted-llm-costs-2026/">SitePoint — Self-Hosted LLM Costs 2026</a></li> <li><a href="https://devtk.ai/en/blog/self-hosting-llm-vs-api-cost-2026/">DevTk.AI — Self-Host LLM vs API Cost 2026</a></li> <li><a href="https://tokenmix.ai/blog/self-host-llm-vs-api">TokenMix — Self-Host LLM vs API Break-Even</a></li> <li><a href="https://pecollective.com/blog/llm-api-pricing-comparison/">PE Collective — LLM API Pricing 2026</a></li> <li><a href="https://www.marktechpost.com/2026/04/20/moonshot-ai-releases-kimi-k2-6-with-long-horizon-coding-agent-swarm-scaling-to-300-sub-agents-and-4000-coordinated-steps/">MarkTechPost — Kimi K2.6 Release</a></li> <li><a href="https://www.aimadetools.com/blog/glm-5-1-vs-deepseek-vs-qwen-coding/">AIMadeTools — GLM-5.1 vs DeepSeek vs Qwen Coding</a></li> <li><a href="https://lmcache.ai/kv_cache_calculator.html">LMCache — KV Cache Size Calculator</a></li> <li><a href="https://localllm.in/blog/llamacpp-vram-requirements-for-local-llms">LocalLLM — llama.cpp VRAM Requirements Guide</a></li> <li><a href="https://renezander.com/guides/self-hosted-llm-vs-api/">Rene Zander — Self-Hosted LLM vs API Break-Even 2026</a></li> </ol> <hr/> <p><em>Cập nhật: 05/2026. Mọi con số có thể thay đổi nhanh — verify trước khi ra quyết định ngân sách.</em></p>]]></content><author><name></name></author><category term="AI"/><category term="infrastructure"/><category term="self-host"/><category term="production"/><summary type="html"><![CDATA[Tự triển khai LLM — khi nào nên làm, chọn model gì, cần bao nhiêu GPU và những con số mà không ai nói trước.]]></summary></entry></feed>
