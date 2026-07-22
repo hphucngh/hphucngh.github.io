@@ -262,6 +262,39 @@ pagination:
 
 /* ─── Empty ─────────────────────────────────────────────────────── */
 .blog-empty { color: var(--global-text-color-light); font-style: italic; padding: 2rem 0; }
+
+/* ─── Article numbering ─────────────────────────────────────────── */
+.blog-articles { counter-reset: article-num; }
+.article-entry { counter-increment: article-num; }
+.article-entry .a-meta::before {
+  content: counter(article-num, decimal-leading-zero) '\00a0\00b7\00a0';
+  color: var(--global-theme-color);
+  font-weight: 700;
+  opacity: 0.7;
+}
+
+/* ─── Blog page title bar ───────────────────────────────────────── */
+.blog-page-title {
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.13em !important;
+}
+.blog-page-title::before { content: '' !important; }
+
+/* ─── Articles label ────────────────────────────────────────────── */
+.articles-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.13em;
+}
+
+/* ─── Featured card border ──────────────────────────────────────── */
+.featured-card {
+  border-left-width: 2px !important;
+  border-top: 1px solid var(--global-theme-color) !important;
+  border-right: 1px solid var(--global-divider-color) !important;
+  border-bottom: 1px solid var(--global-divider-color) !important;
+}
 </style>
 
 <div class="blog-scene">

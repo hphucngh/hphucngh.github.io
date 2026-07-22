@@ -1,0 +1,183 @@
+<style>
+/* ─── Notes Sidebar ─────────────────────────────────────────────── */
+.notes-sidebar {
+  font-size: 0.82rem;
+  padding: 1rem 0;
+}
+.notes-sidebar-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--global-theme-color);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--global-divider-color);
+}
+
+/* Folder toggle */
+.notes-sidebar details {
+  margin-bottom: 0.25rem;
+}
+.notes-sidebar summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--global-text-color);
+  padding: 0.3rem 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  user-select: none;
+}
+.notes-sidebar summary::-webkit-details-marker { display: none; }
+.notes-sidebar summary::before {
+  content: '▸';
+  display: inline-block;
+  font-size: 0.7rem;
+  transition: transform 0.15s ease;
+  color: var(--global-theme-color);
+}
+.notes-sidebar details[open] > summary::before {
+  transform: rotate(90deg);
+}
+.notes-sidebar .folder-count {
+  font-size: 0.68rem;
+  color: var(--global-text-color-light);
+  font-weight: 400;
+}
+
+/* Note links */
+.notes-sidebar .sidebar-notes-list {
+  list-style: none;
+  padding: 0 0 0 1.1rem;
+  margin: 0;
+}
+.notes-sidebar .sidebar-notes-list li {
+  margin: 0;
+}
+.notes-sidebar .sidebar-notes-list a {
+  display: block;
+  padding: 0.2rem 0.4rem;
+  color: var(--global-text-color);
+  text-decoration: none;
+  font-size: 0.78rem;
+  border-left: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.notes-sidebar .sidebar-notes-list a:hover {
+  color: var(--global-theme-color);
+  border-left-color: var(--global-theme-color);
+  text-decoration: none;
+}
+.notes-sidebar .sidebar-notes-list a.active {
+  color: var(--global-theme-color);
+  font-weight: 700;
+  border-left-color: var(--global-theme-color);
+}
+
+/* Root-level notes */
+.notes-sidebar .sidebar-root-notes {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--global-divider-color);
+}
+</style>
+
+<nav class="notes-sidebar">
+  <div class="notes-sidebar-title">Topics</div>
+
+  {% comment %} ── Collect unique folder names (skip _notes/ prefix) ── {% endcomment %}
+  {% assign folder_names = "" %}
+  {% for note in site.notes %}
+    {% assign parts = note.relative_path | split: '/' %}
+    {% if parts.size > 2 %}
+      {% assign folder = parts[1] %}
+      {% unless folder == ".obsidian" %}
+        {% unless folder_names contains folder %}
+          {% if folder_names == "" %}
+            {% assign folder_names = folder %}
+          {% else %}
+            {% assign folder_names = folder_names | append: '|' | append: folder %}
+          {% endif %}
+        {% endunless %}
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+  {% assign folders = folder_names | split: '|' | sort %}
+
+  {% comment %} ── Render each folder ── {% endcomment %}
+  {% for folder in folders %}
+    <details data-folder="{{ folder }}">
+      <summary>
+        {{ folder }}
+        {% assign count = 0 %}
+        {% for note in site.notes %}
+          {% assign parts = note.relative_path | split: '/' %}
+          {% if parts.size > 2 and parts[1] == folder %}
+            {% assign count = count | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+        <span class="folder-count">({{ count }})</span>
+      </summary>
+      <ul class="sidebar-notes-list">
+        {% assign folder_notes = "" | split: "" %}
+        {% for note in site.notes %}
+          {% assign parts = note.relative_path | split: '/' %}
+          {% if parts.size > 2 and parts[1] == folder %}
+            {% assign folder_notes = folder_notes | push: note %}
+          {% endif %}
+        {% endfor %}
+        {% assign folder_notes_sorted = folder_notes | sort: "title" %}
+        {% for note in folder_notes_sorted %}
+          <li>
+            <a href="{{ note.url | relative_url }}"
+               {% if page.url == note.url %} class="active"{% endif %}>
+              {{ note.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </details>
+  {% endfor %}
+
+  {% comment %} ── Root-level notes (directly in _notes/, not in subfolder) ── {% endcomment %}
+  {% assign root_notes = "" | split: "" %}
+  {% for note in site.notes %}
+    {% assign parts = note.relative_path | split: '/' %}
+    {% if parts.size == 2 %}
+      {% assign root_notes = root_notes | push: note %}
+    {% endif %}
+  {% endfor %}
+  {% if root_notes.size > 0 %}
+    <div class="sidebar-root-notes">
+      <ul class="sidebar-notes-list">
+        {% assign root_notes_sorted = root_notes | sort: "title" %}
+        {% for note in root_notes_sorted %}
+          <li>
+            <a href="{{ note.url | relative_url }}"
+               {% if page.url == note.url %} class="active"{% endif %}>
+              {{ note.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</nav>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var currentPath = window.location.pathname.replace(/\/+$/, "");
+    var links = document.querySelectorAll(".notes-sidebar .sidebar-notes-list a");
+    links.forEach(function (link) {
+      var href = link.getAttribute("href").replace(/\/+$/, "");
+      if (href === currentPath) {
+        link.classList.add("active");
+        var details = link.closest("details");
+        if (details) details.setAttribute("open", "");
+      }
+    });
+  });
+</script>

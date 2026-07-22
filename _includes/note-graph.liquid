@@ -1,0 +1,19 @@
+<div
+  id="knowledge-graph"
+  style="position: relative; width: 100%; margin-bottom: 0.5rem"
+  data-graph-url="{{ '/assets/data/graph-data.json' | relative_url }}"
+></div>
+<div class="graph-legend" style="display: flex; flex-wrap: wrap; gap: 0.75rem; font-size: 0.72rem; color: var(--global-text-color-light); margin-bottom: 2rem;">
+  <span><span style="color: #e74c3c;">●</span> ml</span>
+  <span><span style="color: #2698BA;">●</span> engineering</span>
+  <span><span style="color: #27ae60;">●</span> thinking</span>
+  <span><span style="color: #f39c12;">●</span> personal</span>
+</div>
+<script
+  src="https://d3js.org/d3.v7.min.js"
+  defer
+></script>
+<script
+  src="{{ '/assets/js/knowledge-graph.js' | relative_url }}"
+  defer
+></script>

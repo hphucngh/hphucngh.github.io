@@ -1,0 +1,52 @@
+---
+layout: default
+---
+{% if page._styles %}
+  <!-- Page/Post style -->
+  <style type="text/css">
+    {{ page._styles }}
+  </style>
+{% endif %}
+
+<div class="post">
+  <div class="row">
+    <!-- Sidebar: hidden on mobile -->
+    <div class="col-sm-3 d-none d-sm-block">
+      <div class="sticky-top" style="top: 5rem;">
+        {% include notes-sidebar.liquid %}
+      </div>
+    </div>
+
+    <!-- Note content -->
+    <div class="col-sm-9">
+      <header class="post-header">
+        <div class="post-header-eyebrow">
+          <div class="post-header-pills">
+            {% if page.tags and page.tags.size > 0 %}
+              {% for tag in page.tags %}
+                <span class="post-pill">{{ tag }}</span>
+              {% endfor %}
+            {% endif %}
+          </div>
+          <time class="post-header-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y-%m-%d' }}</time>
+        </div>
+        <h1 class="post-title">{{ page.title }}</h1>
+        {% if page.description %}
+          <p class="post-subtitle">{{ page.description }}</p>
+        {% endif %}
+      </header>
+
+      <article class="post-content">
+        <div id="markdown-content">
+          {{ content }}
+        </div>
+      </article>
+
+      {% include backlinks.liquid %}
+
+      {% if site.giscus and page.giscus_comments %}
+        {% include giscus.liquid %}
+      {% endif %}
+    </div>
+  </div>
+</div>

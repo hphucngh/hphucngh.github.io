@@ -193,7 +193,9 @@ ul.task-list input[type="checkbox"] {
         width: 2rem;
         height: 2rem;
         margin-bottom: 0.25rem;
-        transition: opacity 0.2s ease-in-out, filter 0.2s ease-in-out;
+        transition:
+          opacity 0.2s ease-in-out,
+          filter 0.2s ease-in-out;
         filter: grayscale(20%);
         opacity: 0.75;
       }
@@ -277,4 +279,65 @@ ul.task-list input[type="checkbox"] {
 
 .d2h-diff-table {
   position: relative;
+}
+
+// Wikilinks
+a.wikilink {
+  color: var(--global-theme-color);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--global-theme-color);
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-bottom-style: solid;
+  }
+}
+
+.wikilink-broken {
+  color: var(--global-warning-color, #c9190b);
+  border-bottom: 1px dotted var(--global-warning-color, #c9190b);
+  cursor: help;
+}
+
+// Backlinks
+.backlinks-section {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--global-divider-color);
+}
+
+.backlinks-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--global-text-color-light);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.5rem;
+}
+
+.backlinks-icon {
+  margin-right: 0.3rem;
+  opacity: 0.6;
+}
+
+.backlinks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin-bottom: 0.3rem;
+  }
+
+  .backlink-item {
+    font-size: 0.85rem;
+    color: var(--global-theme-color);
+    text-decoration: none;
+    border-bottom: 1px dashed transparent;
+    transition: border-color 0.15s ease;
+
+    &:hover {
+      border-bottom-color: var(--global-theme-color);
+    }
+  }
 }

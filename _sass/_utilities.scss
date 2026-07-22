@@ -180,24 +180,57 @@ html.transition *:after {
 nav[data-toggle="toc"] {
   top: 5rem;
 
-  .nav .nav > li > a {
-    font-size: 0.75rem;
+  .nav > li {
+    margin-top: 0.6rem;
+
+    > a {
+      color: var(--global-text-color);
+      font-size: 0.70rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.25rem 0.6rem;
+      border-left: 2px solid transparent;
+
+      &:hover {
+        color: var(--global-hover-color);
+        border-left-color: var(--global-hover-color);
+        background: rgba(var(--global-theme-color-rgb, 0, 0, 0), 0.05);
+      }
+    }
   }
 
-  .nav > li > a {
-    color: var(--global-text-color);
-    font-size: 0.75rem;
+  .nav .nav > li {
+    margin-top: 0;
 
-    &:hover {
-      color: var(--global-hover-color);
-      border-left-color: var(--global-hover-color);
+    > a {
+      font-size: 0.65rem;
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: normal;
+      color: var(--global-text-color-light, #6c757d);
+      padding: 0.15rem 0.6rem 0.15rem 1rem;
+      border-left: 2px solid transparent;
+
+      &::before {
+        content: "·";
+        margin-right: 0.35rem;
+        color: var(--global-text-color-light, #6c757d);
+      }
+
+      &:hover {
+        color: var(--global-hover-color);
+        border-left-color: var(--global-hover-color);
+        background: rgba(var(--global-theme-color-rgb, 0, 0, 0), 0.05);
+      }
     }
   }
 
   .nav-link.active {
     color: var(--global-theme-color);
     border-left-color: var(--global-theme-color);
-    font-size: 0.75rem;
+    font-weight: 700;
+    background: rgba(var(--global-theme-color-rgb, 0, 0, 0), 0.06);
 
     &:hover {
       color: var(--global-hover-color);

@@ -15,48 +15,36 @@ layout: default
 
 <div class="post">
   <header class="post-header">
+    <div class="post-header-eyebrow">
+      <div class="post-header-pills">
+        {% if tags != '' %}
+          {% for tag in page.tags %}
+            {% if url_beginning == '/blog/' %}
+              <a class="post-pill" href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}">{{ tag }}</a>
+            {% else %}
+              <span class="post-pill">{{ tag }}</span>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        {% if categories != '' %}
+          {% for category in page.categories %}
+            {% if url_beginning == '/blog/' %}
+              <a class="post-pill" href="{{ category | slugify | prepend: '/blog/category/' | relative_url }}">{{ category }}</a>
+            {% else %}
+              <span class="post-pill">{{ category }}</span>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      </div>
+      <time class="post-header-date" datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y-%m-%d' }}</time>
+    </div>
     <h1 class="post-title">{{ page.title }}</h1>
-    <p class="post-meta">
-      Created on {{ page.date | date: '%B %d, %Y' }}
-      {% if page.author %}by {{ page.author }}{% endif %}
-      {% assign last_date = page.last_modified_at | default: page.last_updated %}
-      {% if last_date %}, last updated on {{ last_date | date: '%B %d, %Y' }}{% endif %}
-      {% if page.meta %}• {{ page.meta }}{% endif %}
-    </p>
-    <p class="post-tags">
-      {% if url_beginning == '/blog/' %}
-        <a href="{{ year | prepend: '/blog/' | relative_url }}"> <i class="fa-solid fa-calendar fa-sm"></i> {{ year }} </a>
-      {% else %}
-        <i class="fa-solid fa-calendar fa-sm"></i> {{ year }}
-      {% endif %}
-      {% if tags != '' %}
-        &nbsp; &middot; &nbsp;
-        {% for tag in page.tags %}
-          {% if url_beginning == '/blog/' %}
-            <a href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}"> <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}</a>
-          {% else %}
-            <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}
-          {% endif %}
-          {% unless forloop.last %}
-            &nbsp;
-          {% endunless %}
-        {% endfor %}
-      {% endif %}
-
-      {% if categories != '' %}
-        &nbsp; &middot; &nbsp;
-        {% for category in page.categories %}
-          {% if url_beginning == '/blog/' %}
-            <a href="{{ category | slugify | prepend: '/blog/category/' | relative_url }}"> <i class="fa-solid fa-tag fa-sm"></i> {{ category -}}</a>
-          {% else %}
-            <i class="fa-solid fa-tag fa-sm"></i> {{ category }}
-          {% endif %}
-          {% unless forloop.last %}
-            &nbsp;
-          {% endunless %}
-        {% endfor %}
-      {% endif %}
-    </p>
+    {% if page.description %}
+      <p class="post-subtitle">{{ page.description }}</p>
+    {% endif %}
+    <div class="post-disclaimer">
+      Bài viết tổng hợp từ kinh nghiệm cá nhân và nhiều nguồn khác nhau, nên có gì sai sót hoặc cần góp ý, xin vui lòng liên hệ với mình qua <a href="https://t.me/timoty_nguyen" target="_blank" rel="noopener">Telegram</a>.
+    </div>
   </header>
 
   <article class="post-content">

@@ -21,12 +21,8 @@ _styles: >
 /* ─── Scene ────────────────────────────────────────────────────── */
 .notes-scene {
   position: relative;
-  margin-left:   calc(50% - 50vw);
-  margin-right:  calc(50% - 50vw);
   padding-top:    1.5rem;
   padding-bottom: 4rem;
-  padding-left:  max(1.5rem, calc(50vw - 465px));
-  padding-right: max(1.5rem, calc(50vw - 465px));
 }
 
 /* ─── Hide blobs ───────────────────────────────────────────────── */
@@ -183,45 +179,83 @@ _styles: >
   font-style: italic;
   padding: 2rem 0;
 }
+
+/* ─── Graph section ────────────────────────────────────────────── */
+.notes-graph-section {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 2rem;
+}
+.notes-graph-header {
+  margin-bottom: 0.75rem;
+}
+.notes-graph-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--global-theme-color);
+}
 </style>
 
 <div class="notes-scene">
-  <div class="notes-page-header">
-    <h1 class="notes-page-title">notes</h1>
-    <p class="notes-page-desc">Personal thoughts, reflections, and short notes.</p>
-  </div>
-
-  <div class="notes-timeline">
-    {% assign notes_sorted = site.notes | sort: "date" | reverse %}
-
-    {% if notes_sorted.size == 0 %}
-      <p class="notes-empty">No notes yet.</p>
-    {% endif %}
-
-    {% assign current_year = "" %}
-    {% for note in notes_sorted %}
-      {% assign note_year = note.date | date: "%Y" %}
-      {% if note_year != current_year %}
-        {% assign current_year = note_year %}
-        <div class="timeline-year">{{ current_year }}</div>
-      {% endif %}
-
-      <div class="timeline-row">
-        <span class="note-date">{{ note.date | date: "%b %d" }}</span>
-        <div class="glass-card">
-          <a class="note-title" href="{{ note.url | relative_url }}">{{ note.title }}</a>
-          {% if note.description %}
-            <p class="note-desc">{{ note.description }}</p>
-          {% endif %}
-          {% if note.tags and note.tags.size > 0 %}
-            <div class="note-tags">
-              {% for tag in note.tags %}
-                <span class="note-tag">{{ tag }}</span>
-              {% endfor %}
-            </div>
-          {% endif %}
-        </div>
+  <div class="row">
+    <!-- Sidebar: hidden on mobile -->
+    <div class="col-sm-3 d-none d-sm-block">
+      <div class="sticky-top" style="top: 5rem;">
+        {% include notes-sidebar.liquid %}
       </div>
-    {% endfor %}
+    </div>
+
+    <!-- Main content -->
+    <div class="col-sm-9">
+      <div class="notes-page-header">
+        <h1 class="notes-page-title">notes</h1>
+        <p class="notes-page-desc">Personal thoughts, reflections, and short notes.</p>
+      </div>
+
+      <!-- Knowledge Graph -->
+      <div class="notes-graph-section">
+        <div class="notes-graph-header">
+          <span class="notes-graph-label">knowledge graph</span>
+        </div>
+        {% include note-graph.liquid %}
+      </div>
+
+      <div class="notes-timeline">
+        {% assign notes_sorted = site.notes | sort: "date" | reverse %}
+
+        {% if notes_sorted.size == 0 %}
+          <p class="notes-empty">No notes yet.</p>
+        {% endif %}
+
+        {% assign current_year = "" %}
+        {% for note in notes_sorted %}
+          {% assign note_year = note.date | date: "%Y" %}
+          {% if note_year != current_year %}
+            {% assign current_year = note_year %}
+            <div class="timeline-year">{{ current_year }}</div>
+          {% endif %}
+
+          <div class="timeline-row">
+            <span class="note-date">{{ note.date | date: "%b %d" }}</span>
+            <div class="glass-card">
+              <a class="note-title" href="{{ note.url | relative_url }}">{{ note.title }}</a>
+              {% if note.description %}
+                <p class="note-desc">{{ note.description }}</p>
+              {% endif %}
+              {% if note.tags and note.tags.size > 0 %}
+                <div class="note-tags">
+                  {% for tag in note.tags %}
+                    <span class="note-tag">{{ tag }}</span>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+    </div>
   </div>
 </div>

@@ -81,11 +81,12 @@ table.table a {
 }
 
 blockquote {
-  background: var(--global-bg-color);
-  border-left: 5px solid var(--global-theme-color);
+  background: var(--global-surface-color, var(--global-bg-color));
+  border: 1px solid var(--global-divider-color);
+  border-left: 3px solid var(--global-theme-color);
   margin: 1.5em 0;
-  padding: 1em;
-  font-size: 1.2rem;
+  padding: 0.85em 1.1em;
+  font-size: 0.95rem;
 
   p {
     margin-bottom: 0;

@@ -1,0 +1,19 @@
+{% assign note_path = page.url | split: '/notes/' | last | replace: '/', '' %}
+{% assign note_slug_parts = page.url | remove_first: '/notes/' | split: '/' %}
+{% assign note_slug = note_slug_parts | last %}
+{% assign bl = site.data.backlinks[note_slug] %}
+{% if bl and bl.size > 0 %}
+  <div class="backlinks-section">
+    <h4 class="backlinks-title">
+      <span class="backlinks-icon">←</span>
+      Linked from
+    </h4>
+    <ul class="backlinks-list">
+      {% for link in bl %}
+        <li>
+          <a href="{{ link.url | relative_url }}" class="backlink-item">{{ link.title }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
