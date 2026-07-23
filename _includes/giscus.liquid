@@ -8,18 +8,31 @@
     <br>
   {% endif %}
 
-  {% if site.giscus.repo %}
-    <script defer src="{{ '/assets/js/giscus-setup.js' | relative_url }}"></script>
+  {% comment %}
+    Render giscus only when fully configured (repo + repo_id + category_id).
+    Until then nothing is shown — no error box for visitors. Fill in
+    `giscus.category_id` in _config.yml (from https://giscus.app) to activate.
+  {% endcomment %}
+  {% if site.giscus.repo and site.giscus.repo_id and site.giscus.category_id %}
+    <script
+      src="https://giscus.app/client.js"
+      data-repo="{{ site.giscus.repo }}"
+      data-repo-id="{{ site.giscus.repo_id }}"
+      data-category="{{ site.giscus.category }}"
+      data-category-id="{{ site.giscus.category_id }}"
+      data-mapping="{{ site.giscus.mapping | default: 'title' }}"
+      data-strict="{{ site.giscus.strict | default: 1 }}"
+      data-reactions-enabled="{{ site.giscus.reactions_enabled | default: 1 }}"
+      data-emit-metadata="{{ site.giscus.emit_metadata | default: 0 }}"
+      data-input-position="{{ site.giscus.input_position | default: 'bottom' }}"
+      data-theme="{{ site.giscus.light_theme | default: 'light' }}"
+      data-lang="{{ site.giscus.lang | default: 'en' }}"
+      crossorigin="anonymous"
+      defer
+    ></script>
     <noscript>
       Please enable JavaScript to view the
-      <a href="http://giscus.app/?ref_noscript">comments powered by giscus.</a>
+      <a href="https://giscus.app/?ref_noscript">comments powered by giscus.</a>
     </noscript>
-  {% else %}
-    {% capture giscus_warning %}
-> ##### giscus comments misconfigured
-> Please follow instructions at [http://giscus.app](http://giscus.app) and update your giscus configuration.
-{: .block-danger }
-    {% endcapture %}
-    {{ giscus_warning | markdownify }}
   {% endif %}
 </div>
