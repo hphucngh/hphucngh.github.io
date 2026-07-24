@@ -30,6 +30,27 @@ pagination:
   padding-right: max(1.5rem, calc(50vw - 500px));
 }
 
+/* Widen the content zone on large screens to match the site container, so the
+   sidebar sits closer to the left edge and articles get more room. */
+@media (min-width: 1200px) {
+  .blog-scene {
+    padding-left:  max(1.5rem, calc(50vw - 560px));
+    padding-right: max(1.5rem, calc(50vw - 560px));
+  }
+}
+@media (min-width: 1440px) {
+  .blog-scene {
+    padding-left:  max(1.5rem, calc(50vw - 670px));
+    padding-right: max(1.5rem, calc(50vw - 670px));
+  }
+}
+@media (min-width: 1750px) {
+  .blog-scene {
+    padding-left:  max(1.5rem, calc(50vw - 800px));
+    padding-right: max(1.5rem, calc(50vw - 800px));
+  }
+}
+
 /* ─── Page header ──────────────────────────────────────────────── */
 .blog-page-header {
   margin-bottom: 2rem;

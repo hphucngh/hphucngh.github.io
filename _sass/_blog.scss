@@ -322,21 +322,8 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* Comfortable reading measure (~66–72 chars). Code blocks, tables, and
-     figures are intentionally excluded, so they keep full width. */
-  p,
-  ul,
-  ol,
-  dl,
-  blockquote,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    max-width: 44rem;
-  }
+  /* Body text fills the content column so it lines up with the title, tables,
+     and code (no narrow measure / ragged right gap on wide screens). */
 
   /* Links inside prose are underlined, not color-only (accessibility). */
   a {
@@ -427,19 +414,36 @@
   }
 
 
+  /* bootstrap-table wraps content tables in .fixed-table-body — let that
+     container scroll horizontally so wide tables never overflow the page. */
+  .fixed-table-body {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   @media (max-width: 768px) {
-    table {
-      font-size: 0.6rem;
+    /* Keep a readable font and let wide tables scroll sideways instead of
+       being crushed to fit the viewport. */
+    table,
+    table th,
+    table td {
+      font-size: 0.78rem;
+    }
 
-      th,
-      td {
-        padding: 0.35rem 0.3rem;
-        font-size: 0.6rem;
-      }
+    table th,
+    table td {
+      white-space: nowrap;
+      padding: 0.4rem 0.6rem;
+    }
 
-      th {
-        font-size: 0.63rem;
-      }
+    .fixed-table-body > table {
+      min-width: max-content;
+      margin: 0;
+    }
+
+    /* Wide display equations get their own horizontal scroll too. */
+    mjx-container[jax="CHTML"][display="true"] {
+      overflow-x: auto;
     }
   }
 }

@@ -196,6 +196,15 @@ _styles: >
   text-transform: uppercase;
   color: var(--global-theme-color);
 }
+
+/* On phones/portrait tablets the force-graph labels are too cramped to read,
+   so hide it there — the timeline list below still navigates every note.
+   The graph returns at >= 768px. */
+@media (max-width: 767px) {
+  .notes-graph-section {
+    display: none;
+  }
+}
 </style>
 
 <div class="notes-scene">

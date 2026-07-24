@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "KV Caching Explained"
+title: "KV Cache trong production: tính đúng VRAM trước khi bạn OOM"
 date: 2026-05-07
-description: Giải thích về KV Cache — tại sao cần nó, công thức tính chính xác, đến các kỹ thuật tối ưu production. Với ví dụ tính thực tế trên Llama, DeepSeek, Kimi 2026.
+description: Chắt lọc từ thực tế build & ship LLM inference — vì sao KV Cache tồn tại, cách tính chính xác VRAM, những cần gạt đáng kéo trước, và các sai lầm khiến bạn OOM. Kèm số liệu Llama, DeepSeek, Kimi 2026.
 tags: [AI, LLM, KV-cache, inference, VRAM, optimization]
 categories: AI
 giscus_comments: true
@@ -11,15 +11,30 @@ toc:
   sidebar: left
 ---
 
-> Bài viết tổng hợp từ [KV Caching Explained (Hugging Face)](https://huggingface.co/blog/not-lain/kv-caching), [Mastering LLM Techniques (NVIDIA)](https://developer.nvidia.com/blog/mastering-llm-techniques-inference-optimization/), cùng dữ liệu model 2026. Mục tiêu: đọc xong, bạn tính được chính xác VRAM cần thiết cho bất kỳ cấu hình nào.
+Có một kiểu lỗi rất kinh điển khi đưa LLM lên production: bạn size GPU theo dung lượng **model weights**, deploy ngon lành trên máy test, rồi hệ thống **OOM ngay khi vài user thật cùng vào**. Thủ phạm gần như luôn là **KV cache** — phần bộ nhớ hiếm ai tính tới lúc lên kế hoạch, nhưng ở context dài và nhiều user thì nó còn lớn hơn cả weights.
+
+Bài này là bản mình **gom nhặt và chắt lọc** lại sau khi build & ship vài hệ thống inference — kết hợp tài liệu của Hugging Face, NVIDIA cùng số liệu model 2026, rồi sắp xếp thành một khung tư duy dùng được thật. Mục tiêu rất cụ thể: đọc xong, bạn **tính được chính xác VRAM** cho bất kỳ cấu hình nào, biết **cần gạt nào đáng kéo trước**, và không còn bị bất ngờ lúc 2 giờ sáng.
+
+> ##### Đọc nhanh — 5 điều đọng lại
+>
+> 1. **KV Cache tăng tuyến tính** theo `context × users`. Ở quy mô thật, nó lớn hơn cả weights.
+> 2. **GQA/MLA** cắt cache 8× (hoặc hơn) so với MHA cổ điển mà gần như không mất chất lượng — mọi model 2025–2026 đều dùng.
+> 3. **Quantize KV cache xuống FP8** là tối ưu ROI cao nhất: −50% cache, ~99% chất lượng, thêm đúng một flag.
+> 4. **PagedAttention (vLLM)** dẹp lãng phí do cấp phát tĩnh, throughput tăng 2–4×.
+> 5. Luôn tính **VRAM = Weights + KV Cache + Overhead**. Chỉ tính weights = deploy xong OOM.
+{: .block-tip}
+
+*Nguồn tổng hợp chính: [KV Caching Explained (Hugging Face)](https://huggingface.co/blog/not-lain/kv-caching), [Mastering LLM Techniques (NVIDIA)](https://developer.nvidia.com/blog/mastering-llm-techniques-inference-optimization/), cùng config các model 2026. Danh sách đầy đủ ở [cuối bài](#nguồn-tham-khảo).*
 
 ---
 
-## 1. Tại sao cần KV Cache
+## Phần I — Vì sao KV Cache tồn tại
+
+Trước khi tối ưu bất cứ thứ gì, cần thấy rõ vấn đề nó giải quyết. Phần này cố tình ngắn — chỉ đủ để xây trực giác.
 
 ### LLM sinh text từng token một
 
-Khi bạn hỏi ChatGPT hay bất kỳ LLM nào, câu trả lời không xuất hiện cùng lúc. Model sinh **từng token một** (autoregressive). Mỗi token mới phụ thuộc vào **tất cả** token trước đó.
+Khi bạn hỏi ChatGPT hay bất kỳ LLM nào, câu trả lời không xuất hiện cùng lúc. Model sinh **từng token một** (autoregressive), và mỗi token mới phụ thuộc vào **tất cả** token trước đó.
 
 ```bash
 
@@ -32,11 +47,11 @@ Step 5: sinh "Nam"     ← nhìn lại "Hà Nội là thủ đô của Việt"
 
 ```
 
-### Không có cache: tính lại từ đầu mỗi bước
+### Không cache: mỗi bước tính lại từ đầu
 
-Trong cơ chế attention, model cần tính 3 ma trận cho mỗi token: **Query (Q)**, **Key (K)**, và **Value (V)**. Sau đó dùng $$(Q. K^T)$$ để tính attention scores, rồi nhân với V để ra output.
+Trong cơ chế attention, mỗi token cần 3 ma trận: **Query (Q)**, **Key (K)**, **Value (V)**. Model dùng $$(Q. K^T)$$ để tính attention scores, rồi nhân với V ra output.
 
-**Không có cache,** mỗi khi sinh token mới, model phải **tính lại Q, K, V cho toàn bộ chuỗi** từ đầu:
+Nếu **không có cache**, mỗi lần sinh token mới, model phải **tính lại Q, K, V cho toàn bộ chuỗi** từ đầu:
 
 ```bash
 
@@ -48,14 +63,17 @@ Step N: Tính Q,K,V cho toàn bộ N token              → N-1 bị tính lại
 
 ```
 
+Càng về sau càng lãng phí: chi phí tăng theo bình phương độ dài chuỗi, phần lớn là tính lại thứ vừa tính xong.
+
 ### Có cache: chỉ tính token mới
 
-Nhận thấy: K và V của token cũ **không thay đổi** giữa các bước (vì masked attention chỉ nhìn lại, không nhìn tới). Vậy tại sao phải tính lại?
+Chìa khóa nằm ở một nhận xét: K và V của token cũ **không đổi** giữa các bước (masked attention chỉ nhìn lại, không nhìn tới). Vậy tại sao phải tính lại?
 
-**KV Cache** lưu K,V đã tính vào bộ nhớ GPU. Mỗi bước chỉ cần:
+**KV Cache** lưu K, V đã tính vào VRAM. Mỗi bước chỉ cần:
+
 1. Tính Q, K, V cho **1 token mới**
 2. Nối K, V mới vào cache
-3. Dùng Q mới + toàn bộ K,V trong cache → tính attention → ra output
+3. Dùng Q mới + toàn bộ K, V trong cache → attention → output
 
 ```bash
 
@@ -65,7 +83,9 @@ Step 3: Tính K₅,V₅ cho ["đô"]          → Cache: [K₁K₂K₃K₄K₅],
 
 ```
 
-### Benchmark thực tế
+Ta đổi **tính lại** lấy **lưu trữ**. Và đó chính xác là gốc rễ của mọi bài toán VRAM phía sau: ta vừa tạo ra một khối bộ nhớ phình to theo từng token.
+
+### Con số biết nói
 
 Trên GPU T4, model SmolLM2-1.7B, sinh 300 token:
 
@@ -75,15 +95,17 @@ Trên GPU T4, model SmolLM2-1.7B, sinh 300 token:
 | Có KV cache | 11.7 giây | **5.2× nhanh hơn** |
 
 <br>
-Với model lớn hơn và context dài hơn, speedup còn cao hơn nhiều (10–50×).
+Model càng lớn, context càng dài thì speedup càng cao (10–50×). KV cache không phải "tối ưu cho vui" — không có nó, LLM serving gần như bất khả thi. Cái giá là bộ nhớ, và đó là phần còn lại của bài.
 
 ---
 
-## 2. KV Cache 
+## Phần II — Cái giá phải trả: tính VRAM
 
-### Cấu trúc
+Đây là phần "build & ship" cốt lõi: nếu chỉ nhớ một công thức từ bài này, hãy nhớ công thức ở đây.
 
-Mỗi **layer** trong transformer tạo K và V riêng. Với model 80 layer (Llama 3.3 70B), có 80 cặp [K, V] cache riêng biệt.
+### KV cache nằm ở đâu, hình dạng ra sao
+
+Mỗi **layer** transformer tạo K và V riêng. Model 80 layer (Llama 3.3 70B) → 80 cặp `[K, V]` cache độc lập:
 
 ```bash
 
@@ -94,17 +116,9 @@ Layer 80: "Cache_K₈₀" = [k⁸⁰₁, k⁸⁰₂, ..., k⁸⁰ₙ], "Cache_V�
 
 ```
 
-Tổng shape: `[num_layers, 2, batch_size, num_kv_heads, seq_len, head_dim]`
+Tổng shape: `[num_layers, 2, batch_size, num_kv_heads, seq_len, head_dim]`. Và toàn bộ khối này nằm trên **VRAM của GPU** — **cùng chỗ với weights**. Đây là lý do nó cạnh tranh trực tiếp với weights cho từng GB bộ nhớ.
 
-### KV cache lưu ở VRAM
-
-KV cache nằm hoàn toàn trên **VRAM của GPU** — cùng chỗ với model weights. Đây là lý do nó cạnh tranh trực tiếp với weights cho không gian bộ nhớ.
-
----
-
-## 3. Công thức tính 
-
-### Công thức gốc (từ NVIDIA)
+### Công thức duy nhất bạn cần
 
 ```
 KV cache cho 1 token (bytes) = 2 × num_layers × num_kv_heads × head_dim × bytes_per_element
@@ -113,26 +127,22 @@ KV cache cho 1 token (bytes) = 2 × num_layers × num_kv_heads × head_dim × by
 | Thành phần | Giải thích |
 |---|---|
 | `2` | Cả Key lẫn Value |
-| `num_layers` | Số tầng transformer (tìm trong config.json: `num_hidden_layers`) |
+| `num_layers` | Số tầng transformer (config.json: `num_hidden_layers`) |
 | `num_kv_heads` | Số KV heads (config.json: `num_key_value_heads`). Với GQA, nhỏ hơn query heads |
-| `head_dim` | Chiều mỗi head = `hidden_size / num_attention_heads` |
+| `head_dim` | `hidden_size / num_attention_heads` |
 | `bytes_per_element` | BF16 = 2, FP8 = 1, Q4 = 0.5 |
 
-### Tổng KV cache
+Nhân lên cho cả chuỗi và cả batch:
 
 ```
 Tổng (bytes) = batch_size × seq_len × 2 × num_layers × num_kv_heads × head_dim × bytes_per_element
 ```
 
-Hoặc dạng rút gọn (khi `num_kv_heads × head_dim = hidden_size` — đúng với MHA):
+> ##### Cạm bẫy hay gặp
+> Nhiều bảng tính trên mạng dùng dạng rút gọn `... × hidden_size × ...` (coi `num_kv_heads × head_dim = hidden_size`). Điều này **chỉ đúng với MHA**. Mọi model hiện đại dùng GQA nên `num_kv_heads` nhỏ hơn nhiều — dùng dạng rút gọn sẽ **thổi phồng** con số. Luôn dùng công thức đầy đủ.
+{: .block-warning}
 
-```
-Tổng (bytes) = batch_size × seq_len × 2 × num_layers × hidden_size × bytes_per_element
-```
-
-**Chú ý:** Với GQA, `num_kv_heads` nhỏ hơn `num_attention_heads`, nên phải dùng công thức đầy đủ.
-
-### Bảng tham số các model phổ biến
+Tham số các model phổ biến (kiểm tra config.json trên Hugging Face vì một số chưa công bố đầy đủ):
 
 | Model | Layers | KV Heads | Head Dim | Hidden Size | Attention Type |
 |---|---|---|---|---|---|
@@ -144,17 +154,9 @@ Tổng (bytes) = batch_size × seq_len × 2 × num_layers × hidden_size × byte
 | Qwen 3.5 (A17B) | ~80 | ~8 | 128 | ~5120 | GQA |
 | Phi-4 14B | 40 | 10 | 128 | 5120 | GQA |
 
-*(Giá trị xấp xỉ vì một số model chưa công bố config đầy đủ. Luôn kiểm tra config.json trên Hugging Face.)*
+### Tính thử: từ nhẹ nhàng đến choáng váng
 
----
-
-## 4. Tính thử — từ nhẹ nhàng đến choáng váng
-
-### Ví dụ 1: Llama 3.1 8B (model nhỏ)
-
-```
-1 token = 2 × 32 × 8 × 128 × 2 bytes = 131.072 bytes ≈ 0.000125 GB
-```
+**Llama 3.1 8B** — `1 token = 2 × 32 × 8 × 128 × 2 = 131.072 bytes ≈ 0.000125 GB`
 
 | Context | 1 user | 10 user | 50 user |
 |---|---|---|---|
@@ -162,13 +164,9 @@ Tổng (bytes) = batch_size × seq_len × 2 × num_layers × hidden_size × byte
 | 32K | 4 GB | 40 GB | 200 GB |
 | 128K | **16 GB** | **160 GB** | 800 GB |
 
-Model weights FP16 chỉ ~16 GB. Ở 128K context 1 user, KV cache đã **bằng weights**. Ở 10 user × 128K: KV cache = **10× weights**.
+Weights FP16 chỉ ~16 GB. Ở 128K context 1 user, KV cache đã **bằng weights**. Ở 10 user × 128K, nó bằng **10× weights**. Đây là khoảnh khắc "à há" của cả bài.
 
-### Ví dụ 2: Llama 3.3 70B (model production phổ biến)
-
-```
-1 token = 2 × 80 × 8 × 128 × 2 bytes = 327.680 bytes ≈ 0.00031 GB
-```
+**Llama 3.3 70B** — `1 token = 2 × 80 × 8 × 128 × 2 = 327.680 bytes ≈ 0.00031 GB`
 
 | Context | 1 user | 5 user | 10 user | 20 user |
 |---|---|---|---|---|
@@ -177,9 +175,9 @@ Model weights FP16 chỉ ~16 GB. Ở 128K context 1 user, KV cache đã **bằng
 | 32K | 10.2 GB | 51 GB | 102 GB | 204 GB |
 | 128K | **40.6 GB** | 203 GB | **406 GB** | 812 GB |
 
-### Ví dụ 3: Tổng VRAM cần cho 70B production
+### Tổng VRAM thật sự cho một deployment
 
-Kịch bản: Llama 3.3 70B INT4, 10 user, context 32K:
+Kịch bản thực tế: Llama 3.3 70B INT4, 10 user, context 32K.
 
 | Thành phần | Giá trị |
 |---|---|
@@ -188,45 +186,39 @@ Kịch bản: Llama 3.3 70B INT4, 10 user, context 32K:
 | KV cache (10 user × 32K, **FP8**) | **51 GB** |
 | Activations + overhead | ~5 GB |
 | **Tổng (BF16 cache)** | **144 GB → 2× H100** |
-| **Tổng (FP8 cache)** | **93 GB → 2× H100 (dư)** |
+| **Tổng (FP8 cache)** | **93 GB → 2× H100 (còn dư)** |
 
-Quantize KV cache từ BF16 → FP8 tiết kiệm **51 GB** — có thể là sự khác biệt giữa cần 2 GPU và cần 3 GPU.
+> ##### Bài học production
+> Ở đây, KV cache (102 GB) **gấp gần 3 lần** weights (37 GB). Chỉ riêng việc đổi cache BF16 → FP8 đã tiết kiệm **51 GB** — đủ để là ranh giới giữa cần 2 GPU và cần 3 GPU. Capacity planning mà bỏ qua KV cache là planning sai.
+{: .block-tip}
 
 ---
 
-## 5. GQA, MQA — giảm KV cache từ gốc
+## Phần III — Những cần gạt bạn thực sự điều chỉnh
 
-### Vấn đề với Multi-Head Attention (MHA) cổ điển
+Đã biết cách tính, giờ là phần ra quyết định. Mình xếp theo **ROI trong production** — kéo cần gạt trên trước.
 
-MHA gốc: mỗi query head có riêng 1 key head và 1 value head. Model 70B với 64 query heads → 64 KV heads → KV cache cực lớn.
+### Cần gạt 1 — Kiến trúc attention (phần lớn đã chọn sẵn cho bạn)
+
+Đây là đòn bẩy lớn nhất, nhưng bạn hiếm khi tự chỉnh: nó nằm trong thiết kế model. Hiểu nó để **chọn đúng model**.
+
+**MHA cổ điển** — mỗi query head có riêng 1 KV head. Model 70B với 64 query heads → 64 KV heads → cache khổng lồ:
 
 ```
 MHA cache/token = 2 × 80 × 64 × 128 × 2 = 2.621.440 bytes ≈ 0.0025 GB
 ```
 
-Ở 128K context: `0.0025 × 131.072 = 327 GB` — chỉ cho 1 user!
+Ở 128K context: `0.0025 × 131.072 = 327 GB` — chỉ cho **1 user**. Bất khả thi.
 
-### GQA: nhóm query heads chia sẻ KV heads
-
-Grouped-Query Attention nhóm nhiều query heads chia sẻ ít KV heads hơn. Llama 3.3 70B: 64 query heads chia thành 8 nhóm, mỗi nhóm dùng chung 1 KV head → 8 KV heads.
+**GQA** — nhóm nhiều query heads dùng chung ít KV heads. Llama 3.3 70B: 64 query heads → 8 nhóm → 8 KV heads:
 
 ```
-GQA cache/token = 2 × 80 × 8 × 128 × 2 = 327.680 bytes ≈ 0.00031 GB
+GQA cache/token = 2 × 80 × 8 × 128 × 2 = 327.680 bytes  (giảm 8× so với MHA)
 ```
 
-Giảm **8×** so với MHA!
+**MQA** — cực đoan: chỉ 1 KV head cho tất cả query heads (giảm 64×), nhưng chất lượng giảm đáng kể nên ít dùng thuần.
 
-### MQA: tất cả query heads dùng chung 1 KV head
-
-Multi-Query Attention cực đoan hơn: chỉ 1 KV head cho tất cả query heads.
-
-```
-MQA cache/token = 2 × 80 × 1 × 128 × 2 = 40.960 bytes ≈ 0.000039 GB
-```
-
-Giảm **64×** so với MHA, nhưng chất lượng giảm đáng kể.
-
-### So sánh trực quan — 70B model, context 128K, 1 user
+**Bức tranh tổng — 70B, context 128K, 1 user:**
 
 | Attention | KV Heads | Cache 128K | So với MHA |
 |---|---|---|---|
@@ -234,19 +226,11 @@ Giảm **64×** so với MHA, nhưng chất lượng giảm đáng kể.
 | **GQA** (Llama 3.3) | 8 | **40.6 GB** | Giảm 8× |
 | **MQA** | 1 | **5.1 GB** | Giảm 64× |
 
-GQA giữ ~99% chất lượng MHA mà cache giảm 8×. Đây là lý do **mọi model 2025-2026 đều dùng GQA**.
+GQA giữ ~99% chất lượng MHA mà cache giảm 8× — lý do **mọi model 2025–2026 đều dùng GQA**. Thế hệ mới hơn (DeepSeek V4, Kimi K2.6) dùng **MLA (Multi-Latent Attention)** — nén K, V xuống không gian latent trước khi cache, hiệu quả hơn cả GQA, đổi lại kiến trúc phức tạp hơn.
 
-### Multi-Latent Attention (MLA) — thế hệ mới
+### Cần gạt 2 — Quantize KV cache (ROI cao nhất)
 
-DeepSeek V4 và Kimi K2.6 dùng **MLA** (Multi-Latent Attention) — nén K,V xuống không gian latent nhỏ hơn trước khi cache. Hiệu quả hơn cả GQA nhưng phức tạp hơn về kiến trúc.
-
----
-
-## 6. Các kỹ thuật tối ưu KV Cache
-
-### 6.1 Quantize KV cache
-
-Giống như quantize weights, bạn có thể lưu cache ở precision thấp hơn:
+Đây là cần gạt bạn **thực sự tự kéo**, và nó rẻ nhất: giống quantize weights, ta lưu cache ở precision thấp hơn.
 
 | Cache precision | 70B, 10 user, 32K | Giảm | Chất lượng |
 |---|---|---|---|
@@ -254,7 +238,8 @@ Giống như quantize weights, bạn có thể lưu cache ở precision thấp h
 | FP8 | **51 GB** | −50% | ~99% |
 | Q4_0 | **26 GB** | −75% | ~95% |
 
-Cách bật trong **llama.cpp**:
+Bật trong **llama.cpp**:
+
 ```bash
 llama-server --model model.gguf \
   --cache-type-k q4_0 \
@@ -263,156 +248,142 @@ llama-server --model model.gguf \
   --ctx-size 32768
 ```
 
-Cách bật trong **vLLM**:
+Bật trong **vLLM**:
+
 ```bash
 vllm serve model --kv-cache-dtype fp8
 ```
 
-Qwen 3.5 series xử lý KV cache quantization đặc biệt tốt nhờ GQA tối ưu — giảm 50% VRAM cache mà output gần như không đổi.
+Một dòng flag, giảm nửa cache, chất lượng gần như không đổi. Nếu chỉ làm được một tối ưu, hãy làm cái này. (Qwen 3.5 xử lý KV cache quantization đặc biệt tốt nhờ GQA đã tối ưu sẵn.)
 
-### 6.2 PagedAttention — loại bỏ lãng phí
+### Cần gạt 3 — Serving engine: đừng để bộ nhớ nằm không
 
-**Vấn đề:** Cách truyền thống cấp KV cache tĩnh, contiguous (liền mạch) cho max sequence length. Model hỗ trợ 128K nhưng request dùng 2K → 126K slot bị lãng phí. Gây 3 loại lãng phí:
+Cách cấp phát KV cache "ngây thơ" lãng phí khủng khiếp. Ba đòn của một serving engine tốt (vLLM):
 
-- **Reserved waste:** Bộ nhớ giữ chỗ cho cả context nhưng chưa dùng
-- **Internal fragmentation:** Không biết output bao dài nên phải cấp thừa
-- **External fragmentation:** Các request khác nhau cần kích thước khác nhau, tạo khoảng trống giữa các block
+**PagedAttention** — cấp phát tĩnh, liền mạch cho max context gây 3 loại lãng phí: giữ chỗ cả context chưa dùng (*reserved*), cấp thừa vì không biết output dài bao nhiêu (*internal fragmentation*), và khoảng trống giữa các request cỡ khác nhau (*external fragmentation*). PagedAttention mượn ý tưởng **paging** của OS: chia cache thành **blocks** nhỏ (~16 token), cấp phát **non-contiguous**, dùng block table để tra cứu, trả block ngay khi request xong.
 
-**PagedAttention** (vLLM) giải quyết bằng cách mượn ý tưởng **paging** từ hệ điều hành:
+> **Kết quả:** GPU utilization từ ~24% lên **~98.5%**, batch size tăng **2–4×** trên cùng phần cứng.
+{: .block-tip}
 
-1. KV cache chia thành **blocks** nhỏ (ví dụ 16 token/block)
-2. Blocks cấp phát **non-contiguous** — không cần liền nhau trong VRAM
-3. Block table theo dõi block nào thuộc request nào
-4. Request xong → blocks giải phóng ngay cho request khác
+**Continuous batching** — thay vì gom N request rồi chờ *tất cả* xong (request ngắn phải chờ request dài), engine đưa request mới vào **slot trống ngay khi có request xong**. GPU luôn bận, cache được giải phóng và tái dùng tức thì.
 
-**Kết quả:** GPU utilization từ ~24% lên **~98.5%**. Batch size có thể tăng **2–4×** trên cùng phần cứng.
+**Prefix caching** — nhiều request chung một system prompt (ví dụ 2.000 token) thì chỉ cần tính + lưu KV cache cho phần đó **một lần**, dùng chung:
 
-### 6.3 Sliding Window Attention
+```
+Không prefix caching:  10 user × (2K system + 8K user) = 100K token cache
+Có prefix caching:     1 × 2K (shared) + 10 × 8K user  = 82K token cache  (−18%)
+```
 
-Một số model (Mistral) dùng **sliding window**: chỉ giữ KV cache cho N token gần nhất (ví dụ 4096), token cũ hơn bị loại bỏ. Giới hạn KV cache ở mức cố định bất kể context dài bao nhiêu.
+Với system prompt / RAG context dài (10K+ token), mức tiết kiệm lên tới **40–60%**.
 
-Trade-off: mất thông tin ở đầu context. Phù hợp cho chat (thông tin gần quan trọng hơn), không phù hợp cho document processing (cần toàn bộ context).
+### Cần gạt 4 — Sliding window & token eviction (tùy tình huống)
 
-### 6.4 Token eviction / compression
+Khi context rất dài, có thể **không giữ toàn bộ** cache:
 
-Các kỹ thuật nâng cao xác định token nào "ít quan trọng" (attention score thấp) và loại bỏ khỏi cache:
-
-- **StreamingLLM:** Giữ "attention sink" tokens (vài token đầu tiên) + N token gần nhất
-- **H2O (Heavy-Hitter Oracle):** Giữ token có attention score tích lũy cao nhất
-- **Dynamic Memory Compression:** Nén groups of tokens thành representation nhỏ hơn
-
-Các kỹ thuật này cho phép context "hiệu dụng" dài hơn physical KV cache.
+- **Sliding Window** (Mistral): chỉ giữ N token gần nhất (ví dụ 4096), token cũ bị loại. Cache cố định bất kể context dài bao nhiêu. Hợp cho **chat** (thông tin gần quan trọng hơn), không hợp cho **xử lý tài liệu** (cần toàn bộ ngữ cảnh).
+- **Token eviction / compression**: loại token "ít quan trọng" (attention score thấp). **StreamingLLM** giữ vài "attention sink" đầu chuỗi + N token gần nhất; **H2O** giữ token có score tích lũy cao; **Dynamic Memory Compression** nén nhóm token lại. Cho phép context "hiệu dụng" dài hơn cache vật lý.
 
 ---
 
-## 7. Prefill vs Decode — hai pha khác nhau hoàn toàn
+## Phần IV — Hiểu sâu để vận hành đúng
 
-Hiểu 2 pha này giúp hiểu tại sao KV cache quan trọng:
+Ba chủ đề này không phải cần gạt hằng ngày, nhưng hiểu chúng là ranh giới giữa "chạy được" và "vận hành tốt".
 
-### Prefill (xử lý input)
+### Prefill vs Decode — hai pha, hai bottleneck
 
-- Toàn bộ input tokens xử lý **parallel** (cùng lúc)
-- Phép tính: matrix × matrix → **compute-bound** (GPU tính toán là bottleneck)
-- KV cache được tạo cho toàn bộ input tokens
-- Tốc độ đo bằng: **tokens processed per second** (TTFT — Time To First Token)
+Inference có hai pha với đặc tính trái ngược:
 
-### Decode (sinh output)
+| | Prefill (xử lý input) | Decode (sinh output) |
+|---|---|---|
+| Cách chạy | Toàn bộ input **song song** | **1 token/bước**, tuần tự |
+| Phép tính | matrix × matrix | matrix × vector |
+| Bottleneck | **Compute-bound** | **Memory-bound** |
+| Đo bằng | tokens/s xử lý (TTFT) | tokens/s sinh (TPS) |
 
-- Sinh **1 token/bước**, tuần tự
-- Phép tính: matrix × vector → **memory-bound** (đọc bộ nhớ là bottleneck)
-- Mỗi bước: đọc toàn bộ weights + KV cache từ VRAM, chỉ tính cho 1 token
-- Tốc độ đo bằng: **tokens generated per second** (TPS)
-
-### Tại sao decode bị memory-bound?
+Vì sao decode bị chặn ở bộ nhớ? Mỗi bước phải đọc **toàn bộ weights + KV cache** từ VRAM chỉ để tính cho 1 token:
 
 ```
-Tổng data cần đọc mỗi decode step:
-= Model weights + KV cache
-= 37 GB (70B INT4) + 10.2 GB (1 user, 32K, BF16)
-= 47.2 GB
+Data đọc mỗi decode step = Weights + KV cache
+= 37 GB (70B INT4) + 10.2 GB (1 user, 32K, BF16) = 47.2 GB
 
-Trên H100 (3.350 GB/s bandwidth):
-Max tokens/sec = 3.350 / 47.2 ≈ 71 token/s (lý thuyết)
+Trên H100 (3.350 GB/s):  Max ≈ 3.350 / 47.2 ≈ 71 token/s (lý thuyết)
 ```
 
-GPU H100 có 990 TFLOPS nhưng chỉ cần ~1 GFLOP cho 1 token decode. Compute utilization <0.1%. **100% bottleneck là đọc bộ nhớ.**
+H100 có 990 TFLOPS nhưng 1 token decode chỉ cần ~1 GFLOP — compute utilization <0.1%. **100% bottleneck là đọc bộ nhớ.** Hệ quả trực tiếp:
 
-Đây là lý do:
-- **Bandwidth quan trọng hơn TFLOPS** cho inference
-- **Quantize weights + KV cache** trực tiếp tăng tốc (ít data cần đọc)
-- **Batch > 1** hiệu quả vì weights chỉ đọc 1 lần cho cả batch
+- **Bandwidth quan trọng hơn TFLOPS** cho inference.
+- **Quantize weights + KV cache** tăng tốc trực tiếp (ít data phải đọc).
+- **Batch > 1** hiệu quả vì weights chỉ đọc 1 lần cho cả batch.
 
----
+### MoE — khi weights át cả cache
 
-## 8. KV Cache với MoE — đặc thù riêng
+Model MoE (Kimi K2.6, DeepSeek V4, GLM-5.1) có đặc thù: attention layers vẫn dùng KV cache bình thường, nhưng expert layers **không tạo cache** — chỉ attention mới có. Đổi lại, **toàn bộ** expert weights phải nằm trong VRAM (token nào cũng có thể route tới bất kỳ expert nào).
 
-Model MoE (Kimi K2.6, DeepSeek V4, GLM-5.1) có đặc điểm:
+Hệ quả: với MoE, KV cache chiếm **tỷ lệ nhỏ hơn** trong tổng VRAM (vì weights quá lớn), nhưng vẫn là yếu tố scaling quan trọng khi tăng users/context. Ví dụ Kimi K2.6 (1T params, 61 layers):
 
-- Attention layers vẫn dùng KV cache **bình thường** (giống dense model)
-- Expert layers (MLP) **không tạo KV cache** — chỉ attention layer mới có
-- Nhưng toàn bộ expert weights phải nằm trong VRAM (vì bất kỳ token nào cũng có thể route đến bất kỳ expert nào)
+- Weights INT4: ~500 GB (chiếm đa số)
+- KV cache 1 user 128K (BF16): ~20–30 GB · 10 user: ~200–300 GB
+- Tổng cho 10 user: ~700–800 GB → 8× H100 hoặc 4–6× H200
 
-**Hệ quả:** Với MoE, KV cache chiếm tỷ lệ nhỏ hơn tổng VRAM (vì weights lớn hơn nhiều), nhưng vẫn là yếu tố scaling quan trọng khi tăng users/context.
+### Speculative decoding — hai model, hai cache
 
-Ví dụ Kimi K2.6 (1T params, 61 layers):
-- Weights INT4: ~500 GB (chiếm đa số VRAM)
-- KV cache 1 user 128K (BF16): ~20–30 GB (ước tính, phụ thuộc MLA config)
-- KV cache 10 user 128K: ~200–300 GB
-
-Tổng cho 10 user: ~700–800 GB → cần 8× H100 hoặc 4–6× H200.
-
----
-
-## 9. Batching — KV cache và multi-user serving
-
-### Static batching: lãng phí
-
-Gom N request thành 1 batch, chờ **tất cả** xong. Request A sinh 10 token, request B sinh 500 → A phải chờ B → GPU lãng phí 490 bước cho A.
-
-### Continuous batching (in-flight batching): hiệu quả
-
-Khi request A xong → lập tức đưa request C vào slot trống, B vẫn chạy. GPU luôn bận. **KV cache của A được giải phóng ngay** cho C dùng.
-
-vLLM kết hợp PagedAttention + continuous batching:
-- PagedAttention: cấp phát KV cache hiệu quả
-- Continuous batching: tái sử dụng slot ngay khi request xong
-- Prefix caching: nếu nhiều request có chung prefix (system prompt), cache prefix chỉ lưu **1 lần**
-
-### Prefix caching — tiết kiệm lớn cho production
-
-Nhiều request chia sẻ cùng system prompt (ví dụ 2.000 token). Không cần tính + lưu KV cache cho 2.000 token này mỗi request. Tính 1 lần, dùng chung:
+Dùng **model nhỏ** (draft) đoán trước N token, **model lớn** (verifier) kiểm tra song song. Mỗi model cần cache riêng:
 
 ```
-Không có prefix caching:
-  10 user × (2K system + 8K user) = 10 × 10K = 100K token cache
-
-Có prefix caching:
-  1 × 2K system (shared) + 10 × 8K user = 82K token cache
-  Tiết kiệm: 18%
-```
-
-Với system prompt dài (RAG context 10K+ token), tiết kiệm lên tới 40–60%.
-
----
-
-## 10. Speculative Decoding — KV cache cho 2 model
-
-Speculative decoding dùng **model nhỏ** (draft) đoán trước N token, rồi **model lớn** (verifier) kiểm tra parallel. Mỗi model cần KV cache riêng:
-
-```
-Draft model (7B): KV cache nhỏ, sinh nhanh
-Main model (70B): KV cache lớn, nhưng verify N token cùng lúc
-
+Draft (7B):  cache nhỏ, sinh nhanh
+Main (70B):  cache lớn, verify N token cùng lúc
 Tổng KV cache = cache_draft + cache_main
 ```
 
-Tuy tốn thêm VRAM cho draft model cache, speedup ~1.5–2.5× thường xứng đáng. Nhưng cần tính tổng VRAM cho cả 2 model khi planning.
+Speedup ~1.5–2.5× thường xứng đáng, nhưng nhớ **cộng VRAM của cả hai** khi planning.
 
 ---
 
-## 11. Công cụ tính
+## Phần V — Dùng được ngay
 
-### Python snippet
+Phần này để bạn bookmark: sai lầm cần tránh, bảng tra nhanh, công cụ, và những gì cần nhớ.
+
+### Bốn sai lầm khiến bạn OOM lúc 2 giờ sáng
+
+> ##### Đây đều là những cú OOM có thật
+> Điểm chung: ai đó tính VRAM chỉ bằng weights.
+{: .block-danger}
+
+**"Model 8B chỉ cần 4 GB (INT4)."** Đúng cho weights. Nhưng + 4 GB cache (32K) + 1 GB overhead = ~9 GB — không vừa GPU 8GB nếu context dài.
+
+**"H100 80GB chạy được 70B INT4 cho 20 user."** Weights INT4 37 GB + KV cache 20 user × 8K BF16 = 52 GB → **89 GB > 80 GB → OOM**. Fix: FP8 cache → 26 GB → tổng 65 GB → vừa.
+
+**"Context 10M của Llama 4 Scout chạy trên 1× H100."** Weights ~58 GB + KV cache 1 user × 10M BF16 ≈ **3.100 GB** → cần ~40× H100. Thực tế Scout giới hạn ~128K–256K trên 1 GPU.
+
+**"MoE chỉ cần VRAM cho active params."** Sai. Toàn bộ 1T params của Kimi K2.6 phải ở VRAM dù chỉ 32B active/token — expert không thể offload ra CPU rồi nạp theo nhu cầu (latency không chấp nhận được).
+
+### Cheat sheet tra nhanh
+
+KV cache theo model (1 user, BF16):
+
+| Model | Per token | 4K ctx | 32K ctx | 128K ctx |
+|---|---|---|---|---|
+| Llama 3.1 8B | 0.125 MB | 0.5 GB | 4 GB | **16 GB** |
+| Phi-4 14B | 0.098 MB | 0.4 GB | 3.1 GB | 12.5 GB |
+| Llama 3.3 70B | 0.31 MB | 1.3 GB | 10.2 GB | **40.6 GB** |
+| Llama 4 Scout 109B | ~0.31 MB | 1.3 GB | 10 GB | 40 GB |
+
+Nhân hệ số nhanh:
+
+| Users | ×cache | | Precision | ×cache |
+|---|---|---|---|---|
+| 1 | ×1 | | BF16 (baseline) | ×1 |
+| 5 | ×5 | | FP8 | ×0.5 |
+| 10 | ×10 | | Q4 | ×0.25 |
+| 20 | ×20 | | | |
+
+```
+VRAM ≈ Weights(precision) + KV_cache(ctx × users × cache_precision) + 10–20% overhead
+```
+
+### Công cụ tính
+
+Snippet mình hay dùng để ước lượng nhanh:
 
 ```python
 def kv_cache_gb(
@@ -430,99 +401,23 @@ def kv_cache_gb(
     )
     return total_bytes / (1024 ** 3)
 
-# Llama 3.3 70B, 10 user, 32K context, BF16
-print(f"{kv_cache_gb(80, 8, 128, 32768, 10, 2):.1f} GB")
-# → 97.5 GB
-
-# Cùng config nhưng FP8 cache
-print(f"{kv_cache_gb(80, 8, 128, 32768, 10, 1):.1f} GB")
-# → 48.8 GB
+# Llama 3.3 70B, 10 user, 32K, BF16
+print(f"{kv_cache_gb(80, 8, 128, 32768, 10, 2):.1f} GB")  # → 97.5 GB
+# Cùng config, FP8 cache
+print(f"{kv_cache_gb(80, 8, 128, 32768, 10, 1):.1f} GB")  # → 48.8 GB
 ```
 
-### Online tools
+Hoặc dùng công cụ online: [LMCache KV Cache Calculator](https://lmcache.ai/kv_cache_calculator.html) · [LocalLLM VRAM Calculator](https://localllm.in/blog/interactive-vram-calculator).
 
-- [LMCache KV Cache Calculator](https://lmcache.ai/kv_cache_calculator.html) — chọn model, chọn precision, nhập token count
-- [LocalLLM VRAM Calculator](https://localllm.in/blog/interactive-vram-calculator) — tính tổng VRAM (weights + KV cache + overhead)
+### Năm điều cần nhớ
 
----
+1. **KV Cache tăng tuyến tính** theo `context × batch`. Ở context dài + nhiều user, nó lớn hơn weights.
+2. **GQA giảm cache 8×** so với MHA mà giữ ~99% chất lượng. Model 2025–2026 dùng GQA hoặc MLA.
+3. **Quantize KV cache (FP8)** là tối ưu ROI cao nhất: −50% cache, ~99% chất lượng, thêm một flag.
+4. **PagedAttention (vLLM)** dẹp lãng phí do cấp phát tĩnh, throughput +2–4×.
+5. **VRAM = Weights + KV Cache + Overhead.** Chỉ tính weights = deploy xong OOM khi user thật vào.
 
-## 12. Cheat sheet — tra nhanh
-
-### KV cache theo model (1 user, BF16)
-
-| Model | Per token | 4K ctx | 32K ctx | 128K ctx |
-|---|---|---|---|---|
-| Llama 3.1 8B | 0.125 MB | 0.5 GB | 4 GB | **16 GB** |
-| Phi-4 14B | 0.098 MB | 0.4 GB | 3.1 GB | 12.5 GB |
-| Llama 3.3 70B | 0.31 MB | 1.3 GB | 10.2 GB | **40.6 GB** |
-| Llama 4 Scout 109B | ~0.31 MB | 1.3 GB | 10 GB | 40 GB |
-
-### Nhân hệ số cho multi-user
-
-| Users | Nhân KV cache |
-|---|---|
-| 1 | ×1 |
-| 5 | ×5 |
-| 10 | ×10 |
-| 20 | ×20 |
-
-### Nhân hệ số cho precision
-
-| Precision | Nhân KV cache |
-|---|---|
-| BF16 (baseline) | ×1 |
-| FP8 | ×0.5 |
-| Q4 | ×0.25 |
-
-### Tổng VRAM nhanh
-
-```
-VRAM ≈ Weights(precision) + KV_cache(ctx × users × cache_precision) + 10–20% overhead
-```
-
----
-
-## 13. Sai lầm phổ biến
-
-### "Model 8B chỉ cần 4 GB RAM (INT4)"
-
-Đúng cho weights. Nhưng:
-- Thêm 4 GB KV cache cho context 32K
-- Thêm 1 GB overhead
-- Tổng: ~9 GB — không vừa GPU 8GB nếu context dài
-
-### "Tôi có H100 80GB, chạy được 70B INT4 cho 20 user"
-
-- Weights INT4: 37 GB
-- KV cache 20 user × 8K, BF16: 52 GB
-- Tổng: 89 GB > 80 GB → **OOM**
-- Fix: dùng FP8 KV cache → 26 GB → Tổng 65 GB → vừa
-
-### "Context 10M token của Llama 4 Scout chạy trên 1× H100"
-
-- Weights INT4: ~58 GB
-- KV cache 1 user × 10M, BF16: **~3.100 GB** → Cần cluster ~40× H100
-- Thực tế production: Scout giới hạn ở ~128K–256K context trên 1 GPU
-
-### "MoE model chỉ cần VRAM cho active parameters"
-
-Sai. Toàn bộ 1T tham số của Kimi K2.6 phải nằm trong VRAM, dù chỉ 32B active mỗi token. Expert không thể offload ra CPU rồi đưa vào theo nhu cầu — latency không chấp nhận được.
-
----
-
-## 14. Tóm tắt
-
-Năm điều cần nhớ về KV Cache:
-
-1. **KV Cache là bộ nhớ tăng tuyến tính** theo context_length × batch_size. Ở context dài + nhiều user, nó lớn hơn model weights.
-
-2. **GQA giảm cache 8×** so với MHA cổ điển mà chất lượng gần như giữ nguyên. Mọi model 2025-2026 đều dùng GQA hoặc MLA.
-
-3. **Quantize KV cache (FP8)** là optimization có ROI cao nhất — giảm 50% cache, chất lượng ~99%, chỉ cần thêm 1 flag khi khởi động.
-
-4. **PagedAttention (vLLM)** loại bỏ lãng phí bộ nhớ do cấp phát tĩnh, tăng throughput 2–4×.
-
-5. **Luôn tính VRAM = Weights + KV Cache + Overhead.** Nếu chỉ tính weights, bạn sẽ deploy xong rồi OOM crash khi user thật bắt đầu dùng.
+Nếu bài này giúp bạn tránh được một cú OOM, hoặc chỉ đơn giản là size GPU tự tin hơn một chút, vậy là đủ. Có gì chưa chuẩn hoặc bạn có số liệu mới hơn, rất mong bạn góp ý ở phần bình luận bên dưới.
 
 ---
 
@@ -546,4 +441,4 @@ Năm điều cần nhớ về KV Cache:
 
 ---
 
-*Cập nhật: 07/05/2026.*
+*Cập nhật: 23/07/2026.*
