@@ -23,11 +23,11 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/notes/";
           },
-        },{id: "post-kv-cache-trong-production-tính-đúng-vram-trước-khi-bạn-oom",
+        },{id: "post-kv-cache-in-production-the-exact-vram-formula-and-cutting-it-50-with-fp8",
         
-          title: "KV Cache trong production: tính đúng VRAM trước khi bạn OOM",
+          title: "KV Cache in production: the exact VRAM formula, and cutting it 50% with...",
         
-        description: "Chắt lọc từ thực tế build &amp; ship LLM inference — vì sao KV Cache tồn tại, cách tính chính xác VRAM, những cần gạt đáng kéo trước, và các sai lầm khiến bạn OOM. Kèm số liệu Llama, DeepSeek, Kimi 2026.",
+        description: "The exact formula for KV-cache VRAM, the constraints to nail before you deploy, and the traps that OOM your box in production — with Llama / DeepSeek / Kimi 2026 numbers and vLLM / llama.cpp snippets. English by default; hover or click any paragraph for the Vietnamese.",
         section: "Posts",
         handler: () => {
           
