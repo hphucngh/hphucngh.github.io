@@ -37,6 +37,9 @@
 // Premium sunglow-gold design system (must come last to override)
 @use "premium";
 
+// "Terminal, Typeset" redesign component layer (loaded last, wins ties)
+@use "redesign";
+
 @use "font-awesome/fontawesome";
 @use "font-awesome/brands";
 @use "font-awesome/solid";

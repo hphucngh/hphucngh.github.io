@@ -24,9 +24,9 @@ $pink-color: #f92080 !default;
 $pink-color-light: #ffdddd !default;
 $yellow-color: #efcc00 !default;
 
-// Premium accent palette — teal
-$gold-color: #339999 !default; // teal — dark mode accents
-$gold-color-dark: #1a6666 !default; // deep teal — AA-readable on light bg (~6:1)
+// Premium accent palette — teal ("Terminal, Typeset" redesign)
+$gold-color: #46c2b1 !default; // teal — dark mode accents
+$gold-color-dark: #10857a !default; // deep teal — AA-readable on light bg (~5.5:1)
 
 $grey-color: #828282 !default;
 $grey-color-light: color.adjust($grey-color, $lightness: 40%);

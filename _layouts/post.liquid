@@ -17,21 +17,21 @@ layout: default
   <header class="post-header">
     <div class="post-header-eyebrow">
       <div class="post-header-pills">
-        {% if tags != '' %}
-          {% for tag in page.tags %}
-            {% if url_beginning == '/blog/' %}
-              <a class="post-pill" href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}">{{ tag }}</a>
-            {% else %}
-              <span class="post-pill">{{ tag }}</span>
-            {% endif %}
-          {% endfor %}
-        {% endif %}
         {% if categories != '' %}
           {% for category in page.categories %}
             {% if url_beginning == '/blog/' %}
-              <a class="post-pill" href="{{ category | slugify | prepend: '/blog/category/' | relative_url }}">{{ category }}</a>
+              <a class="post-pill post-pill--cat" href="{{ category | slugify | prepend: '/blog/category/' | relative_url }}">{{ category }}</a>
             {% else %}
-              <span class="post-pill">{{ category }}</span>
+              <span class="post-pill post-pill--cat">{{ category }}</span>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+        {% if tags != '' %}
+          {% for tag in page.tags %}
+            {% if url_beginning == '/blog/' %}
+              <a class="post-pill post-pill--tag" href="{{ tag | slugify | prepend: '/blog/tag/' | relative_url }}">{{ tag }}</a>
+            {% else %}
+              <span class="post-pill post-pill--tag">{{ tag }}</span>
             {% endif %}
           {% endfor %}
         {% endif %}

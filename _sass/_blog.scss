@@ -279,13 +279,26 @@
   font-size: 0.95rem;
   line-height: 1.6;
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
+  /* Heading hierarchy: the accent fades progressively toward the muted text
+     color as level increases, so deeper headings recede and each level is easy
+     to tell apart. Adapts automatically to both light and dark themes. */
+  h1 {
     color: var(--global-theme-color);
+  }
+  h2 {
+    color: color-mix(in srgb, var(--global-theme-color) 85%, var(--global-text-color-light));
+  }
+  h3 {
+    color: color-mix(in srgb, var(--global-theme-color) 60%, var(--global-text-color-light));
+  }
+  h4 {
+    color: color-mix(in srgb, var(--global-theme-color) 40%, var(--global-text-color-light));
+  }
+  h5 {
+    color: color-mix(in srgb, var(--global-theme-color) 24%, var(--global-text-color-light));
+  }
+  h6 {
+    color: var(--global-text-color-light);
   }
 
   h1 {

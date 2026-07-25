@@ -6,42 +6,49 @@
 
 :root {
   color-scheme: light;
-  // --- Terminal light palette (warm off-white) ---
-  --global-bg-color: #f4f3ee;
-  --global-code-bg-color: #{v.$code-bg-color-light};
-  --global-text-color: #1a1a1a;
-  --global-text-color-light: #5f5f57;
+  // --- Light palette: cool, teal-biased paper (not warm cream) ---
+  --global-bg-color: #eef2f0;
+  --global-code-bg-color: #e7ece9;
+  --global-text-color: #0f1c1a;
+  --global-text-color-light: #43544f;
   --global-theme-color: #{v.$gold-color-dark};
   --global-hover-color: #{v.$gold-color-dark};
-  --global-hover-text-color: #f4f3ee;
-  --global-footer-bg-color: #111111;
-  --global-footer-text-color: #888880;
-  --global-footer-link-color: #c8c8c0;
+  --global-hover-text-color: #eef2f0;
+  --global-footer-bg-color: #0e1315;
+  --global-footer-text-color: #6f817c;
+  --global-footer-link-color: #b7c6c1;
   --global-distill-app-color: #{v.$grey-color};
-  --global-divider-color: #dcdbd3;
-  --global-card-bg-color: #e9e8e1;
+  --global-divider-color: #d4ded9;
+  --global-card-bg-color: #e7ece9;
   --global-highlight-color: #{v.$red-color-dark};
   --global-back-to-top-bg-color: #{v.$gold-color-dark};
-  --global-back-to-top-text-color: #f4f3ee;
-  --global-newsletter-bg-color: #e9e8e1;
-  --global-newsletter-text-color: #1a1a1a;
+  --global-back-to-top-text-color: #eef2f0;
+  --global-newsletter-bg-color: #e7ece9;
+  --global-newsletter-text-color: #0f1c1a;
   // Syntax: muted string/literal hue (paired with teal keywords + grey comments)
   --syntax-string: #8a6a3a;
+  // Instrument "signal" hue — used sparingly for live/active states.
+  --global-signal: #b0701f;
 
-  // --- Terminal design tokens ---
+  // --- Design tokens ---
   --global-accent: #{v.$gold-color};
-  --global-surface-color: #e9e8e1;
-  --global-border-color: #d5d4cb;
+  --global-surface-color: #e7ece9;
+  --global-border-color: #b7c6c1;
   --global-card-shadow: none;
   --global-card-hover-shadow: none;
   --global-card-radius: 0px;
 
-  // Fonts: mono for the UI/chrome, a readable slab-serif for long-form prose.
+  // Fonts (Terminal, Typeset): mono = instrument/chrome/code, serif = titles,
+  // sans = long-form reading body.
   --font-mono: "JetBrains Mono", "Fira Code", "SF Mono", "Menlo", "Consolas",
     monospace;
-  --font-body: "Roboto Slab", Georgia, Cambria, "Times New Roman", serif;
+  // Lora + Roboto Slab both carry the full Vietnamese subset (Iowan Old Style /
+  // Charter render Vietnamese diacritics poorly, so they are dropped).
+  --font-heading: "Lora", "Roboto Slab", Georgia, "Times New Roman", serif;
+  --font-body: "Roboto", -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif;
   // Text selection: a soft tint of the teal accent (works on both themes).
-  --global-selection-bg: rgba(51, 153, 153, 0.28);
+  --global-selection-bg: rgba(70, 194, 177, 0.22);
 
   --global-tip-block: #42b983;
   --global-tip-block-bg: #e2f5ec;
@@ -89,31 +96,33 @@
 
 html[data-theme="dark"] {
   color-scheme: dark;
-  // --- Terminal dark palette ---
-  --global-bg-color: #1a1a1a;
-  --global-code-bg-color: #222222;
-  --global-text-color: #c8c8c0;
-  --global-text-color-light: #8a8a82;
+  // --- Dark palette: deep teal-black (not flat grey) ---
+  --global-bg-color: #0e1315;
+  --global-code-bg-color: #141c1e;
+  --global-text-color: #dce5e2;
+  --global-text-color-light: #9fb0ab;
   --global-theme-color: #{v.$gold-color};
   --global-hover-color: #{v.$gold-color};
-  --global-hover-text-color: #1a1a1a;
-  --global-footer-bg-color: #0f0f0f;
-  --global-footer-text-color: #787870;
-  --global-footer-link-color: #a8a8a0;
-  --global-distill-app-color: #787870;
-  --global-divider-color: #2e2e2e;
-  --global-card-bg-color: #222222;
-  --global-back-to-top-bg-color: #222222;
+  --global-hover-text-color: #0e1315;
+  --global-footer-bg-color: #0a0e0f;
+  --global-footer-text-color: #6f817c;
+  --global-footer-link-color: #9fb0ab;
+  --global-distill-app-color: #6f817c;
+  --global-divider-color: #26302f;
+  --global-card-bg-color: #141c1e;
+  --global-back-to-top-bg-color: #141c1e;
   --global-back-to-top-text-color: #{v.$gold-color};
-  --global-newsletter-bg-color: #222222;
-  --global-newsletter-text-color: #c8c8c0;
-  // Syntax: muted string/literal hue for the dark terminal palette
+  --global-newsletter-bg-color: #141c1e;
+  --global-newsletter-text-color: #dce5e2;
+  // Syntax: muted string/literal hue for the dark palette
   --syntax-string: #b58a5a;
+  // Instrument "signal" hue — used sparingly for live/active states.
+  --global-signal: #e6a95c;
 
-  // --- Terminal design tokens (dark) ---
+  // --- Design tokens (dark) ---
   --global-accent: #{v.$gold-color};
-  --global-surface-color: #1f1f1f;
-  --global-border-color: #2e2e2e;
+  --global-surface-color: #1a2325;
+  --global-border-color: #35443f;
   --global-card-shadow: none;
   --global-card-hover-shadow: none;
   --global-card-radius: 0px;

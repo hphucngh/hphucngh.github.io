@@ -28,9 +28,9 @@ pre {
     "Menlo", "Consolas", "Courier New", monospace !important;
 }
 
-/* Direction A: long-form article/note/about prose uses the readable slab-serif
-   body font. The UI "chrome" (nav, TOC, labels, tags), headings, and code stay
-   mono — they are intentionally left out of this override. */
+/* Terminal, Typeset: long-form article/note/about prose reads in the sans body
+   face. UI "chrome" (nav, TOC, labels, tags), in-content section headings, and
+   code stay mono (the site default) — left out of this override. */
 .post-content,
 .post article .clearfix {
   p,
@@ -43,6 +43,16 @@ pre {
   a {
     font-family: var(--font-body) !important;
   }
+}
+
+/* Big titles use the serif display face (in-content h2/h3 section markers stay
+   mono for the instrument feel). */
+.post-title,
+.post-content h1,
+.a-title,
+.f-title,
+.entry-title {
+  font-family: var(--font-heading) !important;
 }
 
 /* Keyboard focus visibility (accessibility). */

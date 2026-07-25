@@ -373,7 +373,9 @@ blockquote,
 // ---------------------------------------------------------------------------
 
 .post article {
-  h3 {
+  // Scoped to the about page's content (.clearfix) only — otherwise this badge
+  // style leaks onto every post/note h3 and overrides the heading colour fade.
+  .clearfix h3 {
     display: inline-flex;
     align-items: center;
     margin: 1.75rem 0 0.65rem;
