@@ -214,6 +214,25 @@ footer.sticky-bottom {
 }
 
 /* ---------------------------------------------------------------------------
+ * Responsive display math — a wide equation must never widen the page. Cap the
+ * container at the content width and let it scroll horizontally on its own;
+ * on phones, scale the equation down a touch so most fit without scrolling.
+ * ------------------------------------------------------------------------- */
+.post-content mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+@media (max-width: 600px) {
+  .post-content mjx-container[jax="CHTML"][display="true"] {
+    font-size: 0.72rem !important;
+    padding: 0.55rem 0.7rem;
+  }
+}
+
+/* ---------------------------------------------------------------------------
  * Post header pills — colour-coded so categories read differently from tags.
  *   · tags       → teal accent, "#" prefix (granular topics)
  *   · categories → amber signal, filled tint (broader grouping)
