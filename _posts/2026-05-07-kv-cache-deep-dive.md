@@ -20,8 +20,10 @@ _styles: >
   #bi-tip { position: fixed; z-index: 1200; max-width: 460px; background: var(--global-surface-color); color: var(--global-text-color); border: 1px solid var(--global-border-color); border-left: 3px solid var(--global-theme-color); border-radius: 7px; padding: .7rem .95rem; font-family: var(--font-body); font-size: .92rem; line-height: 1.62; box-shadow: 0 16px 46px -16px rgba(0,0,0,.7); pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity .12s ease, transform .12s ease; }
   #bi-tip.on { opacity: 1; transform: none; }
   #bi-tip .bi-tip-lab { display: block; font-family: var(--font-mono); font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: var(--global-theme-color); margin-bottom: .35rem; }
-  #bi-tip.is-term { border-left-color: var(--global-signal); max-width: 320px; }
+  #bi-tip.is-term { border-left-color: var(--global-signal); max-width: 380px; }
   #bi-tip.is-term .bi-tip-lab { color: var(--global-signal); }
+  #bi-tip .bi-tip-vi { display: block; margin-top: .5rem; padding-top: .5rem; border-top: 1px solid var(--global-divider-color); color: var(--global-text-color-light); font-size: .88rem; }
+  #bi-tip .bi-tip-vi::before { content: "VI  "; font-family: var(--font-mono); font-size: .56rem; letter-spacing: .1em; color: var(--global-signal); vertical-align: 1px; }
 
   /* technical term → glossary in _notes */
   .term { color: var(--global-signal); border-bottom: 1px dotted var(--global-signal); text-decoration: none; cursor: help; white-space: nowrap; }
@@ -38,11 +40,11 @@ _styles: >
 ---
 
 <div class="bilang-bar" role="group" aria-label="Reading language">
-  <span class="bilang-hint"><b>EN</b> by default — <b>hover</b> a paragraph to peek the Vietnamese, <b>click</b> to translate it inline. Dotted <span class="term" data-vi="Thuật ngữ — rê để xem nghĩa, bấm để mở ghi chú ở trang notes." data-note="/notes/">terms</span> link to glossary notes.</span>
+  <span class="bilang-hint"><b>EN</b> by default — <b>hover</b> a paragraph to peek the Vietnamese, <b>click</b> to translate it inline. Dotted <a class="term" href="/notes/glossary/" data-en="Dotted terms — hover for the definition, click to open the full glossary." data-vi="Thuật ngữ gạch chấm — rê để xem định nghĩa, bấm để mở trang glossary.">terms</a> link to the glossary.</span>
   <button class="bilang-btn" id="bilangToggle" type="button" aria-pressed="false">Dịch cả bài → VI</button>
 </div>
 
-Recently I debugged an LLM serving box that went OOM the moment a few real users hit it at once — even though the solo-user benchmark on the same GPU had run perfectly smooth. The culprit is almost always the <a class="term" href="/notes/" data-vi="Bộ nhớ đệm lưu Key/Value của các token đã xử lý, để attention không phải tính lại từ đầu mỗi bước.">KV cache</a> — memory almost nobody accounts for when sizing a GPU, yet at long context and many users it grows larger than the model weights themselves.
+Recently I debugged an LLM serving box that went OOM the moment a few real users hit it at once — even though the solo-user benchmark on the same GPU had run perfectly smooth. The culprit is almost always the {% term kv-cache %} — memory almost nobody accounts for when sizing a GPU, yet at long context and many users it grows larger than the model weights themselves.
 {: .bi data-vi="Gần đây mình debug một hệ thống LLM serving OOM ngay khi vài user thật dùng cùng lúc, dù benchmark solo-user trên cùng GPU chạy êm re. Thủ phạm gần như luôn là KV cache — phần bộ nhớ hiếm ai tính đến lúc size GPU, nhưng ở context dài và nhiều user thì nó lớn hơn cả weights model."}
 
 > ##### TL;DR
@@ -156,7 +158,7 @@ This is the biggest lever, yet one you rarely tune yourself — it is baked into
 | **GQA** (Llama 3.3, most 2025-2026) | 8 | **40.6 GB** | 8× smaller |
 | **MQA** (extreme) | 1 | **5.1 GB** | 64× smaller |
 
-<a class="term" href="/notes/" data-vi="Grouped-Query Attention: nhiều query head chia sẻ chung một nhóm KV head → giảm số KV head phải cache.">GQA</a> keeps ~99% of MHA quality while cutting cache 8× — the reason nearly every 2025–2026 model uses it. <a class="term" href="/notes/" data-vi="Multi-Query Attention: chỉ 1 KV head cho tất cả query head → cache nhỏ nhất, nhưng chất lượng giảm.">MQA</a> shrinks further but drops quality noticeably, so pure MQA is rare. Newer generations (DeepSeek V4, Kimi K2.6) use <a class="term" href="/notes/" data-vi="Multi-head Latent Attention: nén K,V xuống không gian latent trước khi cache — hiệu quả hơn GQA, kiến trúc phức tạp hơn.">MLA</a> — compressing K, V into a latent space before caching, more efficient than GQA at the cost of a more complex architecture.
+{% term gqa %} keeps ~99% of MHA quality while cutting cache 8× — the reason nearly every 2025–2026 model uses it. {% term mqa %} shrinks further but drops quality noticeably, so pure MQA is rare. Newer generations (DeepSeek V4, Kimi K2.6) use {% term mla %} — compressing K, V into a latent space before caching, more efficient than GQA at the cost of a more complex architecture.
 {: .bi data-vi="GQA giữ ~99% chất lượng MHA mà cache giảm 8× — lý do gần như mọi model 2025–2026 đều dùng GQA. MQA giảm mạnh hơn nữa nhưng chất lượng giảm đáng kể nên ít ai dùng thuần. Thế hệ mới hơn (DeepSeek V4, Kimi K2.6) dùng MLA — nén K, V xuống không gian latent trước khi cache, hiệu quả hơn GQA, đổi lại kiến trúc phức tạp hơn."}
 
 ## Four levers to cut cache, ranked by ROI
@@ -192,16 +194,16 @@ One flag, half the cache, quality nearly unchanged. If you do a single optimizat
 Static allocation (reserving the full max context up front) wastes memory for three reasons: it holds unused context, over-provisions because output length is unknown, and leaves gaps between differently-sized requests.
 {: .bi data-vi="Cấp phát tĩnh (đặt trước toàn bộ max context) lãng phí vì 3 lý do: giữ chỗ context chưa dùng, cấp thừa vì không biết output dài bao nhiêu, và khoảng trống giữa các request cỡ khác nhau."}
 
-<a class="term" href="/notes/" data-vi="Cấp phát KV cache theo block nhỏ (~16 token), non-contiguous, mượn ý tưởng paging của hệ điều hành.">PagedAttention</a> (vLLM) borrows the OS paging idea — it splits the cache into small blocks (~16 tokens), allocates them non-contiguously, and frees a block the moment a request finishes.
+{% term paged-attention %} (vLLM) borrows the OS paging idea — it splits the cache into small blocks (~16 tokens), allocates them non-contiguously, and frees a block the moment a request finishes.
 {: .bi data-vi="PagedAttention (vLLM) mượn ý tưởng paging của OS — chia cache thành block nhỏ (~16 token), cấp phát non-contiguous, trả block ngay khi request xong."}
 
 > GPU utilization goes from ~24% to **~98.5%**, batch size grows **2–4×** on the same hardware.
 {: .block-tip}
 
-<a class="term" href="/notes/" data-vi="Nạp request mới vào slot trống ngay khi có request xong, thay vì chờ cả batch xong.">Continuous batching</a> slots a new request into a freed spot the instant one finishes, instead of waiting for the whole batch — the GPU stays busy.
+{% term continuous-batching %} slots a new request into a freed spot the instant one finishes, instead of waiting for the whole batch — the GPU stays busy.
 {: .bi data-vi="Continuous batching đưa request mới vào slot trống ngay khi có request xong, thay vì chờ cả batch xong mới nhận request mới — GPU luôn bận."}
 
-<a class="term" href="/notes/" data-vi="Nhiều request chung system prompt thì chỉ tính và cache phần đó một lần, dùng chung.">Prefix caching</a>: when many requests share a system prompt, that part is computed and cached **once** and shared:
+{% term prefix-caching %}: when many requests share a system prompt, that part is computed and cached **once** and shared:
 {: .bi data-vi="Prefix caching: nhiều request chung system prompt thì chỉ tính + lưu cache phần đó một lần, dùng chung:"}
 
 ```
@@ -215,25 +217,25 @@ With long system prompts / RAG context (10K+ tokens), the savings reach 40–60%
 ### 3 — Sliding window & token eviction (situational, don't enable by default)
 {: .bi data-vi="3 — Sliding window & token eviction (tùy tình huống, không nên bật mặc định)"}
 
-<a class="term" href="/notes/" data-vi="Chỉ giữ N token gần nhất, cache cố định bất kể context dài bao nhiêu (Mistral).">Sliding Window</a> (Mistral): keep only the last N tokens, giving a fixed cache regardless of how long the context is. Good for **chat** (recent info matters more), **bad for document processing** (loses context at the start of the document).
+{% term sliding-window Sliding Window %} (Mistral): keep only the last N tokens, giving a fixed cache regardless of how long the context is. Good for **chat** (recent info matters more), **bad for document processing** (loses context at the start of the document).
 {: .bi data-vi="Sliding Window (Mistral): chỉ giữ N token gần nhất, cache cố định bất kể context dài bao nhiêu. Hợp cho chat (thông tin gần quan trọng hơn), không hợp cho document processing (mất context ở đầu tài liệu)."}
 
-<a class="term" href="/notes/" data-vi="Bỏ bớt token khỏi cache theo tiêu chí (attention sink, điểm attention tích lũy, nén nhóm token).">Token eviction</a>: StreamingLLM (keep an attention sink at the start + the last N tokens), H2O (keep tokens with high cumulative attention score), Dynamic Memory Compression (compress groups of tokens). These give an "effective" context longer than the physical cache — but add operational complexity, only worth it once the two levers above aren't enough.
+{% term token-eviction %}: StreamingLLM (keep an attention sink at the start + the last N tokens), H2O (keep tokens with high cumulative attention score), Dynamic Memory Compression (compress groups of tokens). These give an "effective" context longer than the physical cache — but add operational complexity, only worth it once the two levers above aren't enough.
 {: .bi data-vi="Token eviction: StreamingLLM (giữ attention sink đầu chuỗi + N token gần nhất), H2O (giữ token có attention score tích lũy cao), Dynamic Memory Compression (nén nhóm token). Cho context 'hiệu dụng' dài hơn cache vật lý — nhưng thêm độ phức tạp vận hành, chỉ đáng cân nhắc khi 2 đòn bẩy trên chưa đủ."}
 
 ### 4 — Know when the KV cache isn't the main bottleneck (MoE, speculative decoding)
 {: .bi data-vi="4 — Biết khi nào KV cache không phải bottleneck chính (MoE, speculative decoding)"}
 
-<a class="term" href="/notes/" data-vi="Mixture-of-Experts: chỉ một phần expert active mỗi token, nhưng toàn bộ expert weights phải nằm trong VRAM.">MoE</a> (Kimi K2.6, DeepSeek V4, GLM-5.1): attention layers still produce cache normally, but expert layers don't — in exchange, **all** expert weights must sit in VRAM, because any token can route to any expert (you can't offload to CPU and load on demand — the latency is unacceptable). With MoE, cache is a smaller share of total VRAM because the weights are already huge, but it still scales with users/context: Kimi K2.6 — INT4 weights ~500GB (the majority) + cache for 10 users @128K (BF16) ~200–300GB → ~700–800GB total, needing 8×H100 or 4–6×H200.
+{% term moe %} (Kimi K2.6, DeepSeek V4, GLM-5.1): attention layers still produce cache normally, but expert layers don't — in exchange, **all** expert weights must sit in VRAM, because any token can route to any expert (you can't offload to CPU and load on demand — the latency is unacceptable). With MoE, cache is a smaller share of total VRAM because the weights are already huge, but it still scales with users/context: Kimi K2.6 — INT4 weights ~500GB (the majority) + cache for 10 users @128K (BF16) ~200–300GB → ~700–800GB total, needing 8×H100 or 4–6×H200.
 {: .bi data-vi="MoE (Kimi K2.6, DeepSeek V4, GLM-5.1): attention layers vẫn tạo cache bình thường, nhưng expert layers không tạo cache — đổi lại toàn bộ expert weights phải nằm VRAM, vì token nào cũng có thể route tới bất kỳ expert nào (không thể offload ra CPU rồi nạp theo nhu cầu — latency không chấp nhận được). Với MoE, cache chiếm tỷ lệ nhỏ hơn trong tổng VRAM vì weights đã quá lớn, nhưng vẫn scale theo user/context: Kimi K2.6 — weights INT4 ~500GB (chiếm đa số) + cache 10 user @128K (BF16) ~200–300GB → tổng ~700–800GB, cần 8×H100 hoặc 4–6×H200."}
 
-<a class="term" href="/notes/" data-vi="Model nhỏ (draft) đoán trước, model lớn (verifier) kiểm tra song song — mỗi model cần cache riêng.">Speculative decoding</a>: a small draft model guesses ahead, a large verifier checks in parallel — each model needs its own cache: `Total KV cache = cache_draft + cache_main`. A 1.5–2.5× speedup is usually worth it, but remember to add both models' VRAM when planning — the draft model's cache is easy to forget.
+{% term speculative-decoding %}: a small draft model guesses ahead, a large verifier checks in parallel — each model needs its own cache: `Total KV cache = cache_draft + cache_main`. A 1.5–2.5× speedup is usually worth it, but remember to add both models' VRAM when planning — the draft model's cache is easy to forget.
 {: .bi data-vi="Speculative decoding: model nhỏ (draft) đoán trước, model lớn (verifier) kiểm tra song song — mỗi model cần cache riêng: Tổng KV cache = cache_draft + cache_main. Speedup 1.5–2.5× thường xứng đáng, nhưng nhớ cộng VRAM của cả hai khi planning — phần cache của draft model dễ bị quên."}
 
 ## Why bandwidth matters more than TFLOPS
 {: .bi data-vi="Vì sao bandwidth quan trọng hơn TFLOPS"}
 
-Inference has two phases of opposite character: <a class="term" href="/notes/" data-vi="Pha xử lý toàn bộ input, chạy song song, giới hạn bởi compute.">prefill</a> (process the input, parallel, compute-bound) and <a class="term" href="/notes/" data-vi="Pha sinh output từng token, tuần tự, giới hạn bởi băng thông bộ nhớ.">decode</a> (generate the output, sequential, memory-bound). Every decode step must read **all the weights + the KV cache** from VRAM just to produce one token:
+Inference has two phases of opposite character: {% term prefill prefill %} (process the input, parallel, compute-bound) and {% term decode decode %} (generate the output, sequential, memory-bound). Every decode step must read **all the weights + the KV cache** from VRAM just to produce one token:
 {: .bi data-vi="Inference có 2 pha ngược tính chất: prefill (xử lý input, song song, compute-bound) và decode (sinh output, tuần tự, memory-bound). Mỗi bước decode phải đọc toàn bộ weights + KV cache từ VRAM chỉ để tính 1 token:"}
 
 ```
@@ -386,35 +388,43 @@ The next step depends on your situation: if you're still weighing self-host vs A
     }
     function hideTip() { tip.classList.remove("on"); }
 
-    // ── paragraph-level bilingual (.bi) ──
+    // ── bilingual paragraphs (.bi) + technical terms (.term) ──
+    // Handlers are delegated on the root so they survive a paragraph being
+    // swapped to Vietnamese and back.
     var paras = root.querySelectorAll(".bi[data-vi]");
-    paras.forEach(function (el) {
-      el.dataset.en = el.innerHTML;
-      el.addEventListener("mouseenter", function (e) {
-        if (el.classList.contains("is-vi")) return;
-        showTip(el.dataset.vi, "Tiếng Việt · bấm để dịch", false, e.clientX, e.clientY);
-      });
-      el.addEventListener("mousemove", function (e) {
-        if (!el.classList.contains("is-vi")) moveTip(e.clientX, e.clientY);
-      });
-      el.addEventListener("mouseleave", hideTip);
-      el.addEventListener("click", function (e) {
-        // don't toggle when clicking a link/term inside the paragraph
-        if (e.target.closest("a, .term")) return;
-        hideTip();
-        var toVi = !el.classList.contains("is-vi");
-        el.classList.toggle("is-vi", toVi);
-        el.innerHTML = toVi ? el.dataset.vi : el.dataset.en;
-      });
-    });
+    paras.forEach(function (el) { el.dataset.en = el.innerHTML; });
 
-    // ── technical terms (.term) ──
-    root.querySelectorAll(".term[data-vi]").forEach(function (el) {
-      el.addEventListener("mouseenter", function (e) {
-        showTip(el.dataset.vi, "Ghi chú thuật ngữ", true, e.clientX, e.clientY);
-      });
-      el.addEventListener("mousemove", function (e) { moveTip(e.clientX, e.clientY); });
-      el.addEventListener("mouseleave", hideTip);
+    var lastKey = null;
+    root.addEventListener("mousemove", function (e) {
+      var term = e.target.closest ? e.target.closest(".term") : null;
+      var para = term ? null : (e.target.closest ? e.target.closest(".bi[data-vi]") : null);
+      if (!term && (!para || para.classList.contains("is-vi"))) { lastKey = null; hideTip(); return; }
+      var key = term ? "t:" + term.href : "p:" + (para.dataset.vi || "").slice(0, 24);
+      if (key !== lastKey) {
+        lastKey = key;
+        if (term) {
+          // a term shows both languages at once: English definition + Vietnamese.
+          var body = term.dataset.en || "";
+          if (term.dataset.vi) body += '<span class="bi-tip-vi">' + term.dataset.vi + "</span>";
+          showTip(body, "Definition · Nghĩa", true, e.clientX, e.clientY);
+        } else {
+          showTip(para.dataset.vi, "Tiếng Việt · bấm để dịch", false, e.clientX, e.clientY);
+        }
+      } else {
+        moveTip(e.clientX, e.clientY);
+      }
+    });
+    root.addEventListener("mouseleave", function () { lastKey = null; hideTip(); });
+
+    // click a paragraph to translate it inline; links & terms keep working
+    root.addEventListener("click", function (e) {
+      if (e.target.closest("a, .term")) return;
+      var para = e.target.closest(".bi[data-vi]");
+      if (!para) return;
+      hideTip();
+      var toVi = !para.classList.contains("is-vi");
+      para.classList.toggle("is-vi", toVi);
+      para.innerHTML = toVi ? para.dataset.vi : para.dataset.en;
     });
 
     // ── whole-page toggle ──

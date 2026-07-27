@@ -1,0 +1,105 @@
+# ---------------------------------------------------------------------------
+# Technical glossary — single source of truth.
+# Add a term = add one entry here (no new file). Used by:
+#   · the glossary page  (/notes/glossary/)
+#   · the {% term 'slug' %} tag in posts (fills the .term tooltip + link)
+# Fields: slug (anchor/id) · term · category · en · vi · related · note (opt.)
+# ---------------------------------------------------------------------------
+
+- slug: kv-cache
+  term: KV cache
+  category: Attention & cache
+  en: Cached Key/Value tensors for already-processed tokens, so attention doesn't recompute them on every generation step.
+  vi: Bộ nhớ đệm lưu Key/Value của các token đã xử lý, để attention không phải tính lại từ đầu mỗi bước.
+  related: [gqa, mla, paged-attention]
+
+- slug: mha
+  term: MHA
+  category: Attention & cache
+  en: Multi-Head Attention — the classic design where every query head has its own KV head; the largest cache.
+  vi: "Multi-Head Attention cổ điển: mỗi query head có KV head riêng → cache lớn nhất."
+  related: [gqa, mqa]
+
+- slug: gqa
+  term: GQA
+  category: Attention & cache
+  en: Grouped-Query Attention — several query heads share one group of KV heads, cutting the KV heads to cache roughly 8×.
+  vi: "Grouped-Query Attention: nhiều query head chia sẻ chung một nhóm KV head → giảm số KV head phải cache (~8×)."
+  related: [mha, mqa, kv-cache]
+
+- slug: mqa
+  term: MQA
+  category: Attention & cache
+  en: Multi-Query Attention — a single KV head shared by all query heads; the smallest cache, but a noticeable quality drop.
+  vi: "Multi-Query Attention: chỉ 1 KV head cho tất cả query head → cache nhỏ nhất, nhưng chất lượng giảm."
+  related: [gqa]
+
+- slug: mla
+  term: MLA
+  category: Attention & cache
+  en: Multi-head Latent Attention — compresses K, V into a latent space before caching; more efficient than GQA, more complex.
+  vi: "Multi-head Latent Attention: nén K, V xuống không gian latent trước khi cache — hiệu quả hơn GQA, kiến trúc phức tạp hơn."
+  related: [gqa, kv-cache]
+
+- slug: paged-attention
+  term: PagedAttention
+  category: Serving
+  en: Allocates the KV cache in small non-contiguous blocks (~16 tokens), borrowing the OS paging idea; frees blocks the moment a request finishes. (vLLM)
+  vi: "Cấp phát KV cache theo block nhỏ (~16 token), non-contiguous, mượn ý tưởng paging của hệ điều hành (vLLM)."
+  related: [continuous-batching, prefix-caching]
+
+- slug: continuous-batching
+  term: Continuous batching
+  category: Serving
+  en: Slots a new request into a freed spot the instant one finishes, keeping the GPU busy instead of waiting for the whole batch.
+  vi: Nạp request mới vào slot trống ngay khi có request xong, thay vì chờ cả batch xong.
+  related: [paged-attention]
+
+- slug: prefix-caching
+  term: Prefix caching
+  category: Serving
+  en: Computes and caches a shared prefix (e.g. a system prompt) once, then reuses it across requests.
+  vi: Nhiều request chung system prompt thì chỉ tính và cache phần đó một lần, dùng chung.
+  related: [kv-cache]
+
+- slug: sliding-window
+  term: Sliding window
+  category: Serving
+  en: Keeps only the last N tokens, giving a fixed cache regardless of context length; good for chat, bad for document processing.
+  vi: "Chỉ giữ N token gần nhất, cache cố định bất kể context dài bao nhiêu; hợp chat, không hợp document processing."
+  related: [token-eviction]
+
+- slug: token-eviction
+  term: Token eviction
+  category: Serving
+  en: Drops tokens from the cache by a heuristic (attention sink, cumulative attention score, group compression) for an effective context longer than the physical cache.
+  vi: "Bỏ bớt token khỏi cache theo tiêu chí (attention sink, điểm attention tích lũy, nén nhóm token)."
+  related: [sliding-window]
+
+- slug: moe
+  term: MoE
+  category: Architecture
+  en: Mixture-of-Experts — only a subset of experts is active per token, but all expert weights must stay in VRAM (any token can route to any expert).
+  vi: "Mixture-of-Experts: chỉ một phần expert active mỗi token, nhưng toàn bộ expert weights phải nằm trong VRAM."
+  related: [kv-cache]
+
+- slug: speculative-decoding
+  term: Speculative decoding
+  category: Architecture
+  en: A small draft model guesses ahead while a large verifier checks in parallel; each model needs its own KV cache.
+  vi: "Model nhỏ (draft) đoán trước, model lớn (verifier) kiểm tra song song — mỗi model cần cache riêng."
+  related: [kv-cache]
+
+- slug: prefill
+  term: Prefill
+  category: Inference phases
+  en: The phase that processes the whole input in parallel; compute-bound.
+  vi: Pha xử lý toàn bộ input, chạy song song, giới hạn bởi compute.
+  related: [decode]
+
+- slug: decode
+  term: Decode
+  category: Inference phases
+  en: The phase that generates output one token at a time, sequentially; memory-bandwidth-bound.
+  vi: Pha sinh output từng token, tuần tự, giới hạn bởi băng thông bộ nhớ.
+  related: [prefill]
