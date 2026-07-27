@@ -331,8 +331,18 @@
   blockquote {
     font-size: 0.95rem;
     line-height: 1.8;
-    text-align: left;
+    /* Justified for an even right edge (easier to read in long form).
+       break-word stops long tokens (variable names, URLs) from opening ugly
+       gaps or overflowing the column. */
+    text-align: justify;
+    text-justify: inter-word;
+    overflow-wrap: break-word;
     font-variant-numeric: tabular-nums;
+  }
+
+  /* Keep inline code tokens intact — never break/justify them apart. */
+  code {
+    overflow-wrap: normal;
   }
 
   /* Body text fills the content column so it lines up with the title, tables,
