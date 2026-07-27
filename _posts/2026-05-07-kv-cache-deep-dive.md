@@ -15,6 +15,9 @@ _styles: >
   .bi:hover { background: color-mix(in srgb, var(--global-theme-color) 9%, transparent); box-shadow: -0.5rem 0 0 color-mix(in srgb, var(--global-theme-color) 9%, transparent); }
   .bi.is-vi { background: color-mix(in srgb, var(--global-signal) 11%, transparent); box-shadow: -0.5rem 0 0 color-mix(in srgb, var(--global-signal) 11%, transparent); }
   .bi.is-vi::after { content: "VI"; font-family: var(--font-mono); font-size: .58rem; letter-spacing: .1em; color: var(--global-signal); vertical-align: super; margin-left: .4ch; opacity: .8; }
+  /* Bilingual list items are authored as a loose list so each <li> can carry its
+     own translation; strip the paragraph margin so the bullets stay tight. */
+  .post-content li > p.bi { margin: 0; }
 
   /* floating peek tooltip */
   #bi-tip { position: fixed; z-index: 1200; max-width: 460px; background: var(--global-surface-color); color: var(--global-text-color); border: 1px solid var(--global-border-color); border-left: 3px solid var(--global-theme-color); border-radius: 7px; padding: .7rem .95rem; font-family: var(--font-body); font-size: .92rem; line-height: 1.62; box-shadow: 0 16px 46px -16px rgba(0,0,0,.7); pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity .12s ease, transform .12s ease; }
@@ -66,10 +69,16 @@ Before the formula, pin down these four constraints — they change the final nu
 {: .bi data-vi="Trước khi vào công thức, xác định rõ 4 ràng buộc sau — chúng quyết định con số cuối cùng khác nhau bao nhiêu lần:"}
 
 - **The GPU you have:** count and type (VRAM, bandwidth) — 1× RTX 4090 24GB is nothing like 8× H100 80GB.
+  {: .bi data-vi="GPU bạn có: số lượng, loại (VRAM, băng thông) — 1× RTX 4090 24GB khác hẳn 8× H100 80GB."}
+
 - **Expected concurrent users:** one dev testing is not twenty production users. Cache multiplies linearly with this.
+  {: .bi data-vi="Concurrent users kỳ vọng: 1 dev test khác 20 user production. Cache nhân tuyến tính theo số này."}
+
 - **Context length to support:** short chat (4K) is not document processing (128K+). This is the single strongest variable.
+  {: .bi data-vi="Context length cần hỗ trợ: chat ngắn (4K) khác document processing (128K+). Đây là biến ảnh hưởng mạnh nhất."}
+
 - **Serving engine:** Ollama for prototyping, vLLM / SGLang for production — the wrong engine makes every other optimization pointless.
-{: .bi data-vi="- GPU bạn có: số lượng, loại (VRAM, băng thông) — 1× RTX 4090 24GB khác hẳn 8× H100 80GB. - Concurrent users kỳ vọng: 1 dev test khác 20 user production. Cache nhân tuyến tính theo số này. - Context length cần hỗ trợ: chat ngắn (4K) khác document processing (128K+). Đây là biến ảnh hưởng mạnh nhất. - Serving engine đang/sẽ dùng: Ollama cho prototype, vLLM/SGLang cho production — engine sai thì tối ưu đúng cũng vô nghĩa."}
+  {: .bi data-vi="Serving engine đang/sẽ dùng: Ollama cho prototype, vLLM/SGLang cho production — engine sai thì tối ưu đúng cũng vô nghĩa."}
 
 The post assumes you have **already picked a model** (it does not compare which is best) — it focuses on the capacity planning that most deployment plans skip.
 {: .bi data-vi="Bài giả định bạn đã chọn được model (không so sánh model nào tốt hơn) — tập trung vào phần capacity planning mà hầu hết kế hoạch deploy bỏ sót."}
@@ -274,10 +283,16 @@ An H100 has 990 TFLOPS, but one decode token needs only ~1 GFLOP — compute uti
 {: .bi data-vi="Những gì mình cân nhắc nhưng bỏ — kèm lý do (để chặn trước câu hỏi 'sao không làm X'):"}
 
 - **MQA instead of GQA** — cuts cache 64× instead of 8×, but quality dropped noticeably on long-reasoning tasks in internal tests. Dropped, unless VRAM is a hard, unbeatable constraint.
+  {: .bi data-vi="MQA thay vì GQA — giảm cache 64× thay vì 8×, nhưng chất lượng giảm đáng kể trên task reasoning dài trong test nội bộ. Bỏ, trừ khi VRAM là ràng buộc cứng không thể vượt qua."}
+
 - **Sliding window on by default** — a fixed cache sounds attractive, but it breaks document QA when the question references the start of the document. Only enable it for pure chat endpoints; turn it off for document processing.
+  {: .bi data-vi="Sliding window bật mặc định — cache cố định nghe hấp dẫn, nhưng làm hỏng document QA khi câu hỏi tham chiếu đầu tài liệu. Chỉ bật cho endpoint chat thuần, tắt cho endpoint document processing."}
+
 - **Ollama for production** — quick to install, great for prototyping, but no real PagedAttention / continuous batching, so throughput collapses under concurrent users. Move to vLLM as soon as you're past the demo stage.
+  {: .bi data-vi="Ollama cho production — cài nhanh, tốt cho prototype, nhưng không có PagedAttention/continuous batching thật nên throughput không đủ khi nhiều user vào cùng lúc. Chuyển sang vLLM ngay khi qua giai đoạn demo."}
+
 - **CPU offload to "save GPU"** — running 70B on system RAM gives only ~1–3 tokens/sec, enough to test but not to serve. Dropped; better to buy/rent more GPU than to offload.
-{: .bi data-vi="- MQA thay vì GQA — giảm cache 64× thay vì 8×, nhưng chất lượng giảm đáng kể trên task reasoning dài trong test nội bộ. Bỏ, trừ khi VRAM là ràng buộc cứng không thể vượt qua. - Sliding window bật mặc định — cache cố định nghe hấp dẫn, nhưng làm hỏng document QA khi câu hỏi tham chiếu đầu tài liệu. Chỉ bật cho endpoint chat thuần, tắt cho endpoint document processing. - Ollama cho production — cài nhanh, tốt cho prototype, nhưng không có PagedAttention/continuous batching thật nên throughput không đủ khi nhiều user vào cùng lúc. Chuyển sang vLLM ngay khi qua giai đoạn demo. - CPU offload để 'tiết kiệm GPU' — chạy 70B trên RAM hệ thống chỉ được ~1–3 token/giây, đủ để test, không đủ production. Bỏ, chấp nhận mua/thuê thêm GPU thay vì offload."}
+  {: .bi data-vi="CPU offload để 'tiết kiệm GPU' — chạy 70B trên RAM hệ thống chỉ được ~1–3 token/giây, đủ để test, không đủ production. Bỏ, chấp nhận mua/thuê thêm GPU thay vì offload."}
 
 **Quick cheat sheet** (KV cache by model, 1 user, BF16):
 {: .bi data-vi="Cheat sheet tra nhanh (KV cache theo model, 1 user, BF16):"}

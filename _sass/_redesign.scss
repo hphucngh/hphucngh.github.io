@@ -267,6 +267,27 @@ footer.sticky-bottom {
 }
 
 /* ---------------------------------------------------------------------------
+ * Justified body prose — a consistent even right edge on every content page
+ * (posts, notes, about, glossary and other standalone pages). We justify every
+ * paragraph inside a `.post` wrapper, plus list items in the reading article
+ * (.post-content, handled in _blog.scss) and on the about page. Index/sidebar
+ * and TOC lists are left alone so their nav items never stretch. break-word
+ * keeps long tokens (variable names, URLs) from opening ugly gaps.
+ * ------------------------------------------------------------------------- */
+.post p,
+.about-page .clearfix li,
+.a-desc, /* article-card excerpts on the synthesis / archive listings */
+.f-desc {
+  /* featured-card excerpt */
+  text-align: justify;
+  text-justify: inter-word;
+  overflow-wrap: break-word;
+}
+.post code {
+  overflow-wrap: normal;
+}
+
+/* ---------------------------------------------------------------------------
  * Motion — respect reduced-motion
  * ------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
