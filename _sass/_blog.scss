@@ -156,7 +156,6 @@
   margin-top: 1.5rem;
   padding-top: 0.75rem;
   border-top: 1px solid var(--global-divider-color);
-  font-size: 0.72rem;
   color: var(--global-text-color-light);
 
   a {
@@ -166,6 +165,40 @@
     &:hover {
       color: var(--global-theme-color);
     }
+  }
+
+  /* English is the default reading track — same visual weight as the old
+     one-line disclaimer, so nothing regresses for existing pages. */
+  .post-disclaimer-en {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--global-text-color-light);
+  }
+
+  /* Vietnamese sits directly under it, one notch quieter (italic, slightly
+     smaller, muted), with a hair-line rule and a "VI" mono tag on the left so
+     the reader can tell at a glance that it's the translation of the line
+     above. */
+  .post-disclaimer-vi {
+    margin: 0.4rem 0 0;
+    padding-top: 0.4rem;
+    padding-left: 0.7rem;
+    border-left: 1px solid var(--global-divider-color);
+    font-size: 0.7rem;
+    font-style: italic;
+    color: var(--global-text-color-light);
+    opacity: 0.78;
+  }
+  .post-disclaimer-vi::before {
+    content: "VI  ";
+    font-family: var(--font-mono);
+    font-size: 0.56rem;
+    font-style: normal;
+    letter-spacing: 0.14em;
+    color: var(--global-theme-color);
+    vertical-align: 1px;
+    margin-right: 0.15em;
+    opacity: 0.85;
   }
 }
 
