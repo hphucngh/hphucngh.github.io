@@ -51,25 +51,6 @@ pagination:
   }
 }
 
-/* ─── Page header ──────────────────────────────────────────────── */
-.blog-page-header {
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--global-divider-color);
-}
-.blog-page-title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--global-theme-color);
-  margin: 0 0 0.2rem;
-}
-.blog-page-title::before { content: '> '; opacity: 0.5; }
-.blog-page-desc {
-  font-size: 0.82rem;
-  color: var(--global-text-color-light);
-  margin: 0;
-}
-
 /* ─── Two-column layout ─────────────────────────────────────────── */
 .blog-layout {
   display: grid;
@@ -294,15 +275,6 @@ pagination:
   opacity: 0.7;
 }
 
-/* ─── Blog page title bar ───────────────────────────────────────── */
-.blog-page-title {
-  font-size: 0.72rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.13em !important;
-}
-.blog-page-title::before { content: '' !important; }
-
 /* ─── Articles label ────────────────────────────────────────────── */
 .articles-label {
   font-size: 0.65rem;
@@ -320,11 +292,11 @@ pagination:
 
 <div class="blog-scene">
 
-  <!-- Page header -->
-  <div class="blog-page-header">
-    <h1 class="blog-page-title">synthesis</h1>
-    <p class="blog-page-desc">Systems, engineering, AI, and notes from the field.</p>
-  </div>
+  <!-- Page header — matches glossary/notes so all index pages share one look. -->
+  <header class="post-header">
+    <h1 class="post-title">synthesis</h1>
+    <p class="post-description">Systems, engineering, AI, and notes from the field.</p>
+  </header>
 
   <div class="blog-layout">
 

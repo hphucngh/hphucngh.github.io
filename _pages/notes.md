@@ -6,14 +6,7 @@ description: Personal thoughts, reflections, and short notes.
 nav: true
 nav_order: 6
 _styles: >
-  /* ── Ẩn post-header mặc định ── */
-  .post-header { display: none; }
-
-  /* ── Xoá margin-top của container ── */
-  .container.mt-5 { margin-top: 0 !important; padding-top: 0 !important; }
-  .post > article  { margin-top: 0; padding-top: 0; }
-
-  /* ── Remove gradient, blobs ── */
+  /* Keep the shared page header (title + description) — same style as glossary/synthesis. */
   body { background-image: none !important; }
 ---
 
@@ -27,28 +20,6 @@ _styles: >
 
 /* ─── Hide blobs ───────────────────────────────────────────────── */
 .blob { display: none; }
-
-/* ─── Page header ──────────────────────────────────────────────── */
-.notes-page-header {
-  position: relative;
-  z-index: 1;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--global-divider-color);
-}
-.notes-page-title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--global-theme-color);
-  margin: 0 0 0.2rem;
-  letter-spacing: 0;
-}
-.notes-page-title::before { content: '> '; opacity: 0.5; }
-.notes-page-desc {
-  font-size: 0.82rem;
-  color: var(--global-text-color-light);
-  margin: 0;
-}
 
 /* ─── Timeline spine ───────────────────────────────────────────── */
 .notes-timeline {
@@ -218,11 +189,6 @@ _styles: >
 
     <!-- Main content -->
     <div class="col-sm-9">
-      <div class="notes-page-header">
-        <h1 class="notes-page-title">notes</h1>
-        <p class="notes-page-desc">Personal thoughts, reflections, and short notes.</p>
-      </div>
-
       <!-- Knowledge Graph -->
       <div class="notes-graph-section">
         <div class="notes-graph-header">

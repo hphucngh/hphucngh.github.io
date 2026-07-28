@@ -1,19 +1,86 @@
 <div
   id="knowledge-graph"
-  style="position: relative; width: 100%; margin-bottom: 0.5rem"
+  style="position: relative; width: 100%; margin-bottom: 0.75rem"
   data-graph-url="{{ '/assets/data/graph-data.json' | relative_url }}"
 ></div>
-<div class="graph-legend" style="display: flex; flex-wrap: wrap; gap: 0.75rem; font-size: 0.72rem; color: var(--global-text-color-light); margin-bottom: 2rem;">
-  <span><span style="color: #e74c3c;">●</span> ml</span>
-  <span><span style="color: #2698BA;">●</span> engineering</span>
-  <span><span style="color: #27ae60;">●</span> thinking</span>
-  <span><span style="color: #f39c12;">●</span> personal</span>
+
+<div class="kg-legend" role="list" aria-label="Note categories">
+  <span class="kg-chip" role="listitem" style="--kg-c:#e74c3c"><span class="kg-shape kg-tri"></span>ml</span>
+  <span class="kg-chip" role="listitem" style="--kg-c:#2698BA"><span class="kg-shape kg-sq"></span>engineering</span>
+  <span class="kg-chip" role="listitem" style="--kg-c:#27ae60"><span class="kg-shape kg-dia"></span>thinking</span>
+  <span class="kg-chip" role="listitem" style="--kg-c:#f39c12"><span class="kg-shape kg-hex"></span>personal</span>
 </div>
-<script
-  src="https://d3js.org/d3.v7.min.js"
-  defer
-></script>
-<script
-  src="{{ '/assets/js/knowledge-graph.js' | relative_url }}"
-  defer
-></script>
+
+<style>
+  .kg-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0.25rem 0 1.75rem;
+  }
+  .kg-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55ch;
+    padding: 0.22rem 0.65rem;
+    border: 1px solid var(--kg-c);
+    border-radius: 3px;
+    background: color-mix(in srgb, var(--kg-c) 14%, transparent);
+    color: var(--kg-c);
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  /* Flat silhouettes of the 3D shapes used inside the graph, so the legend
+     communicates both the colour AND the geometry. */
+  .kg-shape {
+    display: inline-block;
+    width: 0.78em;
+    height: 0.78em;
+    background: var(--kg-c);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--kg-c) 25%, transparent);
+  }
+  .kg-tri {
+    clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    box-shadow: none;
+  }
+  .kg-sq {
+    /* plain square — no clip-path needed */
+  }
+  .kg-dia {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+    box-shadow: none;
+  }
+  .kg-hex {
+    clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+    box-shadow: none;
+  }
+</style>
+
+<!--
+  three.js dropped UMD builds at r150, and both 3d-force-graph and
+  three-spritetext peer-depend on three. If any of them bundles its own copy,
+  we hit the "multiple THREE instances" crash inside the render loop.
+  Fix: declare `three` in an import map, then load the other two from esm.sh
+  with `?external=three` so they re-use the exact same three instance.
+-->
+<script type="importmap">
+  {
+    "imports": {
+      "three": "https://esm.sh/three@0.180.0",
+      "three/": "https://esm.sh/three@0.180.0/"
+    }
+  }
+</script>
+<script type="module">
+  import * as THREE from "three";
+  import SpriteText from "https://esm.sh/three-spritetext@1.9.0?external=three";
+  import ForceGraph3D from "https://esm.sh/3d-force-graph@1.77.0?external=three";
+  window.__kgDeps = { THREE: THREE, SpriteText: SpriteText, ForceGraph3D: ForceGraph3D };
+  window.dispatchEvent(new CustomEvent("kg-deps-ready"));
+</script>
+<script src="{{ '/assets/js/knowledge-graph.js' | relative_url | bust_file_cache }}" defer></script>
