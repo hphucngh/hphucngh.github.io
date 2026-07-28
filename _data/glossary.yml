@@ -103,3 +103,30 @@
   en: The phase that generates output one token at a time, sequentially; memory-bandwidth-bound.
   vi: Pha sinh output từng token, tuần tự, giới hạn bởi băng thông bộ nhớ.
   related: [prefill]
+
+- slug: data-residency
+  term: Data residency
+  category: Compliance
+  en: A legal or contractual requirement that data be processed and stored within a specific jurisdiction — often the real reason to self-host instead of using a third-party API.
+  vi: "Yêu cầu pháp lý/hợp đồng rằng dữ liệu phải được xử lý và lưu trữ trong một khu vực pháp lý cụ thể — thường là lý do thật khiến phải tự host thay vì dùng API bên thứ ba."
+
+- slug: break-even
+  term: Break-even (tokens/day)
+  category: Economics
+  en: The traffic volume at which self-hosting cost equals API cost; below it an API is cheaper, above it self-hosting starts to win — but only once idle time and engineering cost are included.
+  vi: "Ngưỡng lưu lượng mà chi phí tự host bằng chi phí API; dưới ngưỡng thì API rẻ hơn, trên ngưỡng tự host mới bắt đầu thắng — nhưng chỉ khi đã tính đủ GPU idle và chi phí engineering."
+  related: [gpu-idle-cost]
+
+- slug: gpu-idle-cost
+  term: GPU idle cost
+  category: Economics
+  en: Cloud GPUs bill by the hour regardless of load, so low utilization inflates the effective per-token cost — a GPU at 10% load can raise cost/token roughly 10×.
+  vi: "GPU cloud tính tiền theo giờ bất kể tải, nên utilization thấp đẩy cost/token thực tế lên cao — GPU ở 10% load có thể tăng cost/token khoảng 10×."
+  related: [break-even]
+
+- slug: hybrid-routing
+  term: Hybrid routing
+  category: Architecture
+  en: Serving cheap self-hosted models for bulk/simple tasks and routing only the hard cases to a frontier API through a simple dispatcher — the pattern most 2026 production systems actually run.
+  vi: "Serve model rẻ tự host cho task đơn giản/số lượng lớn, chỉ route các case khó sang API frontier qua một router đơn giản — kiến trúc đa số hệ thống production 2026 thực sự dùng."
+  related: [moe]
