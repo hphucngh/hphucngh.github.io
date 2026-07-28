@@ -34,11 +34,11 @@ ninja.data = [{
             window.location.href = "/synthesis/2026/kv-cache-deep-dive/";
           
         },
-      },{id: "post-tự-host-llm-hay-dùng-api-quyết-định-bằng-con-số-self-host-llm-vs-api-a-numbers-based-decision",
+      },{id: "post-self-host-llm-vs-api-the-numbers-based-decision-and-why-95-should-pick-the-api",
         
-          title: "Tự host LLM hay dùng API: quyết định bằng con số / Self-Host...",
+          title: "Self-host LLM vs. API: the numbers-based decision, and why 95% should pick the...",
         
-        description: "Vì sao 95% trường hợp nên dùng API, cách tính đúng VRAM và điểm hoà vốn, và stack production nếu bạn quyết tự host. Bài song ngữ Việt/Anh, số liệu 05/2026. — Why 95% of teams should use an API, how to calculate real VRAM and break-even, and the production stack if you do self-host. Bilingual VI/EN, data as of May 2026.",
+        description: "Why 95% of teams should use an API instead of self-hosting, how to calculate real VRAM and the break-even point, and the production stack if you do self-host — with 2026 model, pricing, and cost-breakdown numbers. English by default; hover or click any paragraph for the Vietnamese.",
         section: "Posts",
         handler: () => {
           
