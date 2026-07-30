@@ -267,7 +267,7 @@ jekyll-archives:
       categories: "/synthesis/:type/:name/"
 
 display_tags: ["LLM", "inference", "KV-cache", "infrastructure", "self-host", "production"] # actual post tags shown in the synthesis sidebar (AI is a category, not a tag)
-display_categories: ["AI"] # these categories will be displayed on the front page of your blog
+display_categories: ["AI", "Certification"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------
 # Jekyll Scholar

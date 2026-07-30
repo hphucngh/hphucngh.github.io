@@ -1,0 +1,1160 @@
+---
+layout: post
+title: "Alibaba Cloud Certified LLM Engineer (Professional) Mock Exam 5"
+date: 2026-07-29 09:00:00
+description: >
+  Extended mock exam for the Alibaba Cloud ACP – Large Language Model certification: 75 questions (50 single-choice + 25 multiple-choice). Instant scoring and explanations.
+tags: [certification, mock-exam, llm]
+categories: Certification
+related_posts: false
+_styles: >
+  /* Terminal, Typeset — everything below uses the site's --global-* design
+     tokens (colors, fonts, dividers) so the exam looks native on both themes.
+     Scoped under .acp-mock so it can't leak into the rest of the post-content. */
+
+  .acp-mock { font-family: var(--font-body); color: var(--global-text-color); line-height: 1.55; }
+  .acp-mock * { box-sizing: border-box; }
+
+  /* Instrument-rail top bar (title + answered/timer stats) */
+  .acp-mock .top {
+    background: var(--global-surface-color);
+    border: 1px solid var(--global-divider-color);
+    border-radius: 5px;
+    margin-bottom: 1.4rem;
+  }
+  .acp-mock .topin {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: .8rem; flex-wrap: wrap;
+    padding: .7rem 1rem;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    letter-spacing: .02em;
+  }
+  .acp-mock .topin .title {
+    color: var(--global-theme-color);
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+  .acp-mock .stat { color: var(--global-text-color-light); }
+  .acp-mock .stat b { color: var(--global-text-color); }
+  .acp-mock #timer {
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: var(--global-theme-color);
+  }
+
+  /* Hero card + rules callout (mono heading, amber accent like site's block-tip) */
+  .acp-mock .hero {
+    background: var(--global-card-bg-color);
+    border: 1px solid var(--global-divider-color);
+    border-left: 2px solid var(--global-theme-color);
+    border-radius: 5px;
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1.6rem;
+  }
+  .acp-mock .hero h2 {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--global-text-color);
+    margin: 0 0 .35rem;
+  }
+  .acp-mock .hero .sub {
+    color: var(--global-text-color-light);
+    font-size: .88rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+  .acp-mock .rules {
+    background: color-mix(in srgb, var(--global-signal) 8%, transparent);
+    border: 1px solid color-mix(in srgb, var(--global-signal) 30%, transparent);
+    border-left: 2px solid var(--global-signal);
+    border-radius: 4px;
+    padding: .85rem 1.05rem;
+    font-size: .85rem;
+    line-height: 1.6;
+    color: var(--global-text-color);
+  }
+  .acp-mock .rules > b {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: .62rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--global-signal);
+    margin-bottom: .5rem;
+  }
+  .acp-mock .rules ul { margin: .4rem 0 0 1.1rem; padding: 0; }
+  .acp-mock .rules li { margin: .25rem 0; }
+
+  /* Part heading — instrument label ("// PART I") */
+  .acp-mock .part {
+    margin: 2.1rem 0 .75rem;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--global-theme-color);
+    padding-bottom: .4rem;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+  .acp-mock .part::before { content: "// "; opacity: .5; }
+  .acp-mock .part span {
+    display: block;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: .66rem;
+    letter-spacing: .06em;
+    text-transform: none;
+    color: var(--global-text-color-light);
+    margin-top: .25rem;
+  }
+
+  /* Question card */
+  .acp-mock .q {
+    background: var(--global-card-bg-color);
+    border: 1px solid var(--global-divider-color);
+    border-radius: 5px;
+    padding: 1.15rem 1.35rem;
+    margin: 1rem 0;
+  }
+  .acp-mock .q.correct {
+    border-color: #27ae60;
+    border-left: 2px solid #27ae60;
+    background: color-mix(in srgb, #27ae60 7%, var(--global-card-bg-color));
+  }
+  .acp-mock .q.incorrect {
+    border-color: #e74c3c;
+    border-left: 2px solid #e74c3c;
+    background: color-mix(in srgb, #e74c3c 7%, var(--global-card-bg-color));
+  }
+  .acp-mock .qhead {
+    display: flex; align-items: center; gap: .5rem;
+    flex-wrap: wrap;
+    margin-bottom: .6rem;
+  }
+  .acp-mock .qnum {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: .74rem;
+    letter-spacing: .1em;
+    color: var(--global-theme-color);
+  }
+
+  /* Topic badges — pill style matching site's post-pill (border + tinted bg).
+     `!important` on the colours overrides Bootstrap/MDB's global .badge rule
+     which forces white text and a solid fill on any element with .badge. */
+  .acp-mock .badge {
+    font-family: var(--font-mono);
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    padding: .15rem .55rem;
+    border-radius: 3px;
+    border: 1px solid;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+  .acp-mock .b-AD  { color: #a97cff !important; border-color: #a97cff; background: color-mix(in srgb, #a97cff 14%, transparent) !important; }
+  .acp-mock .b-PE  { color: #4bb9d4 !important; border-color: #4bb9d4; background: color-mix(in srgb, #4bb9d4 14%, transparent) !important; }
+  .acp-mock .b-RAG { color: #29b8a6 !important; border-color: #29b8a6; background: color-mix(in srgb, #29b8a6 14%, transparent) !important; }
+  .acp-mock .b-FT  { color: #d4a24c !important; border-color: #d4a24c; background: color-mix(in srgb, #d4a24c 14%, transparent) !important; }
+  .acp-mock .b-AG  { color: #e05a75 !important; border-color: #e05a75; background: color-mix(in srgb, #e05a75 14%, transparent) !important; }
+  .acp-mock .b-PR  { color: var(--global-text-color-light) !important; border-color: var(--global-text-color-light); background: color-mix(in srgb, var(--global-text-color-light) 14%, transparent) !important; }
+  .acp-mock .pts {
+    font-family: var(--font-mono);
+    font-size: .6rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--global-text-color-light);
+  }
+
+  .acp-mock .qtext {
+    font-size: .92rem;
+    line-height: 1.65;
+    margin-bottom: .7rem;
+    color: var(--global-text-color);
+    text-align: left;
+  }
+
+  /* Answer options */
+  .acp-mock .opt {
+    display: flex; gap: .65rem; align-items: flex-start;
+    padding: .55rem .75rem;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 4px;
+    margin: .4rem 0;
+    cursor: pointer;
+    background: var(--global-surface-color);
+    font-size: .87rem;
+    line-height: 1.55;
+    color: var(--global-text-color);
+    transition: border-color .12s ease, background .12s ease;
+    text-align: left;
+  }
+  .acp-mock .opt:hover { border-color: var(--global-theme-color); }
+  .acp-mock .opt input {
+    margin-top: .25rem;
+    flex: none;
+    accent-color: var(--global-theme-color);
+  }
+  .acp-mock .opt.right {
+    border-color: #27ae60 !important;
+    background: color-mix(in srgb, #27ae60 12%, var(--global-surface-color)) !important;
+  }
+  .acp-mock .opt.wrongpick {
+    border-color: #e74c3c !important;
+    background: color-mix(in srgb, #e74c3c 12%, var(--global-surface-color)) !important;
+  }
+  .acp-mock .letter {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    flex: none;
+    color: var(--global-theme-color);
+  }
+
+  /* Explanation block */
+  .acp-mock .expl {
+    display: none;
+    margin-top: .75rem;
+    border-top: 1px dashed var(--global-divider-color);
+    padding-top: .75rem;
+    font-size: .83rem;
+    line-height: 1.6;
+    color: var(--global-text-color);
+    text-align: left;
+  }
+  .acp-mock .expl .verdict {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    margin-bottom: .4rem;
+  }
+  .acp-mock .expl .anskey {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--global-theme-color);
+    letter-spacing: .06em;
+  }
+  .acp-mock.graded .expl,
+  .acp-mock .expl.shown { display: block; }
+  .acp-mock.graded .opt { cursor: default; }
+
+  /* Reveal (study-mode) button */
+  .acp-mock .revealbtn {
+    margin-left: auto;
+    background: transparent;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 3px;
+    padding: .2rem .65rem;
+    font-family: var(--font-mono);
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--global-theme-color);
+    cursor: pointer;
+    flex: none;
+    transition: border-color .12s ease, background .12s ease;
+  }
+  .acp-mock .revealbtn:hover {
+    border-color: var(--global-theme-color);
+    background: color-mix(in srgb, var(--global-theme-color) 12%, transparent);
+  }
+  .acp-mock.graded .revealbtn { display: none; }
+
+  /* Submit / Reset buttons */
+  .acp-mock .actions { text-align: center; margin: 2rem 0 1rem; }
+  .acp-mock button.primary {
+    background: var(--global-theme-color);
+    color: var(--global-bg-color);
+    border: none;
+    border-radius: 5px;
+    padding: .85rem 2.2rem;
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: filter .12s ease;
+  }
+  .acp-mock button.primary:hover { filter: brightness(1.1); }
+  .acp-mock button.ghost {
+    background: transparent;
+    border: 1px solid var(--global-divider-color);
+    border-radius: 5px;
+    padding: .68rem 1.5rem;
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-left: .65rem;
+    color: var(--global-text-color-light);
+    transition: border-color .12s ease, color .12s ease;
+  }
+  .acp-mock button.ghost:hover {
+    border-color: var(--global-theme-color);
+    color: var(--global-theme-color);
+  }
+
+  /* Result panel */
+  .acp-mock #result {
+    display: none;
+    background: var(--global-card-bg-color);
+    border: 1px solid var(--global-theme-color);
+    border-left: 3px solid var(--global-theme-color);
+    border-radius: 5px;
+    padding: 1.4rem 1.6rem;
+    margin: 1.25rem 0;
+  }
+  .acp-mock #result h2 {
+    font-family: var(--font-mono);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--global-theme-color);
+    margin: 0 0 .55rem;
+  }
+  .acp-mock #result h2::before { content: "// "; opacity: .5; }
+  .acp-mock #result .big {
+    font-family: var(--font-heading);
+    font-size: 2.3rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: .3rem;
+  }
+  .acp-mock .pass { color: #27ae60; }
+  .acp-mock .fail { color: #e74c3c; }
+
+  /* Breakdown table — matches site's post-content table style */
+  .acp-mock table.brk {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: .9rem;
+    font-size: .82rem;
+  }
+  .acp-mock table.brk th,
+  .acp-mock table.brk td {
+    border: 1px solid var(--global-divider-color);
+    padding: .5rem .75rem;
+    text-align: left;
+  }
+  .acp-mock table.brk th {
+    background: var(--global-surface-color);
+    color: var(--global-theme-color);
+    font-family: var(--font-mono);
+    font-size: .64rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    border-top: 2px solid var(--global-theme-color);
+    border-bottom: 1px solid var(--global-theme-color);
+  }
+
+  /* Interactive dictionary hooks */
+  .acp-mock .w {
+    cursor: help;
+    border-radius: 3px;
+    transition: background .1s ease, box-shadow .1s ease;
+  }
+  .acp-mock .w:hover {
+    background: color-mix(in srgb, var(--global-theme-color) 14%, transparent);
+    box-shadow: inset 0 -1px 0 var(--global-theme-color);
+  }
+
+  /* Floating vocab popup — same look-and-feel as the bilingual .bi tooltip */
+  #vpop {
+    display: none;
+    position: fixed;
+    z-index: 1200;
+    max-width: 320px;
+    background: var(--global-surface-color);
+    color: var(--global-text-color);
+    border: 1px solid var(--global-divider-color);
+    border-left: 3px solid var(--global-theme-color);
+    border-radius: 6px;
+    box-shadow: 0 12px 32px rgba(0,0,0,.55);
+    padding: .7rem .9rem;
+    font-family: var(--font-body);
+    font-size: .88rem;
+    line-height: 1.5;
+  }
+  #vpop .vw {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--global-theme-color);
+    font-size: .92rem;
+    letter-spacing: .02em;
+    margin-bottom: .35rem;
+  }
+  #vpop .vd { color: var(--global-text-color); margin-bottom: .55rem; }
+  #vpop .vd i { color: var(--global-text-color-light); }
+  #vpop .vg {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--global-theme-color);
+    text-decoration: none;
+  }
+  #vpop .vg:hover { text-decoration: underline; }
+
+  /* Confirm modal — replaces the native browser confirm() so the "unanswered"
+     prompt stays inside the Terminal, Typeset language. */
+  #acp-modal {
+    position: fixed; inset: 0;
+    z-index: 1400;
+    display: none;
+    align-items: center; justify-content: center;
+    background: rgba(0, 0, 0, .6);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    padding: 1rem;
+  }
+  #acp-modal.on { display: flex; }
+  #acp-modal .panel {
+    background: var(--global-card-bg-color);
+    border: 1px solid var(--global-theme-color);
+    border-left: 3px solid var(--global-theme-color);
+    border-radius: 5px;
+    padding: 1.35rem 1.55rem;
+    width: 100%;
+    max-width: 440px;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, .55);
+    animation: acp-modal-in .18s ease-out;
+  }
+  @keyframes acp-modal-in {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: none; }
+  }
+  #acp-modal .m-eyebrow {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--global-theme-color);
+    margin-bottom: .4rem;
+  }
+  #acp-modal .m-eyebrow::before { content: "// "; opacity: .5; }
+  #acp-modal .m-title {
+    /* !important overrides the site-wide `h1..h6 { font-family: mono !important }` */
+    font-family: var(--font-heading) !important;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--global-text-color);
+    margin: 0 0 .35rem;
+  }
+  #acp-modal .m-body {
+    /* body copy in sans — override the site-wide mono !important on <p> */
+    font-family: var(--font-body) !important;
+    font-size: .88rem;
+    line-height: 1.6;
+    color: var(--global-text-color-light);
+    margin: 0 0 1.15rem;
+  }
+  #acp-modal .m-body b { color: var(--global-text-color); }
+  #acp-modal .m-actions {
+    display: flex; justify-content: flex-end; gap: .55rem;
+    flex-wrap: wrap;
+  }
+  #acp-modal .m-btn {
+    font-family: var(--font-mono);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .55rem 1.15rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: filter .12s ease, border-color .12s ease, color .12s ease, background .12s ease;
+  }
+  #acp-modal .m-btn.ok {
+    background: var(--global-theme-color);
+    color: var(--global-bg-color);
+    border: none;
+  }
+  #acp-modal .m-btn.ok:hover { filter: brightness(1.1); }
+  #acp-modal .m-btn.cancel {
+    background: transparent;
+    border: 1px solid var(--global-divider-color);
+    color: var(--global-text-color-light);
+  }
+  #acp-modal .m-btn.cancel:hover {
+    border-color: var(--global-theme-color);
+    color: var(--global-theme-color);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #acp-modal .panel { animation: none; }
+  }
+---
+<div class="acp-mock">
+<header class="top">
+  <div class="topin">
+    <div class="title">ACP LLM Mock Exam 5 · Extended</div>
+    <div class="stat">Answered: <b id="answered">0</b>/75 &nbsp;|&nbsp; Time left: <span id="timer">120:00</span></div>
+  </div>
+</header>
+  <div class="hero">
+    <h2>Alibaba Cloud ACP – Large Language Model · Mock Exam 5</h2>
+    <div class="rules">
+      <b>Instructions</b>
+      <ul>
+        <li>Part I: 50 single-choice questions × 1 point. Part II: 25 multiple-choice questions × 2 points. Total 100 points.</li>
+        <li>Passing score: <b>80</b>. Suggested duration: <b>120 minutes</b>.</li>
+        <li>Multiple-choice: you must select <b>all</b> correct options and <b>no</b> wrong ones to get the 2 points (no partial credit).</li>
+        <li>Click <b>Submit Exam</b> at the bottom to see your score, the answer key, and a short explanation for every question.</li>
+        <li>Study mode: press <b>Show answer</b> on any question to reveal its answer and explanation instantly — no need to submit first.</li>
+      </ul>
+    </div>
+  </div>
+  <div id="result"></div>
+  <div id="exam"></div>
+  <div class="actions">
+    <button class="primary" id="submitBtn" onclick="grade()">Submit Exam</button>
+    <button class="ghost" onclick="location.reload()">Reset</button>
+  </div>
+</div>
+
+<script>
+const TOPICS = {
+  AD:"LLM Application Development", PE:"Prompt Engineering", RAG:"Retrieval-Augmented Generation",
+  FT:"Fine-Tuning & Distillation", AG:"AI Agent Applications", PR:"Production & Security Compliance"
+};
+const Q = [
+{t:"s",k:"AD",q:"Your assistant's time-to-first-token grows from 0.4s to 4s as retrieved context grows from 1k to 30k tokens, even though answers stay short. Why does a longer prompt slow down the FIRST token specifically?",
+ o:["The tokenizer runs once per input character, so longer prompts multiply the number of complete tokenization passes",
+    "The first token is always sampled at a lower temperature, and low-temperature sampling takes longer for longer prompts here",
+    "Before generating, the model must prefill attention over every input token, and that computation grows with prompt length",
+    "Network transfer of the prompt dominates, and 30k tokens takes ten times longer to upload than to actually process"],
+ a:[2], e:"Generation has two phases: prefill (process the whole prompt, build the KV cache) and decode (emit tokens). Prefill cost scales with input length, which is exactly what delays the first token. Trimming context is the lever — sampling settings and upload time are not the bottleneck."},
+{t:"s",k:"AD",q:"Every request to your assistant starts with the same 3,000-token system prompt and tool definitions, followed by a short user question. Your provider offers a context-caching feature. What benefit should you expect from enabling it?",
+ o:["The cache stores the model's weights closer to the GPU, raising accuracy for prompts that repeat frequently",
+    "Caching disables billing entirely for requests shorter than the cached prefix, making short questions free",
+    "The repeated static prefix is cached across requests, cutting the cost and prefill latency attributable to those tokens",
+    "The model's answers are cached, so any user asking any question receives the previous user's response instantly in practice"],
+ a:[2], e:"Context/prompt caching reuses computation for a repeated prefix (system prompt, tool schemas), reducing prefill cost and latency for the static part. It does not cache answers, change accuracy, or make requests free — the variable suffix is still processed and billed."},
+{t:"s",k:"AD",q:"A teammate needs strictly parseable output and writes elaborate prompt instructions begging for JSON. You notice the API itself offers a structured-output option (e.g., a JSON response format parameter). What is the right engineering choice?",
+ o:["Rely on prompt phrasing alone, because API-level format options are deprecated in favor of persuasive instructions in most cases",
+    "Use the API's structured-output mode as the base guarantee, keeping schema instructions and validation as complementary layers",
+    "Use neither mechanism and post-process free text with regular expressions, which is more robust than either option",
+    "Alternate between the two mechanisms randomly per request so that neither one becomes a single point of failure"],
+ a:[1], e:"When the platform offers native structured output/JSON mode, use it — it constrains decoding itself. Keep schema-in-prompt and downstream validation as defense in depth: JSON mode guarantees syntax, not that values are semantically right."},
+{t:"s",k:"AD",q:"Finance wants the assistant to read photographed receipts and extract totals. The current stack sends the image's file name to a text-only LLM, which unsurprisingly invents numbers. What is the correct architectural fix?",
+ o:["Rename the image files to include the receipt totals so that the text-only model can read the numbers from the file names in practice",
+    "Use a vision-language (multimodal) model that accepts the image itself, or run OCR first and feed the extracted text to the LLM",
+    "Lower the temperature to zero so the model stops inventing totals and instead retrieves the true numbers from its weights",
+    "Increase max_tokens so the text model has enough room to reason its way toward the amounts printed on the receipt"],
+ a:[1], e:"A text model cannot see pixels — it needs either a multimodal (VL) model that ingests images or an OCR step that converts the image to text. No sampling setting lets a model extract numbers it was never given."},
+{t:"s",k:"AD",q:"A developer wants query embeddings for similarity search and, to save an integration, calls the chat-completion endpoint asking the model to \"output your internal embedding vector as a list of floats\". The model happily outputs 512 numbers. What is wrong with this approach?",
+ o:["Chat endpoints emit embeddings in a proprietary order, so the floats simply need to be re-sorted before indexing them",
+    "The approach is fine as long as the same prompt is reused, because identical prompts always yield identical embeddings in practice",
+    "The vector is real but only has meaning at temperatures below 0.1, so the sampling settings must be corrected first",
+    "The numbers are generated text, not the model's actual representation — use a dedicated embedding model and endpoint instead"],
+ a:[3], e:"A chat model asked for \"its embedding\" just generates plausible-looking numbers — they are hallucinated tokens, not internal representations. Embeddings come from dedicated embedding models/endpoints designed to produce consistent vectors."},
+{t:"s",k:"AD",q:"Your budget model assumed \"1 token ≈ 1 word\". After launching the Vietnamese version, token consumption per message is far higher than projected and bills overshoot. What is the sound way to budget token usage?",
+ o:["Assume Vietnamese tokenizes identically to English, and attribute any billing difference to provider-side errors",
+    "Count characters and divide by exactly four, which is the universal constant ratio for every language and model",
+    "Measure with the model's actual tokenizer on representative text, since tokens per word vary widely across languages",
+    "Count whitespace-separated words, since all modern tokenizers are calibrated to emit one token per word on average here"],
+ a:[2], e:"Tokenization is model- and language-specific: non-English text often produces substantially more tokens per word. Budget from tokenizer measurements on real samples of your actual languages — never from word counts or universal ratios."},
+{t:"s",k:"AD",q:"Your app stays well under the requests-per-minute limit, yet during long-document season it keeps receiving rate-limit errors. The provider's limits page lists both RPM and TPM (tokens per minute). What is happening?",
+ o:["The provider counts each streamed chunk as one full request, so disabling streaming will restore the request budget in practice",
+    "Rate limits tighten automatically at month-end billing cycles, so the errors will clear when the invoice is issued",
+    "Long documents trigger the abuse filter, which mislabels the account, and only support tickets can lift that state",
+    "The token-per-minute ceiling is being hit by large requests, so reduce tokens per call or spread the heavy jobs over time"],
+ a:[3], e:"Providers meter both request count and token volume. A few huge requests can exhaust TPM while RPM looks healthy. Fixes: trim/segment documents, compress context, schedule heavy batches, or request higher limits."},
+{t:"s",k:"AD",q:"You add few-shot examples to a chat-based classifier. A colleague pastes all examples into one giant user message; the style guide instead suggests providing them as alternating user/assistant message pairs. What is the advantage of the message-pair form?",
+ o:["It doubles the effective context window, since paired messages are stored in a compressed area of the prompt",
+    "It prevents users from ever seeing the examples, which is impossible when they are placed in a single message",
+    "It bypasses token billing for the example content, because example messages are metered separately from real messages in practice",
+    "It shows the examples in the same structure as the real dialogue, letting the model imitate exactly how it should respond"],
+ a:[3], e:"Demonstrations formatted as actual user/assistant turns mirror the inference-time structure, which strengthens format imitation. There is no billing exemption, compression area, or visibility difference — all prompt content is tokenized and billed the same."},
+{t:"s",k:"AD",q:"Your production config points at a provider's convenience alias (the \"latest\" model name). One morning, answer style and quality shift noticeably with no deploy on your side. What is the root cause and the standard prevention?",
+ o:["The API key aged past its ninety-day quality window; keys must be rotated to restore the original model behavior",
+    "The alias silently moved to a newer model version; production should pin an explicit model version and upgrade deliberately",
+    "Temperature drifts upward as an account accumulates usage; periodic account resets are the standard countermeasure",
+    "The provider throttled quality due to high usage; purchasing reserved capacity is the only way to stabilize outputs in practice"],
+ a:[1], e:"\"Latest\" aliases re-point to new versions on the provider's schedule. Production should pin exact model versions, then upgrade through canary + evaluation baseline. Keys, usage volume, and billing tiers do not change model behavior."},
+{t:"m",k:"AD",q:"Your prompts have grown to 20k tokens (system prompt, tool schemas, retrieved context, history), and both latency and cost climb with them. Which mitigations genuinely help? (Select all that apply)",
+ o:["Raise the temperature, which makes the prefill phase run measurably faster",
+    "Cut redundant boilerplate and retrieve fewer, higher-quality context chunks",
+    "Enable provider context caching so the static prefix stops being recomputed",
+    "Summarize older conversation history rather than resending it in full"],
+ a:[1,2,3], e:"Prefill cost tracks input size: cache the static part, shrink the variable part, compress the history. Temperature affects sampling probabilities, not prefill speed."},
+{t:"m",k:"AD",q:"Which statements about tokens and budgeting are accurate? (Select all that apply)",
+ o:["The reliable way to estimate cost is measuring with the model's own tokenizer",
+    "Both input and output tokens are billed, and input often dominates in RAG apps",
+    "One whitespace-separated word always equals exactly one token in modern models",
+    "The same sentence can cost different token counts in different languages"],
+ a:[0,1,3], e:"Token counts vary by language and tokenizer; input volume usually dwarfs output in context-heavy apps; and real measurements beat rules of thumb. The one-word-one-token assumption is exactly what breaks budgets."},
+{t:"m",k:"AD",q:"Which statements about getting structured output from an LLM API are correct? (Select all that apply)",
+ o:["Native JSON/structured-output modes constrain the syntax of what the model emits",
+    "Function-calling schemas are another way to obtain machine-parseable arguments",
+    "Enabling JSON mode guarantees the field values are factually and logically correct",
+    "Downstream validation is still needed, since valid syntax can carry wrong values"],
+ a:[0,1,3], e:"JSON mode and tool schemas constrain form, not truth: a syntactically perfect object can still contain a wrong category or invented date, so schema validation and business checks remain."},
+{t:"m",k:"AD",q:"A model family offers a flagship model and a small fast variant. Which practices reflect sound model selection for your application? (Select all that apply)",
+ o:["Benchmark candidates on your own evaluation set instead of trusting public leaderboards alone",
+    "Default every endpoint to the flagship model, since maximum capability never hurts",
+    "Route requests by difficulty: the small model for routine tasks, the flagship for hard ones",
+    "Weigh latency and cost service targets alongside raw quality when choosing per endpoint"],
+ a:[0,2,3], e:"Tiered routing, own-workload benchmarks, and cost/latency-aware selection are the mature pattern. Flagship-everywhere pays top rates for tasks a small model handles identically — capability you don't need still bills you."},
+{t:"s",k:"PE",q:"To exploit prompt caching, your platform team asks you to restructure prompts so the cache actually hits. Your current prompt interleaves user data inside the instruction block. What structure should you adopt?",
+ o:["Static content first (instructions, schemas, examples), variable content last, so the shared prefix stays byte-identical",
+    "Alternate static and variable lines evenly so the cache can compress both kinds of content at the same ratio",
+    "Randomize section order per request so that over time every possible prefix ends up represented in the cache",
+    "Variable content first so the model reads fresh information earliest, with static rules appended after the user data in practice"],
+ a:[0], e:"Prefix caches match from the first byte: anything variable placed early invalidates the match for everything after it. Stable-first, variable-last ordering keeps the long static prefix cacheable — and is cleaner prompt structure anyway."},
+{t:"s",k:"PE",q:"Your system prompt says: \"Never mention our competitor RiverPay. Do not bring up RiverPay's pricing. Avoid RiverPay comparisons.\" Users report the bot now mentions RiverPay more than before the rule was added. What is the better prompting strategy?",
+ o:["Raise the temperature so the model has more freedom to creatively route conversations away from the competitor",
+    "Repeat the prohibition ten more times throughout the prompt so the model finally registers how important the rule is here",
+    "State positively what the bot should discuss — our own products and pricing — rather than repeating the forbidden name",
+    "Encode the competitor's name in base64 within the rule so the model understands it without being reminded of it"],
+ a:[2], e:"Negative instructions plant the very concept they forbid — three mentions of RiverPay make it salient. Positive framing (\"discuss our catalog; if asked about other vendors, redirect to ours\") steers behavior without seeding the topic."},
+{t:"s",k:"PE",q:"A 6,000-token prompt contains a critical rule at token ~3,000: \"All refund amounts must be quoted in VND.\" The model follows rules stated near the top and bottom but keeps missing this one. What phenomenon and fix apply?",
+ o:["Long-context attention favors the beginning and end; move critical rules to the start or restate them near the prompt's end",
+    "The rule exceeds the model's per-rule character limit; splitting it into two shorter rules will restore full compliance",
+    "Mid-prompt tokens are billed at a discount and processed with lower precision; padding the prompt fixes the imbalance",
+    "The currency symbol confuses the tokenizer; spelling out the currency in words is the only reliable way to be understood here"],
+ a:[0], e:"The \"lost in the middle\" effect: information buried mid-context gets less attention than content at the edges. Put must-follow rules at the top (and optionally restate critical ones at the end). There is no per-rule limit or discounted-token tier."},
+{t:"s",k:"PE",q:"Your prompt instructs the model to compute pro-rated subscription refunds step by step, but ~15% of calculations are still wrong, and the errors are arithmetic slips rather than logic mistakes. What is the most reliable next step?",
+ o:["Delegate the arithmetic to a calculator or code tool, letting the model extract parameters and explain the result instead",
+    "Switch the numbers to word form (\"three hundred\") so the model can process them in its stronger linguistic pathway",
+    "Ask the model to compute each refund five times in one response and output whichever value it generated most often",
+    "Add more chain-of-thought phrases per step, since arithmetic accuracy scales with the amount of reasoning text produced here"],
+ a:[0], e:"Token-by-token generation is unreliable at precise arithmetic no matter how much reasoning text surrounds it. Offload math to deterministic tools (calculator/code), keeping the LLM for parameter extraction and explanation — the same \"don't default to the LLM\" principle."},
+{t:"s",k:"PE",q:"For a high-stakes eligibility decision endpoint, single responses occasionally flip between \"approved\" and \"rejected\" on identical input. Latency is not critical. Which technique buys reliability here?",
+ o:["Maximum temperature: broader exploration ensures the single sampled response reflects all possible considerations here",
+    "Verdict streaming: emitting the decision word token by token gives the model extra time to reconsider it midway",
+    "Prompt shortening: removing the eligibility criteria from the prompt reduces the surface area for inconsistency",
+    "Self-consistency: sample several independent reasoning runs and take the majority verdict as the returned decision"],
+ a:[3], e:"When latency permits, self-consistency (multiple samples + majority vote) suppresses run-to-run flips on borderline cases. High temperature increases flips; streaming changes delivery, not the decision; deleting the criteria removes the basis for deciding."},
+{t:"s",k:"PE",q:"A hotfix edits the production prompt directly in the admin console on Friday; by Monday, three downstream teams report regressions, and nobody knows what the prompt looked like before. What working practice prevents this class of incident?",
+ o:["Treat prompts as code: version control, reviewed changes, and a regression evaluation gate before deployment",
+    "Freeze the prompt permanently after launch, since production prompts should never change for any reason at all",
+    "Restrict console access to one senior engineer, whose memory serves as the authoritative history of the prompt",
+    "Append hotfixes as extra paragraphs without deleting old text, so earlier versions remain embedded in the prompt"],
+ a:[0], e:"Prompts are behavioral artifacts: version them, review diffs, and gate deploys on eval runs — same as code releases. Memory is not version control, append-only prompts breed contradictions, and freezing forever blocks legitimate improvement."},
+{t:"s",k:"PE",q:"You want the model to review its own draft for factual and formatting problems before the user sees it. Asking it to \"write the answer, then critique it\" inside one response produces shallow self-praise. Which setup gets substantive review?",
+ o:["A doubled max_tokens setting, giving the single-call critique enough room to become substantially deeper",
+    "An instruction to award the draft a numeric grade, since scoring inherently produces more honest evaluation",
+    "The same single call but with the critique requested first, before the draft that it is supposed to evaluate here",
+    "A separate review pass: a second call (or reviewer role) with a concrete checklist critiques the finished draft"],
+ a:[3], e:"In-line self-critique right after drafting tends to be perfunctory — the model is grading its own fresh work. A separate pass with a reviewer role and explicit rubric (reflection) reliably finds more issues; token budget and grade formats don't change the incentive problem."},
+{t:"s",k:"PE",q:"After red-teaming, your team hardens the system prompt with anti-jailbreak language and declares the assistant \"injection-proof\". What is the accurate assessment of prompt-level defenses?",
+ o:["They are sufficient by themselves once the wording has been reviewed by at least two senior prompt engineers here",
+    "They only work when kept secret, so publishing any part of the system prompt voids all of their protection",
+    "They are counterproductive and should be removed so that attackers gain no information from probing them",
+    "They raise the attack cost but cannot be sufficient alone; guardrails and output moderation must back them up"],
+ a:[3], e:"Hardened prompts are one layer: useful, never sufficient — novel phrasings and indirect injections keep finding gaps. The course's defense-in-depth pairs prompt design with input/output guardrails and structural controls (data-vs-instruction separation)."},
+{t:"s",k:"PE",q:"An intern built a sentiment classifier prompt and left temperature at the account default of 1.0. Labels for borderline reviews change from run to run, breaking the analytics pipeline downstream. For a fixed-label classification task, what is the standard sampling configuration?",
+ o:["Temperature at or near zero, since classification wants the single most probable label, reproducibly",
+    "Temperature above 1.2, since label diversity across runs gives the analytics team a richer signal to study",
+    "Alternating temperature between zero and one per request to balance stability against exploration",
+    "Whatever the account default is, since sampling parameters have no effect on classification outputs"],
+ a:[0], e:"Classification is a deterministic mapping: run it at (near-)zero temperature so identical inputs yield identical labels. Randomized labels are noise in analytics, not signal."},
+{t:"m",k:"PE",q:"Which practices make a large production prompt maintainable AND cache-friendly? (Select all that apply)",
+ o:["Organize the prompt into clearly delimited sections with single responsibilities",
+    "Order sections static-first, variable-last so the shared prefix remains identical",
+    "Keep the prompt in version control with regression evals gating every change",
+    "Reshuffle the section order on every request to keep the model's attention fresh"],
+ a:[0,1,2], e:"Stable ordering feeds the cache, modular sections keep edits safe, and versioning with eval gates prevents silent regressions. Random reshuffling breaks caching AND makes behavior non-reproducible."},
+{t:"m",k:"PE",q:"For a high-stakes decision endpoint (loan pre-screening advice), which measures improve answer reliability? (Select all that apply)",
+ o:["A single high-temperature sample to ensure creative flexibility in verdicts",
+    "Programmatic validation of the output structure with retry on violations",
+    "Self-consistency voting across several independent samples for each decision",
+    "Requiring the decision to cite which provided criteria it applied and how"],
+ a:[1,2,3], e:"Majority voting, criteria citation, and validation loops all constrain variance and surface errors. \"Creative\" high-temperature verdicts are precisely what a decision endpoint must avoid."},
+{t:"m",k:"PE",q:"The model keeps violating one specific instruction in a 5,000-token prompt while following the rest. Which diagnostics and fixes are reasonable? (Select all that apply)",
+ o:["Add a few-shot example that demonstrates the rule being applied correctly",
+    "Check whether the rule sits mid-prompt where attention is weakest, and relocate it",
+    "Paste the same instruction twenty times consecutively as the primary remedy",
+    "Check whether another rule in the prompt conflicts with or overrides the failing one"],
+ a:[0,1,3], e:"Conflict audit, position (lost-in-the-middle) check, and demonstration via examples are the systematic fixes. Mass repetition bloats the prompt, degrades caching, and often still loses to a genuine conflict."},
+{t:"s",k:"RAG",q:"Analysis of failed retrievals shows two clusters: short keyword queries like \"leave form 2026\" match poorly with dense vectors, while conversational queries like \"how do I take time off for my wedding\" match poorly with keyword search. What retrieval architecture serves both?",
+ o:["Pure dense retrieval with a larger embedding model, since scale eventually subsumes keyword matching in practice",
+    "Hybrid retrieval combining sparse keyword scoring with dense vector similarity, merging both result lists",
+    "Pure keyword retrieval with a curated synonym dictionary maintained manually by the knowledge team",
+    "Asking users to classify their own query type on submission so one retriever runs per labeled query"],
+ a:[1], e:"Sparse (keyword/BM25-style) and dense (embedding) retrieval fail on opposite query styles; hybrid retrieval with result merging covers both. Bigger embeddings still fumble exact identifiers, and self-classifying users is a UX dead end."},
+{t:"s",k:"RAG",q:"You are choosing an embedding model. Model X outputs 512-dimensional vectors, Model Y outputs 3072-dimensional vectors. Your colleague assumes Y is automatically better. What is the correct engineering view?",
+ o:["Dimension count is the definitive quality metric, so the 3072-dimension model is superior for every workload in practice",
+    "Lower dimensions are always better because compact vectors are inherently less noisy and thus more accurate",
+    "Higher dimensions raise storage and compute cost and may not improve YOUR retrieval — benchmark both on your own data",
+    "Dimensions only affect the maximum number of documents an index can hold, not retrieval quality in any way"],
+ a:[2], e:"Dimensionality trades quality potential against index size, memory, and query cost — and gains depend on the model, domain, and language. Selection follows benchmarks on your corpus and queries, not the bigger number."},
+{t:"s",k:"RAG",q:"Users ask \"what is the maximum reimbursement for conference travel?\" The policy sentence sits at the very end of one chunk, and the amount table starts at the top of the next chunk. Retrieval returns the first chunk only, so answers name the policy but not the amount. Which indexing adjustment targets this failure?",
+ o:["Disable chunking entirely and embed the complete document as one vector to remove all the boundaries",
+    "Sort the chunks alphabetically during indexing so related content ends up adjacent in the vector store here",
+    "Add overlap between adjacent chunks so boundary-spanning information appears intact in at least one chunk",
+    "Reduce the embedding dimension so neighboring chunks produce more similar vectors than distant ones"],
+ a:[2], e:"Chunk overlap is the standard remedy for boundary splits: the policy line and the table top co-occur in an overlapping window. Whole-document embeddings destroy precision, and neither sorting nor dimensions changes what text a chunk contains."},
+{t:"s",k:"RAG",q:"For ambiguous questions like \"what about parking?\", single-query retrieval returns a lucky-dip of chunks. A colleague proposes: generate several rewritten variants of the user's question (visitor parking, employee parking, parking reimbursement), retrieve for each, and merge the results. What is this technique and its main effect?",
+ o:["Prompt dilution: adding variants weakens each query's embedding, and the technique is generally discouraged",
+    "Multi-query retrieval: variant queries widen coverage of plausible intents, improving recall on ambiguous questions",
+    "Query splitting: dividing a query into words and retrieving per word, which mainly reduces the token cost of search here",
+    "Recursive retrieval: each variant retrieves from the previous variant's results, narrowing to one perfect chunk"],
+ a:[1], e:"Multi-query retrieval generates intent variants, retrieves per variant, and merges (often with rerank). It trades extra retrieval calls for materially better recall on vague or multi-intent questions."},
+{t:"s",k:"RAG",q:"Legal requires that every answer from the compliance assistant be verifiable: reviewers must be able to check which document and section each claim came from. Retrieval already works well. What must the pipeline add?",
+ o:["Attach source metadata to each chunk in the prompt and instruct the model to cite document and section per claim",
+    "Store the model's attention weights per token and expose them to reviewers as the authoritative citation trail here",
+    "Raise answer length so the model naturally paraphrases enough of each document for reviewers to recognize it",
+    "Restrict answers to direct quotations only, since generated sentences can never be traced to their source text"],
+ a:[0], e:"Citations are an application feature: pass document/section metadata alongside chunk text and require per-claim references in the output format. Attention weights are not citations, and quote-only answers gut usefulness."},
+{t:"s",k:"RAG",q:"Your new RAG system has no ground-truth reference answers yet — the eval team hasn't written any. You still need to measure something meaningful this sprint. Which evaluation is available WITHOUT reference answers?",
+ o:["BLEU score against the reference set, which tolerates the references being absent from the computation",
+    "Faithfulness and context-relevance style metrics, which compare the answer against the retrieved context itself",
+    "No evaluation of any kind is possible until a complete human-written reference set has been produced",
+    "Answer correctness, which is defined as agreement with reference answers and needs no references to compute in practice"],
+ a:[1], e:"Reference-free metrics judge the answer against the retrieved context (is every claim grounded? is the context on-topic for the query?). Correctness/BLEU are reference-based by definition. You can also bootstrap references by synthesizing Q&A pairs from documents."},
+{t:"s",k:"RAG",q:"At 20 million vectors, exact nearest-neighbor search takes 3 seconds per query on your hardware — far beyond the latency budget. What is the standard architectural response?",
+ o:["Precompute the answer to every possible user question offline so no similarity search happens at query time at all in practice",
+    "Truncate every stored vector to its first ten dimensions, which preserves ranking while shrinking the search cost",
+    "Use an approximate nearest-neighbor index (e.g., graph-based), trading a small recall loss for orders-of-magnitude speed",
+    "Queue user queries so exact search runs overnight in batch, returning answers to users the following morning"],
+ a:[2], e:"ANN indexes (HNSW and similar) are the standard at scale: milliseconds per query with small, tunable recall loss. Truncating dimensions destroys the geometry; overnight answers and total precomputation aren't serious options for interactive QA."},
+{t:"s",k:"RAG",q:"Your RAG system launches next month, but there are zero historical user questions to build an evaluation set from. The docs team asks how evaluation can possibly start before launch. What is the course-aligned bootstrap?",
+ o:["Generate candidate question-answer pairs from the documents with an LLM, review them by hand, and use that as the seed eval set",
+    "Skip evaluation until three months of production questions accumulate, since synthetic questions have no evidential value in practice",
+    "Have the model evaluate itself daily on questions it invents at random, without any human review of the pairs",
+    "Copy a public QA benchmark from the internet, since generic benchmark scores transfer directly to any private corpus"],
+ a:[0], e:"Bootstrap by synthesizing Q&A from the corpus, with human review for quality — then grow the set from real production questions after launch. Public benchmarks don't reflect your domain; unreviewed self-evaluation compounds errors."},
+{t:"s",k:"RAG",q:"The platform team wants to upgrade to a newer embedding model that benchmarks better publicly. The index has 8 million chunks and re-embedding costs real money. What is the professionally sound migration process?",
+ o:["Skip the upgrade permanently, because embedding models never improve enough to justify any re-indexing expense",
+    "Migrate everything immediately, since public benchmark superiority guarantees improvement on every private corpus",
+    "Re-embed a sample, A/B compare retrieval metrics old-versus-new on your eval set, and migrate fully only if it wins",
+    "Run the new model for queries while keeping old document vectors, since mixed spaces average out to better quality here"],
+ a:[2], e:"Benchmark wins don't guarantee wins on your corpus. Pilot on a sample, compare recall/precision on your own eval set, then migrate — and never mix query and document embeddings from different models."},
+{t:"s",k:"RAG",q:"Your reranker improves quality but adds 300ms, and the retrieval stage feeds it 100 candidates. The endpoint's total latency SLA is 1.5s. Which tuning approach balances quality against the budget?",
+ o:["Rerank one candidate only, which preserves the reranker's benefits while making its cost effectively zero",
+    "Move reranking after answer generation, where it can improve the context without delaying the response",
+    "Measure the latency-quality curve at several candidate counts and pick the best configuration that fits the SLA",
+    "Remove the SLA, since retrieval quality improvements always justify however much latency they happen to add in practice"],
+ a:[2], e:"Rerankers scale with candidate count: profile quality vs latency at, say, 20/50/100 candidates and choose within budget. Reranking one item is a no-op, and reranking after generation cannot change the context the answer already used."},
+{t:"m",k:"RAG",q:"Which techniques genuinely improve retrieval recall? (Select all that apply)",
+ o:["Reducing top_k to a single candidate to concentrate the ranking effort",
+    "Chunk overlap so boundary-spanning facts survive splitting intact",
+    "Multi-query retrieval that fans out rewritten variants and merges results",
+    "Hybrid sparse-plus-dense retrieval covering both keyword and semantic queries"],
+ a:[1,2,3], e:"Overlap, query fan-out, and hybrid retrieval all widen the net for relevant content. top_k=1 is the opposite of recall — anything not ranked first is lost."},
+{t:"m",k:"RAG",q:"Without reference answers, which evaluation moves are legitimate? (Select all that apply)",
+ o:["Score context relevance: check whether retrieved chunks pertain to the query",
+    "Compute answer correctness, which is meaningful without any reference at all",
+    "Synthesize and hand-review Q&A pairs from documents to create references",
+    "Score faithfulness: check each answer claim for support in the retrieved context"],
+ a:[0,2,3], e:"Faithfulness and context relevance are reference-free; synthesizing reviewed Q&A creates references you lack. Answer correctness is defined by comparison to a reference — without one, there is nothing to compute."},
+{t:"m",k:"RAG",q:"Your vector search must scale to 50 million chunks with department-level filtering. Which architecture decisions are sound? (Select all that apply)",
+ o:["Brute-force exact search over all vectors on every query for maximum accuracy",
+    "Approximate nearest-neighbor indexing for sub-second similarity search at scale",
+    "Caching frequent query results to absorb repeated traffic cheaply",
+    "Metadata-based partitioning or filtered indexes to scope searches by department"],
+ a:[1,2,3], e:"ANN indexes, metadata partitioning, and query caching are the scale playbook. Exact search over 50M vectors per query blows any interactive latency budget — the small recall trade of ANN is the price of production."},
+{t:"m",k:"RAG",q:"Which statements about chunk overlap are accurate? (Select all that apply)",
+ o:["Overlap is free of any storage or retrieval-quality cost, so more is always better",
+    "Overlap protects facts that would otherwise be split across chunk boundaries",
+    "Overlap inflates index size and can surface near-duplicate retrieval results",
+    "The right overlap amount is an empirical choice validated with evaluation"],
+ a:[1,2,3], e:"Overlap trades boundary safety against index bloat and duplicate-ish candidates; tune it with your eval set. \"More is always better\" ignores both costs."},
+{t:"m",k:"RAG",q:"Legal wants RAG answers to be independently verifiable by human reviewers. Which measures support that goal? (Select all that apply)",
+ o:["Quoting or tightly paraphrasing key passages with their source metadata attached",
+    "Exposing document version or date so reviewers can spot stale sources",
+    "Per-claim citations naming the source document and section used",
+    "Stripping all source hints from answers to keep the response text clean"],
+ a:[0,1,2], e:"Citations, traceable quoting, and visible document dating give reviewers a checkable trail. Hiding sources optimizes cosmetics at the direct expense of verifiability — the one requirement stated."},
+{t:"s",k:"FT",q:"Ten minutes into a fine-tuning run, BOTH training loss and validation loss are climbing steadily — each epoch ends higher than the last. According to the course's diagnostic table, what state is this and what is the first suspect?",
+ o:["Healthy early training — rising losses in early epochs are the normal warm-up phase and require no intervention here",
+    "Overfitting — the model is memorizing the training set, so reduce the number of epochs and add more data",
+    "Underfitting — the model is learning too slowly, so simply extend the run by several additional epochs",
+    "Training failure — the model is not learning at all; suspect the learning rate first and adjust before rerunning"],
+ a:[3], e:"Both losses rising (or flat) = training failure: the model isn't learning. The table's first suspect is the learning rate (commonly too high, causing divergence). Overfitting looks different — train falls while validation rises."},
+{t:"s",k:"FT",q:"A monitoring dashboard shows a bizarre curve: training loss is INCREASING epoch over epoch while validation loss is steadily DECREASING. Your teammate cheers that \"generalization is improving\". What is the professional read of this pattern?",
+ o:["It is anomalous — no normal training state produces it — so audit the pipeline: metric logging, data splits, and augmentation",
+    "It is the textbook signature of successful regularization, and the run should continue unchanged to completion",
+    "It proves the validation set is too easy, and the correct response is deleting it and training on all of the data",
+    "It is standard overfitting, and the run should be stopped immediately at the current checkpoint to preserve quality in practice"],
+ a:[0], e:"Train worsening while validation improves fits none of the four normal states (failure, underfitting, overfitting, convergence). It usually signals a bug: swapped metrics, leaking or mislabeled splits, augmentation applied only to training, or logging errors. Investigate before trusting either curve."},
+{t:"s",k:"FT",q:"After 6 epochs, training loss sits flat at 0.41 and validation loss flat at 0.44 — both stable for the last two epochs, with healthy task metrics. GPU budget remains. What does the diagnostic table say this state is, and what should you do?",
+ o:["Overfitting — any plateau indicates memorization, so earlier checkpoints must replace this one",
+    "Underfitting — flat curves always mean the model needs a larger learning rate to resume its descent in practice",
+    "Training failure — plateaus mean learning never happened and the entire run must be restarted",
+    "Training success — both losses have plateaued at low values; stop here rather than spending more GPU budget"],
+ a:[3], e:"Both losses converging and holding steady at low values = successful training. Continuing spends money for nothing (and risks drifting into overfitting). Failure is flat-at-HIGH loss from the start — plateau height and history matter."},
+{t:"s",k:"FT",q:"You must fine-tune a 7B model but only have a single 12GB consumer GPU — full-parameter fine-tuning is out of reach by an order of magnitude. Which approach makes this feasible?",
+ o:["Full-parameter fine-tuning with the learning rate reduced tenfold, which proportionally reduces memory usage here",
+    "Parameter-efficient tuning on a quantized base — QLoRA-style: 4-bit base weights with small trainable adapters",
+    "Deleting the validation split, which frees enough GPU memory to hold the full set of optimizer states",
+    "Training on CPU RAM instead, which is slower per step but otherwise identical for gradient-based fine-tuning"],
+ a:[1], e:"QLoRA-style training — quantize the frozen base to 4-bit, train only low-rank adapters — squeezes 7B fine-tuning into consumer VRAM. Learning rate doesn't change memory; CPU training of a 7B is impractical; validation splits don't occupy GPU memory."},
+{t:"s",k:"FT",q:"Your task benefits from an effective batch size of 32, but your GPU only fits 4 examples per step before OOM. Which standard technique reconciles the two?",
+ o:["Loss scaling: multiply the loss by 8 so each small batch carries the statistical weight of the full batch size",
+    "Epoch multiplication: train 8 times more epochs, since epochs and batch size are mathematically interchangeable here",
+    "Sample truncation: shorten every example to one-eighth length so 32 of them fit in the memory of the original 4",
+    "Gradient accumulation: run 8 micro-batches of 4, accumulating gradients, and update weights once per 32 examples"],
+ a:[3], e:"Gradient accumulation decouples effective batch size from per-step memory: accumulate over micro-batches, then update. Loss scaling serves mixed-precision stability (not batch equivalence), epochs are not batch size, and mass truncation destroys training signal."},
+{t:"s",k:"FT",q:"An architect proposes running a ~1.5B-parameter model (Qwen small variant) for a fixed document-tagging service instead of calling a large flagship model. Which claimed benefit is actually TRUE of small models?",
+ o:["Immunity to hallucination, because small models lack the capacity to invent unsupported statements",
+    "Far lower serving cost and latency, plus feasible fine-tuning and even on-device deployment for narrow, stable tasks",
+    "No fine-tuning ever required, because small models automatically absorb any task from three examples",
+    "Identical general reasoning breadth to flagship models, since parameter count stopped mattering after 2023 in practice"],
+ a:[1], e:"Small models trade general capability for economics: cheap high-QPS serving, low latency, single-GPU (or edge) deployment, and inexpensive fine-tuning — ideal for narrow specialized tasks, often after distillation. They still hallucinate and still need adaptation for specialized work."},
+{t:"s",k:"FT",q:"You must serve a 7B model on a GPU with 16GB of memory; FP16 weights alone need ~14GB, leaving no room for KV cache and activations at your batch sizes. Which technique is the standard first lever?",
+ o:["Reduce the temperature parameter, which lowers the numerical precision the weights need at inference time here",
+    "Disable the KV cache, since recomputing attention per token uses no memory and adds no meaningful latency",
+    "Quantize the model for inference — int8 or int4 — cutting weight memory sharply with modest quality impact",
+    "Split each request's tokens across two processes on the same GPU, halving the memory that each one sees"],
+ a:[2], e:"Inference quantization (int8/int4) is the standard fit-it-in-memory lever, usually with small, measurable quality loss. Disabling KV cache explodes latency; temperature has nothing to do with precision; same-GPU process splitting doesn't halve model memory."},
+{t:"s",k:"FT",q:"A teammate hands you a plain text file of policy paragraphs and asks you to \"fine-tune the model on this\" for a Q&A task. What is wrong with the data, and what does SFT actually require?",
+ o:["The text must first be converted into embedding vectors, because fine-tuning consumes vectors rather than tokens",
+    "The file is missing gradient annotations, which every fine-tuning framework requires alongside the raw text",
+    "Nothing is wrong — supervised fine-tuning on raw paragraphs directly teaches the model to answer questions about them",
+    "SFT needs input-output demonstration pairs (e.g., question-answer in a messages format), not raw unlabeled paragraphs"],
+ a:[3], e:"Supervised fine-tuning learns from demonstrations: structured input-output pairs (prompt/response or messages JSONL, as in the course). Raw paragraphs suit pretraining-style objectives or RAG — they don't teach question-answering behavior by themselves."},
+{t:"m",k:"FT",q:"Match the loss-curve patterns to their diagnoses. Which pairings are CORRECT? (Select all that apply)",
+ o:["Both losses still falling together → the model is still learning; training can continue",
+    "Training loss falling while validation loss rises → underfitting; extend training further",
+    "Both losses flat or rising from the start → training failure; adjust the learning rate",
+    "Training loss falling while validation loss rises → overfitting; more data or fewer epochs"],
+ a:[0,2,3], e:"The course's table: flat/rising = failure (learning rate), train-down/val-up = overfitting, both-down = keep training, both plateaued low = success. Option D attaches the overfitting signature to underfitting — and its remedy would make the problem worse."},
+{t:"m",k:"FT",q:"Your fine-tuning job keeps hitting GPU out-of-memory. Which changes genuinely reduce training memory pressure? (Select all that apply)",
+ o:["Reduce the per-device batch size and use gradient accumulation for effective batch",
+    "Use a quantized base model with LoRA adapters instead of full-parameter training",
+    "Cap the maximum sequence length so activation memory per example shrinks",
+    "Increase the LoRA rank substantially, which compresses the optimizer states"],
+ a:[0,1,2], e:"Smaller micro-batches (with accumulation), quantized-base PEFT, and shorter sequences are the standard memory levers. Raising LoRA rank ADDS trainable parameters and optimizer state — the opposite of relief."},
+{t:"m",k:"FT",q:"In which situations is deliberately choosing a small model (roughly 0.5B–3B) the right engineering call? (Select all that apply)",
+ o:["A high-volume narrow task where per-request cost and latency dominate the economics",
+    "An open-ended research assistant expected to reason across arbitrary domains",
+    "A strict real-time latency budget that large-model inference cannot reliably meet",
+    "An edge or offline deployment where the model must run on modest local hardware"],
+ a:[0,2,3], e:"Small models win where economics, latency, or hardware constraints rule and the task is narrow (often after distillation). Broad open-ended reasoning is where they fall furthest behind large models — the wrong assignment for the class."},
+{t:"m",k:"FT",q:"After fine-tuning on 2,000 ticket-formatting examples, the model excels at tickets but has become noticeably worse at general instructions it previously handled. Which statements are accurate? (Select all that apply)",
+ o:["Evaluation should cover both the target task AND retained general capabilities",
+    "Mixing some general instruction data into training can mitigate the specialization damage",
+    "This degradation on general skills after narrow fine-tuning is a known, expected phenomenon",
+    "Using LoRA makes this phenomenon impossible, since adapters cannot affect general skills"],
+ a:[0,1,2], e:"Catastrophic forgetting is real: hard specialization erodes general behavior. Data mixing and dual-scope evaluation are the standard mitigations. LoRA reduces but does not eliminate the effect — adapters still shift the model's outputs."},
+{t:"s",k:"AG",q:"Your ReAct agent calls a paid web-search tool on every turn, even when the answer is already in the conversation, running up API costs. You want it to search only when it genuinely lacks information. Which change best achieves this?",
+ o:["Wrap the search tool so it returns empty results half the time, forcing the agent to rely on the conversation in this case",
+    "Instruct the agent to first check whether it can answer from context, and call the tool only when information is missing",
+    "Increase the temperature so the agent varies its behavior and sometimes chooses not to invoke the search tool",
+    "Remove the search tool entirely, since an agent that cannot search will simply answer from its own knowledge"],
+ a:[1], e:"Tool-use should be conditional: prompt the agent to reason about whether context suffices before acting, so tools serve genuine gaps. Removing the tool breaks real needs; randomizing behavior or sabotaging results are hacks, not control."},
+{t:"s",k:"AG",q:"You wrap an existing function as an agent tool but keep its terse name calc_v2 and a one-line docstring \"does the calc\". The agent frequently calls the wrong tool or passes bad arguments. What is the highest-leverage fix?",
+ o:["Reduce the number of tools to one, so there is never any ambiguity about which tool the agent should be calling",
+    "Lower the temperature so the agent commits more firmly to whichever tool it happens to select on the first attempt",
+    "Write a clear tool name, description, parameter schema, and example so the model can select and call it correctly",
+    "Switch to a larger model, since only greater scale can compensate for a genuinely uninformative tool description"],
+ a:[2], e:"The model chooses tools from their names, descriptions, and schemas — vague metadata causes wrong calls. Clear naming, purpose, typed parameters, and an example are the fix. Bigger models still can't read intent that isn't written down."},
+{t:"s",k:"AG",q:"Your customer agent must call refund_order, which is irreversible. Product wants speed; risk wants safety. The agent is accurate about 95% of the time. What design reconciles autonomy with the irreversibility of the action?",
+ o:["Raise the agent's temperature so it becomes more cautious and naturally hesitates before irreversible actions",
+    "Block the agent from all actions and route every request, reversible or not, to a human for manual handling",
+    "Auto-execute low-risk reversible steps, but require human approval before any irreversible action like a refund",
+    "Let the agent execute all actions autonomously, since 95% accuracy is high enough to accept the occasional error"],
+ a:[2], e:"Match oversight to risk: reversible steps run autonomously; irreversible ones (refunds, deletions, transfers) go through a human-in-the-loop gate. A 5% error rate on irreversible money movement is unacceptable; gating only the dangerous actions preserves speed elsewhere."},
+{t:"s",k:"AG",q:"A single agent handles a 12-step invoice workflow and quality decays badly toward the later steps: it forgets constraints stated at step 2 and compounds early mistakes. Splitting into a multi-step workflow helped. What is the underlying reason the split worked?",
+ o:["Each step gets a focused context and clean inputs, avoiding attention dilution and error cascading across a long task",
+    "Multiple agents share GPU memory more efficiently than one agent processing the entire workflow by itself",
+    "Splitting reduces the total token count, and lower token counts are what primarily determine an agent's accuracy in practice",
+    "Workflows disable the model's sampling randomness, which is the sole cause of quality decay in long tasks"],
+ a:[0], e:"Long single-shot tasks suffer attention dilution (early constraints fade) and error cascading (mistakes propagate). Decomposition gives each step a focused prompt and validated inputs. It's about context focus, not GPU sharing or disabling sampling."},
+{t:"s",k:"AG",q:"Your agent maintains long-term memory across sessions. Over months, the memory store fills with contradictory facts (\"prefers email\" and later \"prefers phone\"), and retrieval surfaces both, confusing the agent. What does mature memory management require?",
+ o:["Raise the temperature so the agent chooses more creatively between the contradictory memories it retrieves here",
+    "Freeze the memory store after the first month, since a fixed memory can never contain new contradictions",
+    "Update and consolidate memory — supersede outdated facts — rather than only ever appending new observations",
+    "Retrieve more memories per query, so the volume of context lets the agent average out the contradictions"],
+ a:[2], e:"Memory needs lifecycle operations: update, supersede, and consolidate so newer facts replace stale ones. Append-only stores accumulate contradictions; retrieving more of them worsens the confusion, and freezing blocks legitimate learning."},
+{t:"s",k:"AG",q:"You are turning a recurring, well-documented review procedure into a reusable Skill. Which description will make the agent trigger it reliably and correctly?",
+ o:["No description at all, letting the agent infer the Skill's purpose from the file names inside its directory",
+    "A specific description stating the exact task, when to trigger, and when NOT to, with a concrete usage example",
+    "A broad description like \"helps with documents\", so the Skill can trigger across the widest possible range of requests",
+    "A description consisting only of the Skill's title, since extra words dilute the agent's triggering decision"],
+ a:[1], e:"Skill selection hinges on the description: specific purpose, explicit trigger and non-trigger conditions, and an example make routing reliable. Vague catch-all descriptions cause false triggers and conflicts — the canonical anti-pattern."},
+{t:"s",k:"AG",q:"Your MCP tool server works when a developer runs the agent locally as a child process, but the team now needs five separate deployed services to reach it over the network. What has to change about the transport?",
+ o:["Serialize tool calls into a shared spreadsheet that all five services poll, since MCP has no networked transport here",
+    "Keep stdio and have every remote service SSH into the developer's laptop to launch the tool server on demand",
+    "Move from stdio to a network transport such as Streamable HTTP, exposing the server as a reachable online service",
+    "Abandon MCP and hard-code the tools separately into each of the five services, since MCP is only for local use"],
+ a:[2], e:"stdio suits a local child process; sharing a server across networked services needs an HTTP-style transport (Streamable HTTP). MCP explicitly supports both — the whole point is decoupling tools so many clients reuse one server."},
+{t:"s",k:"AG",q:"Your coding agent's output keeps failing CI after review, wasting a review round per failure. You decide to give the agent the ability to run the test suite itself and iterate on failures before handing work over. What principle does this embody?",
+ o:["Model engineering: swapping to a larger base model, which is the only reliable way to reduce test failures",
+    "Harness engineering: enforce constraints with mechanical checks inside the agent's own loop, before human review",
+    "Prompt engineering: rephrasing the system prompt to demand more careful code is what removes CI failures",
+    "Context engineering: enlarging the context window so the agent can hold the entire test suite in memory at once here"],
+ a:[1], e:"Harness engineering wires objective, mechanized checks (build, lint, tests) into the agent's loop so it self-corrects before a human looks. Prompted \"carefulness\" verifies nothing; the fix is feedback the agent can act on, not a bigger model or window."},
+{t:"m",k:"AG",q:"A long-running research agent exhausts its context window before finishing multi-hour tasks. Which memory strategies apply? (Select all that apply)",
+ o:["Store intermediate results externally and load them back only when referenced",
+    "Use vector-based recall to fetch older details on demand rather than inline",
+    "Retain every raw observation in context permanently to preserve full fidelity",
+    "Keep a rolling summary of completed work instead of the full raw transcript"],
+ a:[0,1,3], e:"Rolling summaries, externalized artifacts, and vector recall keep the working context lean. Retaining everything inline is exactly what overflows the window and drops the earliest, often critical, material."},
+{t:"m",k:"AG",q:"Which controls are appropriate for an agent that can perform irreversible external actions (payments, deletions, emails)? (Select all that apply)",
+ o:["Full admin credentials granted upfront so workflows never stall on permissions",
+    "Least-privilege tool access limited to what the current task truly needs",
+    "Human-in-the-loop approval gates before each irreversible action executes",
+    "Complete audit logging of tool calls with their arguments and outcomes"],
+ a:[1,2,3], e:"Approval gates, least privilege, and audit trails are the governance set for high-stakes agents. Blanket admin turns every prompt-injection or model error into a potential irreversible incident."},
+{t:"m",k:"AG",q:"Which statements about MCP (Model Context Protocol) are correct? (Select all that apply)",
+ o:["It eliminates the need to describe tools, since clients discover intent automatically",
+    "It supports local transport (stdio) and network transport (Streamable HTTP)",
+    "It reduces the maintenance burden of duplicated tool integrations across apps",
+    "It decouples tools from agents so one tool server can be reused by many clients"],
+ a:[1,2,3], e:"MCP standardizes tool access, offers stdio and HTTP transports, and removes copy-pasted integrations. Tools still need clear descriptions and schemas — discovery exposes them but cannot invent their purpose."},
+{t:"m",k:"AG",q:"Which practices keep a growing library of team Skills healthy? (Select all that apply)",
+ o:["Test each Skill with positive triggers and negative controls before release",
+    "Assign domain-team ownership and retire Skills whose scopes have drifted",
+    "Let any member edit shared production Skills directly without any review",
+    "Version Skills and review changes like any other code artifact"],
+ a:[0,1,3], e:"Two-way trigger testing, versioned code-style management, and clear ownership with scope hygiene keep the library coherent. Unreviewed direct edits are how one tweak silently breaks another team's workflow."},
+{t:"s",k:"PR",q:"Your team benchmarks vLLM against a naive per-request inference loop for serving a fine-tuned model and sees dramatically higher throughput from vLLM under concurrent load. Which capability most explains the gain?",
+ o:["Silent reduction of every answer's length, which raises requests-per-second at the cost of completeness here",
+    "Automatic distillation of the model at load time into a smaller and inherently faster student model",
+    "Continuous batching and efficient KV-cache management that pack many concurrent requests through the GPU",
+    "Conversion of the model to run on CPU, freeing the GPU to accept a far larger number of requests"],
+ a:[2], e:"vLLM's throughput comes from continuous (in-flight) batching and paged KV-cache management, keeping the GPU busy across many concurrent requests. It does not distill, shorten answers, or move inference to CPU."},
+{t:"s",k:"PR",q:"Your latency dashboard shows a healthy average (mean) of 900ms, yet users complain the assistant \"often\" feels slow. The p99 latency is 8 seconds. What does this gap tell you, and what should you track?",
+ o:["Averages hide the tail; track percentiles like p95/p99, since a slow tail is what a meaningful share of users actually feels",
+    "p99 above the average proves the monitoring system is miscalibrated, and the dashboard should be reset to defaults",
+    "The average is the only trustworthy metric, so the complaints are subjective and can be safely disregarded for now",
+    "Users perceive only the mean, so lowering the displayed average number in the dashboard will resolve the complaints in practice"],
+ a:[0], e:"A low mean with a high p99 means a real fraction of requests are very slow — and users remember those. Track tail percentiles (p95/p99), not just averages, and set SLOs on the tail. The gap is signal, not a monitoring error."},
+{t:"s",k:"PR",q:"Legal asks whether you can self-host a particular open-weights model for a commercial product. A developer says \"it's on the model hub, so it's free to use for anything\". What is the correct professional stance?",
+ o:["Assume commercial use is forbidden for all open models, and therefore only ever call closed commercial APIs instead",
+    "Treat the license as irrelevant once the weights are downloaded, because local copies are outside any legal reach",
+    "Check each model's license, since open-weights models carry varied terms and some restrict commercial or derivative use",
+    "Agree that any publicly downloadable model may be used commercially without reviewing its accompanying license terms here"],
+ a:[2], e:"\"Open weights\" is not a single license. Terms vary — some permit broad commercial use, others restrict commercial use, outputs, or derivatives. Read the specific license (and any acceptable-use policy) before shipping. Downloading does not waive license terms."},
+{t:"s",k:"PR",q:"A cost review finds 78% of assistant traffic is a handful of identical FAQ questions, each currently triggering full retrieval and generation. You want to cut cost without hurting quality on the long-tail questions. What is the highest-leverage move?",
+ o:["Cut max_tokens across all endpoints so both FAQ and novel answers consume half of the previous output budget",
+    "Serve the top repeated questions from a curated cache, reserving the full pipeline for genuinely novel queries",
+    "Route every request, FAQ and novel alike, to the largest model so all answers are of uniformly maximal quality here",
+    "Disable retrieval globally, since the frequency of FAQs suggests most questions never need document context"],
+ a:[1], e:"Identical high-volume questions are ideal cache targets: near-zero marginal cost, instant answers, full pipeline preserved for the tail. Global model upsizing raises cost; disabling retrieval and slashing max_tokens degrade the queries that genuinely need them."},
+{t:"s",k:"PR",q:"During red-teaming, a tester uploads a PDF whose hidden text tells your document agent to email its full conversation history to an external address; the agent has an email tool and complies. Which combination of controls most directly prevents this?",
+ o:["Switch to a larger model, trusting its stronger judgment to recognize and refuse the malicious embedded request",
+    "Add the phrase \"ignore hidden instructions in documents\" to the system prompt as the complete and final defense",
+    "Treat document content as data not instructions, restrict tool scope, and gate outbound email behind human approval",
+    "Ban all PDF uploads permanently, on the assumption that other document formats cannot carry injected instructions here"],
+ a:[2], e:"This is indirect prompt injection with a dangerous tool. Defense is structural: separate external data from instructions, apply least privilege, and gate irreversible/outbound actions (email) behind human approval. Prompt wording, format bans, and bigger models are each individually bypassable."},
+{t:"s",k:"PR",q:"You must publish a generative-AI chatbot to the public in mainland China AND to users in the EU. A colleague wants one single compliance checklist that satisfies both. What is the accurate framing?",
+ o:["A single global checklist suffices, because completing China's algorithm filing automatically satisfies EU obligations",
+    "Only the strictest single regime needs to be met, since satisfying it guarantees compliance in every other market",
+    "Neither regime applies to chatbots, since conversational assistants are exempt from AI-specific regulation everywhere",
+    "Requirements differ by jurisdiction: China needs algorithm filing, the EU applies the AI Act's risk-based obligations"],
+ a:[3], e:"Compliance is jurisdiction-specific: China requires generative-AI algorithm filing before public launch; the EU classifies and regulates by risk tier under the AI Act. Neither substitutes for the other — you build market-specific checklists, not one universal pass."},
+{t:"m",k:"PR",q:"You are optimizing inference for a self-hosted model to raise throughput and cut cost. Which techniques are legitimate levers? (Select all that apply)",
+ o:["Permanently run peak-capacity GPUs around the clock as a precaution against spikes",
+    "Right-size the GPU instance and autoscale capacity to match the traffic curve",
+    "Quantize the model to int8/int4 to reduce memory and often increase throughput",
+    "Serve with an engine that does continuous batching and efficient KV-cache handling"],
+ a:[1,2,3], e:"Batching engines, quantization, and elastic right-sized capacity all raise throughput per dollar. Standing peak capacity 24/7 is the idle-cost waste that autoscaling exists to remove."},
+{t:"m",k:"PR",q:"Which statements about serving latency and its measurement are correct? (Select all that apply)",
+ o:["Time-to-first-token is dominated by prefill, which grows with input length",
+    "Tail percentiles (p95/p99) capture slow-request pain that averages conceal",
+    "A low mean latency guarantees that essentially no users experience slow responses",
+    "Streaming improves perceived latency by showing tokens as they are generated"],
+ a:[0,1,3], e:"Streaming helps perception, prefill drives TTFT, and tail percentiles expose the slow requests users remember. A good mean can still hide a punishing tail — which is exactly why you track p95/p99."},
+{t:"m",k:"PR",q:"A quality regression slipped into production after a model change went straight to 100% of traffic. Which release practices would have prevented or contained it? (Select all that apply)",
+ o:["Trusting public benchmark scores in place of testing on your own workload",
+    "An evaluation baseline that gates changes on regression results",
+    "A canary rollout exposing a small traffic slice before a full switch",
+    "Fast rollback capability to revert instantly when metrics degrade"],
+ a:[1,2,3], e:"Canary + eval-baseline gating + rollback is the safe-release triad. Public benchmarks describe someone else's tasks; only your own evaluation predicts your workload's behavior."},
+{t:"m",k:"PR",q:"Which considerations belong in a decision to adopt a specific open-weights model for a commercial product? (Select all that apply)",
+ o:["The model's license terms, including any restrictions on commercial or derivative use",
+    "Quality measured on your own evaluation set for the target task",
+    "The assumption that any downloadable model is automatically free for all uses",
+    "Serving cost and latency on the hardware you can realistically provision"],
+ a:[0,1,3], e:"License, serving economics, and task-specific quality are the real inputs to the decision. \"Downloadable therefore unrestricted\" is a legal misconception that can put a product at risk."},
+{t:"m",k:"PR",q:"Which practices strengthen a production LLM service against both abuse and failure? (Select all that apply)",
+ o:["A single instance in one region, kept simple by avoiding any redundancy",
+    "Failover and graceful degradation so the service survives partial outages",
+    "Input and output guardrails moderating content in both directions",
+    "Per-key rate limits and anomaly alerting to catch misuse and extraction attempts"],
+ a:[1,2,3], e:"Rate limits with anomaly detection, bidirectional guardrails, and failover/degradation harden a service against attackers and outages alike. A single-region single instance is one failure away from total downtime."}
+];
+// ===================== RENDER =====================
+// ===================== VOCAB (tra từ) =====================
+const GLOSS = {"model":"mô hình","models":"các mô hình","prompt":"câu lệnh/lời nhắc đưa vào mô hình","prompts":"các câu lệnh đưa vào mô hình","token":"token — đơn vị văn bản mô hình xử lý (mẩu từ)","tokens":"các token (đơn vị văn bản)","tokenizer":"bộ tách token","tokenization":"việc tách văn bản thành token","tokenize":"tách văn bản thành token","inference":"suy luận — chạy mô hình để tạo kết quả","latency":"độ trễ","throughput":"thông lượng (số yêu cầu xử lý mỗi giây)","embedding":"vector nhúng — biểu diễn văn bản dưới dạng số","embeddings":"các vector nhúng","retrieval":"truy hồi — tìm tài liệu liên quan","retrieve":"truy hồi, lấy về","retrieved":"đã truy hồi/lấy về","retrieves":"truy hồi, lấy về","chunk":"đoạn (mẩu chia nhỏ)","chunks":"các đoạn văn bản","chunking":"việc chia tài liệu thành các đoạn","overlap":"phần chồng lấn giữa các đoạn","rerank":"xếp hạng lại kết quả","reranker":"bộ xếp hạng lại kết quả","reranking":"việc xếp hạng lại kết quả","vector":"vector (dãy số)","vectors":"các vector (dãy số)","index":"chỉ mục / kho tìm kiếm","indexing":"việc xây chỉ mục","indexed":"đã đưa vào chỉ mục","reindex":"xây lại chỉ mục","quantize":"lượng tử hóa (giảm độ chính xác số để tiết kiệm bộ nhớ)","quantization":"lượng tử hóa (giảm độ chính xác số)","quantized":"đã lượng tử hóa","quantizing":"lượng tử hóa","checkpoint":"điểm lưu mô hình trong quá trình huấn luyện","epoch":"một vòng huấn luyện qua toàn bộ dữ liệu","epochs":"các vòng huấn luyện","gradient":"gradient (đạo hàm dùng để cập nhật trọng số)","gradients":"các gradient","accumulation":"tích lũy (gradient accumulation: dồn gradient qua nhiều bước)","accumulate":"tích lũy, dồn lại","accumulating":"đang tích lũy","batch":"lô dữ liệu xử lý cùng lúc","batching":"gộp lô (xử lý nhiều yêu cầu cùng lúc)","adapter":"bộ điều hợp (tham số nhỏ thêm vào khi fine-tune)","adapters":"các bộ điều hợp","lora":"LoRA — kỹ thuật fine-tune hiệu quả, chỉ huấn luyện ma trận nhỏ","qlora":"QLoRA — LoRA trên mô hình đã lượng tử hóa 4-bit","fine-tune":"tinh chỉnh mô hình trên dữ liệu riêng","fine-tuning":"việc tinh chỉnh mô hình trên dữ liệu riêng","fine-tuned":"đã được tinh chỉnh","finetune":"tinh chỉnh mô hình","distillation":"chưng cất (dạy mô hình nhỏ bắt chước mô hình lớn)","distill":"chưng cất (dạy mô hình nhỏ)","distilled":"đã chưng cất","teacher":"mô hình thầy (mô hình lớn tạo dữ liệu/nhãn)","student":"mô hình trò (mô hình nhỏ được huấn luyện)","hallucination":"ảo giác — mô hình bịa ra thông tin sai","hallucinate":"bịa ra thông tin sai","hallucinated":"bị bịa ra","overfitting":"quá khớp — học thuộc dữ liệu, kém tổng quát","overfit":"quá khớp (học thuộc)","underfitting":"dưới khớp — chưa học đủ","validation":"kiểm định (tập dữ liệu để đánh giá trong lúc huấn luyện)","validate":"kiểm định/xác thực","prefill":"giai đoạn nạp & xử lý toàn bộ prompt trước khi sinh","decode":"giai đoạn sinh từng token","decoding":"việc sinh từng token","cache":"bộ nhớ đệm (lưu lại để dùng nhanh)","caching":"việc lưu vào bộ nhớ đệm","cached":"đã lưu vào bộ nhớ đệm","streaming":"truyền theo luồng — hiện token ngay khi sinh","stream":"truyền theo luồng","guardrail":"rào chắn an toàn (lọc nội dung vào/ra)","guardrails":"các rào chắn an toàn","injection":"tấn công tiêm lệnh (chèn chỉ thị độc hại)","jailbreak":"phá rào — lừa mô hình vượt quy tắc an toàn","canary":"triển khai thử trên một phần nhỏ lưu lượng","rollback":"quay lui về phiên bản cũ","failover":"chuyển sang hệ dự phòng khi hỏng","autoscale":"tự động co giãn tài nguyên theo tải","autoscaling":"việc tự động co giãn tài nguyên","quota":"hạn mức","quotas":"các hạn mức","self-consistency":"lấy nhiều mẫu rồi bỏ phiếu chọn đáp án đa số","faithfulness":"độ trung thực (câu trả lời có bám ngữ cảnh không)","precision":"độ chính xác","recall":"độ bao phủ","corpus":"kho ngữ liệu","metadata":"siêu dữ liệu (thông tin mô tả kèm theo)","schema":"lược đồ / cấu trúc dữ liệu quy định","schemas":"các lược đồ dữ liệu","deterministic":"xác định — cùng đầu vào cho cùng kết quả","temperature":"nhiệt độ — tham số điều chỉnh độ ngẫu nhiên khi sinh","deployment":"triển khai (đưa mô hình lên chạy)","deploy":"triển khai","deployed":"đã triển khai","serverless":"không máy chủ (tự co giãn, trả phí theo lượt gọi)","multimodal":"đa phương thức (xử lý cả ảnh/âm thanh/văn bản)","ocr":"nhận dạng ký tự quang học (đọc chữ từ ảnh)","agent":"tác tử — hệ thống LLM tự quyết định và dùng công cụ","agents":"các tác tử","agent's":"của tác tử","tool":"công cụ (hàm agent gọi để làm việc)","tools":"các công cụ","mcp":"giao thức chuẩn kết nối công cụ với tác tử","workflow":"luồng công việc (các bước cố định)","pipeline":"dây chuyền xử lý nhiều bước","memory":"bộ nhớ (lưu ngữ cảnh/kinh nghiệm của agent)","license":"giấy phép sử dụng","compliance":"tuân thủ pháp lý","benchmark":"điểm chuẩn / phép so sánh chuẩn","benchmarks":"các điểm chuẩn","endpoint":"điểm truy cập API","endpoints":"các điểm truy cập API","api":"giao diện lập trình ứng dụng (API)","json":"định dạng dữ liệu JSON","vllm":"vLLM — engine phục vụ suy luận tốc độ cao","gpu":"GPU — chip xử lý dùng cho AI","vram":"bộ nhớ trên GPU","concurrent":"đồng thời","concurrency":"tính đồng thời","percentile":"phân vị","percentiles":"các phân vị (p99 = 99% yêu cầu nhanh hơn mức này)","dimension":"số chiều của vector","dimensions":"số chiều (của vector)","dimensionality":"số chiều của vector","similarity":"độ tương đồng","keyword":"từ khóa","hybrid":"lai (kết hợp nhiều phương pháp)","dense":"dày đặc (tìm kiếm theo vector nghĩa)","sparse":"thưa (tìm kiếm theo từ khóa)","multi-query":"nhiều truy vấn (tạo nhiều biến thể câu hỏi)","citation":"trích dẫn nguồn","citations":"các trích dẫn nguồn","reference":"tham chiếu / đáp án chuẩn","references":"các đáp án chuẩn để so sánh","correctness":"độ đúng đắn","forgetting":"sự quên (quên kỹ năng cũ sau khi fine-tune hẹp)","specialization":"sự chuyên biệt hóa","specialize":"chuyên biệt hóa","generalize":"tổng quát hóa","generalization":"khả năng tổng quát hóa","generalizes":"tổng quát hóa được","mitigate":"giảm nhẹ, khắc phục","mitigation":"cách khắc phục","brittle":"giòn, dễ hỏng","robust":"bền vững, chắc chắn","plausible":"nghe hợp lý (nhưng chưa chắc đúng)","arbitrary":"tùy tiện, bất kỳ","deliberate":"có chủ đích / cân nhắc kỹ","deliberately":"một cách có chủ đích","salient":"nổi bật, đáng chú ý","dilution":"sự pha loãng / làm loãng (vd: loãng chú ý)","dilute":"làm loãng","cascade":"lan truyền dây chuyền","cascading":"nối tiếp dây chuyền (lỗi kéo theo lỗi)","supersede":"thay thế cái cũ","consolidate":"hợp nhất, củng cố","consolidation":"sự hợp nhất/củng cố","anomalous":"bất thường","anomaly":"sự bất thường","anomalies":"các bất thường","irreversible":"không thể đảo ngược","verifiable":"có thể kiểm chứng","verify":"kiểm chứng, xác minh","feasible":"khả thi","bottleneck":"nút thắt cổ chai (điểm nghẽn)","leverage":"tận dụng / đòn bẩy","lever":"đòn bẩy (cách để cải thiện)","levers":"các đòn bẩy (cách cải thiện)","curated":"được tuyển chọn kỹ","curate":"tuyển chọn kỹ","terse":"ngắn cụt, cộc lốc","docstring":"chuỗi mô tả hàm (chú thích trong code)","boilerplate":"đoạn lặp khuôn mẫu (nội dung soạn sẵn)","redundant":"dư thừa","redundancy":"sự dư thừa / dự phòng","adversarial":"đối kháng (tấn công cố ý)","degrade":"suy giảm chất lượng","degradation":"sự suy giảm chất lượng","regression":"sự thụt lùi chất lượng (so với trước)","baseline":"mức chuẩn / cơ sở để so sánh","audit":"rà soát / kiểm toán","gate":"cổng kiểm soát (chặn lại để duyệt)","gates":"các cổng kiểm soát","gating":"việc chặn để kiểm duyệt","approval":"sự phê duyệt","privilege":"đặc quyền","moderation":"kiểm duyệt nội dung","moderate":"kiểm duyệt (hoặc: vừa phải)","moderating":"đang kiểm duyệt","surface":"làm lộ ra","surfaces":"làm lộ ra","surfacing":"việc làm lộ ra","constrain":"ràng buộc, giới hạn","constraint":"ràng buộc","constraints":"các ràng buộc","prohibition":"sự cấm đoán","competitor":"đối thủ cạnh tranh","commercial":"thương mại","derivative":"phái sinh","jurisdiction":"khu vực pháp lý / thẩm quyền","filing":"việc nộp hồ sơ đăng ký","eligibility":"đủ điều kiện","borderline":"cận biên, ranh giới","ambiguous":"mơ hồ, nhập nhằng","paraphrase":"diễn giải lại (viết lại ý)","paraphrases":"các cách diễn giải lại","verbatim":"nguyên văn","concatenate":"nối chuỗi lại","attribution":"sự quy gán (gán đúng nguồn)","placeholder":"chỗ dành sẵn (biến thay thế)","placeholders":"các biến thay thế","substitute":"thay thế","substitution":"việc thay thế","truncate":"cắt ngắn / cắt bớt","truncation":"việc cắt bớt","truncates":"cắt bớt","summarize":"tóm tắt","summary":"bản tóm tắt","prune":"cắt tỉa (loại bớt)","pruning":"việc cắt tỉa","deduplicate":"khử trùng lặp","deduplication":"việc khử trùng lặp","migrate":"di chuyển / chuyển đổi","migration":"việc chuyển đổi","pilot":"chạy thử quy mô nhỏ","provision":"cấp phát (tài nguyên)","inflate":"thổi phồng / làm tăng","inflated":"bị thổi phồng","reconcile":"dung hòa, làm khớp","delegate":"giao phó","decompose":"phân rã thành phần nhỏ","decomposition":"sự phân rã","iterate":"lặp lại để cải tiến","iteration":"vòng lặp cải tiến","iterative":"lặp đi lặp lại","reflection":"phản tư (tự xem lại kết quả của chính mình)","critique":"phê bình, nhận xét","rubric":"khung tiêu chí chấm điểm","trigger":"kích hoạt","triggers":"kích hoạt / các yếu tố kích hoạt","triggering":"việc kích hoạt","scope":"phạm vi","retention":"sự lưu giữ (dữ liệu)","residency":"nơi lưu trú dữ liệu","scrub":"tẩy/xóa (dữ liệu nhạy cảm)","mask":"che / ẩn thông tin","redact":"che thông tin nhạy cảm","watermark":"đóng dấu chìm","extraction":"sự trích xuất / lấy cắp (vd: lấy cắp mô hình)","extract":"trích xuất, rút ra","harvest":"thu gom (dữ liệu để sao chép mô hình)","harvesting":"việc thu gom dữ liệu","poisoning":"đầu độc (dữ liệu huấn luyện)","exposure":"sự phơi lộ / rủi ro lộ","breach":"vi phạm / rò rỉ","hardening":"gia cố an ninh","harden":"gia cố an ninh","encryption":"mã hóa","encrypt":"mã hóa","flagship":"mô hình chủ lực (mạnh nhất)","variant":"biến thể","variants":"các biến thể","edge":"biên (thiết bị đầu cuối)","capacity":"năng lực / dung lượng","utilization":"mức sử dụng (tài nguyên)","spike":"đợt tăng đột biến","spikes":"các đợt tăng đột biến","shed":"loại bỏ bớt","shedding":"loại bỏ bớt yêu cầu khi quá tải","queue":"hàng đợi","queuing":"việc xếp hàng đợi","admission":"kiểm soát cho vào","graceful":"nhẹ nhàng (suy giảm êm, vẫn chạy hạn chế)","observability":"khả năng quan sát hệ thống","trace":"theo vết / dò vết","tracing":"việc dò vết","alert":"cảnh báo","alerting":"việc cảnh báo","dashboard":"bảng theo dõi số liệu","prefix":"tiền tố (phần đầu prompt)","static":"tĩnh (không đổi)","variable":"biến đổi / biến số","attention":"cơ chế chú ý (attention) của mô hình","weights":"trọng số của mô hình","weight":"trọng số","parameter":"tham số","parameters":"các tham số","layer":"tầng / lớp mạng","layers":"các tầng mạng","probability":"xác suất","distribution":"phân bố (xác suất)","sampling":"lấy mẫu (chọn token)","sample":"mẫu / lấy mẫu","samples":"các mẫu","greedy":"tham lam (luôn chọn token xác suất cao nhất)","top_p":"top-p — chọn nhóm token có tổng xác suất đạt ngưỡng p","top_k":"top-k — chỉ giữ k token xác suất cao nhất","max_tokens":"giới hạn số token đầu ra","finish_reason":"lý do dừng sinh (stop = tự kết thúc, length = chạm giới hạn)","eos":"token báo kết thúc chuỗi","stateless":"không lưu trạng thái (mỗi lần gọi độc lập)","alias":"bí danh (tên trỏ tới một phiên bản)","version":"phiên bản","versions":"các phiên bản","deprecate":"ngừng hỗ trợ (đã lỗi thời)","deprecated":"đã lỗi thời / ngừng hỗ trợ","reason":"lý do / lập luận","reasoning":"lập luận, suy luận","order":"thứ tự","healthy":"khỏe / ổn định (chỉ số tốt)","instruction":"chỉ thị / câu lệnh","instructions":"các chỉ thị","policy":"chính sách","paragraph":"đoạn văn","paragraphs":"các đoạn văn","table":"bảng (dữ liệu)","store":"lưu trữ / kho","traffic":"lưu lượng (truy cập)","billed":"bị tính phí","billing":"việc tính phí","downstream":"phía sau / hạ nguồn (xử lý sau)","colleague":"đồng nghiệp","conversation":"cuộc hội thoại","novel":"mới lạ","controls":"biện pháp kiểm soát","signal":"tín hiệu","candidate":"ứng viên (kết quả tiềm năng)","candidates":"các kết quả tiềm năng","curve":"đường cong (đồ thị)","economics":"bài toán chi phí / kinh tế","purpose":"mục đích","risk":"rủi ro","management":"quản lý","skill":"kỹ năng / Skill (quy trình đóng gói cho agent)","skills":"các kỹ năng / Skill","services":"các dịch vụ","service":"dịch vụ","emit":"phát ra / sinh ra","computation":"việc tính toán","structured":"có cấu trúc","defense":"phòng thủ","syntax":"cú pháp","totals":"tổng số","image":"ảnh","developer":"lập trình viên","measure":"đo lường","compress":"nén (dữ liệu/ngữ cảnh)","restore":"khôi phục","cause":"nguyên nhân","explicit":"rõ ràng, tường minh","assumption":"giả định","checks":"các bước kiểm tra","arguments":"đối số (tham số truyền vào) / lập luận","targets":"mục tiêu","refund":"hoàn tiền","phenomenon":"hiện tượng","mistakes":"lỗi sai","high-stakes":"rủi ro cao","majority":"đa số","edits":"các chỉnh sửa","admin":"quản trị (viên)","reviewed":"đã được duyệt","reliably":"một cách đáng tin cậy","reliable":"đáng tin cậy","sufficient":"đủ (thỏa mãn)","checklist":"danh mục kiểm tra","stable":"ổn định","sections":"các mục / phần","remedy":"cách khắc phục","opposite":"ngược lại","trades":"đánh đổi","intent":"ý định","vague":"mơ hồ","requires":"yêu cầu / cần","direct":"trực tiếp","bootstrap":"tự khởi tạo (từ con số 0)","synthesize":"tự tạo / tổng hợp (dữ liệu)","synthesizing":"việc tự tạo dữ liệu","synthetic":"tổng hợp (do máy tạo)","accuracy":"độ chính xác","quality":"chất lượng","budget":"ngân sách / hạn mức","request":"yêu cầu","requests":"các yêu cầu","output":"đầu ra","outputs":"các đầu ra","input":"đầu vào","inputs":"các đầu vào","query":"truy vấn (câu tìm kiếm)","queries":"các truy vấn","answer":"câu trả lời","answers":"các câu trả lời","question":"câu hỏi","questions":"các câu hỏi","example":"ví dụ","examples":"các ví dụ","behavior":"hành vi","results":"kết quả","human":"con người","history":"lịch sử (hội thoại trước)","generation":"việc sinh văn bản","response":"phản hồi","value":"giá trị","values":"các giá trị","guarantee":"bảo đảm","guarantees":"bảo đảm","context":"ngữ cảnh","evaluation":"đánh giá","evaluate":"đánh giá","eval":"đánh giá (viết tắt)","metric":"chỉ số đo","metrics":"các chỉ số đo","loss":"hàm mất mát (loss — càng thấp càng tốt)","losses":"các giá trị mất mát","training":"việc huấn luyện","learning":"việc học (learning rate: tốc độ học)","rate":"tỉ lệ / tốc độ","cost":"chi phí","update":"cập nhật","updates":"các cập nhật","apply":"áp dụng","select":"chọn","selection":"việc chọn / lựa chọn","search":"tìm kiếm","document":"tài liệu","documents":"các tài liệu","facts":"dữ kiện","reduce":"giảm","reduces":"giảm","raise":"tăng lên","rule":"quy tắc","rules":"các quy tắc","transport":"kênh truyền (stdio / HTTP)","stdio":"stdio — chạy công cụ cục bộ như tiến trình con","chunked":"đã chia đoạn","practice":"thực tiễn / cách làm","practices":"các cách làm thực tiễn","review":"xem lại / rà soát","failure":"sự thất bại / hỏng hóc","production":"môi trường vận hành thật (production)","standard":"tiêu chuẩn","decision":"quyết định","identical":"giống hệt nhau","assistant":"trợ lý (ứng dụng LLM)","engineering":"kỹ thuật / công việc kỹ thuật","description":"phần mô tả","genuinely":"thực sự","accurate":"chính xác","statements":"các phát biểu / câu khẳng định","statement":"phát biểu / câu khẳng định","maximum":"tối đa","minimum":"tối thiểu","average":"trung bình","window":"cửa sổ (giới hạn ngữ cảnh)","scale":"quy mô / mở rộng quy mô","format":"định dạng","usage":"mức sử dụng","process":"quy trình / xử lý","length":"độ dài","wants":"muốn","content":"nội dung","change":"thay đổi","numbers":"các con số","pairs":"các cặp (vd: câu hỏi–đáp)","tasks":"các nhiệm vụ","task":"nhiệm vụ","general":"tổng quát / chung","errors":"các lỗi","error":"lỗi","count":"đếm / số đếm","counts":"số đếm","exact":"chính xác tuyệt đối","match":"khớp / so khớp","state":"trạng thái","without":"không có","against":"đối chiếu với / chống lại","enough":"đủ","automatically":"một cách tự động","correct":"đúng","wrong":"sai","lower":"thấp hơn / hạ xuống","calls":"các lượt gọi (API/công cụ)","public":"công khai / công chúng","better":"tốt hơn","needs":"cần / nhu cầu","users":"người dùng","real":"thật / thực tế","similar":"tương tự","approach":"cách tiếp cận","provider":"nhà cung cấp (dịch vụ)","frequent":"thường xuyên","expensive":"đắt / tốn kém","cheap":"rẻ","narrow":"hẹp","broad":"rộng","volume":"khối lượng (lưu lượng)","serve":"phục vụ (chạy mô hình)","serving":"việc phục vụ suy luận","happen":"xảy ra","happens":"xảy ra","allow":"cho phép","allows":"cho phép","avoid":"tránh","avoids":"tránh","ensure":"bảo đảm","provide":"cung cấp","provides":"cung cấp","require":"yêu cầu / cần","prevent":"ngăn chặn","prevents":"ngăn chặn","replace":"thay thế","remove":"loại bỏ","remain":"vẫn còn / duy trì","remains":"vẫn còn","occur":"xảy ra","occurs":"xảy ra","appear":"xuất hiện / có vẻ","appears":"có vẻ / xuất hiện","contain":"chứa","contains":"chứa","receive":"nhận","produce":"tạo ra","produces":"tạo ra","describe":"mô tả","decide":"quyết định","choose":"chọn","choosing":"việc chọn","spend":"tiêu tốn","waste":"lãng phí","save":"tiết kiệm / lưu","share":"chia sẻ","shared":"dùng chung","gather":"thu thập","merge":"gộp lại","split":"chia tách","splits":"chia tách","splitting":"việc chia tách","sort":"sắp xếp","filter":"lọc","filtering":"việc lọc","expose":"phơi bày / để lộ","exposing":"việc để lộ","hide":"ẩn / che","block":"chặn","admit":"thừa nhận","refuse":"từ chối","ignore":"bỏ qua","notice":"nhận thấy","realize":"nhận ra","discover":"phát hiện","suspect":"nghi ngờ","argue":"lập luận / tranh luận","claim":"khẳng định / yêu sách","suggest":"gợi ý","suggests":"gợi ý","propose":"đề xuất","proposes":"đề xuất","recommend":"khuyến nghị","confirm":"xác nhận","handle":"xử lý","manage":"quản lý / xoay xở","maintain":"duy trì","upgrade":"nâng cấp","launch":"ra mắt / khởi chạy","publish":"công bố / xuất bản","fetch":"lấy về","fix":"sửa","fixes":"các cách sửa / sửa","break":"làm hỏng","breaks":"làm hỏng","fail":"thất bại / lỗi","fails":"thất bại / lỗi","pass":"vượt qua / đạt","skip":"bỏ qua","wrap":"bọc / gói lại","route":"định tuyến / chuyển hướng","swap":"hoán đổi","tune":"tinh chỉnh","tuning":"việc tinh chỉnh","pin":"ghim / cố định","cap":"giới hạn trần","trim":"cắt gọn bớt","pad":"chèn thêm","flag":"đánh dấu / cảnh báo","leak":"rò rỉ","craft":"soạn / chế tỉ mỉ","crafted":"được soạn tỉ mỉ","trick":"lừa","inject":"tiêm / chèn vào","bypass":"vượt qua / lách","enforce":"thực thi / áp đặt","grant":"cấp (quyền)","granted":"được cấp","revoke":"thu hồi","rotate":"luân phiên / xoay","stall":"đình trệ / khựng lại","hang":"treo / đơ","abandon":"bỏ dở","commit":"chốt lại / cam kết","escalate":"chuyển lên cấp cao hơn","overshoot":"vượt quá mức","expect":"kỳ vọng / dự kiến","assume":"giả định","attribute":"quy cho / gán cho","echo":"lặp lại y nguyên","invent":"bịa ra / phát minh","invents":"bịa ra","invented":"bị bịa ra","compute":"tính toán","recompute":"tính lại","observe":"quan sát","monitor":"theo dõi / giám sát","detect":"phát hiện","label":"gán nhãn","labeled":"đã gán nhãn","labeling":"việc gán nhãn","render":"kết xuất / hiển thị","slow":"chậm","fast":"nhanh","heavy":"nặng","light":"nhẹ","huge":"khổng lồ","tiny":"rất nhỏ","common":"phổ biến / chung","rare":"hiếm","likely":"có khả năng","unlikely":"khó xảy ra","obvious":"hiển nhiên","unclear":"không rõ","useful":"hữu ích","useless":"vô dụng","harmful":"có hại","safe":"an toàn","risky":"rủi ro","complex":"phức tạp","simple":"đơn giản","difficult":"khó","easy":"dễ","different":"khác","various":"đa dạng / nhiều loại","several":"vài / một số","multiple":"nhiều","entire":"toàn bộ","whole":"toàn bộ","partial":"một phần","missing":"bị thiếu","stale":"cũ / lỗi thời","fresh":"mới / tươi","current":"hiện tại","previous":"trước đó","latest":"mới nhất","broken":"bị hỏng","aware":"nhận biết / hay biết","unaware":"không hay biết","confident":"tự tin / chắc chắn","confidently":"một cách chắc chắn","consistent":"nhất quán","inconsistent":"không nhất quán","critical":"then chốt / nghiêm trọng","severe":"nghiêm trọng","minor":"nhỏ / thứ yếu","major":"lớn / chủ yếu","strict":"nghiêm ngặt","loose":"lỏng lẻo","tight":"chặt / eo hẹp","spiky":"tăng giảm đột ngột","steady":"đều đặn","flat":"phẳng / không đổi","sharp":"mạnh / sắc","subtle":"tinh vi / khó thấy","fake":"giả","raw":"thô / nguyên bản","plain":"thuần / trơn","garbled":"lộn xộn / méo mó","malformed":"sai định dạng","unbounded":"không giới hạn","bounded":"có giới hạn","idle":"nhàn rỗi / không dùng","irrelevant":"không liên quan","relevant":"liên quan","legitimate":"chính đáng / hợp lệ","professional":"chuyên nghiệp","mature":"trưởng thành / chín chắn","messy":"lộn xộn","noisy":"nhiều nhiễu","clean":"sạch / gọn","coherent":"mạch lạc","open-ended":"mở / không giới hạn đáp án","issue":"vấn đề","issues":"các vấn đề","problem":"vấn đề","goal":"mục tiêu","outcome":"kết quả (đầu ra)","impact":"tác động","effect":"tác động / hiệu ứng","benefit":"lợi ích","drawback":"nhược điểm","threat":"mối đe dọa","attack":"cuộc tấn công","source":"nguồn","method":"phương pháp","strategy":"chiến lược","pattern":"khuôn mẫu / quy luật","requirement":"yêu cầu","requirements":"các yêu cầu","effort":"công sức","performance":"hiệu năng","stability":"sự ổn định","safety":"an toàn","security":"bảo mật","privacy":"quyền riêng tư","draft":"bản nháp","snippet":"đoạn mã ngắn","workaround":"cách lách tạm","overhead":"chi phí phụ trội","footprint":"mức chiếm dụng tài nguyên","tail":"phần đuôi (trường hợp lẻ)","insight":"hiểu biết sâu / phát hiện","tradeoff":"sự đánh đổi","trade-off":"sự đánh đổi","trade-offs":"các sự đánh đổi","bug":"lỗi phần mềm","fallback":"phương án dự phòng","gap":"khoảng trống / lỗ hổng","stakeholder":"bên liên quan","stakeholders":"các bên liên quan","teammate":"đồng đội","vendor":"nhà cung cấp","invoice":"hóa đơn","ticket":"phiếu yêu cầu / vé","tickets":"các phiếu yêu cầu","often":"thường","rarely":"hiếm khi","usually":"thường thì","roughly":"khoảng chừng","nearly":"gần như","barely":"vừa đủ / hầu như không","merely":"chỉ là","strictly":"một cách nghiêm ngặt","silently":"âm thầm","gradually":"dần dần","instantly":"tức thì","eventually":"rốt cuộc / cuối cùng","directly":"trực tiếp","initially":"ban đầu","currently":"hiện tại","typically":"thường thì","primarily":"chủ yếu","significantly":"đáng kể","substantially":"đáng kể","materially":"một cách đáng kể","actually":"thực ra","instead":"thay vào đó","rather":"đúng hơn / khá là","whether":"liệu (có... hay không)","despite":"mặc dù","unless":"trừ khi","toward":"về phía","across":"xuyên suốt / khắp","beyond":"vượt ra ngoài","upfront":"ngay từ đầu / trả trước","onward":"trở đi","meanwhile":"trong khi đó","otherwise":"nếu không thì","regardless":"bất kể","furthermore":"hơn nữa","however":"tuy nhiên","therefore":"do đó","thus":"vì thế","hence":"do đó","trade off":"sự đánh đổi","in practice":"trên thực tế","rule of thumb":"quy tắc kinh nghiệm (ước chừng)","make sense":"hợp lý, có lý","makes sense":"hợp lý, có lý","as a rule":"theo lệ thường","at scale":"ở quy mô lớn","out of scope":"ngoài phạm vi","up front":"ngay từ đầu / trả trước","under load":"khi tải nặng","on device":"chạy ngay trên thiết bị","on-device":"chạy ngay trên thiết bị","real time":"thời gian thực","real-time":"thời gian thực","over time":"theo thời gian","at once":"cùng một lúc","in place":"tại chỗ / đã sẵn sàng","such as":"chẳng hạn như","for example":"ví dụ","for instance":"ví dụ","rather than":"thay vì","instead of":"thay vì","as long as":"miễn là","even if":"ngay cả khi","as a result":"kết quả là","in this case":"trong trường hợp này","on the other hand":"mặt khác","keep up":"theo kịp","run up":"làm tăng vọt","fall behind":"tụt lại phía sau","back to back":"liên tiếp nhau","back-to-back":"liên tiếp nhau","day to day":"hằng ngày","day-to-day":"hằng ngày","long tail":"phần đuôi dài (các trường hợp ít gặp)","long-tail":"đuôi dài (trường hợp ít gặp)","edge case":"trường hợp biên (hiếm gặp)","edge cases":"các trường hợp biên","best practice":"cách làm tốt nhất","best practices":"các cách làm tốt nhất","root cause":"nguyên nhân gốc rễ","single point of failure":"điểm hỏng duy nhất (hỏng là sập cả hệ thống)","least privilege":"đặc quyền tối thiểu","human in the loop":"có con người phê duyệt trong quy trình","human-in-the-loop":"có con người phê duyệt trong quy trình","lost in the middle":"bị bỏ sót ở giữa (mô hình ít chú ý phần giữa)","up to date":"cập nhật / mới nhất","up-to-date":"cập nhật nhất","step by step":"từng bước một","step-by-step":"từng bước một","trial and error":"thử và sai","time to first token":"thời gian tới token đầu tiên","for this reason":"vì lý do này","in front":"ở phía trước","so that":"để mà","as such":"như vậy / do đó","in turn":"đến lượt nó","at the same time":"cùng lúc","by design":"theo thiết kế (cố ý)","by default":"theo mặc định","from scratch":"từ đầu / từ con số 0","in the middle":"ở giữa","end to end":"từ đầu đến cuối","end-to-end":"từ đầu đến cuối","which":"cái nào / mà","that":"cái đó / rằng","with":"với","what":"cái gì","your":"của bạn","from":"từ","since":"kể từ / vì","only":"chỉ","both":"cả hai","here":"ở đây","every":"mỗi","before":"trước","more":"nhiều hơn","each":"mỗi","first":"đầu tiên","this":"cái này","after":"sau","into":"vào trong","must":"phải","single":"đơn / duy nhất","small":"nhỏ","than":"hơn","should":"nên","still":"vẫn","them":"chúng / họ","when":"khi","never":"không bao giờ","keep":"giữ","full":"đầy đủ","about":"về / khoảng","does":"làm (trợ động từ)","they":"họ / chúng","same":"giống nhau","system":"hệ thống","user":"người dùng","step":"bước","while":"trong khi","time":"thời gian","over":"qua / trên","because":"bởi vì","need":"cần","team":"nhóm / đội","word":"từ","have":"có","size":"kích thước","always":"luôn luôn","cannot":"không thể","call":"gọi","like":"giống / thích","their":"của họ","check":"kiểm tra","runs":"chạy","number":"số","itself":"chính nó","most":"hầu hết","name":"tên","don't":"không","mean":"nghĩa là / trung bình","make":"làm / tạo","free":"miễn phí / tự do","base":"nền / cơ sở","zero":"số không","long":"dài","keeps":"giữ","will":"sẽ","section":"phần / mục","information":"thông tin","code":"mã / code","where":"ở đâu","larger":"lớn hơn","reviewers":"người rà soát","actions":"hành động","longer":"dài hơn","once":"một lần / khi đã","complete":"hoàn chỉnh","times":"lần","offers":"cung cấp / mời","right":"đúng / phải","mode":"chế độ","neither":"không cái nào","between":"giữa","read":"đọc","file":"tệp","higher":"cao hơn","limits":"giới hạn","clear":"rõ / xóa","account":"tài khoản","being":"việc là / đang","structure":"cấu trúc","there":"ở đó","then":"sau đó / thì","high":"cao","capability":"năng lực","ones":"những cái","early":"sớm","possible":"có thể","three":"ba","other":"khác","move":"di chuyển / động thái","technique":"kỹ thuật","permanently":"vĩnh viễn","restrict":"hạn chế","work":"làm việc / hoạt động","improve":"cải thiện","specific":"cụ thể","bigger":"lớn hơn","legal":"pháp lý","nothing":"không gì","local":"cục bộ / địa phương","email":"email","terms":"điều khoản / thuật ngữ","grows":"tăng lên","short":"ngắn","build":"xây dựng","network":"mạng lưới","repeated":"lặp lại","part":"phần","asking":"hỏi / yêu cầu","alone":"một mình / chỉ riêng","keeping":"giữ","increase":"tăng","generated":"được tạo ra","actual":"thực tế","message":"tin nhắn","sound":"hợp lý / âm thanh","language":"ngôn ngữ","words":"các từ","disabling":"việc tắt đi","large":"lớn","form":"dạng / mẫu","ever":"bao giờ","shows":"cho thấy","speed":"tốc độ","makes":"làm cho","trusting":"tin tưởng","default":"mặc định","asks":"hỏi","inside":"bên trong","riverpay":"RiverPay (tên công ty giả định)","start":"bắt đầu","arithmetic":"số học / phép tính","switch":"chuyển đổi","five":"năm","amount":"số lượng","deleting":"việc xóa","criteria":"tiêu chí","extra":"thêm","control":"kiểm soát","contradictions":"mâu thuẫn","separate":"riêng biệt / tách","least":"ít nhất","classification":"phân loại","disable":"tắt / vô hiệu hóa","parking":"bãi đỗ xe","meaningful":"có ý nghĩa","hardware":"phần cứng","total":"tổng","rising":"đang tăng","train":"huấn luyện / tàu","product":"sản phẩm","http":"HTTP (giao thức web)","many":"nhiều","test":"kiểm thử","track":"theo dõi","even":"ngay cả / thậm chí","takes":"mất / lấy","shorter":"ngắn hơn","structured-output":"đầu ra có cấu trúc","option":"tùy chọn","platform":"nền tảng","either":"một trong hai","names":"tên","room":"chỗ / khoảng trống","simply":"chỉ đơn giản","languages":"ngôn ngữ","universal":"phổ quát / chung","vary":"thay đổi / khác nhau","under":"dưới","limit":"giới hạn","during":"trong suốt","looks":"trông / nhìn","support":"hỗ trợ","style":"phong cách","area":"vùng / khu vực","letting":"để cho","through":"qua / xuyên","newer":"mới hơn","apps":"ứng dụng","another":"cái khác","carry":"mang / chứa","alongside":"cùng với","anything":"bất cứ gì","everything":"mọi thứ","last":"cuối / kéo dài","ends":"kết thúc","very":"rất","near":"gần","gets":"nhận / trở nên","next":"tiếp theo","result":"kết quả","gives":"cho / đưa ra","treat":"đối xử / coi như","access":"truy cập","whose":"của ai / mà","want":"muốn","sees":"thấy","inherently":"vốn dĩ / bản chất","course's":"của khóa học","analytics":"phân tích dữ liệu","applied":"áp dụng","sits":"nằm ở","hold":"giữ / chứa","returns":"trả về","already":"đã / rồi","score":"điểm số","compare":"so sánh","million":"triệu","nearest-neighbor":"láng giềng gần nhất (tìm vector gần nhất)","preserves":"giữ lại","money":"tiền","wins":"thắng / hơn","improves":"cải thiện","adds":"thêm vào","used":"được dùng","fits":"vừa / khớp","would":"sẽ / hẳn là","rises":"tăng","normal":"bình thường","logging":"ghi nhật ký","full-parameter":"toàn bộ tham số (fine-tune toàn phần)","reach":"đạt tới","optimizer":"bộ tối ưu (trong huấn luyện)","micro-batches":"lô nhỏ (chia batch ra)","int8":"int8 (số nguyên 8-bit)","int4":"int4 (số nguyên 4-bit)","falling":"đang giảm / rơi","behind":"phía sau","some":"một số","action":"hành động","reversible":"có thể đảo ngược","steps":"các bước","it's":"nó là","streamable":"có thể truyền luồng (Streamable HTTP)","clients":"máy khách / ứng dụng gọi","demand":"nhu cầu / đòi hỏi","loop":"vòng lặp","load":"tải / nạp","external":"bên ngoài","continuous":"liên tục","kv-cache":"bộ nhớ đệm KV","open-weights":"mô hình mở trọng số","downloadable":"có thể tải về","china":"Trung Quốc","algorithm":"thuật toán","instance":"máy chủ ảo / thực thể","time-to-first-token":"thời gian tới token đầu tiên","down":"xuống","settings":"cài đặt","upload":"tải lên","character":"ký tự","multiply":"nhân lên","transfer":"truyền / chuyển","dominates":"chiếm phần lớn","starts":"bắt đầu","feature":"tính năng","enabling":"bật / kích hoạt","repeat":"lặp lại","making":"việc làm","cutting":"cắt giảm","native":"gốc / tự nhiên","rely":"dựa vào","options":"tùy chọn","cases":"trường hợp","alternate":"luân phiên / xen kẽ","becomes":"trở thành","point":"điểm","text-only":"chỉ văn bản","architectural":"về kiến trúc","setting":"cài đặt","lets":"cho phép","receipt":"hóa đơn / biên lai","stops":"dừng","true":"đúng / thật","amounts":"số tiền / lượng","internal":"nội bộ / bên trong","floats":"số thực (dấu phẩy động)","chat":"trò chuyện","asked":"được hỏi / yêu cầu","generates":"tạo ra","dedicated":"chuyên dụng","reused":"dùng lại","yield":"mang lại / cho ra","vietnamese":"tiếng Việt","bills":"hóa đơn","measurements":"phép đo","difference":"sự khác biệt","four":"bốn","ratio":"tỉ lệ","whitespace-separated":"cách nhau bằng khoảng trắng","modern":"hiện đại","stays":"giữ nguyên","well":"tốt / giếng","lists":"danh sách","schedule":"lịch / lên lịch","abuse":"lạm dụng","few-shot":"few-shot (cho vài ví dụ mẫu)","classifier":"bộ phân loại","alternating":"xen kẽ","demonstrations":"các ví dụ minh họa","turns":"lượt / biến thành","impossible":"không thể","placed":"được đặt","separately":"riêng rẽ","morning":"buổi sáng","shift":"dịch chuyển / ca","noticeably":"rõ rệt","keys":"khóa / chìa khóa","original":"gốc / ban đầu","phase":"giai đoạn","fewer":"ít hơn","older":"cũ hơn","sentence":"câu","perfect":"hoàn hảo","date":"ngày","reflect":"phản ánh","application":"ứng dụng","hard":"khó / cứng","adopt":"áp dụng / chọn dùng","variable-last":"để phần biến đổi ở cuối","earliest":"sớm nhất","says":"nói / ghi","pricing":"định giá","report":"báo cáo","mentions":"nhắc đến","negative":"tiêu cực / âm","positive":"tích cực / dương","framing":"cách diễn đạt / khung","discuss":"thảo luận","creatively":"một cách sáng tạo","away":"đi / ra xa","forbidden":"bị cấm","within":"trong vòng","follows":"theo sau","lost":"mất / bị lạc","less":"ít hơn","restate":"nhắc lại","per-rule":"theo từng quy tắc","tier":"bậc / hạng","mid-prompt":"giữa prompt","currency":"tiền tệ","matter":"vấn đề / quan trọng","much":"nhiều","calculator":"máy tính / công cụ tính","principle":"nguyên tắc","stronger":"mạnh hơn","whichever":"bất cứ cái nào","reliability":"độ tin cậy","flips":"lật / đổi qua lại","exploration":"sự khám phá / thử nhiều hướng","considerations":"các yếu tố cần cân nhắc","verdict":"phán quyết / kết luận","independent":"độc lập","take":"lấy / mất","console":"bảng điều khiển / log","working":"đang hoạt động / làm việc","class":"lớp / loại","incident":"sự cố","artifacts":"sản phẩm / tạo tác","append-only":"chỉ thêm vào (không sửa/xóa)","freezing":"đóng băng / cố định","improvement":"sự cải thiện","freeze":"đóng băng / cố định","senior":"cấp cao","authoritative":"có thẩm quyền / đáng tin","earlier":"trước đó","embedded":"được nhúng / gắn vào","write":"viết","role":"vai trò","finds":"tìm thấy","grade":"chấm điểm","become":"trở thành","scoring":"việc chấm điểm","concrete":"cụ thể","red-teaming":"kiểm thử tấn công (đội đỏ)","indirect":"gián tiếp","design":"thiết kế","structural":"về cấu trúc","themselves":"chính họ / chúng","wording":"cách diễn đạt câu chữ","been":"đã","kept":"giữ / giữ lại","attackers":"kẻ tấn công","gain":"đạt được / lợi","back":"trở lại / phía sau","configuration":"cấu hình","above":"ở trên","feeds":"đưa vào / cấp","silent":"âm thầm / im lặng","random":"ngẫu nhiên","voting":"bỏ phiếu","creative":"sáng tạo","high-temperature":"nhiệt độ cao","verdicts":"các phán quyết","cite":"trích dẫn","following":"sau đây / theo sau","conflict":"xung đột / mâu thuẫn","demonstration":"sự minh họa","mass":"hàng loạt / khối lượng","genuine":"thật sự / chân thực","conflicts":"xung đột","poorly":"kém / tệ","conversational":"mang tính hội thoại","architecture":"kiến trúc","pure":"thuần túy","knowledge":"kiến thức","dimensional":"theo chiều","potential":"tiềm năng","domain":"lĩnh vực / miền","workload":"khối lượng công việc","storage":"lưu trữ","affect":"ảnh hưởng","reimbursement":"hoàn phí / bồi hoàn","boundary":"ranh giới","boundaries":"ranh giới","adjacent":"liền kề","boundary-spanning":"bắc qua ranh giới","intact":"nguyên vẹn","generate":"tạo ra","rewritten":"được viết lại","widen":"mở rộng","improving":"cải thiện","works":"hoạt động / hiệu quả","per-claim":"theo từng luận điểm","instruct":"hướng dẫn / ra lệnh","trail":"dấu vết / đường mòn","naturally":"một cách tự nhiên","recognize":"nhận ra","written":"được viết","reference-free":"không cần đáp án chuẩn","bleu":"BLEU (chỉ số đo bản dịch)","until":"cho đến khi","defined":"được định nghĩa","seconds":"giây","destroys":"phá hủy","overnight":"qua đêm","interactive":"tương tác","offline":"ngoại tuyến","ranking":"xếp hạng","approximate":"gần đúng / xấp xỉ","month":"tháng","unreviewed":"chưa được rà soát","compounds":"cộng dồn / tích lũy lỗi","question-answer":"câu hỏi–câu trả lời","months":"tháng","scores":"điểm số","private":"riêng tư","justify":"biện minh / chứng minh xứng đáng","expense":"chi phí","immediately":"ngay lập tức","best":"tốt nhất","techniques":"kỹ thuật","relevance":"sự liên quan","lack":"thiếu","partitioning":"phân vùng / chia nhỏ","trade":"đánh đổi","absorb":"hấp thụ / gánh","quoting":"trích dẫn","give":"cho / đưa","naming":"đặt tên","steadily":"đều đặn / ổn định","diagnostic":"chẩn đoán","isn't":"không phải","extend":"kéo dài / mở rộng","adjust":"điều chỉnh","augmentation":"tăng cường dữ liệu","signature":"dấu hiệu đặc trưng / chữ ký","successful":"thành công","continue":"tiếp tục","proves":"chứng minh","stopped":"dừng lại","preserve":"bảo toàn / giữ","plateau":"chững lại / đi ngang","success":"thành công","plateaued":"đã chững lại","consumer":"người tiêu dùng / phổ thông","qlora-style":"kiểu QLoRA","doesn't":"không","trainable":"có thể huấn luyện","decouples":"tách rời / gỡ phụ thuộc","shorten":"rút ngắn","running":"chạy / đang chạy","calling":"gọi","ideal":"lý tưởng","uses":"dùng","modest":"vừa phải / khiêm tốn","supervised":"có giám sát (SFT)","input-output":"đầu vào–đầu ra","worse":"tệ hơn","smaller":"nhỏ hơn","rank":"hạng / rank (LoRA)","high-volume":"khối lượng lớn","per-request":"theo từng yêu cầu","research":"nghiên cứu","mixing":"trộn lẫn","target":"mục tiêu","suffices":"là đủ","half":"một nửa","highest-leverage":"có hiệu quả cao nhất","autonomously":"một cách tự chủ","deletions":"việc xóa","dangerous":"nguy hiểm","accept":"chấp nhận","later":"về sau","focused":"tập trung","contradictory":"mâu thuẫn","prefers":"thích hơn / ưu tiên","helps":"giúp","child":"con / tiến trình con","networked":"nối mạng","supports":"hỗ trợ","suite":"bộ (bài kiểm thử)","harness":"khung điều phối (harness)","rolling":"cuộn / lăn (rolling summary)","inline":"nội tuyến / ngay trong dòng","integrations":"việc tích hợp","library":"thư viện","testing":"kiểm thử","ownership":"quyền sở hữu / phụ trách","release":"phát hành","efficient":"hiệu quả","feels":"cảm thấy","remember":"ghi nhớ","complaints":"lời phàn nàn","open":"mở","global":"toàn cầu","alike":"giống nhau / cả hai","uploads":"việc tải lên","hidden":"ẩn","outbound":"gửi ra ngoài","generative-ai":"AI tạo sinh","satisfies":"thỏa mãn","obligations":"nghĩa vụ","regime":"chế độ / khung quy định","outages":"sự cố ngừng dịch vụ","though":"mặc dù","stay":"giữ / ở lại","specifically":"cụ thể là","phases":"các giai đoạn","delays":"làm chậm / độ trễ","trimming":"cắt gọn","low-temperature":"nhiệt độ thấp","generating":"việc sinh ra","definitions":"định nghĩa","followed":"theo sau","context-caching":"lưu đệm ngữ cảnh","reuses":"dùng lại","suffix":"hậu tố (phần cuối)","closer":"gần hơn","disables":"vô hiệu hóa","attributable":"có thể quy cho","parseable":"có thể phân tích cú pháp","writes":"viết","elaborate":"công phu / tỉ mỉ","begging":"nài nỉ","schema-in-prompt":"đưa lược đồ vào prompt","depth":"chiều sâu","semantically":"về mặt ngữ nghĩa","phrasing":"cách diễn đạt","api-level":"ở cấp API","favor":"ưu ái / thiên về","persuasive":"có sức thuyết phục","complementary":"bổ trợ","mechanism":"cơ chế","post-process":"xử lý hậu kỳ","regular":"thông thường / đều đặn","expressions":"biểu thức (regex)","mechanisms":"cơ chế","randomly":"ngẫu nhiên","finance":"tài chính","photographed":"được chụp ảnh","receipts":"hóa đơn","stack":"ngăn xếp / hệ thống","sends":"gửi","unsurprisingly":"không có gì lạ là","pixels":"điểm ảnh","ingests":"nạp vào / tiếp nhận","converts":"chuyển đổi","given":"cho trước / đã cho","rename":"đổi tên","files":"tệp","include":"bao gồm","vision-language":"mô hình thị giác–ngôn ngữ","accepts":"chấp nhận","feed":"đưa vào / cấp","printed":"được in","integration":"sự tích hợp","chat-completion":"hoàn thành hội thoại (API chat)","happily":"vui vẻ / thản nhiên","plausible-looking":"trông có vẻ hợp lý","representations":"biểu diễn","come":"đến / xuất phát","designed":"được thiết kế","proprietary":"độc quyền","re-sorted":"sắp xếp lại","fine":"ổn / tốt","meaning":"ý nghĩa","below":"bên dưới","representation":"biểu diễn","consumption":"mức tiêu thụ","projected":"dự kiến / dự phóng","non-english":"không phải tiếng Anh","ratios":"tỉ lệ","english":"tiếng Anh","provider-side":"phía nhà cung cấp","characters":"ký tự","divide":"chia","constant":"hằng số / không đổi","representative":"đại diện / tiêu biểu","widely":"rộng rãi","calibrated":"được hiệu chỉnh","requests-per-minute":"số yêu cầu mỗi phút (RPM)","long-document":"tài liệu dài","season":"mùa / cao điểm","rate-limit":"giới hạn tần suất","page":"trang","minute":"phút","meter":"đo / tính","exhaust":"làm cạn kiệt","segment":"chia đoạn / phân khúc","tighten":"siết chặt / thu gọn","month-end":"cuối tháng","cycles":"chu kỳ","mislabels":"gán nhãn sai","lift":"gỡ bỏ / nâng","token-per-minute":"số token mỗi phút (TPM)","ceiling":"trần / giới hạn trên","spread":"dàn trải","jobs":"công việc / tác vụ","chat-based":"dựa trên hội thoại","pastes":"dán vào","giant":"khổng lồ","guide":"hướng dẫn","advantage":"lợi thế","message-pair":"cặp tin nhắn","formatted":"được định dạng","mirror":"phản chiếu / giống","inference-time":"lúc suy luận","strengthens":"củng cố","imitation":"sự bắt chước","exemption":"sự miễn trừ","visibility":"khả năng nhìn thấy","doubles":"gấp đôi","paired":"theo cặp","seeing":"nhìn thấy","metered":"bị tính (theo lượng)","dialogue":"hội thoại","imitate":"bắt chước","respond":"phản hồi","config":"cấu hình","points":"trỏ tới / điểm","convenience":"sự tiện lợi","side":"phía / mặt","root":"gốc","prevention":"sự phòng ngừa","re-point":"trỏ lại","tiers":"các bậc","aged":"cũ đi / quá hạn","past":"quá / vượt qua","ninety-day":"chín mươi ngày","moved":"đã dời","drifts":"trôi / lệch dần","upward":"hướng lên","periodic":"định kỳ","resets":"đặt lại","countermeasure":"biện pháp đối phó","throttled":"bị bóp / giới hạn","purchasing":"mua / mua sắm","reserved":"dành riêng / đặt trước","stabilize":"ổn định hóa","grown":"đã tăng","climb":"leo / tăng","help":"giúp","tracks":"theo dõi","shrink":"thu nhỏ","affects":"ảnh hưởng","measurably":"một cách đo được","higher-quality":"chất lượng cao hơn","enable":"bật / cho phép","resending":"gửi lại","dwarfs":"làm lu mờ / lớn hơn hẳn","context-heavy":"nhiều ngữ cảnh","beat":"đánh bại / hơn","thumb":"ngón cái (rule of thumb)","one-word-one-token":"một từ một token","estimate":"ước tính","equals":"bằng","getting":"nhận / trở nên","truth":"sự thật","syntactically":"về mặt cú pháp","object":"đối tượng / vật thể","category":"danh mục / loại","business":"kinh doanh / nghiệp vụ","modes":"chế độ","function-calling":"gọi hàm (function calling)","obtain":"có được","machine-parseable":"máy đọc / phân tích được","field":"trường (dữ liệu)","factually":"về mặt dữ kiện","logically":"về mặt logic","needed":"cần thiết","valid":"hợp lệ","family":"họ / dòng (mô hình)","tiered":"phân bậc","own-workload":"khối lượng công việc của chính bạn","latency-aware":"có tính đến độ trễ","flagship-everywhere":"dùng mô hình chủ lực cho mọi thứ","pays":"trả / chi","leaderboards":"bảng xếp hạng","hurts":"gây hại / làm giảm","difficulty":"độ khó","routine":"thường lệ / đơn giản","weigh":"cân nhắc","exploit":"khai thác / tận dụng","restructure":"tái cấu trúc","hits":"trúng / đạt","interleaves":"xen kẽ","byte":"byte","invalidates":"làm mất hiệu lực","stable-first":"phần tĩnh đặt trước","cacheable":"có thể lưu đệm","anyway":"dù sao","byte-identical":"giống nhau từng byte","lines":"dòng","evenly":"đều nhau","kinds":"loại","randomize":"làm ngẫu nhiên","represented":"được biểu diễn","reads":"đọc","appended":"được nối thêm","mention":"nhắc đến","bring":"mang / đưa","riverpay's":"của RiverPay","comparisons":"so sánh","added":"được thêm","plant":"gieo / cấy vào","concept":"khái niệm","forbid":"cấm","catalog":"danh mục sản phẩm","redirect":"chuyển hướng","ours":"của chúng ta","steers":"lái / dẫn dắt","seeding":"gieo mầm / tạo mồi","topic":"chủ đề","freedom":"sự tự do","throughout":"xuyên suốt","finally":"cuối cùng","registers":"ghi nhận","important":"quan trọng","positively":"một cách khẳng định / tích cực","products":"sản phẩm","repeating":"lặp lại","encode":"mã hóa","base64":"Base64 (kiểu mã hóa)","understands":"hiểu","reminded":"được nhắc","quoted":"được trích","bottom":"dưới cùng","middle":"ở giữa","buried":"bị chôn / vùi","mid-context":"giữa ngữ cảnh","must-follow":"bắt buộc tuân theo","optionally":"tùy chọn","discounted-token":"token được giảm giá","long-context":"ngữ cảnh dài","favors":"thiên về / ưu ái","beginning":"phần đầu","exceeds":"vượt quá","discount":"giảm giá","padding":"chèn đệm","imbalance":"sự mất cân bằng","symbol":"ký hiệu","confuses":"gây nhầm lẫn","spelling":"cách viết / đánh vần","understood":"được hiểu","instructs":"hướng dẫn","pro-rated":"tính theo tỉ lệ","subscription":"thuê bao","calculations":"phép tính","slips":"sai sót nhỏ","logic":"logic / lập luận","token-by-token":"từng token một","unreliable":"không đáng tin","precise":"chính xác","surrounds":"bao quanh","offload":"chuyển tải sang / giao cho","math":"toán","explanation":"lời giải thích","explain":"giải thích","hundred":"trăm","linguistic":"thuộc ngôn ngữ","pathway":"con đường / lối","chain-of-thought":"chuỗi suy luận (CoT)","phrases":"cụm từ","occasionally":"thỉnh thoảng","flip":"đổi / lật","approved":"được duyệt","rejected":"bị từ chối","buys":"mua / đem lại","permits":"cho phép","vote":"bỏ phiếu","suppresses":"kìm / giảm","run-to-run":"giữa các lần chạy","increases":"tăng","delivery":"việc phân phối / giao","basis":"cơ sở","reflects":"phản ánh","emitting":"phát ra","reconsider":"cân nhắc lại","midway":"giữa chừng","shortening":"rút ngắn","inconsistency":"sự không nhất quán","returned":"được trả về","hotfix":"bản vá gấp","friday":"thứ Sáu","monday":"thứ Hai","teams":"các nhóm","nobody":"không ai","knows":"biết","looked":"đã xem","behavioral":"thuộc hành vi","diffs":"khác biệt (diff)","releases":"bản phát hành","breed":"sinh ra / gây ra","forever":"mãi mãi","engineer":"kỹ sư","hotfixes":"các bản vá gấp","factual":"về dữ kiện / sự thật","formatting":"định dạng","shallow":"nông / hời hợt","self-praise":"tự khen","setup":"thiết lập","substantive":"có thực chất","in-line":"ngay trong dòng","self-critique":"tự phê bình","tends":"có xu hướng","perfunctory":"qua loa / chiếu lệ","grading":"chấm điểm","incentive":"động lực / khích lệ","doubled":"gấp đôi","giving":"cho / đưa","single-call":"một lần gọi","deeper":"sâu hơn","award":"trao / cho điểm","numeric":"dạng số","honest":"trung thực","supposed":"được cho là / phải","second":"giây / thứ hai","finished":"đã xong","anti-jailbreak":"chống phá rào","declares":"tuyên bố","injection-proof":"chống tiêm lệnh","assessment":"sự đánh giá","prompt-level":"ở cấp prompt","phrasings":"cách diễn đạt","finding":"việc tìm ra","defense-in-depth":"phòng thủ nhiều lớp","data-vs-instruction":"dữ liệu so với chỉ thị","separation":"sự tách biệt","engineers":"kỹ sư","secret":"bí mật","voids":"làm mất hiệu lực","protection":"sự bảo vệ","counterproductive":"phản tác dụng","probing":"dò xét / thăm dò","intern":"thực tập sinh","built":"đã xây / tạo","sentiment":"cảm xúc / thái độ (sentiment)","left":"để lại / trái","fixed-label":"nhãn cố định","mapping":"ánh xạ","near-":"gần","randomized":"được làm ngẫu nhiên","noise":"nhiễu","probable":"có khả năng cao","reproducibly":"lặp lại được","diversity":"sự đa dạng","richer":"phong phú hơn","study":"học tập / nghiên cứu","balance":"cân bằng","whatever":"bất cứ gì","maintainable":"dễ bảo trì","cache-friendly":"thân thiện với bộ đệm","modular":"dạng mô-đun","reshuffling":"xáo trộn lại","non-reproducible":"không lặp lại được","organize":"tổ chức / sắp xếp","clearly":"rõ ràng","delimited":"được ngăn cách rõ","responsibilities":"trách nhiệm","static-first":"phần tĩnh trước","reshuffle":"xáo trộn lại","loan":"khoản vay","pre-screening":"sàng lọc sơ bộ","advice":"lời khuyên","loops":"vòng lặp","variance":"sự dao động / phương sai","precisely":"một cách chính xác","flexibility":"sự linh hoạt","programmatic":"bằng chương trình / tự động","retry":"thử lại","violations":"vi phạm","violating":"vi phạm","rest":"phần còn lại / nghỉ","diagnostics":"chẩn đoán","reasonable":"hợp lý","position":"vị trí","lost-in-the-middle":"bị bỏ sót ở giữa","systematic":"có hệ thống","repetition":"sự lặp lại","bloats":"làm phình to","loses":"mất / thua","demonstrates":"chứng minh / cho thấy","weakest":"yếu nhất","relocate":"di dời","paste":"dán","twenty":"hai mươi","consecutively":"liên tiếp","primary":"chính / chủ yếu","overrides":"ghi đè / lấn át","analysis":"phân tích","clusters":"cụm","leave":"rời / nghỉ phép","wedding":"đám cưới","bm25-style":"kiểu BM25 (tìm theo từ khóa)","styles":"phong cách","covers":"bao phủ / che","fumble":"làm hỏng / lúng túng","identifiers":"mã định danh","self-classifying":"tự phân loại","dead":"chết / bế tắc","subsumes":"bao trùm / thay thế","combining":"kết hợp","synonym":"từ đồng nghĩa","dictionary":"từ điển","manually":"thủ công","classify":"phân loại","type":"loại / kiểu","submission":"việc gửi / nộp","view":"xem / quan điểm","gains":"lợi ích / tăng","depend":"phụ thuộc","definitive":"dứt khoát / quyết định","superior":"vượt trội","compact":"nhỏ gọn","conference":"hội nghị","travel":"đi lại / công tác","adjustment":"sự điều chỉnh","line":"dòng","co-occur":"cùng xuất hiện","overlapping":"chồng lấn","whole-document":"toàn bộ tài liệu","destroy":"phá hủy","embed":"nhúng","alphabetically":"theo thứ tự bảng chữ cái","related":"liên quan","neighboring":"lân cận","distant":"xa","single-query":"một truy vấn","lucky-dip":"hên xui / vớ đại","visitor":"khách","employee":"nhân viên","main":"chính","multi-intent":"nhiều ý định","adding":"thêm vào","weakens":"làm yếu đi","discouraged":"không khuyến khích","coverage":"độ bao phủ","dividing":"chia","mainly":"chủ yếu","recursive":"đệ quy","able":"có thể","came":"đến","quote-only":"chỉ trích dẫn","usefulness":"tính hữu ích","attach":"gắn kèm","quotations":"trích dẫn","sentences":"câu","ground-truth":"đáp án chuẩn / sự thật nền","hasn't":"chưa","something":"điều gì đó","sprint":"chặng làm việc (sprint)","available":"có sẵn","judge":"giám khảo / đánh giá","grounded":"dựa trên căn cứ / bám ngữ cảnh","on-topic":"đúng chủ đề","reference-based":"dựa trên đáp án chuẩn","definition":"định nghĩa","also":"cũng","tolerates":"chấp nhận / dung thứ","absent":"vắng / thiếu","context-relevance":"mức liên quan của ngữ cảnh","kind":"loại","human-written":"do người viết","agreement":"sự đồng thuận / khớp","hnsw":"HNSW (thuật toán tìm vector gần đúng)","milliseconds":"mili giây","tunable":"có thể điều chỉnh","geometry":"hình học / cấu trúc không gian","precomputation":"tính toán trước","aren't":"không phải","serious":"nghiêm túc","precompute":"tính trước","shrinking":"thu nhỏ lại","graph-based":"dựa trên đồ thị","trading":"đánh đổi","orders-of-magnitude":"gấp nhiều bậc","returning":"trả về","historical":"trong quá khứ","docs":"tài liệu","possibly":"có thể","course-aligned":"đúng theo khóa học","grow":"phát triển / tăng","self-evaluation":"tự đánh giá","seed":"hạt giống / khởi đầu","evidential":"có giá trị bằng chứng","daily":"hằng ngày","copy":"sao chép","internet":"Internet","generic":"chung chung","re-embedding":"nhúng lại","re-indexing":"lập chỉ mục lại","superiority":"sự vượt trội","re-embed":"nhúng lại","old-versus-new":"cũ so với mới","fully":"hoàn toàn","mixed":"pha trộn","spaces":"không gian","stage":"giai đoạn / tầng","balances":"cân bằng","profile":"lập hồ sơ / đo đặc tính","item":"mục / phần tử","no-op":"thao tác vô nghĩa (không tác dụng)","effectively":"một cách hiệu quả / thực chất","delaying":"làm chậm","latency-quality":"độ trễ – chất lượng","pick":"chọn","improvements":"cải tiến","fan-out":"tỏa ra (tạo nhiều truy vấn)","ranked":"được xếp hạng","concentrate":"tập trung","survive":"sống sót / tồn tại","fans":"tỏa ra","sparse-plus-dense":"kết hợp thưa và dày (từ khóa + vector)","covering":"bao phủ","semantic":"ngữ nghĩa","moves":"di chuyển / động thái","creates":"tạo ra","comparison":"sự so sánh","pertain":"liên quan tới","hand-review":"rà soát thủ công","create":"tạo","department-level":"cấp phòng ban","playbook":"cẩm nang / kịch bản","blows":"vượt quá / thổi bay","price":"giá","brute-force":"vét cạn / thô bạo"};
+function vEsc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function wrapWords(text){var re=/[A-Za-z][A-Za-z0-9_'\u2019-]*/g,out='',last=0,m;while((m=re.exec(text))){out+=vEsc(text.slice(last,m.index));out+='<span class="w">'+vEsc(m[0])+'</span>';last=m.index+m[0].length;}out+=vEsc(text.slice(last));return out;}
+function vLookup(raw){var w=raw.toLowerCase().replace(/\u2019/g,"'");if(GLOSS[w])return GLOSS[w];var b=w.replace(/'s$/,'');if(GLOSS[b])return GLOSS[b];var c=[];if(w.endsWith('ies'))c.push(w.slice(0,-3)+'y');if(w.endsWith('es'))c.push(w.slice(0,-2));if(w.endsWith('s'))c.push(w.slice(0,-1));if(w.endsWith('ing')){c.push(w.slice(0,-3));c.push(w.slice(0,-3)+'e');}if(w.endsWith('ed')){c.push(w.slice(0,-2));c.push(w.slice(0,-1));c.push(w.slice(0,-2)+'e');}if(w.endsWith('ly'))c.push(w.slice(0,-2));if(w.endsWith('er')){c.push(w.slice(0,-2));c.push(w.slice(0,-1));}if(w.endsWith('ation'))c.push(w.slice(0,-5)+'e');for(var i=0;i<c.length;i++)if(GLOSS[c[i]])return GLOSS[c[i]];return null;}
+function vShow(x,y,word){var def=vLookup(word);var g='https://translate.google.com/?sl=en&tl=vi&op=translate&text='+encodeURIComponent(word);var p=document.getElementById('vpop');p.innerHTML='<div class="vw">'+vEsc(word)+'</div><div class="vd">'+(def?vEsc(def):'<i>Chưa có trong từ điển tích hợp.</i>')+'</div><a class="vg" href="'+g+'" target="_blank" rel="noopener">Tra Google Dịch \u2197</a>';p.style.display='block';var pw=p.offsetWidth,ph=p.offsetHeight,px=x,py=y+16;if(px+pw>window.innerWidth-8)px=window.innerWidth-pw-8;if(px<8)px=8;if(py+ph>window.innerHeight-8)py=y-ph-16;if(py<8)py=8;p.style.left=px+'px';p.style.top=py+'px';}
+function vHide(){var p=document.getElementById('vpop');if(p)p.style.display='none';}
+document.body.insertAdjacentHTML('beforeend','<div id="vpop"></div>');
+function vSelText(){var s=window.getSelection?window.getSelection():null;if(!s||s.rangeCount===0)return '';return s.toString().replace(/\s+/g,' ').trim();}
+function vShowPhrase(x,y,phrase){var key=phrase.toLowerCase();var def=GLOSS[key]||null;var disp=phrase.length>90?phrase.slice(0,90)+'…':phrase;var g='https://translate.google.com/?sl=en&tl=vi&op=translate&text='+encodeURIComponent(phrase);var p=document.getElementById('vpop');p.innerHTML='<div class="vw">'+vEsc(disp)+'</div><div class="vd">'+(def?vEsc(def):'<i>Cụm từ — bấm liên kết bên dưới để xem bản dịch đầy đủ.</i>')+'</div><a class="vg" href="'+g+'" target="_blank" rel="noopener">Tra Google Dịch cả cụm ↗</a>';p.style.display='block';var pw=p.offsetWidth,ph=p.offsetHeight,px=x-pw/2,py=y+12;if(px+pw>window.innerWidth-8)px=window.innerWidth-pw-8;if(px<8)px=8;if(py+ph>window.innerHeight-8)py=y-ph-24;if(py<8)py=8;p.style.left=px+'px';p.style.top=py+'px';}
+function vCheckSel(){var s=vSelText();if(s&&/\s/.test(s)){var sel=window.getSelection();var r=sel.getRangeAt(0).getBoundingClientRect();vShowPhrase(r.left+r.width/2,r.bottom,s);return true;}return false;}
+document.addEventListener('mouseup',function(){setTimeout(vCheckSel,0);});
+document.addEventListener('touchend',function(){setTimeout(vCheckSel,0);});
+document.addEventListener('click',function(e){var st=vSelText();if(st&&/\s/.test(st))return;var w=e.target&&e.target.classList&&e.target.classList.contains('w')?e.target:null;if(w){e.preventDefault();e.stopPropagation();vShow(e.clientX,e.clientY,w.textContent);return;}if(!(e.target.closest&&e.target.closest('#vpop')))vHide();},true);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')vHide();});
+const singles = Q.filter(x=>x.t==="s"), multis = Q.filter(x=>x.t==="m");
+const ordered = [...singles, ...multis];
+const exam = document.getElementById("exam");
+let html = "";
+ordered.forEach((q,i)=>{
+  const n = i+1;
+  if(i===0) html += '<div class="part">Part I — Single Choice <span>(Q1–Q'+singles.length+', 1 point each; choose exactly one)</span></div>';
+  if(i===singles.length) html += '<div class="part">Part II — Multiple Choice <span>(Q'+(singles.length+1)+'–Q'+ordered.length+', 2 points each; select ALL correct options)</span></div>';
+  const type = q.t==="s" ? "radio" : "checkbox";
+  html += '<div class="q" id="q'+n+'"><div class="qhead"><span class="qnum">Q'+n+'</span>'+
+    '<span class="badge b-'+q.k+'">'+TOPICS[q.k]+'</span>'+
+    '<span class="pts">'+(q.t==="s"?"1 point · single choice":"2 points · multiple choice")+'</span>'+
+    '<button class="revealbtn" id="rb'+n+'" type="button" onclick="reveal('+n+')">Show answer</button></div>'+
+    '<div class="qtext">'+wrapWords(q.q)+'</div>';
+  q.o.forEach((opt,j)=>{
+    const L = "ABCD"[j];
+    html += '<label class="opt" id="q'+n+'o'+j+'"><input type="'+type+'" name="q'+n+'" value="'+j+'" onchange="count()"><span class="letter">'+L+'.</span><span class="otext">'+wrapWords(opt)+'</span></label>';
+  });
+  html += '<div class="expl" id="e'+n+'"></div></div>';
+});
+exam.innerHTML = html;
+// ===================== STATE =====================
+function picked(n){
+  return [...document.querySelectorAll('input[name="q'+n+'"]:checked')].map(x=>+x.value);
+}
+function count(){
+  let c = 0;
+  for(let n=1;n<=ordered.length;n++) if(picked(n).length) c++;
+  document.getElementById("answered").textContent = c;
+}
+// ===================== TIMER =====================
+let secs = 120*60, timerId = setInterval(tick,1000);
+function tick(){
+  secs--;
+  const m = Math.floor(secs/60), s = secs%60;
+  document.getElementById("timer").textContent = m+":"+String(s).padStart(2,"0");
+  if(secs<=0){ clearInterval(timerId); grade(true); }
+}
+// ===================== REVEAL (study mode) =====================
+function reveal(n){
+  if(graded) return;
+  const q = ordered[n-1];
+  const ex = document.getElementById("e"+n);
+  const btn = document.getElementById("rb"+n);
+  const shown = ex.classList.toggle("shown");
+  if(shown){
+    const key = q.a.map(x=>"ABCD"[x]).join(", ");
+    ex.innerHTML = '<div class="verdict">💡 <span class="anskey">Answer: '+key+'</span></div><div>'+wrapWords(q.e)+'</div>';
+    q.a.forEach(j=>document.getElementById("q"+n+"o"+j).classList.add("right"));
+    btn.textContent = "Hide answer";
+  } else {
+    ex.innerHTML = "";
+    q.o.forEach((_,j)=>document.getElementById("q"+n+"o"+j).classList.remove("right"));
+    btn.textContent = "Show answer";
+  }
+}
+// ===================== CUSTOM CONFIRM MODAL (site-styled) =====================
+// Replaces the native confirm() so the "unanswered" prompt matches the
+// Terminal, Typeset UI. Returns a Promise<boolean>.
+function acpConfirm(opts){
+  return new Promise(function(resolve){
+    var host = document.getElementById("acp-modal");
+    if(!host){
+      host = document.createElement("div");
+      host.id = "acp-modal";
+      document.body.appendChild(host);
+    }
+    var eyebrow = opts.eyebrow || "Confirm";
+    var title = opts.title || "Are you sure?";
+    var body = opts.body || "";
+    var okLabel = opts.ok || "Confirm";
+    var cancelLabel = opts.cancel || "Cancel";
+    host.innerHTML = ''
+      + '<div class="panel" role="alertdialog" aria-modal="true" aria-labelledby="acp-modal-title">'
+      +   '<span class="m-eyebrow">' + eyebrow + '</span>'
+      +   '<h3 class="m-title" id="acp-modal-title">' + title + '</h3>'
+      +   '<p class="m-body">' + body + '</p>'
+      +   '<div class="m-actions">'
+      +     '<button type="button" class="m-btn cancel" data-a="0">' + cancelLabel + '</button>'
+      +     '<button type="button" class="m-btn ok" data-a="1">' + okLabel + '</button>'
+      +   '</div>'
+      + '</div>';
+    host.classList.add("on");
+    var done = function(v){
+      host.classList.remove("on");
+      host.innerHTML = "";
+      document.removeEventListener("keydown", onKey);
+      resolve(v);
+    };
+    host.querySelector(".m-btn.ok").focus();
+    host.querySelector(".m-btn.ok").addEventListener("click", function(){ done(true); });
+    host.querySelector(".m-btn.cancel").addEventListener("click", function(){ done(false); });
+    host.addEventListener("click", function(e){ if(e.target===host) done(false); });
+    var onKey = function(e){
+      if(e.key==="Escape") done(false);
+      if(e.key==="Enter"){ e.preventDefault(); done(true); }
+    };
+    document.addEventListener("keydown", onKey);
+  });
+}
+
+// ===================== GRADE =====================
+let graded = false;
+async function grade(auto){
+  if(graded) return;
+  const unanswered = ordered.filter((q,i)=>!picked(i+1).length).length;
+  if(!auto && unanswered>0){
+    const ok = await acpConfirm({
+      eyebrow: "Submit exam",
+      title: "You still have " + unanswered + " unanswered question" + (unanswered===1?"":"s") + ".",
+      body: "Submitting now will mark those as <b>0 points</b>. You can also press <b>Cancel</b> and finish them first.",
+      ok: "Submit anyway",
+      cancel: "Keep going"
+    });
+    if(!ok) return;
+  }
+  graded = true;
+  clearInterval(timerId);
+  var scope = document.querySelector(".acp-mock");
+  if (scope) scope.classList.add("graded");
+  let score = 0;
+  const byTopic = {};
+  Object.keys(TOPICS).forEach(k=>byTopic[k]={got:0,max:0});
+  ordered.forEach((q,i)=>{
+    const n = i+1, sel = picked(n), pts = q.t==="s"?1:2;
+    const correct = sel.length===q.a.length && q.a.every(x=>sel.includes(x));
+    byTopic[q.k].max += pts;
+    if(correct){ score += pts; byTopic[q.k].got += pts; }
+    const card = document.getElementById("q"+n);
+    card.classList.add(correct?"correct":"incorrect");
+    q.o.forEach((_,j)=>{
+      const el = document.getElementById("q"+n+"o"+j);
+      if(q.a.includes(j)) el.classList.add("right");
+      else if(sel.includes(j)) el.classList.add("wrongpick");
+      el.querySelector("input").disabled = true;
+    });
+    const key = q.a.map(x=>"ABCD"[x]).join(", ");
+    const verdict = sel.length===0 ? "⚠️ Not answered" : (correct ? "✅ Correct (+"+pts+")" : "❌ Incorrect (0/"+pts+")");
+    document.getElementById("e"+n).innerHTML =
+      '<div class="verdict">'+verdict+' &nbsp;·&nbsp; <span class="anskey">Answer: '+key+'</span></div><div>'+wrapWords(q.e)+'</div>';
+  });
+  const pass = score>=80;
+  let rows = "";
+  Object.keys(TOPICS).forEach(k=>{
+    rows += "<tr><td>"+TOPICS[k]+"</td><td>"+byTopic[k].got+" / "+byTopic[k].max+"</td></tr>";
+  });
+  const res = document.getElementById("result");
+  res.style.display = "block";
+  res.innerHTML = "<h2>Result</h2><div class='big "+(pass?"pass":"fail")+"'>"+score+" / 100 — "+(pass?"PASS 🎉":"FAIL")+"</div>"+
+    "<div style='color:var(--global-text-color-light);font-size:14px'>Passing score: 80. "+(auto?"(Auto-submitted: time expired.)":"")+"</div>"+
+    "<table class='brk'><tr><th>Topic</th><th>Score</th></tr>"+rows+"</table>"+
+    "<div style='margin-top:10px;font-size:13.5px;color:var(--global-text-color-light)'>Scroll down to review each question — correct answers are highlighted in green, your wrong picks in red, with a short explanation.</div>";
+  document.getElementById("submitBtn").style.display = "none";
+  res.scrollIntoView({behavior:"smooth"});
+}
+</script>
