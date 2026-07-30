@@ -23,7 +23,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/notes/";
           },
-        },{id: "post-kv-cache-in-production-the-exact-vram-formula-and-cutting-it-50-with-fp8",
+        },{id: "post-alibaba-cloud-certified-llm-engineer-professional-mock-exam-5",
+        
+          title: "Alibaba Cloud Certified LLM Engineer (Professional) Mock Exam 5",
+        
+        description: "Extended mock exam for the Alibaba Cloud ACP – Large Language Model certification: 75 questions (50 single-choice + 25 multiple-choice). Instant scoring and explanations.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/synthesis/2026/acp-llm-mock-exam-5/";
+          
+        },
+      },{id: "post-kv-cache-in-production-the-exact-vram-formula-and-cutting-it-50-with-fp8",
         
           title: "KV Cache in production: the exact VRAM formula, and cutting it 50% with...",
         
